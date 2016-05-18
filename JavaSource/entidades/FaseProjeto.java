@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FaseProjeto {
@@ -13,10 +14,13 @@ public class FaseProjeto {
 	@GeneratedValue
 	private Integer id;
 	
+	@ManyToOne
 	private Fase fase;
 	
+	@ManyToOne
 	private Projeto projeto;
 	
+	@ManyToOne
 	private Status status;
 	
 	private Date dataInicio;

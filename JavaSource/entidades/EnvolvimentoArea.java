@@ -15,6 +15,7 @@ public class EnvolvimentoArea {
 	@ManyToOne
 	private Area area;
 	
+	@ManyToOne
 	private Projeto projeto;
 
 	public EnvolvimentoArea() {

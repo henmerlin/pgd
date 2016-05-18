@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,8 +16,10 @@ public class Projeto {
 	@GeneratedValue
 	private Integer id;
 	
+	@ManyToOne
 	private Status status;
 	
+	@ManyToOne
 	private Impacto impacto;
 	
 	private String nome;
