@@ -23,7 +23,7 @@ public class FaseProjeto {
 	
 	private Date dataFim;
 	
-	private Double perc_Conclusao;
+	private Double percConclusao;
 	
 	public FaseProjeto() {
 		
@@ -77,14 +77,12 @@ public class FaseProjeto {
 		this.dataFim = dataFim;
 	}
 
-	public Double getPerc_Conclusao() {
-		return perc_Conclusao;
+	public Double getPercConclusao() {
+		return percConclusao;
 	}
 
-	public void setPerc_Conclusao(Double perc_Conclusao) {
-		this.perc_Conclusao = perc_Conclusao;
+	public void setPercConclusao(Double percConclusao) {
+		this.percConclusao = percConclusao;
 	}	
-	
-	
 
 }
