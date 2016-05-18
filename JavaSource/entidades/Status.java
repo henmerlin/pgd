@@ -3,8 +3,10 @@ package entidades;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="PGD_STATUS")
 public class Status {
 	
 	@Id
