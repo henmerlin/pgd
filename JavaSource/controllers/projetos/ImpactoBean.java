@@ -1,4 +1,4 @@
-package controllers;
+package controllers.projetos;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import entidades.Impacto;
-import models.ImpactoServico;
+import entidades.projetos.Impacto;
+import models.projetos.ImpactoServico;
 import util.JSFUtil;
 
 @ManagedBean

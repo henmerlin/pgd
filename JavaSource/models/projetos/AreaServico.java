@@ -1,4 +1,4 @@
-package models;
+package models.projetos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.Area;
+import entidades.projetos.Area;
 
 @Stateless
 public class AreaServico {

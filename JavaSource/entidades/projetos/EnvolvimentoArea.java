@@ -1,4 +1,4 @@
-package entidades;
+package entidades.projetos;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

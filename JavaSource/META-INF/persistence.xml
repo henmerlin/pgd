@@ -5,14 +5,14 @@
 	<persistence-unit name="vu">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/co</jta-data-source>
-		<class>entidades.Projeto</class>
-		<class>entidades.FaseProjeto</class>
-		<class>entidades.Impacto</class>
+		<class>entidades.projetos.Projeto</class>
+		<class>entidades.projetos.FaseProjeto</class>
+		<class>entidades.projetos.Impacto</class>
 		<class>com.sun.mail.imap.protocol.Status</class>
-		<class>entidades.Status</class>
-		<class>entidades.Fase</class>
-		<class>entidades.Area</class>
-		<class>entidades.EnvolvimentoArea</class>
+		<class>entidades.projetos.Status</class>
+		<class>entidades.projetos.Fase</class>
+		<class>entidades.projetos.Area</class>
+		<class>entidades.projetos.EnvolvimentoArea</class>
 		<class>entidades.UsuarioEfika</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />

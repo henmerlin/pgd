@@ -1,4 +1,4 @@
-package entidades;
+package entidades.projetos;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,17 +8,17 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="PGD_IMPACTO")
-public class Impacto {
+@Table(name="PGD_STATUS")
+public class Status {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	@NotEmpty
-	private String nivel;
-	
-	public Impacto() {
+	private String nome;
+
+	public Status() {
 		
 	}
 
@@ -30,12 +30,12 @@ public class Impacto {
 		this.id = id;
 	}
 
-	public String getNivel() {
-		return nivel;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
-	}
-	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}	
+
 }

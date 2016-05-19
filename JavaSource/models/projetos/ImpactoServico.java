@@ -1,4 +1,4 @@
-package models;
+package models.projetos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.Impacto;
+import entidades.projetos.Impacto;
 
 @Stateless
 public class ImpactoServico {

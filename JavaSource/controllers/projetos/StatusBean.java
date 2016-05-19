@@ -1,4 +1,4 @@
-package controllers;
+package controllers.projetos;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import entidades.Status;
-import models.StatusServico;
+import entidades.projetos.Status;
+import models.projetos.StatusServico;
 import util.JSFUtil;
 
 @ManagedBean
