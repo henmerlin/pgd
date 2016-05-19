@@ -8,36 +8,36 @@
 <ui:composition template="/recursos/template/template.xhtml">
 
 	<ui:define name="tituloPagina">
-		 Cadastrar Area
+		  Cadastrar Status
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Cadastrar Area</ui:define>
+		<i class="fa fa-align-left"> </i> Cadastrar Status</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
 
 	<ui:define name="conteudo">
 
-		<p:panel header="Cadastrar Area">
+		<p:panel header="Cadastrar Status">
 
-			<h:form id="formCadastroArea">
+			<h:form id="formCadastroStatus">
 
 				<h:panelGrid columns="4">
 
 					<p:outputLabel for="n0" value="Nome: " />
-					<p:inputText id="n0" value="#{areaBean.area.nome}" />
+					<p:inputText id="n0" value="#{statusBean.status.nome}" />
 					<p:message for="n0" />
 
-					<p:commandButton action="#{areaBean.cadastrarArea()}"
+					<p:commandButton action="#{statusBean.cadastrarStatus()}"
 						value="Cadastrar" update="@all" />
 
 				</h:panelGrid>
 
-				<p:dataTable var="area" value="#{areaBean.listarAreas()}" style="margin-top: 25px;">
+				<p:dataTable var="status" value="#{statusBean.listarStatus()}" style="margin-top: 25px;">
 
-					<p:column headerText="Area" style="text-align: center;">
+					<p:column headerText="Status" style="text-align: center;">
 
-						<h:outputText value="#{area.nome}" />
+						<h:outputText value="#{status.nome}" />
 
 					</p:column>
 					

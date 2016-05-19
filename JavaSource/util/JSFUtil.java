@@ -46,10 +46,4 @@ public class JSFUtil {
 		return sb.toString(); 
 	}
 	
-	public static void tratamentoString() {
-		
-		
-		
-	}
-	
 }

@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="PGD_STATUS")
 public class Status {
@@ -13,6 +15,7 @@ public class Status {
 	@GeneratedValue
 	private Integer id;
 	
+	@NotEmpty
 	private String nome;
 
 	public Status() {

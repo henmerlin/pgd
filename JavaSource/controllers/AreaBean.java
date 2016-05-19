@@ -34,7 +34,7 @@ public class AreaBean {
 			this.area = new Area();
 			
 			JSFUtil.addInfoMessage("Area cadastrada com sucesso");
-			
+						
 		} catch (Exception e) {
 			
 			JSFUtil.addErrorMessage(e.getMessage());

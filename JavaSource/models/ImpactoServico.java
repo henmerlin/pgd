@@ -8,62 +8,61 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.Area;
+import entidades.Impacto;
 
 @Stateless
-public class AreaServico {
+public class ImpactoServico {
 
 	@PersistenceContext(unitName="vu")  
 	private EntityManager entityManager;
 
-	public AreaServico() {
+	public ImpactoServico() {
 
 	}
 
-	public void cadastrarArea(Area area) throws Exception {
+	public void cadastrarImpacto(Impacto impacto) throws Exception {
 
 		try {
 
-			this.entityManager.persist(area);
+			this.entityManager.persist(impacto);		
 
 		} catch (Exception e) {
 
-			throw new Exception("Não foi possivel cadastrar uma Area");
+			throw new Exception("Não foi possivel cadastrar uma Impacto");
 
 		}
 
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Area> listarAreas() {
+	public List<Impacto> listarImpacto() {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Area a");
+			Query query = this.entityManager.createQuery("FROM Impacto i");
 
 			return query.getResultList();
 
 		} catch (Exception e) {
 
-			return new ArrayList<Area>();
+			return new ArrayList<Impacto>();
 
 		}
 
 	}
 
-	public void editarFase(Area area) throws Exception {
+	public void editarFase(Impacto impacto) throws Exception {
 
 		try {
 
-			this.entityManager.merge(area);
+			this.entityManager.merge(impacto);
 
 		} catch (Exception e) {
 
-			throw new Exception("Não foi possivel editar uma Area");
+			throw new Exception("Não foi possivel editar uma Impacto");
 
 		}
 
 	}
-
 
 }
