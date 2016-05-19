@@ -23,7 +23,9 @@ public class LoginBean implements Serializable{
 	private Usuario usuarioWS;
 
 	private String senha;
-
+	
+	private String pagina;
+	
 	@EJB
 	private LoginServico servicoLogin;
 
@@ -36,8 +38,9 @@ public class LoginBean implements Serializable{
 
 	public void validarLogin() {
 		FacesContext fc = FacesContext.getCurrentInstance();
-
+		
 		if (!this.logado){
+			
 			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)
 					fc.getApplication().getNavigationHandler();
 			nav.performNavigation("index.jsf");
@@ -68,7 +71,7 @@ public class LoginBean implements Serializable{
 	
 	public String logar() {
 
-		try {		
+		try {
 
 			this.usuarioWS = this.servicoLogin.buscaLoginWS(this.usuario.getLogin());
 			this.servicoLogin.autenticaLogin(this.usuarioWS, this.senha);
@@ -91,6 +94,12 @@ public class LoginBean implements Serializable{
 		this.usuario = new UsuarioEfika();
 		this.logado = false;
 
+	}
+	
+	public void validaPagina(String pagina) {
+				
+		this.pagina = pagina;
+		
 	}
 
 	public UsuarioEfika getUsuario() {
@@ -123,6 +132,14 @@ public class LoginBean implements Serializable{
 
 	public void setUsuarioWS(Usuario usuarioWS) {
 		this.usuarioWS = usuarioWS;
+	}
+
+	public String getPagina() {
+		return pagina;
+	}
+
+	public void setPagina(String pagina) {
+		this.pagina = pagina;
 	}
 
 }

@@ -15,6 +15,14 @@
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
+	
+	<ui:insert name="eventos">
+		<f:metadata>
+			
+			<f:event listener="#{loginBean.validaPagina('Bugs')}" type="preRenderView" />
+					
+		</f:metadata>
+	</ui:insert>
 
 	<ui:define name="conteudo">
 

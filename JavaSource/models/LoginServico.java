@@ -28,12 +28,14 @@ public class LoginServico {
 	public Usuario buscaLoginWS(String login) throws Exception {
 
 		Usuario usuarioWS = efikaUsersProxy.consultarUsuario(login);
-
+		
+		System.out.println(login);
+		
 		if (usuarioWS == null){
 
 			throw new Exception("Usuário não encontrado, se você não possui login de acesso utilize a opção \"Solicite o seu acesso\" na pagina http://efika/web");
 
-		}	
+		}
 
 		return usuarioWS;		
 

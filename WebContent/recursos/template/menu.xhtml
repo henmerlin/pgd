@@ -8,21 +8,45 @@
 <ui:composition>
 
 	<ul id="menu">
-	
-		<li><a href="index.jsf"> <i class="fa fa-home" /> Início
-		</a></li>
 
-		<li><a href="cadastrarArea.jsf"> <i class="fa fa-align-left" /> Cadastrar Area
-		</a></li>
+
+
+		<h:panelGroup rendered="#{loginBean.pagina==''}">
+			<li><a href="/PGD/index.jsf"> <i class="fa fa-home" />
+					Início
+			</a></li>
+			<li><a href="/PGD/Bugs/index.jsf"> <i class="fa fa-bug" />
+					Bugs
+			</a></li>
+			<li><a href="/PGD/Pds/index.jsf"> <i class="fa fa-edit" />
+					Pps
+			</a></li>
+			<li><a href="/PGD/Projetos/index.jsf"> <i
+					class="fa fa-align-left" /> Projetos
+			</a></li>
+		</h:panelGroup>
 		
-		<li><a href="cadastrarFase.jsf"> <i class="fa fa-align-left" /> Cadastrar Fase
-		</a></li>
-		
-		<li><a href="cadastrarStatus.jsf"> <i class="fa fa-align-left" /> Cadastrar Status
-		</a></li>
-		
-		<li><a href="cadastrarImpacto.jsf"> <i class="fa fa-align-left" /> Cadastrar Impacto
-		</a></li>
+		<h:panelGroup
+			rendered="#{loginBean.logado and loginBean.pagina.equalsIgnoreCase('projetos')}">
+
+			<li><a href="cadastrarArea.jsf"> <i class="fa fa-align-left" />
+					Cadastrar Area
+			</a></li>
+
+			<li><a href="cadastrarFase.jsf"> <i class="fa fa-align-left" />
+					Cadastrar Fase
+			</a></li>
+
+			<li><a href="cadastrarStatus.jsf"> <i
+					class="fa fa-align-left" /> Cadastrar Status
+			</a></li>
+
+			<li><a href="cadastrarImpacto.jsf"> <i
+					class="fa fa-align-left" /> Cadastrar Impacto
+			</a></li>
+
+		</h:panelGroup>
+
 
 	</ul>
 </ui:composition>
