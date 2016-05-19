@@ -23,13 +23,9 @@
 <h:body>
 
 	<ui:insert name="eventos">
-		<!-- <f:metadata>
 		
-			<f:event listener="#{loginBean.validarLogin()}" type="preRenderView"/>
-							
-		</f:metadata> -->
+		<f:event listener="#{loginBean.validarLogin()}" type="preRenderView" />
 		
-		<f:ajax event="load" listener="#{loginBean.validarLogin()}"/>
 	</ui:insert>
 
 	<div id="topo" class="gradienteTelefonica">

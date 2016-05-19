@@ -37,6 +37,7 @@ public class LoginBean implements Serializable{
 	}
 
 	public void validarLogin() {
+				
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		if (!this.logado){
@@ -45,6 +46,7 @@ public class LoginBean implements Serializable{
 					fc.getApplication().getNavigationHandler();
 			nav.performNavigation("index.jsf");
 		}
+		
 	}
 
 	public Boolean is_Admin(){

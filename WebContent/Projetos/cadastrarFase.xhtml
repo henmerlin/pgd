@@ -15,15 +15,16 @@
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
-	
+
 	<ui:insert name="eventos">
 		<f:metadata>
-			
-			<f:event listener="#{loginBean.validaPagina('Projetos')}" type="preRenderView" />
-					
+
+			<f:event listener="#{loginBean.validaPagina('Projetos')}"
+				type="preRenderView" />
+
 		</f:metadata>
 	</ui:insert>
-	
+
 	<ui:define name="conteudo">
 
 		<p:panel header="Cadastrar Fase">
@@ -41,18 +42,19 @@
 
 				</h:panelGrid>
 
-				<p:dataTable var="fase" value="#{faseBean.listarFase()}" style="margin-top: 25px;">
+				<p:dataTable var="fase" value="#{faseBean.listarFase()}"
+					style="margin-top: 25px;">
 
 					<p:column headerText="Status" style="text-align: center;">
 
 						<h:outputText value="#{fase.nome}" />
 
 					</p:column>
-					
+
 					<p:column headerText="Editar?" style="text-align: center;">
-					
-						
-						
+
+
+
 					</p:column>
 
 				</p:dataTable>
