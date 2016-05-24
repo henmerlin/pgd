@@ -23,6 +23,8 @@ public class ProjetoServico {
 	public void cadastrarProjeto(Projeto projeto) throws Exception {
 
 		try {
+			
+			projeto.setConclusaoPj(0.0);
 
 			this.entityManager.persist(projeto);
 

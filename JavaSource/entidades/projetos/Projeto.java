@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Projeto {
 	
@@ -14,25 +16,35 @@ public class Projeto {
 	@GeneratedValue
 	private Integer id;
 	
+	@NotEmpty
 	private String nomePj;
 	
+	@NotEmpty
 	private Boolean tipoPj;
 	
 	@Lob
+	@NotEmpty
 	private String descricao;
 
+	@NotEmpty
 	private Boolean impacto_Co;
 	
+	@NotEmpty
 	private Boolean evolucao;
 	
+	@NotEmpty
 	private String nomeGpPmo;
 	
+	@NotEmpty
 	private String nomeFocalCo;
 	
+	@NotEmpty
 	private String nomeEspecialista;
 	
+	@NotEmpty
 	private String areaEnv;
 	
+	@NotEmpty
 	private Date dataPrevImp;
 	
 	private Double conclusaoPj;
