@@ -19,6 +19,7 @@
 		<class>entidades.projetos.ImpactoProjeto</class>
 		<class>entidades.projetos.FaseProjeto</class>
 		<class>entidades.projetos.StatusFaseProjeto</class>
+		<class>entidades.projetos.StatusProjeto</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
