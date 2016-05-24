@@ -1,7 +1,4 @@
-/webservices/
-/META-INF/
 /entidades/
-/models/
+/META-INF/
 /controllers/
-/util/
-/projetos/
+/models/

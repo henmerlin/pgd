@@ -4,23 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="PGD_ENVOLVIMENTO_AREA")
-public class EnvolvimentoArea {
+public class ResultadoObtido {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne
-	private Area area;
+	private String descricao;
 	
 	@ManyToOne
 	private Projeto projeto;
 
-	public EnvolvimentoArea() {
+	public ResultadoObtido() {
 		
 	}
 
@@ -32,12 +29,12 @@ public class EnvolvimentoArea {
 		this.id = id;
 	}
 
-	public Area getArea() {
-		return area;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Projeto getProjeto() {
@@ -46,6 +43,6 @@ public class EnvolvimentoArea {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
-	}
+	}	
 
 }

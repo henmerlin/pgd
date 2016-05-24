@@ -1,49 +1,41 @@
 package entidades.projetos;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="PGD_PROJETO")
 public class Projeto {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne
-	private Status status;
+	private String nomePj;
 	
-	@ManyToOne
-	private Impacto impacto;
-	
-	private String nome;
-	
-	private Boolean evolucao;
+	private Boolean tipoPj;
 	
 	@Lob
 	private String descricao;
 
-	private String nomeGP;
+	private Boolean impacto_Co;
 	
-	private String nomefocal;
+	private Boolean evolucao;
 	
-	private String nomeesp;
+	private String nomeGpPmo;
 	
-	private Double percConclusao;
+	private String nomeFocalCo;
 	
-	@OneToMany
-	private List<FaseProjeto> fases;
+	private String nomeEspecialista;
 	
-	@OneToMany
-	private List<EnvolvimentoArea> areasEnvolvidas;
+	private String areaEnv;
+	
+	private Date dataPrevImp;
+	
+	private Double conclusaoPj;
 	
 	public Projeto() {
 		
@@ -57,28 +49,36 @@ public class Projeto {
 		this.id = id;
 	}
 
-	public Status getStatus() {
-		return status;
+	public String getNomePj() {
+		return nomePj;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setNomePj(String nomePj) {
+		this.nomePj = nomePj;
 	}
 
-	public Impacto getImpacto() {
-		return impacto;
+	public Boolean getTipoPj() {
+		return tipoPj;
 	}
 
-	public void setImpacto(Impacto impacto) {
-		this.impacto = impacto;
+	public void setTipoPj(Boolean tipoPj) {
+		this.tipoPj = tipoPj;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Boolean getImpacto_Co() {
+		return impacto_Co;
+	}
+
+	public void setImpacto_Co(Boolean impacto_Co) {
+		this.impacto_Co = impacto_Co;
 	}
 
 	public Boolean getEvolucao() {
@@ -89,60 +89,52 @@ public class Projeto {
 		this.evolucao = evolucao;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNomeGpPmo() {
+		return nomeGpPmo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNomeGpPmo(String nomeGpPmo) {
+		this.nomeGpPmo = nomeGpPmo;
+	}
+
+	public String getNomeFocalCo() {
+		return nomeFocalCo;
+	}
+
+	public void setNomeFocalCo(String nomeFocalCo) {
+		this.nomeFocalCo = nomeFocalCo;
+	}
+
+	public String getNomeEspecialista() {
+		return nomeEspecialista;
+	}
+
+	public void setNomeEspecialista(String nomeEspecialista) {
+		this.nomeEspecialista = nomeEspecialista;
+	}
+
+	public String getAreaEnv() {
+		return areaEnv;
+	}
+
+	public void setAreaEnv(String areaEnv) {
+		this.areaEnv = areaEnv;
+	}
+
+	public Date getDataPrevImp() {
+		return dataPrevImp;
+	}
+
+	public void setDataPrevImp(Date dataPrevImp) {
+		this.dataPrevImp = dataPrevImp;
+	}
+
+	public Double getConclusaoPj() {
+		return conclusaoPj;
+	}
+
+	public void setConclusaoPj(Double conclusaoPj) {
+		this.conclusaoPj = conclusaoPj;
 	}	
-
-	public String getNomeGP() {
-		return nomeGP;
-	}
-
-	public void setNomeGP(String nomeGP) {
-		this.nomeGP = nomeGP;
-	}
-
-	public String getNomefocal() {
-		return nomefocal;
-	}
-
-	public void setNomefocal(String nomefocal) {
-		this.nomefocal = nomefocal;
-	}
-
-	public String getNomeesp() {
-		return nomeesp;
-	}
-
-	public void setNomeesp(String nomeesp) {
-		this.nomeesp = nomeesp;
-	}
-
-	public Double getPercConclusao() {
-		return percConclusao;
-	}
-
-	public void setPercConclusao(Double percConclusao) {
-		this.percConclusao = percConclusao;
-	}
-
-	public List<FaseProjeto> getFases() {
-		return fases;
-	}
-
-	public void setFases(List<FaseProjeto> fases) {
-		this.fases = fases;
-	}
-
-	public List<EnvolvimentoArea> getAreasEnvolvidas() {
-		return areasEnvolvidas;
-	}
-
-	public void setAreasEnvolvidas(List<EnvolvimentoArea> areasEnvolvidas) {
-		this.areasEnvolvidas = areasEnvolvidas;
-	}
 
 }

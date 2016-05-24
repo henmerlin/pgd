@@ -3,21 +3,16 @@ package entidades.projetos;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="PGD_FASE")
 public class Fase {
-
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@NotEmpty
 	private String nome;
-	
+
 	public Fase() {
 		
 	}
@@ -36,6 +31,6 @@ public class Fase {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
+	}	
+
 }
