@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Início
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-home"> </i> Início</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Projetos')}"
+				type="preRenderView" />
+
+			<f:viewParam name="proj" value="#{projetoBean.projeto.id}" />
+
+			<f:event listener="#{projetoBean.listarProjetoEspecifico()}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:fieldset legend="Detalhes do projeto" toggleable="true"
+				toggleSpeed="500" style="width: 50%;">
+
+				<h:panelGrid rendered="#{not empty projetoBean.projeto}"
+					columnClasses="label, value">
+
+					<h:outputText value="Nome do projeto:" />
+					<h:outputText value="#{projetoBean.projeto.nomePj}" />
+
+					<br />
+
+					<h:outputText value="Tipo do Projeto: " />
+					<p:selectOneMenu id="p1" value="#{projetoBean.projeto.tipoProjeto}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems value="#{tipoProjetoBean.listarTipoProjeto()}"
+							var="tipoProjeto" itemLabel="#{tipoProjeto.nome}"
+							itemValue="#{tipoProjeto}" />
+					</p:selectOneMenu>
+
+					<br />
+
+					<h:outputText value="Descrição do projeto: " />
+					<p:inputTextarea id="p2" rows="5" cols="100"
+						value="#{projetoBean.projeto.descricao}" maxlength="500" />
+
+					<br />
+
+					<h:outputText value="Nome GP PMO: " />
+					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGpPmo}" />
+
+					<br />
+
+					<h:outputText value="Nome Focal CO: " />
+					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocalCo}" />
+
+					<br />
+
+					<h:outputText value="Nome Especialista: " />
+					<p:inputText id="p7"
+						value="#{projetoBean.projeto.nomeEspecialista}" />
+
+					<br />
+
+					<h:outputText value="Areas Envolvidas: " />
+					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnv}" />
+
+					<br />
+
+					<h:outputText value="Data prevista implantação: " />
+					
+					<h:panelGroup
+						rendered="#{not empty dataImplementacaoBean.listarDatasImplantacaoEspecifico(projetoBean.projeto).get(0)}">
+
+						<h:panelGrid>
+
+							<ui:repeat var="dataMod"
+								value="#{dataImplementacaoBean.listaDeDatas}">
+
+								<h:outputText value="#{dataMod.dataFormatada}" />
+								<h:outputText value=" - #{dataMod.descricao}" />
+
+								<br />
+
+							</ui:repeat>
+
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+					<p:commandButton value="Modificar data implantação"
+						oncomplete="PF('modData').show()" update="@form:detalhesModData" />
+
+					<br />
+
+				</h:panelGrid>
+
+			</p:fieldset>
+
+			<p:dialog header="Modificar data" widgetVar="modData" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="false" width="500"
+				height="400">
+
+				<h:panelGroup id="detalhesModData">
+
+					<h:panelGrid
+						rendered="#{not empty dataImplementacaoBean.listarDatasImplantacaoEspecifico(projetoBean.projeto)}"
+						columnClasses="label, value">
+
+						<h:outputText value="Data prevista implantação: " />
+						<p:calendar
+							value="#{dataImplementacaoBean.dataImplementacao.dataMod}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<h:outputText value="Justificativa: " />
+						<p:inputTextarea rows="5" cols="50"
+							value="#{dataImplementacaoBean.dataImplementacao.descricao}"
+							maxlength="1500" />
+
+						<p:commandButton value="Mudar data Prevista"
+							action="#{dataImplementacaoBean.updateDataImplantacao(projetoBean.projeto)}"
+							update="@all" />
+
+
+					</h:panelGrid>
+
+				</h:panelGroup>
+
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
