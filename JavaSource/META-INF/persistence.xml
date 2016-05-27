@@ -20,9 +20,11 @@
 		<class>entidades.projetos.FaseProjeto</class>
 		<class>entidades.projetos.StatusFaseProjeto</class>
 		<class>entidades.projetos.StatusProjeto</class>
+		<class>entidades.projetos.TipoProjeto</class>
+		<class>entidades.projetos.DataImplantacao</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>

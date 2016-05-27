@@ -51,5 +51,23 @@ public class ProjetoServico {
 		}
 
 	}
+	
+	public Projeto listarProjetoEspecifico(Projeto projeto) throws Exception {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.id =:param1");
+			query.setParameter("param1", projeto.getId());
+			return (Projeto) query.getSingleResult();
+
+		} catch (Exception e) {
+
+			throw new Exception("Projeto nao encontrado...");
+
+		}
+
+	}
+
+	
 
 }

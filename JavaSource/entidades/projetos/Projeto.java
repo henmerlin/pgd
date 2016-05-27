@@ -1,11 +1,11 @@
 package entidades.projetos;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -19,17 +19,16 @@ public class Projeto {
 	@NotEmpty
 	private String nomePj;
 	
-	@NotEmpty
-	private Boolean tipoPj;
+	@ManyToOne
+	private TipoProjeto tipoProjeto;
 	
 	@Lob
 	@NotEmpty
 	private String descricao;
 
-	@NotEmpty
-	private Boolean impacto_Co;
+	private Boolean impactoCo;
 	
-	@NotEmpty
+	@NotNull
 	private Boolean evolucao;
 	
 	@NotEmpty
@@ -43,12 +42,9 @@ public class Projeto {
 	
 	@NotEmpty
 	private String areaEnv;
-	
-	@NotEmpty
-	private Date dataPrevImp;
-	
+		
 	private Double conclusaoPj;
-	
+		
 	public Projeto() {
 		
 	}
@@ -68,29 +64,21 @@ public class Projeto {
 	public void setNomePj(String nomePj) {
 		this.nomePj = nomePj;
 	}
-
-	public Boolean getTipoPj() {
-		return tipoPj;
-	}
-
-	public void setTipoPj(Boolean tipoPj) {
-		this.tipoPj = tipoPj;
-	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}	
+
+	public Boolean getImpactoCo() {
+		return impactoCo;
 	}
 
-	public Boolean getImpacto_Co() {
-		return impacto_Co;
-	}
-
-	public void setImpacto_Co(Boolean impacto_Co) {
-		this.impacto_Co = impacto_Co;
+	public void setImpactoCo(Boolean impactoCo) {
+		this.impactoCo = impactoCo;
 	}
 
 	public Boolean getEvolucao() {
@@ -132,13 +120,13 @@ public class Projeto {
 	public void setAreaEnv(String areaEnv) {
 		this.areaEnv = areaEnv;
 	}
-
-	public Date getDataPrevImp() {
-		return dataPrevImp;
+	
+	public TipoProjeto getTipoProjeto() {
+		return tipoProjeto;
 	}
 
-	public void setDataPrevImp(Date dataPrevImp) {
-		this.dataPrevImp = dataPrevImp;
+	public void setTipoProjeto(TipoProjeto tipoProjeto) {
+		this.tipoProjeto = tipoProjeto;
 	}
 
 	public Double getConclusaoPj() {
@@ -147,6 +135,36 @@ public class Projeto {
 
 	public void setConclusaoPj(Double conclusaoPj) {
 		this.conclusaoPj = conclusaoPj;
-	}	
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Projeto other = (Projeto) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Projeto [id=" + id + "]";
+	}
 
 }

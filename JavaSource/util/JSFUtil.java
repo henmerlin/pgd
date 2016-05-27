@@ -1,6 +1,9 @@
 package util;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -44,6 +47,16 @@ public class JSFUtil {
 		}
 
 		return sb.toString(); 
+	}
+	
+	public static String formatarData(Date date) {
+		
+		SimpleDateFormat formmater = new SimpleDateFormat("dd/MM/yyyy");
+		
+		String dataFormatada = formmater.format(date);
+		
+		return dataFormatada;
+		
 	}
 	
 }
