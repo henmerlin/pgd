@@ -5,23 +5,18 @@
 	<persistence-unit name="vu">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/co</jta-data-source>
-		<class>entidades.UsuarioEfika</class>
-		<class>entidades.projetos.Projeto</class>
-		<class>entidades.projetos.Impacto</class>
 		<class>entidades.projetos.Fase</class>
-		<class>entidades.projetos.Treinamento</class>
-		<class>entidades.projetos.Progressos</class>
-		<class>entidades.projetos.PontosCritico</class>
-		<class>entidades.projetos.AcoesMinImpacto</class>
-		<class>entidades.projetos.ProximoPasso</class>
-		<class>entidades.projetos.ResultadoEsperado</class>
-		<class>entidades.projetos.ResultadoObtido</class>
-		<class>entidades.projetos.ImpactoProjeto</class>
 		<class>entidades.projetos.FaseProjeto</class>
-		<class>entidades.projetos.StatusFaseProjeto</class>
-		<class>entidades.projetos.StatusProjeto</class>
+		<class>entidades.projetos.Projeto</class>
+		<class>entidades.UsuarioEfika</class>
 		<class>entidades.projetos.TipoProjeto</class>
-		<class>entidades.projetos.DataImplantacao</class>
+		<class>entidades.projetos.StatusFaseProjeto</class>
+		<class>entidades.projetos.StatusFase</class>
+		<class>entidades.projetos.DataImplantacaoProjeto</class>
+		<class>entidades.projetos.ImpactoProjeto</class>
+		<class>entidades.projetos.Impacto</class>
+		<class>entidades.projetos.TipoTarefa</class>
+		<class>entidades.projetos.Tarefa</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

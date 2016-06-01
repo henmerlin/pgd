@@ -14,7 +14,7 @@ import entidades.projetos.Impacto;
 public class ImpactoServico {
 	
 	@PersistenceContext(unitName = "vu")
-	private EntityManager entityManager;
+	private EntityManager entityManager;	
 
 	public ImpactoServico() {
 		
@@ -48,6 +48,6 @@ public class ImpactoServico {
 
 		}
 
-	}
+	}	
 
 }

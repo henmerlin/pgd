@@ -8,46 +8,34 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.projetos.StatusFase;
+import entidades.projetos.TipoTarefa;
 
 @Stateless
-public class FaseServico {
+public class TipoTarefaServico {
 
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 	
-	public FaseServico() {
+	public TipoTarefaServico() {
 		
 	}
 	
-	public void cadastrarFase(StatusFase fase) throws Exception {
-
-		try {
-
-			this.entityManager.persist(fase);
-
-		} catch (Exception e) {
-
-			throw new Exception("Erro ao cadastrar Fase.");
-
-		}
-
-	}
-	
 	@SuppressWarnings("unchecked")
-	public List<StatusFase> listarFases() {
+	public List<TipoTarefa> listarTipoTarefa() {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Fase");
+			Query query = this.entityManager.createQuery("FROM TipoTarefa");
 			return query.getResultList();
 
 		} catch (Exception e) {
 
-			return new ArrayList<StatusFase>();
+			return new ArrayList<TipoTarefa>();
 
 		}
 
 	}
+
+	
 
 }

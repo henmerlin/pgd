@@ -36,6 +36,20 @@ public class ProjetoServico {
 
 	}
 	
+	public void updaterProjeto(Projeto projeto) throws Exception {
+
+		try {
+			
+			this.entityManager.merge(projeto);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao modificar Projeto.");
+
+		}
+
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Projeto> listarProjeto() {
 

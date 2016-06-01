@@ -25,6 +25,8 @@ public class FaseProjetoServico {
 
 		try {
 
+			faseProjeto.setPorcentagemConclusao(0.0);
+			
 			this.entityManager.persist(faseProjeto);
 
 		} catch (Exception e) {
@@ -68,7 +70,20 @@ public class FaseProjetoServico {
 		}
 
 	}
+	
+	public void modificarFaseProjeto(FaseProjeto faseProjeto) throws Exception {
 
+		try {
+			
+			this.entityManager.merge(faseProjeto);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao modificar FaseProjeto.");
+
+		}
+
+	}
 		
 
 }

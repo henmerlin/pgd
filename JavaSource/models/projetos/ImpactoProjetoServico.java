@@ -16,7 +16,7 @@ public class ImpactoProjetoServico {
 
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
-	
+		
 	public ImpactoProjetoServico() {
 		
 	}
@@ -36,23 +36,7 @@ public class ImpactoProjetoServico {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ImpactoProjeto> listarImpactosProjetos() {
-
-		try {
-
-			Query query = this.entityManager.createQuery("FROM ImpactoProjeto");
-			return query.getResultList();
-
-		} catch (Exception e) {
-
-			return new ArrayList<ImpactoProjeto>();
-
-		}
-
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<ImpactoProjeto> listarImpactosProjetosEspecifico(Projeto projeto) {
+	public List<ImpactoProjeto> listarImpactoProjetoEspecifico(Projeto projeto) {
 
 		try {
 

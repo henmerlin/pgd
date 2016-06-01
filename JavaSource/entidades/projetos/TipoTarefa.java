@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Impacto {
+public class TipoTarefa {
 
 	@Id
 	@GeneratedValue
@@ -13,7 +13,7 @@ public class Impacto {
 
 	private String nome;
 	
-	public Impacto() {
+	public TipoTarefa() {
 		
 	}
 
@@ -49,7 +49,7 @@ public class Impacto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Impacto other = (Impacto) obj;
+		TipoTarefa other = (TipoTarefa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -60,7 +60,7 @@ public class Impacto {
 
 	@Override
 	public String toString() {
-		return "Impacto [id=" + id + "]";
-	}	
+		return "TipoTarefa [id=" + id + "]";
+	}
 
 }

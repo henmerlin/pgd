@@ -8,10 +8,10 @@
 <ui:composition template="/recursos/template/template.xhtml">
 
 	<ui:define name="tituloPagina">
-		 Início
+		 Gerenciar Projeto
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-home"> </i> Início</ui:define>
+		<i class="fa fa-home"> </i> Gerenciar Projeto</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
@@ -41,17 +41,10 @@
 						<h:outputText value="#{proj.nomePj}" />
 
 					</p:column>
-
-					<p:column headerText="Tipo do Projeto" style="text-align: center;">
-
-						<h:outputText value="#{proj.tipoProjeto.nome}" />
-
-					</p:column>
-
-
+					
 					<p:column headerText="Data Prevista de Implantação" style="text-align: center;">
 
-						<h:outputText value="#{dataImplementacaoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}"/>
+						<h:outputText value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}"/>
 
 					</p:column>
 

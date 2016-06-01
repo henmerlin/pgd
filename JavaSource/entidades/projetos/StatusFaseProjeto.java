@@ -20,8 +20,8 @@ public class StatusFaseProjeto {
 	private FaseProjeto faseProjeto;
 	
 	@ManyToOne
-	private Fase fase;
-	
+	private StatusFase statusFase;
+		
 	public StatusFaseProjeto() {
 		
 	}
@@ -50,12 +50,12 @@ public class StatusFaseProjeto {
 		this.faseProjeto = faseProjeto;
 	}
 
-	public Fase getFase() {
-		return fase;
+	public StatusFase getStatusFase() {
+		return statusFase;
 	}
 
-	public void setFase(Fase fase) {
-		this.fase = fase;
-	}	
-
+	public void setStatusFase(StatusFase statusFase) {
+		this.statusFase = statusFase;
+	}
+	
 }

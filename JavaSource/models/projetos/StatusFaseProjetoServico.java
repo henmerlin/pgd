@@ -22,7 +22,7 @@ public class StatusFaseProjetoServico {
 	}
 	
 	public void cadastrarStatusFaseProjeto(StatusFaseProjeto statusFaseProjeto) throws Exception {
-
+		
 		try {
 
 			this.entityManager.persist(statusFaseProjeto);
@@ -56,7 +56,7 @@ public class StatusFaseProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM StatusFaseProjeto s WHERE s.faseProjeto =:param1");
+			Query query = this.entityManager.createQuery("FROM StatusFaseProjeto s WHERE s.faseProjeto =:param1 ORDER BY s.dataModStatus DESC");
 			query.setParameter("param1", faseProjeto);
 			return query.getResultList();
 
@@ -67,5 +67,7 @@ public class StatusFaseProjetoServico {
 		}
 
 	}
+	
+	
 	
 }

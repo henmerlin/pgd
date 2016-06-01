@@ -37,13 +37,6 @@
 					<p:inputText id="p0" value="#{projetoBean.projeto.nomePj}" />
 					<p:message for="p0" />
 
-					<p:outputLabel for="p1" value="Tipo do Projeto: " />
-					<p:selectOneMenu id="p1" value="#{projetoBean.projeto.tipoProjeto}" converter="omnifaces.SelectItemsConverter">
-						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-						<f:selectItems value="#{tipoProjetoBean.listarTipoProjeto()}" var="tipoProjeto" itemLabel="#{tipoProjeto.nome}" itemValue="#{tipoProjeto}"/>
-					</p:selectOneMenu>
-					<p:message for="p1" />
-
 					<p:outputLabel for="p2" value="Descrição do projeto: " />
 					<p:inputTextarea id="p2" rows="5" cols="30"
 						value="#{projetoBean.projeto.descricao}" maxlength="500" />
@@ -72,7 +65,7 @@
 					<p:message for="p8" />
 
 					<p:outputLabel for="p9" value="Data Prevista de Implantação: " />
-					<p:calendar id="p9" value="#{projetoBean.dataImplantacao.dataMod}"
+					<p:calendar id="p9" value="#{projetoBean.dataImplantacao.data}"
 						pattern="dd/MM/yyyy" mask="true" />
 					<p:message for="p9" />
 

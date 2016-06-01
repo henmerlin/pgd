@@ -1,23 +1,31 @@
 package entidades.projetos;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-@Entity
-public class Progressos {
+import util.JSFUtil;
 
+@Entity
+public class DataImplantacaoProjeto {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
+
+	private Date data;
 	
+	@Lob
 	private String descricao;
 	
 	@ManyToOne
 	private Projeto projeto;
 	
-	public Progressos() {
+	public DataImplantacaoProjeto() {
 		
 	}
 
@@ -27,6 +35,20 @@ public class Progressos {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
+	public String getDataFormatada() {
+		
+		return JSFUtil.formatarData(this.data);
+		
 	}
 
 	public String getDescricao() {

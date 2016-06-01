@@ -5,24 +5,28 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
+import util.JSFUtil;
 
 @Entity
 public class ImpactoProjeto {
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
+	@Lob
 	private String descricao;
 	
 	private Date dataImpacto;
 	
 	@ManyToOne
-	private Impacto impacto;
-
-	@ManyToOne
 	private Projeto projeto;
+	
+	@ManyToOne
+	private Impacto impacto;	
 	
 	public ImpactoProjeto() {
 		
@@ -47,17 +51,15 @@ public class ImpactoProjeto {
 	public Date getDataImpacto() {
 		return dataImpacto;
 	}
+	
+	public String getDataImpactoFormatada() {
+		
+		return JSFUtil.formatarData(this.dataImpacto);
+		
+	}
 
 	public void setDataImpacto(Date dataImpacto) {
 		this.dataImpacto = dataImpacto;
-	}
-
-	public Impacto getImpacto() {
-		return impacto;
-	}
-
-	public void setImpacto(Impacto impacto) {
-		this.impacto = impacto;
 	}
 
 	public Projeto getProjeto() {
@@ -66,6 +68,14 @@ public class ImpactoProjeto {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+
+	public Impacto getImpacto() {
+		return impacto;
+	}
+
+	public void setImpacto(Impacto impacto) {
+		this.impacto = impacto;
 	}	
 
 }

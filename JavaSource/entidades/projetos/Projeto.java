@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,17 +16,13 @@ public class Projeto {
 	
 	@NotEmpty
 	private String nomePj;
-	
-	@ManyToOne
-	private TipoProjeto tipoProjeto;
-	
+		
 	@Lob
 	@NotEmpty
 	private String descricao;
 
 	private Boolean impactoCo;
 	
-	@NotNull
 	private Boolean evolucao;
 	
 	@NotEmpty
@@ -119,14 +113,6 @@ public class Projeto {
 
 	public void setAreaEnv(String areaEnv) {
 		this.areaEnv = areaEnv;
-	}
-	
-	public TipoProjeto getTipoProjeto() {
-		return tipoProjeto;
-	}
-
-	public void setTipoProjeto(TipoProjeto tipoProjeto) {
-		this.tipoProjeto = tipoProjeto;
 	}
 
 	public Double getConclusaoPj() {

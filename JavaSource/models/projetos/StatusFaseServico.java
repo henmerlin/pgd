@@ -8,46 +8,46 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.projetos.TipoProjeto;
+import entidades.projetos.StatusFase;
 
 @Stateless
-public class TipoProjetoServico {
+public class StatusFaseServico {
 
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
-		
-	public TipoProjetoServico() {
+	
+	public StatusFaseServico() {
 		
 	}
 	
-	public void cadastrarTipoProjeto(TipoProjeto tipoProjeto) throws Exception {
+	public void cadastrarCadastrarStatusFase(StatusFase statusFase) throws Exception {
 
 		try {
 
-			this.entityManager.persist(tipoProjeto);
+			this.entityManager.persist(statusFase);
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar TipoProjeto.");
+			throw new Exception("Erro ao cadastrar StatusFase.");
 
 		}
 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TipoProjeto> listarTipoProjeto() {
+	public List<StatusFase> listarStatusFase() {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM TipoProjeto");
+			Query query = this.entityManager.createQuery("FROM StatusFase");
 			return query.getResultList();
 
 		} catch (Exception e) {
 
-			return new ArrayList<TipoProjeto>();
+			return new ArrayList<StatusFase>();
 
 		}
 
-	}
+	}	
 
 }

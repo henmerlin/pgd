@@ -8,64 +8,66 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import entidades.projetos.PontosCritico;
 import entidades.projetos.Projeto;
+import entidades.projetos.Tarefa;
 
 @Stateless
-public class PontosCriticosServico {
+public class TarefaServico {
 
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
-	
-	public PontosCriticosServico() {
+		
+	public TarefaServico() {
 		
 	}
 	
-	public void cadastrarPontosCritico(PontosCritico pontosCritico) throws Exception {
+	public void cadastrarTarefa(Tarefa tarefa) throws Exception {
 
 		try {
 
-			this.entityManager.persist(pontosCritico);
+			this.entityManager.persist(tarefa);
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar PontosCritico.");
+			throw new Exception("Erro ao cadastrar Terefa.");
 
 		}
 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<PontosCritico> listarPontosCriticos() {
+	public List<Tarefa> listarTarefa() {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM PontosCritico");
+			Query query = this.entityManager.createQuery("FROM Terefa");
 			return query.getResultList();
 
 		} catch (Exception e) {
 
-			return new ArrayList<PontosCritico>();
+			return new ArrayList<Tarefa>();
 
 		}
 
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public List<PontosCritico> listarPontosCriticosProjeto(Projeto projeto) {
+	public List<Tarefa> listarTarefaEspecifica(Projeto projeto) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM PontosCritico p WHERE p.projeto =:param1");
+			Query query = this.entityManager.createQuery("FROM Tarefa t WHERE t.projeto =:param1");
 			query.setParameter("param1", projeto);
 			return query.getResultList();
 
 		} catch (Exception e) {
 
-			return new ArrayList<PontosCritico>();
+			return new ArrayList<Tarefa>();
 
 		}
 
 	}
-			
+	
+	
+
 }
