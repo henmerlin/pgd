@@ -17,6 +17,8 @@ public class Fase {
 	@ManyToOne
 	private TipoProjeto tipoProjeto;
 	
+	private Boolean ativo = true;
+	
 	public Fase() {
 		
 	}
@@ -43,6 +45,14 @@ public class Fase {
 
 	public void setTipoProjeto(TipoProjeto tipoProjeto) {
 		this.tipoProjeto = tipoProjeto;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

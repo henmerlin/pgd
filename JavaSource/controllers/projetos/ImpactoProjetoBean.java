@@ -51,6 +51,24 @@ public class ImpactoProjetoBean {
 		return this.impactoProjetoServico.listarImpactoProjetoEspecifico(projeto);
 		
 	}
+	
+	public void modificarImpactoProjeto() {
+		
+		try {
+			
+			this.impactoProjetoServico.modificarImpactoProjeto(this.impactoProjeto);
+			
+			this.impactoProjeto = new ImpactoProjeto();
+			
+			JSFUtil.addInfoMessage("Status modificado com sucesso");
+			
+		} catch (Exception e) {
+			
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
+		
+	}
 
 	public ImpactoProjeto getImpactoProjeto() {
 		return impactoProjeto;

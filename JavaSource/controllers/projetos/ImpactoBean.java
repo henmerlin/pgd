@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import entidades.projetos.Impacto;
 import models.projetos.ImpactoServico;
+import util.JSFUtil;
 
 @ManagedBean
 @ViewScoped
@@ -27,6 +28,22 @@ public class ImpactoBean {
 	public List<Impacto> listarImpacto() {
 		
 		return this.impactoServico.listarImpacto();
+		
+	}
+	
+	public void modificarImpacto() {
+		
+		try {
+			
+			this.impactoServico.modificarImpacto(this.impacto);
+			
+			JSFUtil.addInfoMessage("Impacto modificado com sucesso");
+			
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
 		
 	}
 

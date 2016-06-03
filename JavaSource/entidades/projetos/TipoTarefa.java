@@ -13,6 +13,8 @@ public class TipoTarefa {
 
 	private String nome;
 	
+	private Boolean ativo = true;
+	
 	public TipoTarefa() {
 		
 	}
@@ -31,6 +33,14 @@ public class TipoTarefa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

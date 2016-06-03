@@ -113,8 +113,10 @@ public class FaseProjetoBean {
 	public void cadastrarStatusFaseProjeto1() {
 
 		try {
-
+			
 			Date data = new Date();
+			
+			this.statusFaseProjeto1.setId(null);
 
 			this.statusFaseProjeto1.setDataModStatus(data);
 
@@ -150,7 +152,7 @@ public class FaseProjetoBean {
 
 	public FaseProjeto getFaseProjeto1() {
 		return faseProjeto1;
-	}
+	}	
 
 	public void setFaseProjeto1(FaseProjeto faseProjeto1) {
 		this.faseProjeto1 = faseProjeto1;

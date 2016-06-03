@@ -51,7 +51,19 @@ public class ImpactoProjetoServico {
 		}
 
 	}
-
 	
+	public void modificarImpactoProjeto(ImpactoProjeto impactoProjeto) throws Exception {
+
+		try {
+
+			this.entityManager.merge(impactoProjeto);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao modificar ImpactoProjeto.");
+
+		}
+
+	}
 
 }

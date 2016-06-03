@@ -68,6 +68,18 @@ public class TarefaServico {
 
 	}
 	
-	
+	public void modificarTarefa(Tarefa tarefa) throws Exception {
+
+		try {
+
+			this.entityManager.merge(tarefa);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao cadastrar Terefa.");
+
+		}
+
+	}	
 
 }

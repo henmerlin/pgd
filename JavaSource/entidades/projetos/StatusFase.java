@@ -13,6 +13,8 @@ public class StatusFase {
 
 	private String nome;
 	
+	private Boolean ativo = true;
+	
 	public StatusFase() {
 		
 	}
@@ -31,6 +33,14 @@ public class StatusFase {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

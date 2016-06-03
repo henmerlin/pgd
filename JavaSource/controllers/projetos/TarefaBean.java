@@ -49,6 +49,24 @@ public class TarefaBean {
 		return this.tarefaServico.listarTarefaEspecifica(projeto);
 		
 	}
+	
+	public void modificarTarefa() {
+		
+		try {
+			
+			this.tarefaServico.modificarTarefa(this.tarefa);
+			
+			this.tarefa = new Tarefa();
+			
+			JSFUtil.addInfoMessage("Tarefa modificada com sucesso");
+			
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
+		
+	}
 
 	public Tarefa getTarefa() {
 		return tarefa;

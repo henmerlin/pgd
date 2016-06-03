@@ -33,7 +33,11 @@ public class StatusFaseProjetoBean {
 	
 	public List<StatusFaseProjeto> listarStatusFaseProjetoEspecifico(FaseProjeto faseProjeto) {
 		
-		return this.statusFaseProjetoServico.listarStatusFaseProjetoEspecifico(faseProjeto);
+		List<StatusFaseProjeto> lista = this.statusFaseProjetoServico.listarStatusFaseProjetoEspecifico(faseProjeto);
+		
+		this.statusFaseProjeto = lista.get(0);
+						
+		return lista;
 		
 	}
 	

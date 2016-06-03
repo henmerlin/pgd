@@ -15,6 +15,8 @@ public class TipoProjeto {
 	
 	@NotEmpty
 	private String nome;
+	
+	private Boolean ativo = true;
 		
 	public TipoProjeto() {
 		
@@ -34,6 +36,14 @@ public class TipoProjeto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

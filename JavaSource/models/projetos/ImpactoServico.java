@@ -31,7 +31,21 @@ public class ImpactoServico {
 			throw new Exception("Erro ao cadastrar Impacto.");
 
 		}
+		
+	}
+	
+	public void modificarImpacto(Impacto impacto) throws Exception {
 
+		try {
+
+			this.entityManager.merge(impacto);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao modificar Impacto.");
+
+		}
+		
 	}
 	
 	@SuppressWarnings("unchecked")

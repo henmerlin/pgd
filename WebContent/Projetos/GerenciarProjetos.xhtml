@@ -41,17 +41,29 @@
 						<h:outputText value="#{proj.nomePj}" />
 
 					</p:column>
-					
-					<p:column headerText="Data Prevista de Implantação" style="text-align: center;">
 
-						<h:outputText value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}"/>
+					<p:column headerText="Gerente de projeto"
+						style="text-align: center;">
+
+						<h:outputText value="#{proj.nomeGpPmo}" />
+
+					</p:column>
+
+					<p:column headerText="Data Prevista de Implantação"
+						style="text-align: center;">
+
+						<h:outputText
+							value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
 
 					</p:column>
 
 					<p:column style="text-align: center; width: 50px;">
 
-						<p:commandButton update="@form:detatlhesProj" oncomplete="PF('infProj').show()" icon="ui-icon-search" title="Detalhes do projeto">
-							<f:setPropertyActionListener value="#{proj}" target="#{projetoBean.projeto}" />
+						<p:commandButton update="@form:detatlhesProj"
+							oncomplete="PF('infProj').show()" icon="ui-icon-search"
+							title="Detalhes do projeto">
+							<f:setPropertyActionListener value="#{proj}"
+								target="#{projetoBean.projeto}" />
 						</p:commandButton>
 
 					</p:column>
@@ -59,57 +71,120 @@
 				</p:dataTable>
 
 				<p:dialog header="Detalhes do Projeto" widgetVar="infProj"
-					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-					width="500" height="400">
+					modal="true" showEffect="fade" hideEffect="fade" width="500"
+					height="300" minHeight="300" minWidth="500">
 
 					<h:panelGroup id="detatlhesProj">
-					
-						<h:panelGrid rendered="#{not empty projetoBean.projeto}" columnClasses="label, value">
+
+						<p:panelGrid rendered="#{not empty projetoBean.projeto}"
+							columnClasses="label, value">
+
+							<p:row>
+
+								<p:column >
+
+									<h:outputText value="Nome do projeto:" style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomePj}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Descrição do projeto: " style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.descricao}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome GP PMO: " style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomeGpPmo}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome Focal CO: " style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomeFocalCo}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome Especialista: " style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomeEspecialista}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Areas Envolvidas: " style="font-weight:bold"/>
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.areaEnv}" />
+
+								</p:column>
+
+							</p:row>
+							
+						</p:panelGrid>
 						
-							<h:outputText value="Nome do projeto:"/>
-							<h:outputText value="#{projetoBean.projeto.nomePj}"/>
-														
-							<br/>
-							
-							<h:outputText value="Descrição do projeto: "/>
-							<h:outputText value="#{projetoBean.projeto.descricao}"/>
-							
-							<br/>
-							
-							<h:outputText value="Nome GP PMO: "/>
-							<h:outputText value="#{projetoBean.projeto.nomeGpPmo}"/>
-							
-							<br/>
-							
-							<h:outputText value="Nome Focal CO: "/>
-							<h:outputText value="#{projetoBean.projeto.nomeFocalCo}"/>
-							
-							<br/>
-							
-							<h:outputText value="Nome Especialista: "/>
-							<h:outputText value="#{projetoBean.projeto.nomeEspecialista}"/>
-							
-							<br/>
-							
-							<h:outputText value="Areas Envolvidas: "/>
-							<h:outputText value="#{projetoBean.projeto.areaEnv}"/>
-							
-							<br/>
-							
-							<h:outputText value="Areas Envolvidas: "/>
-							<h:outputText value="#{projetoBean.projeto.areaEnv}"/>
-							
-							<br/>
-							
-							<p:button outcome="detalhesProjeto" value="Modificar">
-							
-								<f:param name="proj" value="#{projetoBean.projeto.id}"/>
-								
-							
-							</p:button>
-						
-						</h:panelGrid>
-					
+						<br/>
+
+						<p:button outcome="detalhesProjeto" value="Modificar" style="float: right;">
+
+							<f:param name="proj" value="#{projetoBean.projeto.id}" />
+
+						</p:button>
+
 					</h:panelGroup>
 
 				</p:dialog>
