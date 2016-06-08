@@ -20,7 +20,7 @@ public class FaseProjeto {
 
 	private Date dataFim;
 
-	private Double porcentagemConclusao;
+	private Integer porcentagemConclusao;
 
 	@ManyToOne
 	private Projeto projeto;
@@ -66,13 +66,13 @@ public class FaseProjeto {
 
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
-	}
+	}	
 
-	public Double getPorcentagemConclusao() {
+	public Integer getPorcentagemConclusao() {
 		return porcentagemConclusao;
 	}
 
-	public void setPorcentagemConclusao(Double porcentagemConclusao) {
+	public void setPorcentagemConclusao(Integer porcentagemConclusao) {
 		this.porcentagemConclusao = porcentagemConclusao;
 	}
 

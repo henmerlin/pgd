@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -21,8 +22,6 @@ public class Projeto {
 	@NotEmpty
 	private String descricao;
 
-	private Boolean impactoCo;
-	
 	private Boolean evolucao;
 	
 	@NotEmpty
@@ -37,7 +36,10 @@ public class Projeto {
 	@NotEmpty
 	private String areaEnv;
 		
-	private Double conclusaoPj;
+	private Integer conclusaoPj;
+	
+	@ManyToOne
+	private TipoProjeto tipoProjeto;
 		
 	public Projeto() {
 		
@@ -65,14 +67,6 @@ public class Projeto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}	
-
-	public Boolean getImpactoCo() {
-		return impactoCo;
-	}
-
-	public void setImpactoCo(Boolean impactoCo) {
-		this.impactoCo = impactoCo;
 	}
 
 	public Boolean getEvolucao() {
@@ -114,13 +108,21 @@ public class Projeto {
 	public void setAreaEnv(String areaEnv) {
 		this.areaEnv = areaEnv;
 	}
-
-	public Double getConclusaoPj() {
+	
+	public Integer getConclusaoPj() {
 		return conclusaoPj;
 	}
 
-	public void setConclusaoPj(Double conclusaoPj) {
+	public void setConclusaoPj(Integer conclusaoPj) {
 		this.conclusaoPj = conclusaoPj;
+	}
+
+	public TipoProjeto getTipoProjeto() {
+		return tipoProjeto;
+	}
+
+	public void setTipoProjeto(TipoProjeto tipoProjeto) {
+		this.tipoProjeto = tipoProjeto;
 	}
 
 	@Override

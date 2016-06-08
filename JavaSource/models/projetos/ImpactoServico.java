@@ -63,5 +63,22 @@ public class ImpactoServico {
 		}
 
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Impacto> listarImpactoAtivo() {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Impacto i WHERE i.ativo =:param1");
+			query.setParameter("param1", true);
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<Impacto>();
+
+		}
+
+	}
 
 }

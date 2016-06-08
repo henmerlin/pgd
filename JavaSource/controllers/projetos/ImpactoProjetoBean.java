@@ -17,6 +17,8 @@ public class ImpactoProjetoBean {
 
 	private ImpactoProjeto impactoProjeto;
 	
+	private ImpactoProjeto impactoProjetoCadastrar;
+	
 	@EJB
 	private ImpactoProjetoServico impactoProjetoServico;
 	
@@ -24,17 +26,19 @@ public class ImpactoProjetoBean {
 		
 		this.impactoProjeto = new ImpactoProjeto();
 		
+		this.impactoProjetoCadastrar = new ImpactoProjeto();
+		
 	}
 	
 	public void cadastrarImpactoProjeto(Projeto projeto) {
 		
 		try {
+						
+			this.impactoProjetoCadastrar.setProjeto(projeto);
 			
-			this.impactoProjeto.setProjeto(projeto);
+			this.impactoProjetoServico.cadastrarImpactoProjeto(this.impactoProjetoCadastrar);
 			
-			this.impactoProjetoServico.cadastrarImpactoProjeto(this.impactoProjeto);
-			
-			this.impactoProjeto = new ImpactoProjeto();
+			this.impactoProjetoCadastrar = new ImpactoProjeto();
 			
 			JSFUtil.addInfoMessage("Impacto cadastrado com sucesso");
 			
@@ -76,6 +80,14 @@ public class ImpactoProjetoBean {
 
 	public void setImpactoProjeto(ImpactoProjeto impactoProjeto) {
 		this.impactoProjeto = impactoProjeto;
-	}	
+	}
+
+	public ImpactoProjeto getImpactoProjetoCadastrar() {
+		return impactoProjetoCadastrar;
+	}
+
+	public void setImpactoProjetoCadastrar(ImpactoProjeto impactoProjetoCadastrar) {
+		this.impactoProjetoCadastrar = impactoProjetoCadastrar;
+	}
 
 }

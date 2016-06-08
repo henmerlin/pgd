@@ -17,6 +17,8 @@ public class TarefaBean {
 	
 	private Tarefa tarefa;
 	
+	private Tarefa tarefaCadastrar;
+	
 	@EJB
 	private TarefaServico tarefaServico;
 
@@ -24,15 +26,19 @@ public class TarefaBean {
 		
 		this.tarefa = new Tarefa();
 		
+		this.tarefaCadastrar = new Tarefa();
+		
 	}
 	
 	public void cadastrarTarefa(Projeto projeto) {		
 		
 		try {
 			
-			this.tarefa.setProjeto(projeto);
+			this.tarefaCadastrar.setProjeto(projeto);
 			
-			this.tarefaServico.cadastrarTarefa(this.tarefa);
+			this.tarefaServico.cadastrarTarefa(this.tarefaCadastrar);
+			
+			this.tarefaCadastrar = new Tarefa();
 			
 			JSFUtil.addInfoMessage("Tarefa cadastrada com sucesso");			
 			
@@ -74,6 +80,14 @@ public class TarefaBean {
 
 	public void setTarefa(Tarefa tarefa) {
 		this.tarefa = tarefa;
-	}	
+	}
+
+	public Tarefa getTarefaCadastrar() {
+		return tarefaCadastrar;
+	}
+
+	public void setTarefaCadastrar(Tarefa tarefaCadastrar) {
+		this.tarefaCadastrar = tarefaCadastrar;
+	}
 
 }

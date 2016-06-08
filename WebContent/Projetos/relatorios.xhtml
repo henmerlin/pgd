@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Relatórios
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-pie-chart"> </i> Relatórios</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Projetos')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:panel header="Tipo" style="width: 49%; float: right;">
+
+				<p:chart type="pie" model="#{relatorioBean.grafico1}"
+					style="height: 300px;" />
+
+			</p:panel>
+
+			<p:panel header="Evolução" style="width: 49%; float: left;">
+
+				<p:chart type="pie" model="#{relatorioBean.grafico2}"
+					style="height: 300px;" />
+
+			</p:panel>
+
+			<p:dataTable var="proj"
+				value="#{projetoBean.listarProjetoAndamento()}"
+				style="width: 49%; float: left; margin-top: 20px;">
+
+				<f:facet name="header">Projetos em andamento</f:facet>
+
+				<p:column headerText="Nome do Projeto" style="text-align: center;">
+
+					<h:outputText value="#{proj.nomePj}" />
+
+				</p:column>
+
+				<p:column headerText="Gerente de projeto"
+					style="text-align: center;">
+
+					<h:outputText value="#{proj.nomeGpPmo}" />
+
+				</p:column>
+
+				<p:column headerText="Data Prevista de Implantação"
+					style="text-align: center;">
+
+					<h:outputText
+						value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
+
+				</p:column>
+
+				<p:column headerText="Porcentagem Conclusão"
+					style="text-align: center;">
+
+					<h:outputText value="#{proj.conclusaoPj}%" />
+
+				</p:column>
+
+				<p:column style="text-align: center; width: 50px;">
+
+					<p:commandButton update="@form:detatlhesProj"
+						oncomplete="PF('infProj').show()" icon="ui-icon-search"
+						title="Detalhes do projeto">
+						<f:setPropertyActionListener value="#{proj}"
+							target="#{projetoBean.projeto}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+			<p:dataTable var="proj"
+				value="#{projetoBean.listarProjetoConcluido()}"
+				style="width: 49%; float: right;  margin-top: 20px;">
+
+				<f:facet name="header">Projetos concluido</f:facet>
+
+				<p:column headerText="Nome do Projeto" style="text-align: center;">
+
+					<h:outputText value="#{proj.nomePj}" />
+
+				</p:column>
+
+				<p:column headerText="Gerente de projeto"
+					style="text-align: center;">
+
+					<h:outputText value="#{proj.nomeGpPmo}" />
+
+				</p:column>
+
+				<p:column headerText="Data Prevista de Implantação"
+					style="text-align: center;">
+
+					<h:outputText
+						value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
+
+				</p:column>
+
+				<p:column headerText="Porcentagem Conclusão"
+					style="text-align: center;">
+
+					<h:outputText value="#{proj.conclusaoPj}%" />
+
+				</p:column>
+
+				<p:column style="text-align: center; width: 50px;">
+
+					<p:commandButton update="@form:detatlhesProj"
+						oncomplete="PF('infProj').show()" icon="ui-icon-search"
+						title="Detalhes do projeto">
+						<f:setPropertyActionListener value="#{proj}"
+							target="#{projetoBean.projeto}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+			<p:dialog header="Detalhes do Projeto" widgetVar="infProj"
+				modal="true" showEffect="fade" hideEffect="fade" height="500px"
+				width="60%">
+
+				<h:panelGroup id="detatlhesProj">
+
+					<p:panelGrid rendered="#{not empty projetoBean.projeto}"
+						columnClasses="label, value">
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Nome do projeto: " style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.nomePj}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Tipo Projeto: " style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.tipoProjeto.nome}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Evolução: " style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText rendered="#{projetoBean.projeto.evolucao}"
+									value="Sim" />
+
+								<h:outputText rendered="#{!projetoBean.projeto.evolucao}"
+									value="Não" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Descrição do projeto: "
+									style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.descricao}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.nomeGpPmo}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Nome Focal CO: " style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.nomeFocalCo}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Nome Especialista: "
+									style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.nomeEspecialista}" />
+
+							</p:column>
+
+						</p:row>
+
+						<p:row>
+
+							<p:column>
+
+								<h:outputText value="Areas Envolvidas: "
+									style="font-weight:bold" />
+
+							</p:column>
+
+							<p:column>
+
+								<h:outputText value="#{projetoBean.projeto.areaEnv}" />
+
+							</p:column>
+
+						</p:row>
+
+					</p:panelGrid>
+
+					<p:dataTable
+						value="#{faseProjetoBean.listarFaseProjetoEspecifico(projetoBean.projeto)}"
+						var="fase" style="margin-top: 20px;"
+						emptyMessage="Não há fases registradas">
+
+						<f:facet name="header">Fases</f:facet>
+
+						<p:column headerText="Fase" style="text-align: center;">
+
+							<h:outputText value="#{fase.fase.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Data inicio" style="text-align: center;">
+
+							<h:outputText value="#{fase.dataInicioFormatada}" />
+
+						</p:column>
+
+						<p:column headerText="Data Fim" style="text-align: center;">
+
+							<h:outputText value="#{fase.dataFimFormatada}" />
+
+						</p:column>
+
+						<p:column headerText="Status fase" style="text-align: center;">
+
+							<h:outputText
+								value="#{statusFaseProjetoBean.listarStatusFaseProjetoEspecifico(fase).get(0).statusFase.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Porcentagem" style="text-align: center;">
+
+							<h:outputText value="#{fase.porcentagemConclusao}%" />
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dataTable
+						value="#{impactoProjetoBean.listarImpactoProjetoEspecifico(projetoBean.projeto)}"
+						var="impact" style="margin-top: 20px;"
+						emptyMessage="Não há impactos registradas">
+
+						<f:facet name="header">Impacto</f:facet>
+
+						<p:column headerText="Data Impacto" style="text-align: center;">
+
+							<h:outputText value="#{impact.dataImpactoFormatada}" />
+
+						</p:column>
+
+						<p:column headerText="Tipo de impacto" style="text-align: center;">
+
+							<h:outputText value="#{impact.impacto.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Descrição" style="text-align: center;">
+
+							<h:outputText value="#{impact.descricao}" />
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dataTable var="tarefa"
+						value="#{tarefaBean.listarTarefaEspecifica(projetoBean.projeto)}"
+						style="margin-top: 20px;"
+						emptyMessage="Não há tarefas registradas">
+
+						<f:facet name="header">Tarefa</f:facet>
+
+						<p:column headerText="Tipo Tarefa" style="text-align: center;">
+
+							<h:outputText value="#{tarefa.tipoTarefa.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Descrição" style="text-align: center;">
+
+							<h:outputText value="#{tarefa.descricao}" />
+
+						</p:column>
+
+					</p:dataTable>
+
+				</h:panelGroup>
+
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

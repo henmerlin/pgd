@@ -11,7 +11,7 @@
 		 Gerenciar Projeto
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-home"> </i> Gerenciar Projeto</ui:define>
+		<i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
@@ -54,6 +54,14 @@
 
 						<h:outputText
 							value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
+
+					</p:column>
+					
+					<p:column headerText="Porcentagem Conclusão"
+						style="text-align: center;">
+
+						<h:outputText
+							value="#{proj.conclusaoPj}%" />
 
 					</p:column>
 

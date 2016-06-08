@@ -11,7 +11,7 @@
 		 Cadastrar Projeto
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-home"> </i> Cadastrar Projeto</ui:define>
+		<i class="fa fa-align-left"> </i> Cadastrar Projeto</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
@@ -35,6 +35,16 @@
 
 					<p:outputLabel for="p0" value="Nome do Projeto: " />
 					<p:inputText id="p0" value="#{projetoBean.projeto.nomePj}" />
+					<p:message for="p0" />
+
+					<h:outputText value="Selecione o Tipo" style="font-weight:bold" />
+					<p:selectOneMenu value="#{projetoBean.projeto.tipoProjeto}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems value="#{tipoProjetoBean.listarTipoProjetoAtivo()}"
+							var="tipoProj" itemLabel="#{tipoProj.nome}"
+							itemValue="#{tipoProj}" />
+					</p:selectOneMenu>
 					<p:message for="p0" />
 
 					<p:outputLabel for="p2" value="Descrição do projeto: " />

@@ -3,7 +3,6 @@ package entidades.projetos;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Fase {
@@ -12,10 +11,7 @@ public class Fase {
 	@GeneratedValue
 	private Integer id;
 
-	private String nome;
-	
-	@ManyToOne
-	private TipoProjeto tipoProjeto;
+	private String nome;	
 	
 	private Boolean ativo = true;
 	
@@ -37,14 +33,6 @@ public class Fase {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public TipoProjeto getTipoProjeto() {
-		return tipoProjeto;
-	}
-
-	public void setTipoProjeto(TipoProjeto tipoProjeto) {
-		this.tipoProjeto = tipoProjeto;
 	}
 	
 	public Boolean getAtivo() {

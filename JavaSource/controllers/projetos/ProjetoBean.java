@@ -8,8 +8,10 @@ import javax.faces.bean.ViewScoped;
 
 import entidades.projetos.DataImplantacaoProjeto;
 import entidades.projetos.Projeto;
+import entidades.projetos.TipoProjeto;
 import models.projetos.DataImplantacaoProjetoServico;
 import models.projetos.ProjetoServico;
+import models.projetos.TipoProjetoServico;
 import util.JSFUtil;
 
 @ManagedBean
@@ -25,6 +27,9 @@ public class ProjetoBean {
 
 	@EJB
 	private DataImplantacaoProjetoServico dataImplantacaoProjetoServico;
+	
+	@EJB
+	public TipoProjetoServico tipoProjetoServico;
 
 	public ProjetoBean() {
 
@@ -79,6 +84,12 @@ public class ProjetoBean {
 		return this.projetoServico.listarProjeto();
 
 	}
+	
+	public List<Projeto> listarProjetoAndamento() {
+
+		return this.projetoServico.listarProjetoAndamento();
+
+	}
 
 	public Projeto listarProjetoEspecifico() {
 
@@ -110,7 +121,24 @@ public class ProjetoBean {
 		}
 
 	}
-
+	
+	public List<Projeto> listarProjetoConcluido() {
+				
+		return this.projetoServico.listarProjetoConcluido();
+		
+	}
+	
+	public List<Projeto> listarProjetosEvolucao(Boolean evo) {
+		
+		return this.projetoServico.listarProjetosEvolucao(evo);
+		
+	}
+	
+	public List<Projeto> listarProjetosRelatorio(TipoProjeto tipoProjeto) {
+		
+		return this.projetoServico.listarProjetosRelatorio(tipoProjeto);
+		
+	}
 	
 	public Projeto getProjeto() {
 		return projeto;

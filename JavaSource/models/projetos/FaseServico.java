@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.projetos.Fase;
-import entidades.projetos.StatusFase;
 
 @Stateless
 public class FaseServico {
@@ -50,7 +49,7 @@ public class FaseServico {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<StatusFase> listarFases() {
+	public List<Fase> listarFases() {
 
 		try {
 
@@ -59,7 +58,24 @@ public class FaseServico {
 
 		} catch (Exception e) {
 
-			return new ArrayList<StatusFase>();
+			return new ArrayList<Fase>();
+
+		}
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Fase> listarFasesAtiva() {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Fase f WHERE f.ativo =:param1");
+			query.setParameter("param1", true);			
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<Fase>();
 
 		}
 

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import entidades.projetos.FaseProjeto;
 import entidades.projetos.Projeto;
+import entidades.projetos.TipoProjeto;
 
 @Stateless
 public class FaseProjetoServico {
@@ -25,7 +26,7 @@ public class FaseProjetoServico {
 
 		try {
 
-			faseProjeto.setPorcentagemConclusao(0.0);
+			faseProjeto.setPorcentagemConclusao(0);
 			
 			this.entityManager.persist(faseProjeto);
 
@@ -58,7 +59,7 @@ public class FaseProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM FaseProjeto f WHERE f.projeto =:param1");
+			Query query = this.entityManager.createQuery("FROM FaseProjeto f WHERE f.projeto =:param1 ORDER BY f.porcentagemConclusao DESC");
 			query.setParameter("param1", Projeto);
 			
 			return query.getResultList();
@@ -84,6 +85,23 @@ public class FaseProjetoServico {
 		}
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FaseProjeto> listarTipoProjetos(TipoProjeto tipoProjeto) {
 		
+		try {
+			
+			Query query = this.entityManager.createQuery("SELECT DISTINCT f.projeto FROM FaseProjeto f WHERE f.fase.tipoProjeto =:param1");
+			query.setParameter("param1", tipoProjeto);
+			
+			return query.getResultList();
+			
+		} catch (Exception e) {			
+			
+			return new ArrayList<FaseProjeto>();		
+			
+		}
+		
+	}	
 
 }

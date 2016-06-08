@@ -87,7 +87,7 @@ public class FaseProjetoBean {
 	}
 
 	public List<FaseProjeto> listarFaseProjetoEspecifico(Projeto projeto) {
-
+				
 		return this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
 
 	}
@@ -132,7 +132,7 @@ public class FaseProjetoBean {
 
 		}
 
-	}
+	}		
 
 	public FaseProjeto getFaseProjeto() {
 		return faseProjeto;

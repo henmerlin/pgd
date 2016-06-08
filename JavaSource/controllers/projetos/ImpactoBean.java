@@ -15,36 +15,64 @@ import util.JSFUtil;
 public class ImpactoBean {
 
 	private Impacto impacto;
-	
+
+	private Impacto impactoCadastro;
+
 	@EJB
 	private ImpactoServico impactoServico;
-	
+
 	public ImpactoBean() {
-		
+
 		this.impacto = new Impacto();
-		
+
+		this.impactoCadastro = new Impacto();
+
 	}
-	
+
 	public List<Impacto> listarImpacto() {
-		
+
 		return this.impactoServico.listarImpacto();
-		
+
 	}
-	
+
+	public List<Impacto> listarImpactoAtivo() {
+
+		return this.impactoServico.listarImpactoAtivo();
+
+	}
+
 	public void modificarImpacto() {
-		
+
 		try {
-			
+
 			this.impactoServico.modificarImpacto(this.impacto);
-			
+
 			JSFUtil.addInfoMessage("Impacto modificado com sucesso");
-			
+
 		} catch (Exception e) {
 
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
 		}
-		
+
+	}
+
+	public void cadastrarImpacto() {
+
+		try {
+
+			this.impactoServico.cadastrarImpacto(this.impactoCadastro);
+
+			this.impactoCadastro = new Impacto();			
+
+			JSFUtil.addInfoMessage("Impacto cadastrado com sucesso");
+
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+
+		}
+
 	}
 
 	public Impacto getImpacto() {
@@ -54,5 +82,13 @@ public class ImpactoBean {
 	public void setImpacto(Impacto impacto) {
 		this.impacto = impacto;
 	}
+
+	public Impacto getImpactoCadastro() {
+		return impactoCadastro;
+	}
+
+	public void setImpactoCadastro(Impacto impactoCadastro) {
+		this.impactoCadastro = impactoCadastro;
+	}	
 
 }
