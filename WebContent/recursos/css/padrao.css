@@ -205,3 +205,8 @@ ul#menu li a.selected {
 	border-left: 10px solid #e74c3c;
 }
 
+.jqplot-data-label {
+	
+	color: #FFF;
+	
+}

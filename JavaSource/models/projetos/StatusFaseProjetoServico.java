@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.projetos.FaseProjeto;
+import entidades.projetos.Projeto;
 import entidades.projetos.StatusFaseProjeto;
 
 @Stateless
@@ -58,6 +59,41 @@ public class StatusFaseProjetoServico {
 
 			Query query = this.entityManager.createQuery("FROM StatusFaseProjeto s WHERE s.faseProjeto =:param1 ORDER BY s.dataModStatus DESC");
 			query.setParameter("param1", faseProjeto);
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<StatusFaseProjeto>();
+
+		}
+
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<StatusFaseProjeto> listarStatusFaseProjetoParalisado() {
+
+		try {
+
+			Query query = this.entityManager.createQuery("SELECT DISTINCT s.faseProjeto FROM StatusFaseProjeto s WHERE s.statusFase.nome =:param1");
+			query.setParameter("param1", "Paralisado");
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<StatusFaseProjeto>();
+
+		}
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<StatusFaseProjeto> listarStatusFaseProjetoEspecificoPj(Projeto projeto) {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM StatusFaseProjeto s WHERE s.faseProjeto.projeto =:param1");
+			query.setParameter("param1", projeto);
 			return query.getResultList();
 
 		} catch (Exception e) {

@@ -29,72 +29,26 @@
 
 		<h:form id="form">
 
-			<p:panel header="Tipo" style="width: 49%; float: right;">
+			<p:panel header="Tipo" style="height: 400px;">
+
+				<p:chart type="pie" model="#{relatorioBean.grafico3}"
+					style="height: 350px; width: 33%; float: left;" responsive="true" />
+
 
 				<p:chart type="pie" model="#{relatorioBean.grafico1}"
-					style="height: 300px;" />
+					style="height: 350px; width: 33%; float: left;" responsive="true" />
 
-			</p:panel>
-
-			<p:panel header="Evolução" style="width: 49%; float: left;">
 
 				<p:chart type="pie" model="#{relatorioBean.grafico2}"
-					style="height: 300px;" />
+					style="height: 350px; width: 33%; float: left;" responsive="true" />
 
 			</p:panel>
 
 			<p:dataTable var="proj"
 				value="#{projetoBean.listarProjetoAndamento()}"
-				style="width: 49%; float: left; margin-top: 20px;">
+				style="margin-top: 20px;" widgetVar="projes">
 
-				<f:facet name="header">Projetos em andamento</f:facet>
-
-				<p:column headerText="Nome do Projeto" style="text-align: center;">
-
-					<h:outputText value="#{proj.nomePj}" />
-
-				</p:column>
-
-				<p:column headerText="Gerente de projeto"
-					style="text-align: center;">
-
-					<h:outputText value="#{proj.nomeGpPmo}" />
-
-				</p:column>
-
-				<p:column headerText="Data Prevista de Implantação"
-					style="text-align: center;">
-
-					<h:outputText
-						value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
-
-				</p:column>
-
-				<p:column headerText="Porcentagem Conclusão"
-					style="text-align: center;">
-
-					<h:outputText value="#{proj.conclusaoPj}%" />
-
-				</p:column>
-
-				<p:column style="text-align: center; width: 50px;">
-
-					<p:commandButton update="@form:detatlhesProj"
-						oncomplete="PF('infProj').show()" icon="ui-icon-search"
-						title="Detalhes do projeto">
-						<f:setPropertyActionListener value="#{proj}"
-							target="#{projetoBean.projeto}" />
-					</p:commandButton>
-
-				</p:column>
-
-			</p:dataTable>
-
-			<p:dataTable var="proj"
-				value="#{projetoBean.listarProjetoConcluido()}"
-				style="width: 49%; float: right;  margin-top: 20px;">
-
-				<f:facet name="header">Projetos concluido</f:facet>
+				<f:facet name="header">Projetos</f:facet>
 
 				<p:column headerText="Nome do Projeto" style="text-align: center;">
 
@@ -121,6 +75,12 @@
 					style="text-align: center;">
 
 					<h:outputText value="#{proj.conclusaoPj}%" />
+
+				</p:column>
+
+				<p:column headerText="Status" style="text-align: center;" >
+
+					<h:outputText value="#{proj.statusFase.nome}" />
 
 				</p:column>
 
@@ -326,7 +286,7 @@
 					<p:dataTable
 						value="#{impactoProjetoBean.listarImpactoProjetoEspecifico(projetoBean.projeto)}"
 						var="impact" style="margin-top: 20px;"
-						emptyMessage="Não há impactos registradas">
+						emptyMessage="Não há impactos registrados">
 
 						<f:facet name="header">Impacto</f:facet>
 

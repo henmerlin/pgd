@@ -53,6 +53,17 @@
 							var="tipoProj" itemLabel="#{tipoProj.nome}"
 							itemValue="#{tipoProj}" />
 					</p:selectOneMenu>
+					
+					<br />
+					
+					<h:outputText value="Selecione o Status" style="font-weight:bold" />
+					<p:selectOneMenu value="#{projetoBean.projeto.statusFase}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems value="#{statusFaseBean.listarStatusFaseAtivo()}"
+							var="statusFase" itemLabel="#{statusFase.nome}"
+							itemValue="#{statusFase}" />
+					</p:selectOneMenu>
 
 					<br />
 

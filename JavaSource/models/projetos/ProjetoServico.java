@@ -70,12 +70,12 @@ public class ProjetoServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Projeto> listarProjetoConcluido() {
+	public List<Projeto> listarProjetoStatusEspecifico(String status) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.conclusaoPj =:param1 ORDER BY p.conclusaoPj DESC");
-			query.setParameter("param1", 100);
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.statusFase.nome =:param1 ORDER BY p.conclusaoPj DESC");
+			query.setParameter("param1", status);
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -85,14 +85,13 @@ public class ProjetoServico {
 		}
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Projeto> listarProjetoAndamento() {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.conclusaoPj !=:param1 ORDER BY p.conclusaoPj DESC");
-			query.setParameter("param1", 100);
+			Query query = this.entityManager.createQuery("FROM Projeto p");
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -124,8 +123,10 @@ public class ProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.tipoProjeto =:param1 AND p.conclusaoPj != 100");
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.tipoProjeto =:param1 AND (p.statusFase.nome =:param2 OR p.statusFase.nome =:param3)");
 			query.setParameter("param1", tipoProjeto);
+			query.setParameter("param2", "A iniciar");
+			query.setParameter("param3", "Em andamento");
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -141,8 +142,10 @@ public class ProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.evolucao =:param1");
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.evolucao =:param1 AND (p.statusFase.nome =:param2 OR p.statusFase.nome =:param3)");
 			query.setParameter("param1", evo);
+			query.setParameter("param2", "A iniciar");
+			query.setParameter("param3", "Em andamento");
 			return query.getResultList();
 
 		} catch (Exception e) {

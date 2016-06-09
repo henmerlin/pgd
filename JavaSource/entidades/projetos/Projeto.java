@@ -40,6 +40,9 @@ public class Projeto {
 	
 	@ManyToOne
 	private TipoProjeto tipoProjeto;
+	
+	@ManyToOne
+	private StatusFase statusFase;
 		
 	public Projeto() {
 		
@@ -123,6 +126,14 @@ public class Projeto {
 
 	public void setTipoProjeto(TipoProjeto tipoProjeto) {
 		this.tipoProjeto = tipoProjeto;
+	}	
+
+	public StatusFase getStatusFase() {
+		return statusFase;
+	}
+
+	public void setStatusFase(StatusFase statusFase) {
+		this.statusFase = statusFase;
 	}
 
 	@Override

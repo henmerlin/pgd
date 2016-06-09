@@ -11,6 +11,7 @@ import entidades.projetos.Projeto;
 import entidades.projetos.TipoProjeto;
 import models.projetos.DataImplantacaoProjetoServico;
 import models.projetos.ProjetoServico;
+import models.projetos.StatusFaseServico;
 import models.projetos.TipoProjetoServico;
 import util.JSFUtil;
 
@@ -30,6 +31,9 @@ public class ProjetoBean {
 	
 	@EJB
 	public TipoProjetoServico tipoProjetoServico;
+	
+	@EJB
+	public StatusFaseServico statusFaseServico;
 
 	public ProjetoBean() {
 
@@ -42,6 +46,8 @@ public class ProjetoBean {
 	public void cadastrarProjeto() {
 
 		try {
+			
+			this.projeto.setStatusFase(this.statusFaseServico.listarStatusFaseEspecifico("A iniciar"));
 
 			this.projetoServico.cadastrarProjeto(this.projeto);
 
@@ -124,13 +130,19 @@ public class ProjetoBean {
 	
 	public List<Projeto> listarProjetoConcluido() {
 				
-		return this.projetoServico.listarProjetoConcluido();
+		return this.projetoServico.listarProjetoStatusEspecifico("Concluído");
 		
 	}
 	
 	public List<Projeto> listarProjetosEvolucao(Boolean evo) {
 		
 		return this.projetoServico.listarProjetosEvolucao(evo);
+		
+	}
+	
+	public List<Projeto> listarProjetoOutroStatus() {
+		
+		return this.projetoServico.listarProjetoStatusEspecifico("Concluído");
 		
 	}
 	

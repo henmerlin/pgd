@@ -39,7 +39,7 @@ public class StatusFaseProjetoBean {
 						
 		return lista;
 		
-	}
+	}	
 	
 	public StatusFaseProjeto getStatusFaseProjeto() {
 		return statusFaseProjeto;

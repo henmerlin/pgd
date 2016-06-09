@@ -64,6 +64,22 @@ public class StatusFaseServico {
 
 	}
 	
+	public StatusFase listarStatusFaseEspecifico(String busca) throws Exception {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM StatusFase s WHERE s.nome =:param1");
+			query.setParameter("param1", busca);
+			return (StatusFase) query.getSingleResult();
+
+		} catch (Exception e) {
+
+			throw new Exception("Status fase nao encontrado");
+
+		}
+
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<StatusFase> listarStatusFaseAtivo() {
 
