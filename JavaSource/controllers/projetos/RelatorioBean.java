@@ -59,14 +59,20 @@ public class RelatorioBean implements Serializable {
 		this.grafico1 = new PieChartModel();	
 
 		List<TipoProjeto> listaTipoProjetos = this.tipoProjetoServico.listarTipoProjeto();
+		
+		Integer total = 0;
 
-		for (TipoProjeto tipoProjeto : listaTipoProjetos) {	
+		for (TipoProjeto tipoProjeto : listaTipoProjetos) {
 			
-			this.grafico1.set(tipoProjeto.getNome(), this.projetoServico.listarProjetosRelatorio(tipoProjeto).size());
+			Integer numero = this.projetoServico.listarProjetosRelatorio(tipoProjeto).size();			
+			
+			this.grafico1.set(tipoProjeto.getNome(), numero);
+			
+			total += numero;
 
 		}
 
-		this.grafico1.setTitle("Tipos de projetos em andamento");
+		this.grafico1.setTitle("Tipos de projetos (Total " + total + ")");
 		this.grafico1.setLegendPosition("se");
 		this.grafico1.setShowDataLabels(true);
 		this.grafico1.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
@@ -76,11 +82,17 @@ public class RelatorioBean implements Serializable {
 	public void criaGraficoEvolucao() {
 
 		this.grafico2 = new PieChartModel();
+		
+		Integer evolucaoTrue = this.projetoServico.listarProjetosEvolucao(true).size();
+		
+		Integer evolucaoFalse = this.projetoServico.listarProjetosEvolucao(false).size();
+		
+		Integer total = evolucaoTrue + evolucaoFalse;
 
-		this.grafico2.set("Projetos com Evoluções", this.projetoServico.listarProjetosEvolucao(true).size());
-		this.grafico2.set("Projetos sem Evoluções", this.projetoServico.listarProjetosEvolucao(false).size());
+		this.grafico2.set("Projetos com Evoluções", evolucaoTrue);
+		this.grafico2.set("Projetos sem Evoluções", evolucaoFalse);
 
-		this.grafico2.setTitle("Projetos Evolução");
+		this.grafico2.setTitle("Projetos Evolução (Total " + total + ")");
 		this.grafico2.setLegendPosition("se");
 		this.grafico2.setShowDataLabels(true);
 		this.grafico2.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");
@@ -96,7 +108,7 @@ public class RelatorioBean implements Serializable {
 		this.grafico3.set("Projetos em Andamento", this.projetoServico.listarProjetoStatusEspecifico("Em andamento").size());
 		this.grafico3.set("Projetos a Iniciar", this.projetoServico.listarProjetoStatusEspecifico("A iniciar").size());
 
-		this.grafico3.setTitle("Geral (Total de Projetos " + this.projetoServico.listarProjeto().size() + ")");
+		this.grafico3.setTitle("Geral (Total " + this.projetoServico.listarProjeto().size() + ")");
 		this.grafico3.setLegendPosition("se");
 		this.grafico3.setShowDataLabels(true);
 		this.grafico3.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");

@@ -91,7 +91,7 @@ public class ProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p");
+			Query query = this.entityManager.createQuery("FROM Projeto p ORDER BY p.statusFase.nome DESC");
 			return query.getResultList();
 
 		} catch (Exception e) {

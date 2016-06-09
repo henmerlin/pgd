@@ -46,7 +46,10 @@
 
 			<p:dataTable var="proj"
 				value="#{projetoBean.listarProjetoAndamento()}"
-				style="margin-top: 20px;" widgetVar="projes">
+				style="margin-top: 20px;" rows="10" paginator="true"
+				currentPageReportTemplate="[{startRecord} de {endRecord}]"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10, 15, 20">
 
 				<f:facet name="header">Projetos</f:facet>
 
@@ -78,7 +81,7 @@
 
 				</p:column>
 
-				<p:column headerText="Status" style="text-align: center;" >
+				<p:column headerText="Status" style="text-align: center;">
 
 					<h:outputText value="#{proj.statusFase.nome}" />
 
