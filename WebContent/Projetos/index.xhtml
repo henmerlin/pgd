@@ -15,21 +15,26 @@
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
-	
+
 	<ui:insert name="eventos">
 		<f:metadata>
-			
-			<f:event listener="#{loginBean.validaPagina('Projetos')}" type="preRenderView" />
-					
+
+			<f:event listener="#{loginBean.validaPagina('Projetos')}"
+				type="preRenderView" />
+
 		</f:metadata>
 	</ui:insert>
 
 	<ui:define name="conteudo">
-		
+
 		<h:form id="formInicio">
+
 			<p:panel id="panelInicio" header="Início" style="margin-bottom:20px">
+
 				<p:outputPanel rendered="#{!loginBean.logado}">
+
 					<h:panelGrid columns="3">
+
 						<label for="login">Login: </label>
 						<p:inputText id="login" value="#{loginBean.usuario.login}" />
 						<p:message for="login" />
@@ -42,12 +47,18 @@
 							update="@all" />
 
 					</h:panelGrid>
+
 				</p:outputPanel>
+
 				<p:outputPanel rendered="#{loginBean.logado}">
+				
 					<p:commandButton value="Sair" action="#{loginBean.deslogar()}"
-						update="@all" />
+						update="@all" widgetVar="entrar" />
+						
 				</p:outputPanel>
+
 			</p:panel>
+
 		</h:form>
 
 	</ui:define>
