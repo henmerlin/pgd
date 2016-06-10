@@ -52,7 +52,7 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{faseBean.listarFases()}" var="fases"
-						style="margin-top: 20px;">
+						style="margin-top: 20px;" emptyMessage="Não há fases registradas">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -133,7 +133,7 @@
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{impactoBean.listarImpacto()}" var="impactos" style="margin-top: 20px;">
+					<p:dataTable value="#{impactoBean.listarImpacto()}" var="impactos" style="margin-top: 20px;" emptyMessage="Não há impacto registradas">
 
 						<p:column headerText="Impacto" style="text-align: center;">
 
@@ -216,7 +216,7 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{tipoTarefaBean.listarTipoTarefa()}"
-						var="tarefa" style="margin-top: 20px;">
+						var="tarefa" style="margin-top: 20px;" emptyMessage="Não há tipos de tarefa registradas">
 
 						<p:column headerText="Tarefa" style="text-align: center;">
 
@@ -299,7 +299,7 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{tipoProjetoBean.listarTipoProjeto()}"
-						var="tipoProj" style="margin-top: 20px;">
+						var="tipoProj" style="margin-top: 20px;" emptyMessage="Não há tipos de projetos registradas">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -383,7 +383,7 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{statusFaseBean.listarStatusFase()}"
-						var="statusFase" style="margin-top: 20px;">
+						var="statusFase" style="margin-top: 20px;" emptyMessage="Não há status de fase registrados">
 
 						<p:column headerText="Fase" style="text-align: center;">
 

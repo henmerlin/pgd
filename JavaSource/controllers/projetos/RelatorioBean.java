@@ -60,19 +60,13 @@ public class RelatorioBean implements Serializable {
 
 		List<TipoProjeto> listaTipoProjetos = this.tipoProjetoServico.listarTipoProjeto();
 		
-		Integer total = 0;
-
 		for (TipoProjeto tipoProjeto : listaTipoProjetos) {
+						
+			this.grafico1.set(tipoProjeto.getNome(), this.projetoServico.listarProjetosRelatorio(tipoProjeto).size());
 			
-			Integer numero = this.projetoServico.listarProjetosRelatorio(tipoProjeto).size();			
-			
-			this.grafico1.set(tipoProjeto.getNome(), numero);
-			
-			total += numero;
-
 		}
 
-		this.grafico1.setTitle("Tipos de projetos (Total " + total + ")");
+		this.grafico1.setTitle("Tipos de projetos");
 		this.grafico1.setLegendPosition("se");
 		this.grafico1.setShowDataLabels(true);
 		this.grafico1.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
@@ -87,12 +81,10 @@ public class RelatorioBean implements Serializable {
 		
 		Integer evolucaoFalse = this.projetoServico.listarProjetosEvolucao(false).size();
 		
-		Integer total = evolucaoTrue + evolucaoFalse;
-
 		this.grafico2.set("Projetos com Evoluções", evolucaoTrue);
 		this.grafico2.set("Projetos sem Evoluções", evolucaoFalse);
 
-		this.grafico2.setTitle("Projetos Evolução (Total " + total + ")");
+		this.grafico2.setTitle("Projetos Evolução");
 		this.grafico2.setLegendPosition("se");
 		this.grafico2.setShowDataLabels(true);
 		this.grafico2.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");

@@ -34,7 +34,7 @@
 				<p:dataTable var="proj" value="#{projetoBean.listarProjeto()}"
 					rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 15, 20">
+					rowsPerPageTemplate="10, 15, 20" emptyMessage="Não há projetos registradas">
 
 					<p:column headerText="Nome do Projeto" style="text-align: center;">
 

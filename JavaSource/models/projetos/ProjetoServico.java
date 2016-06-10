@@ -123,10 +123,8 @@ public class ProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.tipoProjeto =:param1 AND (p.statusFase.nome =:param2 OR p.statusFase.nome =:param3)");
-			query.setParameter("param1", tipoProjeto);
-			query.setParameter("param2", "A iniciar");
-			query.setParameter("param3", "Em andamento");
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.tipoProjeto =:param1");
+			query.setParameter("param1", tipoProjeto);			
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -142,10 +140,8 @@ public class ProjetoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.evolucao =:param1 AND (p.statusFase.nome =:param2 OR p.statusFase.nome =:param3)");
-			query.setParameter("param1", evo);
-			query.setParameter("param2", "A iniciar");
-			query.setParameter("param3", "Em andamento");
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.evolucao =:param1");
+			query.setParameter("param1", evo);			
 			return query.getResultList();
 
 		} catch (Exception e) {
