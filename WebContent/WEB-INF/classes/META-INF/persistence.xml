@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="vu">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/co</jta-data-source>
+		<class>entidades.projetos.Fase</class>
+		<class>entidades.projetos.FaseProjeto</class>
+		<class>entidades.projetos.Projeto</class>
+		<class>entidades.UsuarioEfika</class>
+		<class>entidades.projetos.TipoProjeto</class>
+		<class>entidades.projetos.StatusFaseProjeto</class>
+		<class>entidades.projetos.StatusFase</class>
+		<class>entidades.projetos.DataImplantacaoProjeto</class>
+		<class>entidades.projetos.ImpactoProjeto</class>
+		<class>entidades.projetos.Impacto</class>
+		<class>entidades.projetos.TipoTarefa</class>
+		<class>entidades.projetos.Tarefa</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+</persistence>

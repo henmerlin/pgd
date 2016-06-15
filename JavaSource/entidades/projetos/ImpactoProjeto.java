@@ -7,10 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import util.JSFUtil;
 
 @Entity
+@Table(name="pdg_Impacto_Projeto")
 public class ImpactoProjeto {
 
 	@Id

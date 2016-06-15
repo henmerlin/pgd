@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import util.JSFUtil;
 
 @Entity
+@Table(name="pdg_Fase_Projeto")
 public class FaseProjeto {
 
 	@Id
