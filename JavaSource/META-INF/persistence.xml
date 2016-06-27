@@ -19,11 +19,11 @@
 		<class>entidades.projetos.Tarefa</class>
 		<class>entidades.pps.Pp</class>
 		<class>entidades.pps.Beneficio</class>
-		<class>entidades.pps.FasePp</class>
+		<class>entidades.pps.InformacaoFase</class>
 		<class>entidades.pps.Prioridade</class>
 		<class>entidades.pps.Priorizacao</class>
 		<class>entidades.pps.StatusFasePp</class>
-		<class>entidades.pps.StatusPp</class>
+		<class>entidades.pps.FasePp</class>
 		<class>entidades.pps.CodigoPp</class>
 		<class>entidades.pps.Codigo</class>
 		<properties>
