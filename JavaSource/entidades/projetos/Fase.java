@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdg_Fase")
+@Table(name="pdg_projetos_Fase")
 public class Fase {
 
 	@Id

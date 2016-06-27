@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="pdg_Projeto")
+@Table(name="pdg_projetos_Projeto")
 public class Projeto {
 	
 	@Id

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import util.JSFUtil;
 
 @Entity
-@Table(name="pdg_Data_ImplantacaoProjeto")
+@Table(name="pdg_projetos_Data_ImplantacaoProjeto")
 public class DataImplantacaoProjeto {
 	
 	@Id

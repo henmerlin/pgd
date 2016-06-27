@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import util.JSFUtil;
 
 @Entity
-@Table(name="pdg_Fase_Projeto")
+@Table(name="pdg_projetos_Fase_Projeto")
 public class FaseProjeto {
 
 	@Id
