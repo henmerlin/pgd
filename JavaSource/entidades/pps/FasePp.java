@@ -1,8 +1,11 @@
 package entidades.pps;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,6 +20,15 @@ public class FasePp {
 	private String nome;
 	
 	private Boolean ativo;
+	
+	private Date dataInicio;
+	
+	private Date dataFim;
+	
+	private Integer porcentagem;
+	
+	@Lob
+	private String descricao;
 	
 	@ManyToOne
 	private Pp pp;
@@ -73,6 +85,38 @@ public class FasePp {
 
 	public void setStatusFasePp(StatusFasePp statusFasePp) {
 		this.statusFasePp = statusFasePp;
+	}	
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public Integer getPorcentagem() {
+		return porcentagem;
+	}
+
+	public void setPorcentagem(Integer porcentagem) {
+		this.porcentagem = porcentagem;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
