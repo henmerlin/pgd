@@ -17,9 +17,18 @@
 		<class>entidades.projetos.Impacto</class>
 		<class>entidades.projetos.TipoTarefa</class>
 		<class>entidades.projetos.Tarefa</class>
+		<class>entidades.pps.Pp</class>
+		<class>entidades.pps.Beneficio</class>
+		<class>entidades.pps.FasePp</class>
+		<class>entidades.pps.Prioridade</class>
+		<class>entidades.pps.Priorizacao</class>
+		<class>entidades.pps.StatusFasePp</class>
+		<class>entidades.pps.StatusPp</class>
+		<class>entidades.pps.CodigoPp</class>
+		<class>entidades.pps.Codigo</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
