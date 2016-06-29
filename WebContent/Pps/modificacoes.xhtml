@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Ferramenta
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Gerenciar Ferramenta</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Pps')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:tabView dynamic="true" cache="true" id="tabview">
+
+				<p:tab title="Fase">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{fasePpBean.fasePp.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{fasePpBean.fasePp.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{fasePpBean.cadastrarFase()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{fasePpBean.listarFasePp()}" var="fases"
+						style="margin-top: 20px;" emptyMessage="Não há fases registradas">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{fases.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{fases.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!fases.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModFase"
+								oncomplete="PF('modFase').show()" icon="ui-icon-pencil"
+								title="Edita Fase">
+
+								<f:setPropertyActionListener value="#{fases}"
+									target="#{fasePpBean.fasePpMostra}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Fases" widgetVar="modFase" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModFase">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome " style="font-weight:bold" />
+								<p:inputText value="#{fasePpBean.fasePpMostra.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu value="#{fasePpBean.fasePpMostra.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{fasePpBean.modificarFase()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Status">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{statusFasePpBean.statusFasePp.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{statusFasePpBean.statusFasePp.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{statusFasePpBean.cadastraStatusFase()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{statusFasePpBean.listarStatusFasePp()}"
+						var="fases" style="margin-top: 20px;"
+						emptyMessage="Não há status fase registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{fases.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{fases.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!fases.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModStatusFase"
+								oncomplete="PF('modStatusFase').show()" icon="ui-icon-pencil"
+								title="Edita Status Fase">
+
+								<f:setPropertyActionListener value="#{fases}"
+									target="#{statusFasePpBean.statusFasePpModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Status Fase" widgetVar="modStatusFase"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModStatusFase">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome " style="font-weight:bold" />
+								<p:inputText
+									value="#{statusFasePpBean.statusFasePpModifica.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{statusFasePpBean.statusFasePpModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{statusFasePpBean.modificaStatusFase()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>				
+				
+				<p:tab title="Benefício">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{beneficioBean.beneficio.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{beneficioBean.beneficio.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{beneficioBean.cadastrarBeneficio()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{beneficioBean.listarBeneficios()}" var="beneficio"
+						style="margin-top: 20px;"
+						emptyMessage="Não há benefício registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{beneficio.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{beneficio.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!beneficio.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModBeneficio"
+								oncomplete="PF('modBeneficio').show()" icon="ui-icon-pencil"
+								title="Edita beneficio">
+
+								<f:setPropertyActionListener value="#{beneficio}"
+									target="#{beneficioBean.beneficioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Beneficio" widgetVar="modBeneficio" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModBeneficio">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome " style="font-weight:bold" />
+								<p:inputText value="#{beneficioBean.beneficioModifica.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu value="#{beneficioBean.beneficioModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{beneficioBean.modificarBeneficio()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+				
+				<p:tab title="Prioridade">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{prioridadeBean.prioridade.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{prioridadeBean.prioridade.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{prioridadeBean.cadastrarPrioridade()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{prioridadeBean.listarPrioridades()}" var="prioridade"
+						style="margin-top: 20px;"
+						emptyMessage="Não há prioridade registradas">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{prioridade.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{prioridade.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!prioridade.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModPrioridade"
+								oncomplete="PF('modPrioridade').show()" icon="ui-icon-pencil"
+								title="Edita prioridade">
+
+								<f:setPropertyActionListener value="#{prioridade}"
+									target="#{prioridadeBean.prioridadeModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Prioridade" widgetVar="modPrioridade" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModPrioridade">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome " style="font-weight:bold" />
+								<p:inputText value="#{prioridadeBean.prioridadeModifica.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu value="#{prioridadeBean.prioridadeModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{prioridadeBean.modificaPrioridade()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+				
+				<p:tab title="Código">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{codigoBean.codigo.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{codigoBean.codigo.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{codigoBean.cadastrarCodigo()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{codigoBean.listarCodigos()}" var="codigo"
+						style="margin-top: 20px;"
+						emptyMessage="Não há códigos registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{codigo.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{codigo.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!codigo.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModCodigo"
+								oncomplete="PF('modCodigo').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{codigo}"
+									target="#{codigoBean.codigoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Código" widgetVar="modCodigo" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModCodigo">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome " style="font-weight:bold" />
+								<p:inputText value="#{codigoBean.codigoModifica.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu value="#{codigoBean.codigoModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{codigoBean.modificarCodigo()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

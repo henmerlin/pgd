@@ -59,10 +59,16 @@ public class JSFUtil {
 	}
 
 	public static String formatarData(Date date) {
+		
+		String dataFormatada = null;
 
-		SimpleDateFormat formmater = new SimpleDateFormat("dd/MM/yyyy");
+		if (date != null) {
+			
+			SimpleDateFormat formmater = new SimpleDateFormat("dd/MM/yyyy");
 
-		String dataFormatada = formmater.format(date);
+			dataFormatada = formmater.format(date);
+			
+		}	
 
 		return dataFormatada;
 

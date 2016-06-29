@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pdg_pps_Projetos_Pequenos")
 public class Pp {
@@ -27,15 +29,15 @@ public class Pp {
 	private String solicitante;
 
 	private String autor;	
-	
+
 	private Date dataSolicitacao;
 
 	private Date dataPostagem;
 
 	private Date dataPrevista;
-	
+
 	private String impacto;
-	
+
 	@ManyToOne
 	private StatusFasePp statusFasePp;
 
@@ -91,6 +93,12 @@ public class Pp {
 		return dataSolicitacao;
 	}
 
+	public String getDataSolicitacaoFormatada() {
+
+		return JSFUtil.formatarData(this.dataSolicitacao);
+
+	}
+
 	public void setDataSolicitacao(Date dataSolicitacao) {
 		this.dataSolicitacao = dataSolicitacao;
 	}
@@ -99,12 +107,24 @@ public class Pp {
 		return dataPostagem;
 	}
 
+	public String getDataPostagemFormatada() {
+
+		return JSFUtil.formatarData(this.dataPostagem);
+
+	}
+
 	public void setDataPostagem(Date dataPostagem) {
 		this.dataPostagem = dataPostagem;
 	}
 
 	public Date getDataPrevista() {
 		return dataPrevista;
+	}
+	
+	public String getDataPrevistaFormatada() {
+
+		return JSFUtil.formatarData(this.dataPrevista);
+
 	}
 
 	public void setDataPrevista(Date dataPrevista) {

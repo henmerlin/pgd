@@ -61,4 +61,20 @@ public class FasePpServico {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<FasePp> listarFasePp() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM FasePp f");
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<FasePp>();
+			
+		}
+		
+	}
+	
 }

@@ -44,21 +44,36 @@ public class StatusFasePpServico {
 		}
 
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<StatusFasePp> listarStatusFasePp() {
+
+		try {
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s");
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<StatusFasePp>();
+
+		}
+
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<StatusFasePp> listarStatusFasePpAtivo() {
-		
+
 		try {
-			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE p.ativo =:param1");
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.ativo =:param1");
 			query.setParameter("param1", true);
 			return query.getResultList();
-			
+
 		} catch (Exception e) {
-			
+
 			return new ArrayList<StatusFasePp>();
-			
+
 		}
-		
+
 	}
 
 }

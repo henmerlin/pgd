@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pdg_pps_Informacao_fase_pp")
 public class InformacaoFase {
@@ -16,11 +18,7 @@ public class InformacaoFase {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
-	private String nome;
-	
-	private Boolean ativo;
-	
+			
 	private Date dataInicio;
 	
 	private Date dataFim;
@@ -47,24 +45,14 @@ public class InformacaoFase {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
 	public Date getDataInicio() {
 		return dataInicio;
+	}
+	
+	public String getDataInicioFormatado() {
+		
+		return JSFUtil.formatarData(this.dataInicio);
+		
 	}
 
 	public void setDataInicio(Date dataInicio) {
@@ -73,6 +61,12 @@ public class InformacaoFase {
 
 	public Date getDataFim() {
 		return dataFim;
+	}
+	
+	public String getDataFimFormatado() {
+		
+		return JSFUtil.formatarData(this.dataFim);
+		
 	}
 
 	public void setDataFim(Date dataFim) {

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Cadastrar Pp
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Cadastrar Pp</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Pps')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<p:panel header="Cadastrar Pp">
+
+			<h:form>
+
+				<h:panelGrid columns="3">
+
+					<p:outputLabel for="p0" value="Nome do Pp: " />
+					<p:inputText id="p0" value="#{ppBean.pp.nome}" />
+					<p:message for="p0" />
+
+					<p:outputLabel for="p0" value="Selecione: " />
+					<p:selectOneMenu value="#{ppBean.pp.statusFasePp}"
+						converter="omnifaces.SelectItemsConverter" id="p1">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems
+							value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+							var="statusFasePp" itemLabel="#{statusFasePp.nome}"
+							itemValue="#{statusFasePp}" />
+					</p:selectOneMenu>
+					<p:message for="p1" />
+
+					<p:outputLabel for="p2" value="Descrição do Pp: " />
+					<p:inputTextarea id="p2" rows="5" cols="30"
+						value="#{ppBean.pp.descricao}" maxlength="800" />
+					<p:message for="p2" />
+
+					<p:outputLabel for="p3" value="Solicitante: " />
+					<p:inputText id="p3" value="#{ppBean.pp.solicitante}" />
+					<p:message for="p3" />
+
+					<p:outputLabel for="p4" value="Area Solicitante: " />
+					<p:inputText id="p4" value="#{ppBean.pp.areaSolicitante}" />
+					<p:message for="p4" />
+
+					<p:outputLabel for="p5" value="Autor: " />
+					<p:inputText id="p5" value="#{ppBean.pp.autor}" />
+					<p:message for="p5" />
+
+					<p:outputLabel for="p6" value="Data da Solicitação: " />
+					<p:calendar id="p6" value="#{ppBean.pp.dataSolicitacao}"
+						pattern="dd/MM/yyyy" mask="true" />
+					<p:message for="p6" />
+					
+					<p:outputLabel for="p7" value="Data da Postagem: " />
+					<p:calendar id="p7" value="#{ppBean.pp.dataPostagem}"
+						pattern="dd/MM/yyyy" mask="true" />
+					<p:message for="p7" />
+					
+					<p:outputLabel for="p8" value="Data da Prevista " />
+					<p:calendar id="p8" value="#{ppBean.pp.dataPrevista}"
+						pattern="dd/MM/yyyy" mask="true" />
+					<p:message for="p8" />
+					
+					<p:outputLabel for="p9" value="Impacto Area: " />
+					<p:inputText id="p9" value="#{ppBean.pp.impacto}" />
+					<p:message for="p9" />
+
+					<p:commandButton id="cadastrarPp" value="Cadastrar" action="#{ppBean.cadastrarPp()}" update="@all" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:panel>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Projeto
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Pps')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:panel header="Gerenciar Projetos">
+
+				<p:dataTable var="pp" value="#{ppBean.listarPp()}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10, 15, 20"
+					emptyMessage="Não há projetos registradas">
+
+					<p:column headerText="Nome do Pp" style="text-align: center;">
+
+						<h:outputText value="#{pp.nome}" />
+
+					</p:column>
+
+					<p:column headerText="Autor" style="text-align: center;">
+
+						<h:outputText value="#{pp.autor}" />
+
+					</p:column>
+
+					<p:column headerText="Solicitante" style="text-align: center;">
+
+						<h:outputText value="#{pp.solicitante}" />
+
+					</p:column>
+
+					<p:column headerText="Data de Solicitação"
+						style="text-align: center;">
+
+						<h:outputText value="#{pp.dataSolicitacaoFormatada}" />
+
+					</p:column>
+
+					<p:column headerText="Data Prevista" style="text-align: center;">
+
+						<h:outputText value="#{pp.dataPrevistaFormatada}" />
+
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px;">
+
+						<p:commandButton update="@form:detatlhesPp"
+							oncomplete="PF('infPp').show()" icon="ui-icon-search"
+							title="Detalhes do projeto">
+							<f:setPropertyActionListener value="#{pp}" target="#{ppBean.pp}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Detalhes do Projeto" widgetVar="infPp"
+					modal="true" showEffect="fade" hideEffect="fade" width="500"
+					height="300" minHeight="300" minWidth="500">
+
+					<h:panelGroup id="detatlhesPp">
+
+						<p:panelGrid rendered="#{not empty ppBean.pp}"
+							columnClasses="label, value">
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome do pp" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.nome}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Descrição" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.descricao}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Area Solicitante" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.areaSolicitante}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Solicitante" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.solicitante}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Autor" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.autor}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Data de Solicitação"
+										style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.dataSolicitacaoFormatada}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Data de Postagem" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.dataPostagemFormatada}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Data de Prevista" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.dataPrevistaFormatada}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Impactos" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{ppBean.pp.impacto}" />
+
+								</p:column>
+
+							</p:row>
+
+						</p:panelGrid>
+
+						<br />
+
+						<p:button outcome="detalhesProjeto" value="Modificar"
+							style="float: right;">
+
+							<f:param name="pp" value="#{ppBean.pp.id}" />
+
+						</p:button>
+
+					</h:panelGroup>
+
+				</p:dialog>
+			</p:panel>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -60,5 +60,21 @@ public class PrioridadeServico {
 		}
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prioridade> listarPrioridades() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Prioridade p");
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Prioridade>();
+			
+		}
+		
+	}
 
 }

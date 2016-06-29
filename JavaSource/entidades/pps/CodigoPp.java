@@ -6,17 +6,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import util.JSFUtil;
 
 @Entity
+@Table(name="pdg_pps_Codigo_pp")
 public class CodigoPp {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
+	
 	private String nome;
 	
-	private Date data;
+	private Date dataPostagem;
 	
 	@ManyToOne
 	private Codigo codigo;
@@ -30,7 +34,7 @@ public class CodigoPp {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	}	
 
 	public String getNome() {
 		return nome;
@@ -38,15 +42,21 @@ public class CodigoPp {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-
-	public Date getData() {
-		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
-	}	
+	public Date getDataPostagem() {
+		return dataPostagem;
+	}
+	
+	public String getDataPostagemFormatada() {
+		
+		return JSFUtil.formatarData(this.dataPostagem);
+		
+	}
+
+	public void setDataPostagem(Date dataPostagem) {
+		this.dataPostagem = dataPostagem;
+	}
 
 	public Codigo getCodigo() {
 		return codigo;

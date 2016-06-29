@@ -24,7 +24,7 @@ public class BeneficioServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao cadastrar Beneficio");
+			throw new Exception("Erro ao cadastrar Benefício");
 			
 		}
 		
@@ -38,7 +38,7 @@ public class BeneficioServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao modificar Beneficio");
+			throw new Exception("Erro ao modificar Benefício");
 			
 		}
 		
@@ -51,6 +51,22 @@ public class BeneficioServico {
 			
 			Query query = this.entityManager.createQuery("FROM Beneficio b WHERE b.ativo =:param1");
 			query.setParameter("param1", true);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Beneficio>();
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Beneficio> listarBeneficios() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Beneficio b");
 			return query.getResultList();
 			
 		} catch (Exception e) {

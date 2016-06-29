@@ -3,6 +3,7 @@ package entidades.pps;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,6 +18,9 @@ public class Priorizacao {
 	private Integer nota;
 	
 	private Double saving;
+	
+	@Lob
+	private String descStatus;
 	
 	@ManyToOne
 	private Pp pp;
@@ -73,6 +77,14 @@ public class Priorizacao {
 
 	public void setBeneficio(Beneficio beneficio) {
 		this.beneficio = beneficio;
+	}	
+
+	public String getDescStatus() {
+		return descStatus;
+	}
+
+	public void setDescStatus(String descStatus) {
+		this.descStatus = descStatus;
 	}
 
 	@Override

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Detalhe do Projeto
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-home"> </i> Detalhe do Projeto</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Pps')}"
+				type="preRenderView" />
+
+			<f:viewParam name="pp" value="#{ppBean.pp.id}" />
+
+			<f:event listener="#{ppBean.listarPpEspecifico()}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:fieldset legend="Detalhes do Pp" toggleable="true"
+				toggleSpeed="500">
+
+				<h:panelGrid rendered="#{not empty ppBean.pp}"
+					columnClasses="label, value">
+
+					<h:outputText value="Nome do Pp: " style="font-weight:bold" />
+					<h:outputText value="#{ppBean.pp.nome}" />
+
+					<br />
+
+					<h:outputText value="Selecione o status: " style="font-weight:bold" />
+					<p:selectOneMenu value="#{ppBean.pp.statusFasePp}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems
+							value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+							var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+					</p:selectOneMenu>
+
+					<br />
+
+					<h:outputText value="Descrição: " style="font-weight:bold" />
+					<p:inputTextarea rows="5" cols="100" value="#{ppBean.pp.descricao}"
+						maxlength="500" />
+
+					<br />
+
+					<h:outputText value="Area Solicitante: " style="font-weight:bold" />
+					<p:inputText value="#{ppBean.pp.areaSolicitante}" />
+
+					<br />
+
+					<h:outputText value="Solicitante: " style="font-weight:bold" />
+					<p:inputText value="#{ppBean.pp.solicitante}" />
+					<br />
+
+					<h:outputText value="Autor: " style="font-weight:bold" />
+					<p:inputText value="#{ppBean.pp.autor}" />
+					<br />
+
+					<h:outputText value="Data de Solicitação " />
+					<p:calendar value="#{ppBean.pp.dataSolicitacao}"
+						pattern="dd/MM/yyyy" mask="true" />
+
+					<br />
+
+					<h:outputText value="Data de Postagem " />
+					<p:calendar value="#{ppBean.pp.dataPostagem}" pattern="dd/MM/yyyy"
+						mask="true" />
+
+					<br />
+
+					<h:outputText value="Data de Prevista " />
+					<p:calendar value="#{ppBean.pp.dataPrevista}" pattern="dd/MM/yyyy"
+						mask="true" />
+
+					<br />
+
+					<h:outputText value="Impactos: " style="font-weight:bold" />
+					<p:inputText value="#{ppBean.pp.impacto}" />
+
+					<br />
+
+					<p:commandButton value="Salvar" action="#{ppBean.modificarPp()}"
+						update="@all" />
+
+				</h:panelGrid>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Fases" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Fases" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Selecione a fase" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{informacaoFaseBean.informacaoFase.fasePp}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{fasePpBean.listarFasePpAtivo()}"
+								var="fasepp" itemLabel="#{fasepp.nome}" itemValue="#{fasepp}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Selecione status" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{informacaoFaseBean.informacaoFase.statusFasePp}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems
+								value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+								var="statusFasePp" itemLabel="#{statusFasePp.nome}"
+								itemValue="#{statusFasePp}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Descrição " style="font-weight:bold" />
+						<p:inputTextarea rows="5" cols="100"
+							value="#{informacaoFaseBean.informacaoFase.descricao}"
+							maxlength="500" />
+
+						<h:outputText value="Data de inicio " />
+						<p:calendar
+							value="#{informacaoFaseBean.informacaoFase.dataInicio}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<h:outputText value="Data de fim " />
+						<p:calendar value="#{informacaoFaseBean.informacaoFase.dataFim}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<p:commandButton value="Criar Fase"
+							action="#{informacaoFaseBean.cadastrarInformacaoFase(ppBean.pp)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Fases do Pp" toggleable="true" toggleSpeed="500"
+					style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{informacaoFaseBean.listarInformacaoFaseEspecifico(ppBean.pp)}"
+						var="fasePp" emptyMessage="Não há fases cadastradas.">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{fasePp.fasePp.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Status" style="text-align: center;">
+
+							<h:outputText value="#{fasePp.statusFasePp.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Porcentagem" style="text-align: center;">
+
+							<h:outputText value="#{fasePp.porcentagem}%" />
+
+						</p:column>
+
+						<p:column headerText="Data Inicio" style="text-align: center;">
+
+							<h:outputText value="#{fasePp.dataInicioFormatado}" />
+
+						</p:column>
+
+						<p:column headerText="Data Fim" style="text-align: center;">
+
+							<h:outputText value="#{fasePp.dataFimFormatado}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModInfoFase"
+								icon="ui-icon-pencil" title="Modifica Fase"
+								oncomplete="PF('modInfoFase').show()">
+
+								<f:setPropertyActionListener value="#{fasePp}"
+									target="#{informacaoFaseBean.informacaoFaseModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Informações" widgetVar="modInfoFase"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+						width="500" height="300">
+
+						<h:panelGroup id="detalhesModInfoFase">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Fase: " style="font-weight:bold" />
+								<h:outputText
+									value="#{informacaoFaseBean.informacaoFaseModifica.fasePp.nome}" />
+
+								<h:outputText id="outputPp"
+									value="Porcentagem #{informacaoFaseBean.informacaoFaseModifica.porcentagem}%"
+									style="font-weight:bold" />
+								<h:inputHidden id="porcentagemPp"
+									value="#{informacaoFaseBean.informacaoFaseModifica.porcentagem}" />
+								<p:slider for="porcentagemPp" display="outputPp"
+									displayTemplate="Porcentagem {value}%" style="width: 100%;" />
+
+								<br />
+								<h:outputText value="Selecione status: "
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{informacaoFaseBean.informacaoFaseModifica.statusFasePp}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+										var="statusFasePp" itemLabel="#{statusFasePp.nome}"
+										itemValue="#{statusFasePp}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5"
+									value="#{informacaoFaseBean.informacaoFaseModifica.descricao}"
+									maxlength="500" />
+
+								<h:outputText value="Data de inicio: " />
+								<p:calendar
+									value="#{informacaoFaseBean.informacaoFaseModifica.dataInicio}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<h:outputText value="Data de fim: " />
+								<p:calendar
+									value="#{informacaoFaseBean.informacaoFaseModifica.dataFim}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+
+								<p:commandButton value="Modificar: "
+									action="#{informacaoFaseBean.modificarInformacaoFase(ppBean.pp)}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Priorização" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Priorização" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Prioridade" style="font-weight:bold" />
+						<p:selectOneMenu value="#{priorizacaoBean.priorizacao.prioridade}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{prioridadeBean.listarPrioridadesAtiva()}"
+								var="prioridade" itemLabel="#{prioridade.nome}"
+								itemValue="#{prioridade}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Beneficio" style="font-weight:bold" />
+						<p:selectOneMenu value="#{priorizacaoBean.priorizacao.beneficio}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{beneficioBean.listarBeneficiosAtivos()}"
+								var="beneficio" itemLabel="#{beneficio.nome}"
+								itemValue="#{beneficio}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Nota: " style="font-weight:bold" />
+						<p:inputText value="#{priorizacaoBean.priorizacao.nota}" />
+
+						<h:outputText value="Saving: " style="font-weight:bold" />
+						<p:inputNumber value="#{priorizacaoBean.priorizacao.saving}"
+							symbol="R$" decimalSeparator="," thousandSeparator="." />
+
+						<h:outputText value="Descrição: " style="font-weight:bold" />
+						<p:inputTextarea rows="5"
+							value="#{priorizacaoBean.priorizacao.descStatus}" maxlength="500" />
+
+						<p:commandButton value="Criar Priorização"
+							action="#{priorizacaoBean.cadastrarPriorizacao(ppBean.pp)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Lista de priorização" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{priorizacaoBean.listarPriorizacaoEspecifico(ppBean.pp)}"
+						var="priorizacao" emptyMessage="Não há priorizações cadastradas.">
+
+						<p:column headerText="Prioridade" style="text-align: center;">
+
+							<h:outputText value="#{priorizacao.prioridade.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Beneficio" style="text-align: center;">
+
+							<h:outputText value="#{priorizacao.beneficio.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Nota" style="text-align: center;">
+
+							<h:outputText value="#{priorizacao.nota}" />
+
+						</p:column>
+
+						<p:column headerText="Saving" style="text-align: center;">
+
+							<h:outputText value="#{priorizacao.saving}">
+
+								<f:convertNumber locale="pt_BR" />
+
+							</h:outputText>
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModInfoPriorizacao"
+								icon="ui-icon-pencil" title="Modifica Priorização"
+								oncomplete="PF('modInfoPriorizacao').show()">
+
+								<f:setPropertyActionListener value="#{priorizacao}"
+									target="#{priorizacaoBean.priorizacaoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Informações"
+						widgetVar="modInfoPriorizacao" modal="true" showEffect="fade"
+						hideEffect="fade" resizable="true" width="500" height="300">
+
+						<h:panelGroup id="detalhesModInfoPriorizacao">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Prioridade" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{priorizacaoBean.priorizacaoModifica.prioridade}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{prioridadeBean.listarPrioridadesAtiva()}"
+										var="prioridade" itemLabel="#{prioridade.nome}"
+										itemValue="#{prioridade}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Beneficio" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{priorizacaoBean.priorizacaoModifica.beneficio}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{beneficioBean.listarBeneficiosAtivos()}"
+										var="beneficio" itemLabel="#{beneficio.nome}"
+										itemValue="#{beneficio}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Nota: " style="font-weight:bold" />
+								<p:inputText value="#{priorizacaoBean.priorizacaoModifica.nota}" />
+
+								<h:outputText value="Saving: " style="font-weight:bold" />
+								<p:inputNumber
+									value="#{priorizacaoBean.priorizacaoModifica.saving}"
+									symbol="R$" decimalSeparator="," thousandSeparator="." />
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5"
+									value="#{priorizacaoBean.priorizacaoModifica.descStatus}"
+									maxlength="500" />
+
+								<p:commandButton value="Modificar: "
+									action="#{priorizacaoBean.modificarPriorizacao()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+			
+			<br />
+
+			<p:fieldset legend="Codigos" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Codigos" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Código" style="font-weight:bold" />
+						<p:selectOneMenu value="#{codigoPpBean.codigoPp.codigo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{codigoBean.listarCodigosAtivo()}"
+								var="codigo" itemLabel="#{codigo.nome}" itemValue="#{codigo}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Id " style="font-weight:bold" />
+						<p:inputText value="#{codigoPpBean.codigoPp.nome}" />
+
+						<h:outputText value="Data de postagem" />
+						<p:calendar value="#{codigoPpBean.codigoPp.dataPostagem}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<p:commandButton value="Criar Código"
+							action="#{codigoPpBean.cadastrarCodigoPp(ppBean.pp)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Lista de Codigos" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: right;">
+
+
+					<p:dataTable
+						value="#{codigoPpBean.listarCodigoPpEspecifico(ppBean.pp)}"
+						var="codigo" emptyMessage="Não há códigos cadastradas.">
+
+						<p:column headerText="Código" style="text-align: center;">
+
+							<h:outputText value="#{codigo.codigo.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Id" style="text-align: center;">
+
+							<h:outputText value="#{codigo.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Data postagem" style="text-align: center;">
+
+							<h:outputText value="#{codigo.dataPostagemFormatada}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModInfoCod"
+								icon="ui-icon-pencil" title="Modifica Código"
+								oncomplete="PF('modInfoCod').show()">
+
+								<f:setPropertyActionListener value="#{codigo}"
+									target="#{codigoPpBean.codigoPpModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Informações" widgetVar="modInfoCod"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+						width="500" height="300">
+
+						<h:panelGroup id="detalhesModInfoCod">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Código" style="font-weight:bold" />
+								<h:outputText value="#{codigoPpBean.codigoPpModifica.codigo.nome}" />
+								
+								<h:outputText value="Id " style="font-weight:bold" />
+								<p:inputText value="#{codigoPpBean.codigoPpModifica.nome}" />
+
+								<h:outputText value="Data de postagem" />
+								<p:calendar value="#{codigoPpBean.codigoPpModifica.dataPostagem}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<p:commandButton value="Modificar: "
+									action="#{codigoPpBean.modificaCodigoPp()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

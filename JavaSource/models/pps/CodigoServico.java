@@ -60,5 +60,21 @@ public class CodigoServico {
 		}
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Codigo> listarCodigos() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Codigo c");
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Codigo>();
+			
+		}
+		
+	}
 
 }
