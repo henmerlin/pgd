@@ -34,7 +34,7 @@ public class CodigoBean {
 		try {
 
 			this.codigoServico.cadastrarCodigo(this.codigo);			
-			JSFUtil.addErrorMessage("Codigo cadastrado com sucesso.");
+			JSFUtil.addInfoMessage("Codigo cadastrado com sucesso.");
 			this.codigo = new Codigo();
 
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class CodigoBean {
 		try {
 
 			this.codigoServico.modificarCodigo(this.codigoModifica);			
-			JSFUtil.addErrorMessage("Codigo modificado com sucesso.");
+			JSFUtil.addInfoMessage("Codigo modificado com sucesso.");
 			this.codigo = new Codigo();
 
 		} catch (Exception e) {

@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.UsuarioEfika;
+import entidades.pps.ControleUsuario;
 import webservices.EfikaUsersProxy;
 import webservices.Usuario;
 
@@ -96,6 +97,24 @@ public class LoginServico {
 
 		this.entityManager.merge(usuarioEfika);		
 
+	}
+	
+	public ControleUsuario validaListaAdm(UsuarioEfika usuarioEfika, String sistema) throws Exception {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM ControleUsuario c WHERE c.usuarioEfika =:param1 AND c.sistema =:param2 AND c.ativo =:param3");
+			query.setParameter("param1", usuarioEfika);
+			query.setParameter("param2", sistema);
+			query.setParameter("param3", true);
+			return (ControleUsuario) query.getSingleResult();
+			
+		} catch (Exception e) {
+			
+			throw new Exception("Usuário não é Administrador");
+			
+		}
+		
 	}
 
 }

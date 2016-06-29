@@ -49,13 +49,22 @@ public class LoginBean implements Serializable{
 		
 	}
 
-	public Boolean is_Admin(){
+	public Boolean is_Admin(String sistema){
 
-		return this.usuarioWS.getNivel() > 5;
+		try {
+			
+			this.servicoLogin.validaListaAdm(this.usuario, sistema);
+			return true;
+			
+		} catch (Exception e) {
+			
+			return false;
+
+		}
 
 	}
 
-	public void validaAdmin() {
+	/*public void validaAdmin() {
 		try {
 			this.validarLogin();
 
@@ -69,7 +78,7 @@ public class LoginBean implements Serializable{
 		} catch (Exception e) {
 			this.usuario = new UsuarioEfika();
 		}
-	}
+	}*/
 	
 	public String logar() {
 

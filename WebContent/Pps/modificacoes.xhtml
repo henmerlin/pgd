@@ -196,8 +196,8 @@
 
 					</p:dialog>
 
-				</p:tab>				
-				
+				</p:tab>
+
 				<p:tab title="Benefício">
 
 					<h:panelGrid>
@@ -218,8 +218,8 @@
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{beneficioBean.listarBeneficios()}" var="beneficio"
-						style="margin-top: 20px;"
+					<p:dataTable value="#{beneficioBean.listarBeneficios()}"
+						var="beneficio" style="margin-top: 20px;"
 						emptyMessage="Não há benefício registrados">
 
 						<p:column headerText="Nome" style="text-align: center;">
@@ -251,9 +251,9 @@
 
 					</p:dataTable>
 
-					<p:dialog header="Editar Beneficio" widgetVar="modBeneficio" modal="true"
-						showEffect="fade" hideEffect="fade" resizable="false" width="250"
-						height="150">
+					<p:dialog header="Editar Beneficio" widgetVar="modBeneficio"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
 
 						<h:panelGroup id="detalhesModBeneficio">
 
@@ -263,7 +263,8 @@
 								<p:inputText value="#{beneficioBean.beneficioModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{beneficioBean.beneficioModifica.ativo}"
+								<p:selectOneMenu
+									value="#{beneficioBean.beneficioModifica.ativo}"
 									converter="omnifaces.SelectItemsConverter">
 									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 									<f:selectItem itemLabel="Ativo" itemValue="true" />
@@ -280,7 +281,7 @@
 					</p:dialog>
 
 				</p:tab>
-				
+
 				<p:tab title="Prioridade">
 
 					<h:panelGrid>
@@ -301,8 +302,8 @@
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{prioridadeBean.listarPrioridades()}" var="prioridade"
-						style="margin-top: 20px;"
+					<p:dataTable value="#{prioridadeBean.listarPrioridades()}"
+						var="prioridade" style="margin-top: 20px;"
 						emptyMessage="Não há prioridade registradas">
 
 						<p:column headerText="Nome" style="text-align: center;">
@@ -334,9 +335,9 @@
 
 					</p:dataTable>
 
-					<p:dialog header="Editar Prioridade" widgetVar="modPrioridade" modal="true"
-						showEffect="fade" hideEffect="fade" resizable="false" width="250"
-						height="150">
+					<p:dialog header="Editar Prioridade" widgetVar="modPrioridade"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
 
 						<h:panelGroup id="detalhesModPrioridade">
 
@@ -346,7 +347,8 @@
 								<p:inputText value="#{prioridadeBean.prioridadeModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{prioridadeBean.prioridadeModifica.ativo}"
+								<p:selectOneMenu
+									value="#{prioridadeBean.prioridadeModifica.ativo}"
 									converter="omnifaces.SelectItemsConverter">
 									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 									<f:selectItem itemLabel="Ativo" itemValue="true" />
@@ -363,7 +365,7 @@
 					</p:dialog>
 
 				</p:tab>
-				
+
 				<p:tab title="Código">
 
 					<h:panelGrid>
@@ -438,6 +440,126 @@
 
 								<p:commandButton value="Editar"
 									action="#{codigoBean.modificarCodigo()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Usuário">
+
+					<h:panelGrid>
+
+						<h:outputText value="Login" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
+								var="usuario" itemLabel="#{usuario.login}"
+								itemValue="#{usuario}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Status" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Sistema" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.sistema}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="PPs" itemValue="PPs" />
+							<f:selectItem itemLabel="Projetos" itemValue="Projetos" />
+							<f:selectItem itemLabel="Bugs" itemValue="Bugs" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable
+						value="#{controleUsuarioBean.listarControleUsuario()}"
+						var="usuario" style="margin-top: 20px;"
+						emptyMessage="Não há usuários registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{usuario.usuarioEfika.login}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{usuario.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!usuario.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuário"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{controleUsuarioBean.controleUsuarioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Usuário" widgetVar="modUser" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModUsuário">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
+										var="usuario" itemLabel="#{usuario.login}"
+										itemValue="#{usuario}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{controleUsuarioBean.controleUsuarioModifica.sistema}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="PPs" itemValue="PPs" />
+									<f:selectItem itemLabel="Projetos" itemValue="Projetos" />
+									<f:selectItem itemLabel="Bugs" itemValue="Bugs" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{controleUsuarioBean.modificaUsuario()}" update="@all" />
 
 							</h:panelGrid>
 
