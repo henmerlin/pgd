@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="PGD_USUARIO")
+@Table(name="backloglist_UsuarioEfika")
 public class UsuarioEfika{
 	
 	@Id
