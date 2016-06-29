@@ -8,10 +8,10 @@
 <ui:composition template="/recursos/template/template.xhtml">
 
 	<ui:define name="tituloPagina">
-		 Cadastrar Pp
+		 Cadastrar PP
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Cadastrar Pp</ui:define>
+		<i class="fa fa-align-left"> </i> Cadastrar PP</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
@@ -27,13 +27,13 @@
 
 	<ui:define name="conteudo">
 
-		<p:panel header="Cadastrar Pp">
+		<p:panel header="Cadastrar PP">
 
 			<h:form>
 
 				<h:panelGrid columns="3">
 
-					<p:outputLabel for="p0" value="Nome do Pp: " />
+					<p:outputLabel for="p0" value="Nome do PP: " />
 					<p:inputText id="p0" value="#{ppBean.pp.nome}" />
 					<p:message for="p0" />
 
@@ -48,7 +48,7 @@
 					</p:selectOneMenu>
 					<p:message for="p1" />
 
-					<p:outputLabel for="p2" value="Descrição do Pp: " />
+					<p:outputLabel for="p2" value="Descrição do PP: " />
 					<p:inputTextarea id="p2" rows="5" cols="30"
 						value="#{ppBean.pp.descricao}" maxlength="800" />
 					<p:message for="p2" />
@@ -69,22 +69,23 @@
 					<p:calendar id="p6" value="#{ppBean.pp.dataSolicitacao}"
 						pattern="dd/MM/yyyy" mask="true" />
 					<p:message for="p6" />
-					
+
 					<p:outputLabel for="p7" value="Data da Postagem: " />
 					<p:calendar id="p7" value="#{ppBean.pp.dataPostagem}"
 						pattern="dd/MM/yyyy" mask="true" />
 					<p:message for="p7" />
-					
+
 					<p:outputLabel for="p8" value="Data da Prevista " />
 					<p:calendar id="p8" value="#{ppBean.pp.dataPrevista}"
 						pattern="dd/MM/yyyy" mask="true" />
 					<p:message for="p8" />
-					
+
 					<p:outputLabel for="p9" value="Impacto Area: " />
 					<p:inputText id="p9" value="#{ppBean.pp.impacto}" />
 					<p:message for="p9" />
 
-					<p:commandButton id="cadastrarPp" value="Cadastrar" action="#{ppBean.cadastrarPp()}" update="@all" />
+					<p:commandButton id="cadastrarPP" value="Cadastrar"
+						action="#{ppBean.cadastrarPp()}" update="@all" />
 
 				</h:panelGrid>
 

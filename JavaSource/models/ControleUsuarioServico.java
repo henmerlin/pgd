@@ -1,4 +1,4 @@
-package models.projetos;
+package models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.ControleUsuario;
 import entidades.UsuarioEfika;
-import entidades.pps.ControleUsuario;
 
 @Stateless
 public class ControleUsuarioServico {

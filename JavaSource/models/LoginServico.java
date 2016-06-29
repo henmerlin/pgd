@@ -5,8 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.ControleUsuario;
 import entidades.UsuarioEfika;
-import entidades.pps.ControleUsuario;
 import webservices.EfikaUsersProxy;
 import webservices.Usuario;
 

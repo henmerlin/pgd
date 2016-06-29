@@ -1,12 +1,10 @@
-package entidades.pps;
+package entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import entidades.UsuarioEfika;
 
 @Entity
 @Table(name="pdg_pps_Controle_Usuario")

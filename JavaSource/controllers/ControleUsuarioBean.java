@@ -1,4 +1,4 @@
-package controllers.pps;
+package controllers;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import entidades.ControleUsuario;
 import entidades.UsuarioEfika;
-import entidades.pps.ControleUsuario;
-import models.projetos.ControleUsuarioServico;
+import models.ControleUsuarioServico;
 import util.JSFUtil;
 
 @ManagedBean
