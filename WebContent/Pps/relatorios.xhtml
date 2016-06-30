@@ -19,7 +19,7 @@
 	<ui:insert name="eventos">
 		<f:metadata>
 
-			<f:event listener="#{loginBean.validaPagina('Projetos')}"
+			<f:event listener="#{loginBean.validaPagina('Pps')}"
 				type="preRenderView" />
 
 		</f:metadata>
@@ -29,7 +29,15 @@
 
 		<h:form id="form">
 
-			
+			<p:panel header="Gráficos" style="height: 400px;">
+
+				<p:chart type="pie" model="#{relatorioBeanPp.graficoStatus}"
+					style="height: 350px; width: 48%; float: left;" />
+
+				<p:chart type="pie" model="#{relatorioBeanPp.graficoFase}"
+					style="height: 350px; width: 48%; float: right;" />
+
+			</p:panel>
 
 		</h:form>
 

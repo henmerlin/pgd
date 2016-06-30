@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.pps.Pp;
+import entidades.pps.StatusFasePp;
 
 @Stateless
 public class PpServico {
@@ -73,6 +74,23 @@ public class PpServico {
 		} catch (Exception e) {
 			
 			throw new Exception("Pp não encontrado.");
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pp> listarPpPorStatusEspecificos(StatusFasePp statusFasePp) {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Pp p WHERE p.statusFasePp =:param1");
+			query.setParameter("param1", statusFasePp);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+
+			return new ArrayList<Pp>();
 			
 		}
 		
