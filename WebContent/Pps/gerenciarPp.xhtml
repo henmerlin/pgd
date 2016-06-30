@@ -29,7 +29,7 @@
 
 		<h:form id="form">
 
-			<p:panel header="Gerenciar Projetos">
+			<p:panel header="Gerenciar PPs">
 
 				<p:dataTable var="pp" value="#{ppBean.listarPp()}" rows="10"
 					paginator="true"
@@ -37,7 +37,7 @@
 					rowsPerPageTemplate="10, 15, 20"
 					emptyMessage="Não há projetos registradas">
 
-					<p:column headerText="Nome do Pp" style="text-align: center;">
+					<p:column headerText="Nome do PP" style="text-align: center;" sortBy="#{pp.nome}">
 
 						<h:outputText value="#{pp.nome}" />
 
@@ -56,15 +56,16 @@
 					</p:column>
 
 					<p:column headerText="Data de Solicitação"
-						style="text-align: center;">
+						style="text-align: center;" sortBy="#{pp.nome}">
 
 						<h:outputText value="#{pp.dataSolicitacaoFormatada}" />
 
 					</p:column>
 
-					<p:column headerText="Data Prevista" style="text-align: center;">
+					<p:column headerText="Data Prevista" style="text-align: center;" sortBy="#{pp.nome}">
 
-						<h:outputText value="#{pp.dataPrevistaFormatada}" />
+						<h:outputText rendered="#{pp.dataPrevistaFormatada!=null}" value="#{pp.dataPrevistaFormatada}" />
+						<h:outputText rendered="#{pp.dataPrevistaFormatada==null}" value="SEM PREVISÃO" />
 
 					</p:column>
 

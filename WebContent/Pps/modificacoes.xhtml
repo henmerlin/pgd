@@ -296,6 +296,9 @@
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
+						
+						<h:outputText value="Ordem: " style="font-weight:bold" />
+						<p:inputNumber value="#{prioridadeBean.prioridade.ordem}"/>
 
 						<p:commandButton value="Cadastrar"
 							action="#{prioridadeBean.cadastrarPrioridade()}" update="@all" />
@@ -316,6 +319,12 @@
 
 							<h:outputText rendered="#{prioridade.ativo}" value="Ativo" />
 							<h:outputText rendered="#{!prioridade.ativo}" value="Inativo" />
+
+						</p:column>
+						
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{prioridade.ordem}" />
 
 						</p:column>
 
