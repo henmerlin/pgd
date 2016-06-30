@@ -17,9 +17,23 @@ public class ControleUsuarioServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 	
-	public void cadastrarUsuario(ControleUsuario controleUsuario) throws Exception {
+	public void cadastrarUsuario(ControleUsuario controleUsuario, List<String> sistemas) throws Exception {
 		
 		try {
+			
+			String sis = "";
+
+			for (String string : sistemas) {
+
+				if (!string.isEmpty() || string != null || string != "null") {
+
+					sis = string + ";" + sis;
+
+				}			
+
+			}
+
+			controleUsuario.setSistema(sis);
 			
 			this.entityManager.persist(controleUsuario);
 			
@@ -31,9 +45,23 @@ public class ControleUsuarioServico {
 		
 	}
 	
-	public void modificaUsuario(ControleUsuario controleUsuario) throws Exception {
+	public void modificaUsuario(ControleUsuario controleUsuario, List<String> sistemas) throws Exception {
 		
 		try {
+			
+			String sis = "";
+
+			for (String string : sistemas) {
+
+				if (!string.isEmpty() || string != null || string != "null") {
+
+					sis = string + ";" + sis;
+
+				}			
+
+			}
+			
+			controleUsuario.setSistema(sis);
 			
 			this.entityManager.merge(controleUsuario);
 			

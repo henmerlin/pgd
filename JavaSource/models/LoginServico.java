@@ -99,14 +99,13 @@ public class LoginServico {
 
 	}
 	
-	public ControleUsuario validaListaAdm(UsuarioEfika usuarioEfika, String sistema) throws Exception {
+	public ControleUsuario validaListaAdm(UsuarioEfika usuarioEfika) throws Exception {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM ControleUsuario c WHERE c.usuarioEfika =:param1 AND c.sistema =:param2 AND c.ativo =:param3");
+			Query query = this.entityManager.createQuery("FROM ControleUsuario c WHERE c.usuarioEfika =:param1 AND c.ativo =:param2");
 			query.setParameter("param1", usuarioEfika);
-			query.setParameter("param2", sistema);
-			query.setParameter("param3", true);
+			query.setParameter("param2", true);
 			return (ControleUsuario) query.getSingleResult();
 			
 		} catch (Exception e) {

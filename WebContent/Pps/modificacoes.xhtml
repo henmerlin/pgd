@@ -473,22 +473,21 @@
 						</p:selectOneMenu>
 
 						<h:outputText value="Sistema" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{controleUsuarioBean.controleUsuario.sistema}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="PPs" itemValue="PPs" />
-							<f:selectItem itemLabel="Projetos" itemValue="Projetos" />
-							<f:selectItem itemLabel="Bugs" itemValue="Bugs" />
-						</p:selectOneMenu>
+						<p:selectManyCheckbox
+							value="#{controleUsuarioBean.sistemaSelected}"
+							layout="pageDirection" columns="1">
+
+							<f:selectItems value="#{controleUsuarioBean.sistemas}"
+								var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+						</p:selectManyCheckbox>
 
 						<p:commandButton value="Cadastrar"
 							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
 
 					</h:panelGrid>
 
-					<p:dataTable
-						value="#{controleUsuarioBean.listarControleUsuario()}"
+					<p:dataTable value="#{controleUsuarioBean.listarControleUsuario()}"
 						var="usuario" style="margin-top: 20px;"
 						emptyMessage="Não há usuários registrados">
 
@@ -504,7 +503,7 @@
 							<h:outputText rendered="#{!usuario.ativo}" value="Inativo" />
 
 						</p:column>
-						
+
 						<p:column headerText="Sistema" style="text-align: center;">
 
 							<h:outputText value="#{usuario.sistema}" />
@@ -535,7 +534,7 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Status" style="font-weight:bold" />
+								<h:outputText value="Login" style="font-weight:bold" />
 								<p:selectOneMenu
 									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika}"
 									converter="omnifaces.SelectItemsConverter">
@@ -554,15 +553,15 @@
 									<f:selectItem itemLabel="Inativo" itemValue="false" />
 								</p:selectOneMenu>
 
-								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{controleUsuarioBean.controleUsuarioModifica.sistema}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="PPs" itemValue="PPs" />
-									<f:selectItem itemLabel="Projetos" itemValue="Projetos" />
-									<f:selectItem itemLabel="Bugs" itemValue="Bugs" />
-								</p:selectOneMenu>
+								<h:outputText value="Sistema" style="font-weight:bold" />
+								<p:selectManyCheckbox
+									value="#{controleUsuarioBean.sistemaSelectedModifica}"
+									layout="pageDirection" columns="1">
+
+									<f:selectItems value="#{controleUsuarioBean.sistemas}"
+										var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+								</p:selectManyCheckbox>
 
 								<p:commandButton value="Editar"
 									action="#{controleUsuarioBean.modificaUsuario()}" update="@all" />

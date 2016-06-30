@@ -6,6 +6,7 @@ import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import entidades.ControleUsuario;
 import entidades.UsuarioEfika;
 import models.LoginServico;
 import util.JSFUtil;
@@ -51,14 +52,33 @@ public class LoginBean implements Serializable{
 
 	public Boolean is_Admin(String sistema){
 
-		try {
+		ControleUsuario ControleUsuario = new ControleUsuario();
+		
+		String[] sistemaBuscado;
+		
+		Boolean esAdm = false;
+		
+		try {			
 			
-			this.servicoLogin.validaListaAdm(this.usuario, sistema);
-			return true;
+			ControleUsuario = this.servicoLogin.validaListaAdm(this.usuario);
 			
+			sistemaBuscado = ControleUsuario.getSistema().split(";");
+			
+			for (String string : sistemaBuscado) {
+				
+				if (string.equalsIgnoreCase(sistema)) {
+					
+					esAdm = true;
+					
+				}
+				
+			}
+			
+			return esAdm;
+						
 		} catch (Exception e) {
 			
-			return false;
+			return esAdm;
 
 		}
 
