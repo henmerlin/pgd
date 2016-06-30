@@ -64,7 +64,7 @@ public class StatusFasePpServico {
 	public List<StatusFasePp> listarStatusFasePpAtivo() {
 
 		try {
-			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.ativo =:param1");
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.ativo =:param1 ORDER BY s.ordem ASC");
 			query.setParameter("param1", true);
 			return query.getResultList();
 

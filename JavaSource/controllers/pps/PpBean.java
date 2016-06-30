@@ -30,7 +30,7 @@ public class PpBean {
 		try {
 			
 			this.ppServico.cadastrarPp(this.pp);
-			JSFUtil.addInfoMessage("Pp cadastrado com sucesso.");
+			JSFUtil.addInfoMessage("PP cadastrado com sucesso.");
 			this.pp = new Pp();			
 			
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class PpBean {
 		try {
 			
 			this.ppServico.modificarPp(this.pp);
-			JSFUtil.addInfoMessage("Pp modificado com sucesso.");
+			JSFUtil.addInfoMessage("PP modificado com sucesso.");
 			
 		} catch (Exception e) {
 			
