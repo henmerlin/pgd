@@ -84,21 +84,28 @@ public class LoginBean implements Serializable{
 
 	}
 
-	/*public void validaAdmin() {
+	public void validaAdmin(String sistema) {
+		
 		try {
+			
 			this.validarLogin();
 
 			FacesContext fc = FacesContext.getCurrentInstance();
-
-			if(!this.is_Admin()){
+						
+			if(!this.is_Admin(sistema)){				
+				
 				ConfigurableNavigationHandler nav  = (ConfigurableNavigationHandler) 
 						fc.getApplication().getNavigationHandler();
 				nav.performNavigation("restrito.jsf");
+				
 			}
 		} catch (Exception e) {
+			
 			this.usuario = new UsuarioEfika();
+			
 		}
-	}*/
+		
+	}
 	
 	public String logar() {
 
