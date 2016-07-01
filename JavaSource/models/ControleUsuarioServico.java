@@ -94,7 +94,7 @@ public class ControleUsuarioServico {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM UsuarioEfika u");
+			Query query = this.entityManager.createQuery("FROM UsuarioEfika u ORDER BY u.login ASC");
 			return query.getResultList();
 			
 		} catch (Exception e) {
