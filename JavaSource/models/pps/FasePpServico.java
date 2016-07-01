@@ -49,7 +49,7 @@ public class FasePpServico {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.ativo =:param1");
+			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.ativo =:param1 ORDER BY f.ordem ASC");
 			query.setParameter("param1", true);
 			return query.getResultList();
 			

@@ -16,6 +16,8 @@ public class FasePp {
 	private String nome;
 	
 	private Boolean ativo;
+	
+	private String ordem;
 
 	public Integer getId() {
 		return id;
@@ -39,6 +41,14 @@ public class FasePp {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}	
+
+	public String getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(String ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override

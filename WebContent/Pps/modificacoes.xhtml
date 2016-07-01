@@ -21,7 +21,7 @@
 
 			<f:event listener="#{loginBean.validaPagina('Pps')}"
 				type="preRenderView" />
-			
+
 			<f:event listener="#{loginBean.validaAdmin('Pps')}"
 				type="preRenderView" />
 
@@ -49,6 +49,9 @@
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
 
+						<h:outputText value="Ordem: " style="font-weight:bold" />
+						<p:inputNumber value="#{fasePpBean.fasePp.ordem}" />
+
 						<p:commandButton value="Cadastrar"
 							action="#{fasePpBean.cadastrarFase()}" update="@all" />
 
@@ -67,6 +70,12 @@
 
 							<h:outputText rendered="#{fases.ativo}" value="Ativo" />
 							<h:outputText rendered="#{!fases.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{fases.ordem}" />
 
 						</p:column>
 
@@ -104,6 +113,9 @@
 									<f:selectItem itemLabel="Ativo" itemValue="true" />
 									<f:selectItem itemLabel="Inativo" itemValue="false" />
 								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputNumber value="#{fasePpBean.fasePpMostra.ordem}" />
 
 								<p:commandButton value="Editar"
 									action="#{fasePpBean.modificarFase()}" update="@all" />
@@ -155,7 +167,7 @@
 							<h:outputText rendered="#{!fases.ativo}" value="Inativo" />
 
 						</p:column>
-						
+
 						<p:column headerText="Ordem" style="text-align: center;">
 
 							<h:outputText value="#{fases.ordem}" />
@@ -200,7 +212,8 @@
 								</p:selectOneMenu>
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
-								<p:inputNumber value="#{statusFasePpBean.statusFasePpModifica.ordem}" />
+								<p:inputNumber
+									value="#{statusFasePpBean.statusFasePpModifica.ordem}" />
 
 								<p:commandButton value="Editar"
 									action="#{statusFasePpBean.modificaStatusFase()}" update="@all" />
@@ -228,6 +241,9 @@
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
 
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputNumber value="#{beneficioBean.beneficio.ordem}" />
+
 						<p:commandButton value="Cadastrar"
 							action="#{beneficioBean.cadastrarBeneficio()}" update="@all" />
 
@@ -247,6 +263,12 @@
 
 							<h:outputText rendered="#{beneficio.ativo}" value="Ativo" />
 							<h:outputText rendered="#{!beneficio.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{beneficio.ordem}" />
 
 						</p:column>
 
@@ -274,10 +296,10 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Nome " style="font-weight:bold" />
+								<h:outputText value="Nome: " style="font-weight:bold" />
 								<p:inputText value="#{beneficioBean.beneficioModifica.nome}" />
 
-								<h:outputText value="Status" style="font-weight:bold" />
+								<h:outputText value="Status: " style="font-weight:bold" />
 								<p:selectOneMenu
 									value="#{beneficioBean.beneficioModifica.ativo}"
 									converter="omnifaces.SelectItemsConverter">
@@ -285,6 +307,9 @@
 									<f:selectItem itemLabel="Ativo" itemValue="true" />
 									<f:selectItem itemLabel="Inativo" itemValue="false" />
 								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputNumber value="#{beneficioBean.beneficioModifica.ordem}" />
 
 								<p:commandButton value="Editar"
 									action="#{beneficioBean.modificarBeneficio()}" update="@all" />
@@ -558,8 +583,9 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Login" style="font-weight:bold" />								
-								<h:outputText value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
+								<h:outputText value="Login" style="font-weight:bold" />
+								<h:outputText
+									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
 								<p:selectOneMenu

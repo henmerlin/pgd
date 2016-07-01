@@ -49,7 +49,7 @@ public class BeneficioServico {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM Beneficio b WHERE b.ativo =:param1");
+			Query query = this.entityManager.createQuery("FROM Beneficio b WHERE b.ativo =:param1 ORDER BY b.ordem ASC");
 			query.setParameter("param1", true);
 			return query.getResultList();
 			

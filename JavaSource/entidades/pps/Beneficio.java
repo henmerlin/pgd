@@ -14,6 +14,8 @@ public class Beneficio {
 	private Integer id;
 
 	private String nome;
+	
+	private String ordem;
 
 	private Boolean ativo;
 
@@ -39,6 +41,14 @@ public class Beneficio {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}	
+
+	public String getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(String ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override
