@@ -104,5 +104,22 @@ public class ControleUsuarioServico {
 		}
 		
 	}
+	
+	public ControleUsuario buscarControleUsuarioEspecifico(UsuarioEfika usuarioEfika) throws Exception {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM ControleUsuario c WHERE c.usuarioEfika =:param1");
+			query.setParameter("param1", usuarioEfika);
+			
+			return (ControleUsuario) query.getSingleResult();
+			
+		} catch (Exception e) {
+			
+			throw new Exception("Controle nao encontrado.");
+			
+		}
+		
+	}
 
 }

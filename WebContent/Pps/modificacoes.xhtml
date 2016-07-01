@@ -555,15 +555,8 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Login" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
-										var="usuario" itemLabel="#{usuario.login}"
-										itemValue="#{usuario}" />
-								</p:selectOneMenu>
+								<h:outputText value="Login" style="font-weight:bold" />								
+								<h:outputText value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
 								<p:selectOneMenu

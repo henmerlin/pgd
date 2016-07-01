@@ -28,7 +28,7 @@ public class ControleUsuarioBean {
 	private List<String> sistemaSelectedModifica;
 
 	@EJB
-	private ControleUsuarioServico controleUsuarioPpServico;
+	private ControleUsuarioServico controleUsuarioServico;
 
 	@PostConstruct
 	public void init() {
@@ -54,26 +54,38 @@ public class ControleUsuarioBean {
 
 	public void cadastrarUsuario() {
 
-		try {
+		try {		
 			
-			this.controleUsuarioPpServico.cadastrarUsuario(this.controleUsuario, this.sistemaSelected);
-			JSFUtil.addInfoMessage("Controle cadastrado com sucesso.");
-			this.controleUsuario = new ControleUsuario();
-			this.sistemaSelected = new ArrayList<String>();
+			this.controleUsuario = this.controleUsuarioServico.buscarControleUsuarioEspecifico(this.controleUsuario.getUsuarioEfika());
+			
+			if (this.controleUsuario.getUsuarioEfika().getLogin().isEmpty()) {
+				
+				this.controleUsuarioServico.cadastrarUsuario(this.controleUsuario, this.sistemaSelected);
+				JSFUtil.addInfoMessage("Controle cadastrado com sucesso.");
+				this.controleUsuario = new ControleUsuario();
+				this.sistemaSelected = new ArrayList<String>();
+				
+			}else{
+				
+				this.controleUsuario = new ControleUsuario();
+				JSFUtil.addWarnMessage("Controle já cadastrado.");
+				
+			}
+			
 
-		} catch (Exception e) {
+		} catch (Exception e) {			
 
-			JSFUtil.addErrorMessage(e.getMessage());
-
+				JSFUtil.addErrorMessage(e.getMessage());
+				
 		}
 
 	}
 
 	public void modificaUsuario() {
 
-		try {	
-
-			this.controleUsuarioPpServico.modificaUsuario(this.controleUsuarioModifica, this.sistemaSelectedModifica);
+		try {
+						
+			this.controleUsuarioServico.modificaUsuario(this.controleUsuarioModifica, this.sistemaSelectedModifica);
 			JSFUtil.addInfoMessage("Controle modificado com sucesso.");
 			this.controleUsuarioModifica = new ControleUsuario();
 
@@ -87,13 +99,13 @@ public class ControleUsuarioBean {
 
 	public List<ControleUsuario> listarControleUsuario() {
 
-		return this.controleUsuarioPpServico.listarControleUsuario();
+		return this.controleUsuarioServico.listarControleUsuario();
 
 	}
 
 	public List<UsuarioEfika> listaDeUsuario() {
 
-		return this.controleUsuarioPpServico.listaDeUsuario();
+		return this.controleUsuarioServico.listaDeUsuario();
 
 	}
 
