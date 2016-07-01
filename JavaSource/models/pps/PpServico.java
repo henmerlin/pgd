@@ -95,4 +95,24 @@ public class PpServico {
 		}
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pp> listarPpEmTrabalho() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Pp p WHERE p.statusFasePp.nome =:param1 OR p.statusFasePp.nome =:param2 OR p.statusFasePp.nome =:param3");
+			query.setParameter("param1", "A iniciar");
+			query.setParameter("param2", "Em andamento");
+			query.setParameter("param3", "Paralisado");
+			
+			return query.getResultList();			
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Pp>();
+			
+		}
+		
+	}
 }

@@ -78,7 +78,13 @@ public class PpBean {
 		}
 		
 	}
-
+	
+	public List<Pp> listarPpEmTrabalho() {
+		
+		return this.ppServico.listarPpEmTrabalho();
+		
+	}
+	
 	public Pp getPp() {
 		return pp;
 	}
