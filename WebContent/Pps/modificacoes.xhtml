@@ -405,7 +405,8 @@
 								</p:selectOneMenu>
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
-								<p:inputNumber value="#{prioridadeBean.prioridadeModifica.ordem}" />
+								<p:inputNumber
+									value="#{prioridadeBean.prioridadeModifica.ordem}" />
 
 								<p:commandButton value="Editar"
 									action="#{prioridadeBean.modificaPrioridade()}" update="@all" />
@@ -613,6 +614,93 @@
 									action="#{controleUsuarioBean.modificaUsuario()}" update="@all" />
 
 							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Relatório">
+				
+					<h:outputText value="Modifica a sequencia do segundo gráfico que mostra a quantidade de Fases por Status." />
+
+					<p:dataTable value="#{sequenciaRelatorioPpBean.listarSequencia()}"
+						var="sequencia" style="margin-top: 20px;"
+						emptyMessage="Não há sequencia registradas">
+
+						<p:column headerText="Status 1" style="text-align: center;">
+
+							<h:outputText value="#{sequencia.statusFasePpOne.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Status 2" style="text-align: center;">
+
+							<h:outputText value="#{sequencia.statusFasePpTwo.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Status 3" style="text-align: center;">
+
+							<h:outputText value="#{sequencia.statusFasePpThree.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModSequencia"
+								oncomplete="PF('modSequencia').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{sequencia}"
+									target="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Relatório" widgetVar="modSequencia"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModSequencia">
+
+							<h:outputText value="Selecione o status: "
+								style="font-weight:bold" />
+							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpOne}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+								<f:selectItems
+									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+							</p:selectOneMenu>
+							
+							<h:outputText value="Selecione o status: "
+								style="font-weight:bold" />
+							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpTwo}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+								<f:selectItems
+									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+							</p:selectOneMenu>
+							
+							<h:outputText value="Selecione o status: "
+								style="font-weight:bold" />
+							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpThree}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+								<f:selectItems
+									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
+									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+							</p:selectOneMenu>
+							
+							<p:commandButton value="Editar"
+									action="#{sequenciaRelatorioPpBean.modificarSequencia()}" update="@all" />							
 
 						</h:panelGroup>
 

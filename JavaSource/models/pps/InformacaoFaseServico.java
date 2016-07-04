@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import entidades.pps.FasePp;
 import entidades.pps.InformacaoFase;
 import entidades.pps.Pp;
+import entidades.pps.SequenciaRelatorioPp;
 
 @Stateless
 public class InformacaoFaseServico {
@@ -66,12 +67,15 @@ public class InformacaoFaseServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp) {
+	public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp, SequenciaRelatorioPp sequenciaRelatorioPp) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (i.statusFasePp.nome = 'A iniciar' OR i.statusFasePp.nome = 'Em andamento' OR i.statusFasePp.nome = 'Paralisado')");
-			query.setParameter("param1", fasePp);			
+			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (i.statusFasePp =:param2 OR i.statusFasePp =:param3 OR i.statusFasePp =:param4)");
+			query.setParameter("param1", fasePp);	
+			query.setParameter("param2", sequenciaRelatorioPp.getStatusFasePpOne());
+			query.setParameter("param3", sequenciaRelatorioPp.getStatusFasePpTwo());
+			query.setParameter("param4", sequenciaRelatorioPp.getStatusFasePpThree());
 			return query.getResultList();
 
 		} catch (Exception e) {

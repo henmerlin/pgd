@@ -11,11 +11,14 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.model.chart.PieChartModel;
 
 import entidades.pps.FasePp;
+import entidades.pps.SequenciaRelatorioPp;
 import entidades.pps.StatusFasePp;
 import models.pps.FasePpServico;
 import models.pps.InformacaoFaseServico;
 import models.pps.PpServico;
+import models.pps.SequenciaRelatorioPpServico;
 import models.pps.StatusFasePpServico;
+import util.JSFUtil;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -37,6 +40,9 @@ public class RelatorioBeanPp implements Serializable{
 
 	@EJB
 	private InformacaoFaseServico informacaoFaseServico;
+	
+	@EJB
+	private SequenciaRelatorioPpServico sequenciaRelatorioPpServico;
 
 	public RelatorioBeanPp() {
 
@@ -63,15 +69,27 @@ public class RelatorioBeanPp implements Serializable{
 		List<FasePp> fases;
 
 		fases = this.fasePpServico.listarFasePpAtivo();
+		
+		SequenciaRelatorioPp sequencia = new SequenciaRelatorioPp();
+		
+		try {
+			
+			sequencia = this.sequenciaRelatorioPpServico.listarSequencia();
+						
+		} catch (Exception e) {
+			
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
 
 		for (FasePp fasePp : fases) {
 
-			Integer qnde = this.informacaoFaseServico.listarInformacaoFaseEspecificoFase(fasePp).size();
+			Integer qnde = this.informacaoFaseServico.listarInformacaoFaseEspecificoFase(fasePp, sequencia).size();
 			this.graficoFase.set(fasePp.getNome() + ": " + qnde, qnde);			
 
 		}
 
-		this.graficoFase.setTitle("Titulo Grafico Status");
+		this.graficoFase.setTitle("Titulo Grafico Fase");
 		this.graficoFase.setLegendPosition("e");
 		this.graficoFase.setShowDataLabels(true);
 		this.graficoFase.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");
