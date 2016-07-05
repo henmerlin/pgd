@@ -38,49 +38,15 @@ public class FasePpServico {
 
 	public void modificarFase(FasePp fasePp) throws Exception {
 
-		try {
+		try {		
 
 			List<FasePp> listaDFase = this.listarFasePp();
 
-			FasePp fasePpEspecifica = this.listaFasePpEspecifica(fasePp.getNome());
+			FasePp fasePpEspecifica = this.listaFasePpEspecifica(fasePp.getId());			
+
+			this.ordenarListaFase(fasePp, fasePpEspecifica, listaDFase);
 			
 			this.entityManager.merge(fasePp);
-
-			if (fasePp.getOrdem() != fasePpEspecifica.getOrdem()) {
-
-				if (fasePp.getOrdem() > fasePpEspecifica.getOrdem()) {
-
-					for (FasePp fase : listaDFase) {
-
-						if (fase.getOrdem() > fasePpEspecifica.getOrdem() && fase.getOrdem() <= fasePp.getOrdem()) {
-
-							fase.setOrdem(fase.getOrdem() - 1);
-
-							this.entityManager.persist(fase);
-
-						}				
-
-					}
-
-				}
-
-				if (fasePp.getOrdem() < fasePpEspecifica.getOrdem()) {
-
-					for (FasePp fase : listaDFase) {					
-
-						if (fase.getOrdem() < fasePpEspecifica.getOrdem() && fase.getOrdem() >= fasePp.getOrdem()) {
-
-							fase.setOrdem(fase.getOrdem() + 1);
-
-							this.entityManager.persist(fase);
-
-						}					
-
-					}
-
-				}
-
-			}					
 
 		} catch (Exception e) {
 
@@ -123,17 +89,53 @@ public class FasePpServico {
 
 	}
 
-	public FasePp listaFasePpEspecifica(String nome) {
+	public FasePp listaFasePpEspecifica(Integer id) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.nome =:param1");
-			query.setParameter("param1", nome);
+			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.id =:param1");
+			query.setParameter("param1", id);
 			return (FasePp) query.getSingleResult();
 
 		} catch (Exception e) {
 
 			return null;
+
+		}
+
+	}
+
+	public void ordenarListaFase(FasePp fasePpNova, FasePp fasePpAntiga, List<FasePp> listaFase) {
+
+		if (fasePpNova.getOrdem() > fasePpAntiga.getOrdem()) {
+
+			for (FasePp fase : listaFase) {
+
+				if (fase.getOrdem() > fasePpAntiga.getOrdem() && fase.getOrdem() <= fasePpNova.getOrdem()) {
+
+					fase.setOrdem(fase.getOrdem() - 1);
+
+					this.entityManager.persist(fase);
+
+				}				
+
+			}
+
+		}
+
+		if (fasePpNova.getOrdem() < fasePpAntiga.getOrdem()) {
+
+			for (FasePp fase : listaFase) {
+
+				if (fase.getOrdem() < fasePpAntiga.getOrdem() && fase.getOrdem() >= fasePpNova.getOrdem()) {
+
+					fase.setOrdem(fase.getOrdem() + 1);
+
+					this.entityManager.persist(fase);
+
+				}				
+
+			}
 
 		}
 

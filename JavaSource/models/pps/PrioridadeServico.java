@@ -38,45 +38,15 @@ public class PrioridadeServico {
 
 	public void modificaPrioridade(Prioridade prioridade) throws Exception {
 
-		try {
+		try {			
 
 			List<Prioridade> listaDPrioridade = this.listarPrioridades();
 
-			Prioridade prioridadeEspecifico = this.listarPrioridadeEspecifico(prioridade.getNome());
+			Prioridade prioridadeEspecifico = this.listarPrioridadeEspecifico(prioridade.getId());			
+
+			this.ordenarListaPrioridade(prioridade, prioridadeEspecifico, listaDPrioridade);
 			
-			this.entityManager.merge(prioridade);
-
-			if (prioridade.getOrdem() > prioridadeEspecifico.getOrdem()) {
-
-				for (Prioridade prioridadePp : listaDPrioridade) {
-
-					if (prioridadePp.getOrdem() > prioridadeEspecifico.getOrdem() && prioridadePp.getOrdem() <= prioridade.getOrdem()) {
-
-						prioridadePp.setOrdem(prioridadePp.getOrdem() + 1);
-
-						this.entityManager.persist(prioridadePp);
-
-					}
-
-				}				
-
-			}
-
-			if (prioridade.getOrdem() < prioridadeEspecifico.getOrdem()) {
-
-				for (Prioridade prioridadePp : listaDPrioridade) {
-
-					if (prioridadePp.getOrdem() < prioridadeEspecifico.getOrdem() && prioridadePp.getOrdem() >= prioridade.getOrdem()) {
-
-						prioridadePp.setOrdem(prioridadePp.getOrdem() - 1);
-
-						this.entityManager.persist(prioridadePp);
-
-					}
-
-				}				
-
-			}		
+			this.entityManager.merge(prioridade);			
 
 		} catch (Exception e) {
 
@@ -119,12 +89,12 @@ public class PrioridadeServico {
 
 	}
 
-	public Prioridade listarPrioridadeEspecifico(String nome) {
+	public Prioridade listarPrioridadeEspecifico(Integer id) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Prioridade p WHERE p.nome =:param1");
-			query.setParameter("param1", nome);
+			Query query = this.entityManager.createQuery("FROM Prioridade p WHERE p.id =:param1");
+			query.setParameter("param1", id);
 			return (Prioridade) query.getSingleResult();
 
 		} catch (Exception e) {
@@ -133,6 +103,42 @@ public class PrioridadeServico {
 
 		}
 
+	}
+	
+	public void ordenarListaPrioridade(Prioridade prioridadeNova, Prioridade prioridadeAntiga, List<Prioridade> listaPrioridade) {
+		
+		if (prioridadeNova.getOrdem() > prioridadeAntiga.getOrdem()) {
+
+			for (Prioridade prioridade : listaPrioridade) {
+
+				if (prioridade.getOrdem() > prioridadeAntiga.getOrdem() && prioridade.getOrdem() <= prioridadeNova.getOrdem()) {
+
+					prioridade.setOrdem(prioridade.getOrdem() - 1);
+
+					this.entityManager.persist(prioridade);
+
+				}				
+
+			}
+
+		}
+		
+		if (prioridadeNova.getOrdem() < prioridadeAntiga.getOrdem()) {
+
+			for (Prioridade prioridade : listaPrioridade) {
+
+				if (prioridade.getOrdem() < prioridadeAntiga.getOrdem() && prioridade.getOrdem() >= prioridadeNova.getOrdem()) {
+
+					prioridade.setOrdem(prioridade.getOrdem() + 1);
+
+					this.entityManager.persist(prioridade);
+
+				}				
+
+			}
+
+		}
+		
 	}
 
 }

@@ -39,45 +39,15 @@ public class StatusFasePpServico {
 
 	public void modificarStatusFasePp(StatusFasePp statusFasePp) throws Exception {
 
-		try {
+		try {		
 
 			List<StatusFasePp> listaDStatus = this.listarStatusFasePp();
 
-			StatusFasePp statusFaseEspecifica = this.listaStatusFaseEspecifico(statusFasePp.getNome());
+			StatusFasePp statusFaseEspecifica = this.listaStatusFaseEspecifico(statusFasePp.getId());
 			
+			this.ordenarListaStatusFase(statusFasePp, statusFaseEspecifica, listaDStatus);
+
 			this.entityManager.merge(statusFasePp);
-
-			if (statusFasePp.getOrdem() > statusFaseEspecifica.getOrdem()) {
-
-				for (StatusFasePp statusFase : listaDStatus) {
-
-					if (statusFase.getOrdem() > statusFaseEspecifica.getOrdem() && statusFase.getOrdem() <= statusFasePp.getOrdem()) {
-
-						statusFase.setOrdem(statusFase.getOrdem() - 1);
-
-						this.entityManager.persist(statusFase);
-
-					}
-
-				}
-
-			}
-
-			if (statusFasePp.getOrdem() < statusFaseEspecifica.getOrdem()) {
-
-				for (StatusFasePp statusFase : listaDStatus) {
-
-					if (statusFase.getOrdem() < statusFaseEspecifica.getOrdem() && statusFase.getOrdem() >= statusFasePp.getOrdem()) {
-
-						statusFase.setOrdem(statusFase.getOrdem() + 1);
-
-						this.entityManager.persist(statusFase);
-
-					}
-
-				}
-
-			}		
 
 		} catch (Exception e) {
 
@@ -118,12 +88,12 @@ public class StatusFasePpServico {
 
 	}
 
-	public StatusFasePp listaStatusFaseEspecifico(String nome) {
+	public StatusFasePp listaStatusFaseEspecifico(Integer id) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.nome =:param1");
-			query.setParameter("param1", nome);
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.id =:param1");
+			query.setParameter("param1", id);
 			return (StatusFasePp) query.getSingleResult();			
 
 		} catch (Exception e) {
@@ -131,6 +101,43 @@ public class StatusFasePpServico {
 			return null;
 
 		}
+
+	}
+
+
+	public void ordenarListaStatusFase(StatusFasePp statusFasePpNova, StatusFasePp statusFasePpAntiga, List<StatusFasePp> listaStatus) {
+
+		if (statusFasePpNova.getOrdem() > statusFasePpAntiga.getOrdem()) {
+
+			for (StatusFasePp statusFase : listaStatus) {
+
+				if (statusFase.getOrdem() > statusFasePpAntiga.getOrdem() && statusFase.getOrdem() <= statusFasePpNova.getOrdem()) {
+
+					statusFase.setOrdem(statusFase.getOrdem() - 1);
+
+					this.entityManager.persist(statusFase);
+
+				}
+
+			}
+
+		}	
+
+		if (statusFasePpNova.getOrdem() < statusFasePpAntiga.getOrdem()) {
+
+			for (StatusFasePp statusFase : listaStatus) {
+
+				if (statusFase.getOrdem() < statusFasePpAntiga.getOrdem() && statusFase.getOrdem() >= statusFasePpNova.getOrdem()) {
+
+					statusFase.setOrdem(statusFase.getOrdem() + 1);
+
+					this.entityManager.persist(statusFase);
+
+				}
+
+			}
+
+		}	
 
 	}
 

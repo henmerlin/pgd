@@ -38,45 +38,15 @@ public class BeneficioServico {
 
 	public void modificarBeneficio(Beneficio beneficio) throws Exception {
 
-		try {
+		try {		
 
-			List<Beneficio> listaDBeneficio = this.listarBeneficios();
-
-			Beneficio beneficioEspecifico = this.listarBeneficioEspecifico(beneficio.getNome());
+			List<Beneficio> listaDBeneficio = this.listarBeneficios();			
 			
+			Beneficio beneficioEspecifico = this.listarBeneficioEspecifico(beneficio.getId());
+
+			this.ordenarListaBeneficios(beneficio, beneficioEspecifico, listaDBeneficio);
+
 			this.entityManager.merge(beneficio);
-
-			if (beneficio.getOrdem() > beneficioEspecifico.getOrdem()) {
-
-				for (Beneficio beneficioPp : listaDBeneficio) {
-
-					if (beneficioPp.getOrdem() > beneficioEspecifico.getOrdem() && beneficioPp.getOrdem() <= beneficio.getOrdem()) {
-
-						beneficioPp.setOrdem(beneficioPp.getOrdem() - 1);
-
-						this.entityManager.persist(beneficioPp);
-
-					}
-
-				}
-
-			}
-
-			if (beneficio.getOrdem() < beneficioEspecifico.getOrdem()) {
-
-				for (Beneficio beneficioPp : listaDBeneficio) {
-
-					if (beneficioPp.getOrdem() < beneficioEspecifico.getOrdem() && beneficioPp.getOrdem() >= beneficio.getOrdem()) {
-
-						beneficioPp.setOrdem(beneficioPp.getOrdem() + 1);
-
-						this.entityManager.persist(beneficioPp);
-
-					}
-
-				}
-
-			}			
 
 		} catch (Exception e) {
 
@@ -119,12 +89,12 @@ public class BeneficioServico {
 
 	}
 
-	public Beneficio listarBeneficioEspecifico(String nome) {
+	public Beneficio listarBeneficioEspecifico(Integer id) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Beneficio b WHERE b.nome =:param1");
-			query.setParameter("param1", nome);
+			Query query = this.entityManager.createQuery("FROM Beneficio b WHERE b.id =:param1");
+			query.setParameter("param1", id);
 			return (Beneficio) query.getSingleResult();
 
 		} catch (Exception e) {
@@ -132,6 +102,42 @@ public class BeneficioServico {
 			return null;
 
 		}		
+
+	}
+
+	public void ordenarListaBeneficios(Beneficio beneficioNovo, Beneficio beneficioAntigo, List<Beneficio> listaBeneficio) {
+
+		if (beneficioNovo.getOrdem() > beneficioAntigo.getOrdem()) {
+
+			for (Beneficio beneficio : listaBeneficio) {
+
+				if (beneficio.getOrdem() > beneficioAntigo.getOrdem() && beneficio.getOrdem() <= beneficioNovo.getOrdem()) {
+
+					beneficio.setOrdem(beneficio.getOrdem() - 1);
+
+					this.entityManager.persist(beneficio);
+
+				}
+
+			}			
+
+		}
+
+		if (beneficioNovo.getOrdem() < beneficioAntigo.getOrdem()) {
+
+			for (Beneficio beneficio : listaBeneficio) {
+
+				if (beneficio.getOrdem() < beneficioAntigo.getOrdem() && beneficio.getOrdem() >= beneficioNovo.getOrdem()) {
+
+					beneficio.setOrdem(beneficio.getOrdem() + 1);
+
+					this.entityManager.persist(beneficio);
+
+				}
+
+			}			
+
+		}
 
 	}
 
