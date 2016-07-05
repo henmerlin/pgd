@@ -62,8 +62,8 @@ public class FasePpBean {
 		try {
 			
 			this.fasePpServico.modificarFase(this.fasePpMostra);
-			JSFUtil.addInfoMessage("Modificado fase com sucesso.");
-			this.fasePp = new FasePp();
+			JSFUtil.addInfoMessage("Fase " + this.fasePpMostra.getNome() + " modificada com sucesso.");
+			this.fasePpMostra = new FasePp();
 			
 		} catch (Exception e) {
 			

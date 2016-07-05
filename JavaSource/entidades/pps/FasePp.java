@@ -17,7 +17,7 @@ public class FasePp {
 	
 	private Boolean ativo;
 	
-	private String ordem;
+	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -41,13 +41,13 @@ public class FasePp {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
-	}	
-
-	public String getOrdem() {
+	}
+	
+	public Integer getOrdem() {
 		return ordem;
 	}
 
-	public void setOrdem(String ordem) {
+	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
 

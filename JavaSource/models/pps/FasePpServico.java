@@ -20,6 +20,12 @@ public class FasePpServico {
 
 		try {
 
+			List<FasePp> listaDFase = this.listarFasePp();
+
+			Integer ultimoLista = listaDFase.size() + 1;
+
+			fasePp.setOrdem(ultimoLista);
+
 			this.entityManager.persist(fasePp);
 
 		} catch (Exception e) {
@@ -34,7 +40,43 @@ public class FasePpServico {
 
 		try {
 
-			this.entityManager.merge(fasePp);
+			List<FasePp> listaDFase = this.listarFasePp();
+
+			FasePp fasePpEspecifica = this.listaFasePpEspecifica(fasePp.getNome());
+
+			if (fasePp.getOrdem() > fasePpEspecifica.getOrdem()) {
+
+				for (FasePp fase : listaDFase) {
+					
+					if (fase.getOrdem() > fasePpEspecifica.getOrdem() && fase.getOrdem() <= fasePp.getOrdem()) {
+						
+						fase.setOrdem(fase.getOrdem() - 1);
+
+						this.entityManager.persist(fase);
+						
+					}				
+
+				}
+
+			}
+
+			if (fasePp.getOrdem() < fasePpEspecifica.getOrdem()) {
+
+				for (FasePp fase : listaDFase) {					
+
+					if (fase.getOrdem() < fasePpEspecifica.getOrdem() && fase.getOrdem() >= fasePp.getOrdem()) {
+						
+						fase.setOrdem(fase.getOrdem() + 1);
+
+						this.entityManager.persist(fase);
+						
+					}					
+
+				}
+
+			}
+
+			this.entityManager.merge(fasePp);			
 
 		} catch (Exception e) {
 
@@ -43,38 +85,54 @@ public class FasePpServico {
 		}
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<FasePp> listarFasePpAtivo() {
-		
+
 		try {
-			
+
 			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.ativo =:param1 ORDER BY f.ordem ASC");
 			query.setParameter("param1", true);
 			return query.getResultList();
-			
+
 		} catch (Exception e) {
-			
+
 			return new ArrayList<FasePp>();
-			
+
 		}
-		
+
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<FasePp> listarFasePp() {
-		
+
 		try {
-			
-			Query query = this.entityManager.createQuery("FROM FasePp f");
+
+			Query query = this.entityManager.createQuery("FROM FasePp f ORDER BY F.ordem ASC");
 			return query.getResultList();
-			
+
 		} catch (Exception e) {
-			
+
 			return new ArrayList<FasePp>();
-			
+
 		}
-		
+
 	}
-	
+
+	public FasePp listaFasePpEspecifica(String nome) {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM FasePp f WHERE f.nome =:param1");
+			query.setParameter("param1", nome);
+			return (FasePp) query.getSingleResult();
+
+		} catch (Exception e) {
+
+			return null;
+
+		}
+
+	}
+
 }

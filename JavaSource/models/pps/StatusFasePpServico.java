@@ -20,6 +20,12 @@ public class StatusFasePpServico {
 
 		try {
 
+			List<StatusFasePp> listaDStatus = this.listarStatusFasePp();
+
+			Integer ultimoLista = listaDStatus.size() + 1;
+
+			statusFasePp.setOrdem(ultimoLista);
+
 			this.entityManager.persist(statusFasePp);
 
 		} catch (Exception e) {
@@ -35,6 +41,42 @@ public class StatusFasePpServico {
 
 		try {
 
+			List<StatusFasePp> listaDStatus = this.listarStatusFasePp();
+
+			StatusFasePp statusFaseEspecifica = this.listaStatusFaseEspecifico(statusFasePp.getNome());
+
+			if (statusFasePp.getOrdem() > statusFaseEspecifica.getOrdem()) {
+
+				for (StatusFasePp statusFase : listaDStatus) {
+
+					if (statusFase.getOrdem() > statusFaseEspecifica.getOrdem() && statusFase.getOrdem() <= statusFasePp.getOrdem()) {
+
+						statusFase.setOrdem(statusFase.getOrdem() - 1);
+
+						this.entityManager.persist(statusFase);
+
+					}
+
+				}
+
+			}
+
+			if (statusFasePp.getOrdem() < statusFaseEspecifica.getOrdem()) {
+
+				for (StatusFasePp statusFase : listaDStatus) {
+
+					if (statusFase.getOrdem() < statusFaseEspecifica.getOrdem() && statusFase.getOrdem() >= statusFasePp.getOrdem()) {
+
+						statusFase.setOrdem(statusFase.getOrdem() + 1);
+
+						this.entityManager.persist(statusFase);
+
+					}
+
+				}
+
+			}
+
 			this.entityManager.merge(statusFasePp);
 
 		} catch (Exception e) {
@@ -49,7 +91,7 @@ public class StatusFasePpServico {
 	public List<StatusFasePp> listarStatusFasePp() {
 
 		try {
-			Query query = this.entityManager.createQuery("FROM StatusFasePp s");
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s ORDER BY s.ordem ASC");
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -71,6 +113,22 @@ public class StatusFasePpServico {
 		} catch (Exception e) {
 
 			return new ArrayList<StatusFasePp>();
+
+		}
+
+	}
+
+	public StatusFasePp listaStatusFaseEspecifico(String nome) {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM StatusFasePp s WHERE s.nome =:param1");
+			query.setParameter("param1", nome);
+			return (StatusFasePp) query.getSingleResult();			
+
+		} catch (Exception e) {
+
+			return null;
 
 		}
 

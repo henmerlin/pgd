@@ -15,7 +15,7 @@ public class Beneficio {
 
 	private String nome;
 	
-	private String ordem;
+	private Integer ordem;
 
 	private Boolean ativo;
 
@@ -43,11 +43,11 @@ public class Beneficio {
 		this.ativo = ativo;
 	}	
 
-	public String getOrdem() {
+	public Integer getOrdem() {
 		return ordem;
 	}
 
-	public void setOrdem(String ordem) {
+	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
 

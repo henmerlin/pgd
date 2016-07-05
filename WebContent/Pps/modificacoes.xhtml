@@ -49,9 +49,6 @@
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Ordem: " style="font-weight:bold" />
-						<p:inputNumber value="#{fasePpBean.fasePp.ordem}" />
-
 						<p:commandButton value="Cadastrar"
 							action="#{fasePpBean.cadastrarFase()}" update="@all" />
 
@@ -141,10 +138,7 @@
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
-
-						<h:outputText value="Ordem: " style="font-weight:bold" />
-						<p:inputNumber value="#{statusFasePpBean.statusFasePp.ordem}" />
+						</p:selectOneMenu>					
 
 						<p:commandButton value="Cadastrar"
 							action="#{statusFasePpBean.cadastraStatusFase()}" update="@all" />
@@ -241,9 +235,6 @@
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Nome: " style="font-weight:bold" />
-						<p:inputNumber value="#{beneficioBean.beneficio.ordem}" />
-
 						<p:commandButton value="Cadastrar"
 							action="#{beneficioBean.cadastrarBeneficio()}" update="@all" />
 
@@ -336,9 +327,6 @@
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 						</p:selectOneMenu>
-
-						<h:outputText value="Ordem: " style="font-weight:bold" />
-						<p:inputNumber value="#{prioridadeBean.prioridade.ordem}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{prioridadeBean.cadastrarPrioridade()}" update="@all" />
