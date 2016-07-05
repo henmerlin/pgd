@@ -44,6 +44,8 @@ public class StatusFasePpServico {
 			List<StatusFasePp> listaDStatus = this.listarStatusFasePp();
 
 			StatusFasePp statusFaseEspecifica = this.listaStatusFaseEspecifico(statusFasePp.getNome());
+			
+			this.entityManager.merge(statusFasePp);
 
 			if (statusFasePp.getOrdem() > statusFaseEspecifica.getOrdem()) {
 
@@ -75,9 +77,7 @@ public class StatusFasePpServico {
 
 				}
 
-			}
-
-			this.entityManager.merge(statusFasePp);
+			}		
 
 		} catch (Exception e) {
 

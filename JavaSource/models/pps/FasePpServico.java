@@ -43,44 +43,48 @@ public class FasePpServico {
 			List<FasePp> listaDFase = this.listarFasePp();
 
 			FasePp fasePpEspecifica = this.listaFasePpEspecifica(fasePp.getNome());
+			
+			this.entityManager.merge(fasePp);
 
-			if (fasePp.getOrdem() > fasePpEspecifica.getOrdem()) {
+			if (fasePp.getOrdem() != fasePpEspecifica.getOrdem()) {
 
-				for (FasePp fase : listaDFase) {
-					
-					if (fase.getOrdem() > fasePpEspecifica.getOrdem() && fase.getOrdem() <= fasePp.getOrdem()) {
-						
-						fase.setOrdem(fase.getOrdem() - 1);
+				if (fasePp.getOrdem() > fasePpEspecifica.getOrdem()) {
 
-						this.entityManager.persist(fase);
-						
-					}				
+					for (FasePp fase : listaDFase) {
 
-				}
+						if (fase.getOrdem() > fasePpEspecifica.getOrdem() && fase.getOrdem() <= fasePp.getOrdem()) {
 
-			}
+							fase.setOrdem(fase.getOrdem() - 1);
 
-			if (fasePp.getOrdem() < fasePpEspecifica.getOrdem()) {
+							this.entityManager.persist(fase);
 
-				for (FasePp fase : listaDFase) {					
+						}				
 
-					if (fase.getOrdem() < fasePpEspecifica.getOrdem() && fase.getOrdem() >= fasePp.getOrdem()) {
-						
-						fase.setOrdem(fase.getOrdem() + 1);
-
-						this.entityManager.persist(fase);
-						
-					}					
+					}
 
 				}
 
-			}
+				if (fasePp.getOrdem() < fasePpEspecifica.getOrdem()) {
 
-			this.entityManager.merge(fasePp);			
+					for (FasePp fase : listaDFase) {					
+
+						if (fase.getOrdem() < fasePpEspecifica.getOrdem() && fase.getOrdem() >= fasePp.getOrdem()) {
+
+							fase.setOrdem(fase.getOrdem() + 1);
+
+							this.entityManager.persist(fase);
+
+						}					
+
+					}
+
+				}
+
+			}					
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao modificar a Fase");
+			throw new Exception("Erro ao modificar a Fase: " + fasePp.getNome());
 
 		}
 

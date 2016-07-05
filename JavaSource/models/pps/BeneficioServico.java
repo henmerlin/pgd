@@ -43,6 +43,8 @@ public class BeneficioServico {
 			List<Beneficio> listaDBeneficio = this.listarBeneficios();
 
 			Beneficio beneficioEspecifico = this.listarBeneficioEspecifico(beneficio.getNome());
+			
+			this.entityManager.merge(beneficio);
 
 			if (beneficio.getOrdem() > beneficioEspecifico.getOrdem()) {
 
@@ -74,9 +76,7 @@ public class BeneficioServico {
 
 				}
 
-			}
-
-			this.entityManager.merge(beneficio);
+			}			
 
 		} catch (Exception e) {
 

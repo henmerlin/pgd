@@ -43,6 +43,8 @@ public class PrioridadeServico {
 			List<Prioridade> listaDPrioridade = this.listarPrioridades();
 
 			Prioridade prioridadeEspecifico = this.listarPrioridadeEspecifico(prioridade.getNome());
+			
+			this.entityManager.merge(prioridade);
 
 			if (prioridade.getOrdem() > prioridadeEspecifico.getOrdem()) {
 
@@ -74,9 +76,7 @@ public class PrioridadeServico {
 
 				}				
 
-			}
-
-			this.entityManager.merge(prioridade);
+			}		
 
 		} catch (Exception e) {
 
