@@ -108,7 +108,7 @@ public class FasePpServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM FasePp f ORDER BY F.ordem ASC");
+			Query query = this.entityManager.createQuery("FROM FasePp f ORDER BY f.ordem ASC");
 			return query.getResultList();
 
 		} catch (Exception e) {
