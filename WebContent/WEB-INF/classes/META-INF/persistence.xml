@@ -28,6 +28,13 @@
 		<class>entidades.pps.Codigo</class>
 		<class>entidades.ControleUsuario</class>
 		<class>entidades.pps.SequenciaRelatorioPp</class>
+		<class>entidades.bugs.Bug</class>
+		<class>entidades.bugs.PrioridadeBug</class>
+		<class>entidades.bugs.ImpactoBug</class>
+		<class>entidades.bugs.StatusBug</class>
+		<class>entidades.bugs.DetalhesBug</class>
+		<class>entidades.bugs.SistemaAfetado</class>
+		<class>entidades.bugs.AcaoBug</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

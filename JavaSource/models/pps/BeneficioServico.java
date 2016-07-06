@@ -115,7 +115,7 @@ public class BeneficioServico {
 
 					beneficio.setOrdem(beneficio.getOrdem() - 1);
 
-					this.entityManager.persist(beneficio);
+					this.entityManager.merge(beneficio);
 
 				}
 
@@ -131,7 +131,7 @@ public class BeneficioServico {
 
 					beneficio.setOrdem(beneficio.getOrdem() + 1);
 
-					this.entityManager.persist(beneficio);
+					this.entityManager.merge(beneficio);
 
 				}
 

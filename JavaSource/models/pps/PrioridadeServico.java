@@ -115,7 +115,7 @@ public class PrioridadeServico {
 
 					prioridade.setOrdem(prioridade.getOrdem() - 1);
 
-					this.entityManager.persist(prioridade);
+					this.entityManager.merge(prioridade);
 
 				}				
 
@@ -131,7 +131,7 @@ public class PrioridadeServico {
 
 					prioridade.setOrdem(prioridade.getOrdem() + 1);
 
-					this.entityManager.persist(prioridade);
+					this.entityManager.merge(prioridade);
 
 				}				
 

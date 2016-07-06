@@ -115,7 +115,7 @@ public class FasePpServico {
 
 					fase.setOrdem(fase.getOrdem() - 1);
 
-					this.entityManager.persist(fase);
+					this.entityManager.merge(fase);
 
 				}				
 
@@ -131,7 +131,7 @@ public class FasePpServico {
 
 					fase.setOrdem(fase.getOrdem() + 1);
 
-					this.entityManager.persist(fase);
+					this.entityManager.merge(fase);
 
 				}				
 

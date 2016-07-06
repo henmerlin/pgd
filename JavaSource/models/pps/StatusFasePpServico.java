@@ -115,7 +115,7 @@ public class StatusFasePpServico {
 
 					statusFase.setOrdem(statusFase.getOrdem() - 1);
 
-					this.entityManager.persist(statusFase);
+					this.entityManager.merge(statusFase);
 
 				}
 
@@ -131,7 +131,7 @@ public class StatusFasePpServico {
 
 					statusFase.setOrdem(statusFase.getOrdem() + 1);
 
-					this.entityManager.persist(statusFase);
+					this.entityManager.merge(statusFase);
 
 				}
 
