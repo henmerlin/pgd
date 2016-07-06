@@ -62,7 +62,23 @@ public class ImpactoBugServico {
 		try {
 
 			Query query = this.entityManager.createQuery("FROM ImpactoBug i ORDER BY i.ordem ASC");
+			return query.getResultList();
 
+		} catch (Exception e) {
+
+			return new ArrayList<ImpactoBug>();
+
+		}
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ImpactoBug> listarImpactoAtivo() {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM ImpactoBug i WHERE i.ativo =:param1 ORDER BY i.ordem ASC");
+			query.setParameter("param1", true);
 			return query.getResultList();
 
 		} catch (Exception e) {
@@ -77,7 +93,7 @@ public class ImpactoBugServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("");
+			Query query = this.entityManager.createQuery("FROM ImpactoBug i WHERE i.id =:param1");
 			query.setParameter("param1", id);
 			return (ImpactoBug) query.getSingleResult();
 
@@ -95,7 +111,7 @@ public class ImpactoBugServico {
 
 			for (ImpactoBug impactoBug : listaImpacto) {
 
-				if (impactoBug.getOrdem() > impactoBugAntigo.getOrdem() && impactoBug.getOrdem() <= impactoBugAntigo.getOrdem()) {
+				if (impactoBug.getOrdem() > impactoBugAntigo.getOrdem() && impactoBug.getOrdem() <= impactoBugNovo.getOrdem()) {
 
 					impactoBug.setOrdem(impactoBug.getOrdem() - 1);
 
@@ -110,7 +126,7 @@ public class ImpactoBugServico {
 
 			for (ImpactoBug impactoBug : listaImpacto) {
 
-				if (impactoBug.getOrdem() < impactoBugAntigo.getOrdem() && impactoBug.getOrdem() >= impactoBugAntigo.getOrdem()) {
+				if (impactoBug.getOrdem() < impactoBugAntigo.getOrdem() && impactoBug.getOrdem() >= impactoBugNovo.getOrdem()) {
 
 					impactoBug.setOrdem(impactoBug.getOrdem() + 1);
 
