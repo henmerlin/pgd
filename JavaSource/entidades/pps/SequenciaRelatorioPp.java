@@ -13,15 +13,11 @@ public class SequenciaRelatorioPp {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	private Boolean ativo;
 
 	@ManyToOne
-	private StatusFasePp statusFasePpOne;
-	
-	@ManyToOne
-	private StatusFasePp statusFasePpTwo;
-	
-	@ManyToOne
-	private StatusFasePp statusFasePpThree;
+	private StatusFasePp statusFasePp;	
 	
 	public SequenciaRelatorioPp() {
 		
@@ -33,30 +29,22 @@ public class SequenciaRelatorioPp {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public StatusFasePp getStatusFasePpOne() {
-		return statusFasePpOne;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
-	public void setStatusFasePpOne(StatusFasePp statusFasePpOne) {
-		this.statusFasePpOne = statusFasePpOne;
+	public StatusFasePp getStatusFasePp() {
+		return statusFasePp;
 	}
 
-	public StatusFasePp getStatusFasePpTwo() {
-		return statusFasePpTwo;
-	}
-
-	public void setStatusFasePpTwo(StatusFasePp statusFasePpTwo) {
-		this.statusFasePpTwo = statusFasePpTwo;
-	}
-
-	public StatusFasePp getStatusFasePpThree() {
-		return statusFasePpThree;
-	}
-
-	public void setStatusFasePpThree(StatusFasePp statusFasePpThree) {
-		this.statusFasePpThree = statusFasePpThree;
+	public void setStatusFasePp(StatusFasePp statusFasePp) {
+		this.statusFasePp = statusFasePp;
 	}
 
 	@Override

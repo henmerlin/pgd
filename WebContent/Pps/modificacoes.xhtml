@@ -138,7 +138,7 @@
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItem itemLabel="Ativo" itemValue="true" />
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>					
+						</p:selectOneMenu>
 
 						<p:commandButton value="Cadastrar"
 							action="#{statusFasePpBean.cadastraStatusFase()}" update="@all" />
@@ -610,28 +610,21 @@
 				</p:tab>
 
 				<p:tab title="Relatório">
-				
-					<h:outputText value="Modifica a sequencia do segundo gráfico que mostra a quantidade de Fases por Status." />
 
 					<p:dataTable value="#{sequenciaRelatorioPpBean.listarSequencia()}"
 						var="sequencia" style="margin-top: 20px;"
 						emptyMessage="Não há sequencia registradas">
 
-						<p:column headerText="Status 1" style="text-align: center;">
+						<p:column headerText="Status" style="text-align: center;">
 
-							<h:outputText value="#{sequencia.statusFasePpOne.nome}" />
-
-						</p:column>
-
-						<p:column headerText="Status 2" style="text-align: center;">
-
-							<h:outputText value="#{sequencia.statusFasePpTwo.nome}" />
+							<h:outputText value="#{sequencia.statusFasePp.nome}" />
 
 						</p:column>
 
-						<p:column headerText="Status 3" style="text-align: center;">
+						<p:column headerText="Ativo" style="text-align: center;">
 
-							<h:outputText value="#{sequencia.statusFasePpThree.nome}" />
+							<h:outputText rendered="#{sequencia.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!sequencia.ativo}" value="Inativo" />
 
 						</p:column>
 
@@ -657,38 +650,26 @@
 
 						<h:panelGroup id="detalhesModSequencia">
 
-							<h:outputText value="Selecione o status: "
-								style="font-weight:bold" />
-							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpOne}"
-								converter="omnifaces.SelectItemsConverter">
-								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-								<f:selectItems
-									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
-									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
-							</p:selectOneMenu>
-							
-							<h:outputText value="Selecione o status: "
-								style="font-weight:bold" />
-							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpTwo}"
-								converter="omnifaces.SelectItemsConverter">
-								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-								<f:selectItems
-									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
-									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
-							</p:selectOneMenu>
-							
-							<h:outputText value="Selecione o status: "
-								style="font-weight:bold" />
-							<p:selectOneMenu value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePpThree}"
-								converter="omnifaces.SelectItemsConverter">
-								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-								<f:selectItems
-									value="#{statusFasePpBean.listarStatusFasePpAtivo()}"
-									var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
-							</p:selectOneMenu>
-							
-							<p:commandButton value="Editar"
-									action="#{sequenciaRelatorioPpBean.modificarSequencia()}" update="@all" />							
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Status " style="font-weight:bold" />
+								<h:outputText
+									value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePp.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{sequenciaRelatorioPpBean.modificarSequencia()}"
+									update="@all" />
+
+							</h:panelGrid>
 
 						</h:panelGroup>
 

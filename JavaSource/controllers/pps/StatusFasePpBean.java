@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import entidades.pps.StatusFasePp;
+import models.pps.SequenciaRelatorioPpServico;
 import models.pps.StatusFasePpServico;
 import util.JSFUtil;
 
@@ -20,6 +21,9 @@ public class StatusFasePpBean {
 
 	@EJB
 	private StatusFasePpServico statusFasePpServico;
+	
+	@EJB
+	private SequenciaRelatorioPpServico sequenciaRelatorioPpServico;
 
 	public StatusFasePpBean() {
 
@@ -34,12 +38,15 @@ public class StatusFasePpBean {
 		try {
 
 			this.statusFasePpServico.cadastrarStatusFasePp(this.statusFasePp);
+			
+			this.sequenciaRelatorioPpServico.cadastrarSequencia(this.statusFasePp);
+			
 			JSFUtil.addInfoMessage("Status Fase cadastrado com sucesso.");
 			this.statusFasePp = new StatusFasePp();
 
 		} catch (Exception e) {
 
-			JSFUtil.addErrorMessage("Erro ao cadastrar Status Fase");
+			JSFUtil.addErrorMessage(e.getMessage());
 
 		}
 

@@ -1,11 +1,15 @@
 package models.pps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.pps.SequenciaRelatorioPp;
+import entidades.pps.StatusFasePp;
 
 @Stateless
 public class SequenciaRelatorioPpServico {
@@ -19,9 +23,14 @@ public class SequenciaRelatorioPpServico {
 
 	}
 
-	public void cadastrarSequencia(SequenciaRelatorioPp sequenciaRelatorioPp) throws Exception {
+	public void cadastrarSequencia(StatusFasePp statusFase) throws Exception {
 
 		try {
+			
+			SequenciaRelatorioPp sequenciaRelatorioPp = new SequenciaRelatorioPp();
+			
+			sequenciaRelatorioPp.setStatusFasePp(statusFase);
+			sequenciaRelatorioPp.setAtivo(false);
 
 			this.entityManager.persist(sequenciaRelatorioPp);
 
@@ -47,19 +56,39 @@ public class SequenciaRelatorioPpServico {
 
 	}
 
-	public SequenciaRelatorioPp listarSequencia() throws Exception {
-
+		
+	@SuppressWarnings("unchecked")
+	public List<SequenciaRelatorioPp> listarSequenciaAtivo() {
+		
 		try {
-
-			Query query = this.entityManager.createQuery("FROM SequenciaRelatorioPp s");
-			return (SequenciaRelatorioPp) query.getSingleResult();
-
+			
+			Query query = this.entityManager.createQuery("FROM SequenciaRelatorioPp s WHERE s.ativo =:param1");
+			query.setParameter("param1", true);
+			return query.getResultList();
+			
 		} catch (Exception e) {
-
-			throw new Exception("Sequencia não encontrado.");
-
+			
+			return new ArrayList<SequenciaRelatorioPp>();
+			
 		}
-
+		
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<SequenciaRelatorioPp> listarSequencia() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM SequenciaRelatorioPp s");
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<SequenciaRelatorioPp>();
+			
+		}
+		
+		
+	}
+	
 }

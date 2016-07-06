@@ -67,15 +67,35 @@ public class InformacaoFaseServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp, SequenciaRelatorioPp sequenciaRelatorioPp) {
+	public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp, List<SequenciaRelatorioPp> listaSequencia) {
 
 		try {
-
-			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (i.statusFasePp =:param2 OR i.statusFasePp =:param3 OR i.statusFasePp =:param4)");
-			query.setParameter("param1", fasePp);	
-			query.setParameter("param2", sequenciaRelatorioPp.getStatusFasePpOne());
-			query.setParameter("param3", sequenciaRelatorioPp.getStatusFasePpTwo());
-			query.setParameter("param4", sequenciaRelatorioPp.getStatusFasePpThree());
+			
+			StringBuffer sequencia = new StringBuffer();
+			
+			Integer totalLista = listaSequencia.size();
+			
+			Integer count = 1;			
+			
+			for (SequenciaRelatorioPp sequenciaRelatorioPp : listaSequencia) {
+				
+				String or = "";
+				
+				if (count != totalLista) {
+					
+					or = " OR ";
+					
+				}
+				
+				sequencia.append("i.statusFasePp.nome = '" + sequenciaRelatorioPp.getStatusFasePp().getNome() + "' " + or + " ");
+				
+				count++;
+				
+			}
+						
+			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (" + sequencia + ")");
+			query.setParameter("param1", fasePp);
+						
 			return query.getResultList();
 
 		} catch (Exception e) {
