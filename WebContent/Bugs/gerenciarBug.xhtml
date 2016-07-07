@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Bug
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Gerenciar Bug</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Bugs')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.validaAdmin('Bugs')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:panel header="Gerenciar PPs">
+
+				<p:dataTable var="bug" value="#{bugBean.listarBugs()}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10, 15, 20"
+					emptyMessage="Não há bugs registrados">
+
+					<p:column headerText="Nome" style="text-align: center;"
+						sortBy="#{bug.titulo}">
+
+						<h:outputText value="#{bug.titulo}" />
+
+					</p:column>
+
+					<p:column headerText="Solicitante" style="text-align: center;">
+
+						<h:outputText value="#{bug.solicitante}" />
+
+					</p:column>
+
+					<p:column headerText="Data Abertura" style="text-align: center;">
+
+						<h:outputText value="#{bug.dataAberturaFormatada}" />
+
+					</p:column>
+
+					<p:column headerText="Previsão" style="text-align: center;">
+
+						<h:outputText value="#{bug.previsaoFormatada}" />
+
+					</p:column>
+
+					<p:column style="text-align: center; width: 50px;">
+
+						<p:commandButton update="@form:detatlhesBug"
+							oncomplete="PF('infBug').show()" icon="ui-icon-search"
+							title="Detalhes do projeto">
+							<f:setPropertyActionListener value="#{bug}"
+								target="#{bugBean.bug}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Detalhes Bug" widgetVar="infBug" modal="true"
+					showEffect="fade" hideEffect="fade" width="750" height="400"
+					minWidth="650" minHeight="400">
+
+					<h:panelGroup id="detatlhesBug">
+
+						<p:panelGrid rendered="#{not empty bugBean.bug}"
+							columnClasses="label, value" style="width: 100%;">
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Titulo" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.titulo}" />
+
+								</p:column>
+
+							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Descrição" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.descricao}" />
+
+								</p:column>
+
+							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Solicitante" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.solicitante}" />
+
+								</p:column>
+
+							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Data Abertura" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.dataAberturaFormatada}" />
+
+								</p:column>
+
+							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Previsão" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.previsaoFormatada}" />
+
+								</p:column>
+
+							</p:row>
+
+						</p:panelGrid>
+						
+						<br />
+						
+						<p:button outcome="detalhesBug" value="Modificar"
+							style="float: right;">
+
+							<f:param name="bug" value="#{bugBean.bug.id}" />
+
+						</p:button>
+
+					</h:panelGroup>
+
+				</p:dialog>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

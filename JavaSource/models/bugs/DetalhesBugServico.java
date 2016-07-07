@@ -1,5 +1,8 @@
 package models.bugs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,17 +45,18 @@ public class DetalhesBugServico {
 
 	}
 	
-	public DetalhesBug listarDetalhesBugEspecifico(Bug bug) throws Exception {
+	@SuppressWarnings("unchecked")
+	public List<DetalhesBug> listarDetalhesBugEspecifico(Bug bug) {		
 		
 		try {
 			
 			Query query = this.entityManager.createQuery("FROM DetalhesBug d WHERE d.bug =:param1");
-			query.setParameter("param1", bug);			
-			return (DetalhesBug) query.getSingleResult();
+			query.setParameter("param1", bug);
+			return query.getResultList();
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Não foi possivel encontrar detalhe especifico.");
+			return new ArrayList<DetalhesBug>();
 			
 		}
 		

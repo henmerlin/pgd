@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Detalhe do Bug
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-home"> </i> Detalhe do Bug</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Bugs')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.validaAdmin('Bugs')}"
+				type="preRenderView" />
+
+			<f:viewParam name="bug" value="#{bugBean.bug.id}" />
+
+			<f:event listener="#{bugBean.listarBugEspecifico()}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:fieldset legend="Detalhes do Bug" toggleable="true"
+				toggleSpeed="500">
+
+				<h:panelGrid rendered="#{not empty bugBean.bug}"
+					columnClasses="label, value">
+
+					<h:outputText value="Titulo: " style="font-weight:bold" />
+					<p:inputText value="#{bugBean.bug.titulo}" />
+
+					<br />
+
+					<h:outputText value="Descrição: " style="font-weight:bold" />
+					<p:inputTextarea rows="5" cols="100"
+						value="#{bugBean.bug.descricao}" maxlength="500" />
+
+					<br />
+
+					<h:outputText value="Solicitante " style="font-weight:bold" />
+					<p:inputText value="#{bugBean.bug.solicitante}" />
+
+					<br />
+
+					<h:outputText value="Data de Abertura " />
+					<p:calendar value="#{bugBean.bug.dataAbertura}"
+						pattern="dd/MM/yyyy" mask="true" />
+
+					<br />
+
+					<h:outputText value="Previsão " />
+					<p:calendar value="#{bugBean.bug.previsao}" pattern="dd/MM/yyyy"
+						mask="true" />
+
+					<br />
+
+					<p:commandButton value="Salvar" action="#{bugBean.modificaBug()}"
+						update="@all" />
+
+				</h:panelGrid>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Código" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Código" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Selecione a código" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{codigoBugDescricaoBean.codigoBugDescricao.codigoBug}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{codigoBugBean.listarCodigoBug()}"
+								var="codbug" itemLabel="#{codbug.nome}" itemValue="#{codbug}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Descrição " style="font-weight:bold" />
+						<p:inputText
+							value="#{codigoBugDescricaoBean.codigoBugDescricao.nome}" />
+
+						<p:commandButton value="Criar Código"
+							action="#{codigoBugDescricaoBean.cadastrarDescricao(bugBean.bug)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Código" toggleable="true" toggleSpeed="500"
+					style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug)}"
+						var="codDesc" emptyMessage="Não há códigos cadastrados.">
+
+						<p:column headerText="Tipo Código" style="text-align: center;">
+
+							<h:outputText value="#{codDesc.codigoBug.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Código" style="text-align: center;">
+
+							<h:outputText value="#{codDesc.nome}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModDescCod"
+								icon="ui-icon-pencil" title="Modifica código"
+								oncomplete="PF('modDescCod').show()">
+
+								<f:setPropertyActionListener value="#{codDesc}"
+									target="#{codigoBugDescricaoBean.codigoBugDescricaoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Informações" widgetVar="modDescCod"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+						width="500" height="300">
+
+						<h:panelGroup id="detalhesModDescCod">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Selecione a código"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{codigoBugDescricaoBean.codigoBugDescricaoModifica.codigoBug}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{codigoBugBean.listarCodigoBug()}"
+										var="codbug" itemLabel="#{codbug.nome}" itemValue="#{codbug}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Descrição " style="font-weight:bold" />
+								<p:inputText
+									value="#{codigoBugDescricaoBean.codigoBugDescricaoModifica.nome}" />
+
+
+								<p:commandButton value="Modificar: "
+									action="#{codigoBugDescricaoBean.modificarDescricao()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+					
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pgd_bugs_bug")
 public class Bug {
@@ -16,18 +18,14 @@ public class Bug {
 	@GeneratedValue
 	private Integer id;
 	
-	private String inc;
-	
-	private String prob;
-	
-	private String req;
+	private String titulo;
 	
 	@Lob
 	private String descricao;
 	
 	private String solicitante;
 	
-	private Date data_abertura;
+	private Date dataAbertura;
 	
 	private Date previsao;
 
@@ -37,30 +35,6 @@ public class Bug {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getInc() {
-		return inc;
-	}
-
-	public void setInc(String inc) {
-		this.inc = inc;
-	}
-
-	public String getProb() {
-		return prob;
-	}
-
-	public void setProb(String prob) {
-		this.prob = prob;
-	}
-
-	public String getReq() {
-		return req;
-	}
-
-	public void setReq(String req) {
-		this.req = req;
 	}
 
 	public String getDescricao() {
@@ -79,20 +53,70 @@ public class Bug {
 		this.solicitante = solicitante;
 	}
 
-	public Date getData_abertura() {
-		return data_abertura;
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+	
+	public String getDataAberturaFormatada() {
+		
+		return JSFUtil.formatarData(this.dataAbertura);
+		
 	}
 
-	public void setData_abertura(Date data_abertura) {
-		this.data_abertura = data_abertura;
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
 	}
 
 	public Date getPrevisao() {
 		return previsao;
 	}
+	
+	public String getPrevisaoFormatada() {
+		
+		return JSFUtil.formatarData(this.previsao);
+		
+	}
 
 	public void setPrevisao(Date previsao) {
 		this.previsao = previsao;
-	}	
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bug other = (Bug) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Bug [id=" + id + "]";
+	}
 	
 }

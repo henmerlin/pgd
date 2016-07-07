@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Cadastrar Bug
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Cadastrar Bug</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Bugs')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.validaAdmin('Bugs')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<p:panel header="Cadastrar PP">
+
+			<h:form>
+
+				<h:panelGrid columns="3">
+
+					<p:outputLabel for="p0" value="Titulo: " />
+					<p:inputText id="p0" value="#{bugBean.bug.titulo}" />
+					<p:message for="p0" />
+
+					<p:outputLabel for="p1" value="Descrição do Bug: " />
+					<p:inputTextarea id="p1" rows="5" cols="30"
+						value="#{bugBean.bug.descricao}" maxlength="800" />
+					<p:message for="p1" />
+
+					<p:outputLabel for="p2" value="Solicitante: " />
+					<p:inputText id="p2" value="#{bugBean.bug.solicitante}" />
+					<p:message for="p2" />
+
+					<p:outputLabel for="p3" value="Data da Abertura " />
+					<p:calendar id="p3" value="#{bugBean.bug.dataAbertura}"
+						pattern="dd/MM/yyyy" mask="true" />
+					<p:message for="p3" />
+
+					<p:outputLabel for="p4" value="Previsão: " />
+					<p:calendar id="p4" value="#{bugBean.bug.previsao}"
+						pattern="dd/MM/yyyy" mask="true" />
+					<p:message for="p4" />
+
+					<p:commandButton id="cadastrarBug" value="Cadastrar" action="#{bugBean.cadastrarBug()}"
+						update="@all" />
+
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>

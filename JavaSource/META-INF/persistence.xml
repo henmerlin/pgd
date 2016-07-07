@@ -35,6 +35,9 @@
 		<class>entidades.bugs.DetalhesBug</class>
 		<class>entidades.bugs.SistemaAfetado</class>
 		<class>entidades.bugs.AcaoBug</class>
+		<class>entidades.bugs.CodigoBug</class>
+		<class>entidades.bugs.CodigoBugDescricao</class>
+		<class>entidades.bugs.SistemaAfetadoBug</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

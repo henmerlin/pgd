@@ -3,21 +3,24 @@ package entidades.bugs;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pgd_bugs_impacto_bug")
-public class ImpactoBug {
-
+@Table(name="pgd_bugs_codigo_descricao_bug")
+public class CodigoBugDescricao {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	private String nome;
 	
-	private Boolean ativo;
+	@ManyToOne
+	private Bug bug;
 	
-	private Integer ordem;
+	@ManyToOne
+	private CodigoBug codigoBug;
 
 	public Integer getId() {
 		return id;
@@ -35,20 +38,20 @@ public class ImpactoBug {
 		this.nome = nome;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public Bug getBug() {
+		return bug;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setBug(Bug bug) {
+		this.bug = bug;
 	}
 
-	public Integer getOrdem() {
-		return ordem;
+	public CodigoBug getCodigoBug() {
+		return codigoBug;
 	}
 
-	public void setOrdem(Integer ordem) {
-		this.ordem = ordem;
+	public void setCodigoBug(CodigoBug codigoBug) {
+		this.codigoBug = codigoBug;
 	}
 
 	@Override
@@ -67,7 +70,7 @@ public class ImpactoBug {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ImpactoBug other = (ImpactoBug) obj;
+		CodigoBugDescricao other = (CodigoBugDescricao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,7 +81,7 @@ public class ImpactoBug {
 
 	@Override
 	public String toString() {
-		return "ImpactoBug [id=" + id + "]";
-	}		
+		return "CodigoBugDescricao [id=" + id + "]";
+	}	
 	
 }

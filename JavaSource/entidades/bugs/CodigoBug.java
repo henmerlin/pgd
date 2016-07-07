@@ -6,18 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pgd_bugs_impacto_bug")
-public class ImpactoBug {
-
+@Table(name="pgd_bugs_codigo_bug")
+public class CodigoBug {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	private String nome;
-	
-	private Boolean ativo;
-	
-	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -33,22 +29,6 @@ public class ImpactoBug {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Integer getOrdem() {
-		return ordem;
-	}
-
-	public void setOrdem(Integer ordem) {
-		this.ordem = ordem;
 	}
 
 	@Override
@@ -67,7 +47,7 @@ public class ImpactoBug {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ImpactoBug other = (ImpactoBug) obj;
+		CodigoBug other = (CodigoBug) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,7 +58,7 @@ public class ImpactoBug {
 
 	@Override
 	public String toString() {
-		return "ImpactoBug [id=" + id + "]";
-	}		
+		return "CodigoBug [id=" + id + "]";
+	}	
 	
 }
