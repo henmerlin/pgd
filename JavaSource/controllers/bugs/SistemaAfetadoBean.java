@@ -1,5 +1,7 @@
 package controllers.bugs;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -56,6 +58,12 @@ public class SistemaAfetadoBean {
 			JSFUtil.addErrorMessage(e.getMessage());
 			
 		}
+		
+	}
+	
+	public List<SistemaAfetado> listarSistema() {
+		
+		return this.sistemaAfetadoServico.listarSistema();
 		
 	}
 

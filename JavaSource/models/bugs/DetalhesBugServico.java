@@ -17,15 +17,17 @@ public class DetalhesBugServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 
-	public void cadastrarDetalhes(DetalhesBug detalhesBug) throws Exception {
+	public void cadastrarDetalhes(DetalhesBug detalhesBug, Bug bug) throws Exception {
 
 		try {
+			
+			detalhesBug.setBug(bug);
 
 			this.entityManager.persist(detalhesBug);
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Detalhes.");
+			throw new Exception("Erro ao cadastrar Detalhe.");
 
 		}
 

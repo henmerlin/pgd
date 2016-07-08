@@ -14,8 +14,7 @@ import util.JSFUtil;
 @ViewScoped
 public class BugBean {
 
-	private Bug bug;
-	
+	private Bug bug;	
 	
 	@EJB
 	private BugServico bugServico;

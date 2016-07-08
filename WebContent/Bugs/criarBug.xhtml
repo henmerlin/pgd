@@ -30,7 +30,7 @@
 
 	<ui:define name="conteudo">
 
-		<p:panel header="Cadastrar PP">
+		<p:panel header="Cadastrar Bug">
 
 			<h:form>
 
@@ -39,6 +39,15 @@
 					<p:outputLabel for="p0" value="Titulo: " />
 					<p:inputText id="p0" value="#{bugBean.bug.titulo}" />
 					<p:message for="p0" />
+
+					<h:outputText for="p0dotOne" value="Selecione o Status"/>
+					<p:selectOneMenu id="p0dotOne" value="#{bugBean.bug.statusBug}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems value="#{statusBugBean.listarStatus()}"
+							var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+					</p:selectOneMenu>
+					<p:message for="p0dotOne" />
 
 					<p:outputLabel for="p1" value="Descrição do Bug: " />
 					<p:inputTextarea id="p1" rows="5" cols="30"
@@ -59,8 +68,8 @@
 						pattern="dd/MM/yyyy" mask="true" />
 					<p:message for="p4" />
 
-					<p:commandButton id="cadastrarBug" value="Cadastrar" action="#{bugBean.cadastrarBug()}"
-						update="@all" />
+					<p:commandButton id="cadastrarBug" value="Cadastrar"
+						action="#{bugBean.cadastrarBug()}" update="@all" />
 
 				</h:panelGrid>
 

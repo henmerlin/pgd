@@ -48,6 +48,16 @@
 
 					<br />
 
+					<h:outputText value="Selecione o Status" style="font-weight:bold" />
+					<p:selectOneMenu value="#{bugBean.bug.statusBug}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+						<f:selectItems value="#{statusBugBean.listarStatus()}"
+							var="status" itemLabel="#{status.nome}" itemValue="#{status}" />
+					</p:selectOneMenu>
+
+					<br />
+
 					<h:outputText value="Descrição: " style="font-weight:bold" />
 					<p:inputTextarea rows="5" cols="100"
 						value="#{bugBean.bug.descricao}" maxlength="500" />
@@ -178,7 +188,388 @@
 				</p:fieldset>
 
 			</p:fieldset>
-					
+
+			<br />
+
+			<p:fieldset legend="Sistemas" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Sistema" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Selecione o sistema" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{sistemaAfetadoBugBean.sistemaAfetadoBug.sistemaAfetado}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{sistemaAfetadoBean.listarSistema()}"
+								var="sistema" itemLabel="#{sistema.nome}" itemValue="#{sistema}" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Criar Código"
+							action="#{sistemaAfetadoBugBean.cadastrarSistemaAfetadoBug(bugBean.bug)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Sistemas" toggleable="true" toggleSpeed="500"
+					style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug)}"
+						var="sistema" emptyMessage="Não há sistema cadastrados.">
+
+						<p:column headerText="Tipo Código" style="text-align: center;">
+
+							<h:outputText value="#{sistema.sistemaAfetado.nome}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModSisAfe"
+								icon="ui-icon-pencil" title="Modifica Sistema"
+								oncomplete="PF('modSisAfe').show()">
+
+								<f:setPropertyActionListener value="#{sistema}"
+									target="#{sistemaAfetadoBugBean.sistemaAfetadoBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Informações" widgetVar="modSisAfe"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+						width="500" height="300">
+
+						<h:panelGroup id="detalhesModSisAfe">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Selecione o sistema"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{sistemaAfetadoBugBean.sistemaAfetadoBugModifica.sistemaAfetado}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{sistemaAfetadoBean.listarSistema()}"
+										var="sistema" itemLabel="#{sistema.nome}"
+										itemValue="#{sistema}" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Modificar: "
+									action="#{sistemaAfetadoBugBean.modificarSistemaAfetadoBug()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Ação" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Ação" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Titulo: " style="font-weight:bold" />
+						<p:inputText value="#{acaoBugBean.acaoBug.nome}" />
+
+						<h:outputText value="Descrição: " style="font-weight:bold" />
+						<p:inputTextarea rows="5" cols="100"
+							value="#{acaoBugBean.acaoBug.descricao}" maxlength="500" />
+
+						<h:outputText value="Data da Ação " />
+						<p:calendar value="#{acaoBugBean.acaoBug.dataAcao}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<p:commandButton value="Criar Ação"
+							action="#{acaoBugBean.cadastrarAcao(bugBean.bug)}" update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Sistemas" toggleable="true" toggleSpeed="500"
+					style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{acaoBugBean.listarAcaoBugsEspecifico(bugBean.bug)}"
+						var="acao" emptyMessage="Não há ações cadastrados.">
+
+						<p:column headerText="Titulo" style="text-align: center;">
+
+							<h:outputText value="#{acao.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Descrição" style="text-align: center;">
+
+							<h:outputText value="Clique em editar para ver a descrição." />
+
+						</p:column>
+
+						<p:column headerText="Data da Ação" style="text-align: center;">
+
+							<h:outputText value="#{acao.dataAcaoFormatada}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModAcoes"
+								icon="ui-icon-pencil" title="Modifica Ações"
+								oncomplete="PF('modAcoes').show()">
+
+								<f:setPropertyActionListener value="#{acao}"
+									target="#{acaoBugBean.acaoBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Ações" widgetVar="modAcoes" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="true" width="500"
+						height="300">
+
+						<h:panelGroup id="detalhesModAcoes">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Titulo: " style="font-weight:bold" />
+								<p:inputText value="#{acaoBugBean.acaoBugModifica.nome}" />
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5" cols="50"
+									value="#{acaoBugBean.acaoBugModifica.descricao}"
+									maxlength="500" />
+
+								<h:outputText value="Data da Ação " />
+								<p:calendar value="#{acaoBugBean.acaoBugModifica.dataAcao}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<p:commandButton value="Modificar: "
+									action="#{acaoBugBean.modificarAcao()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Ação" toggleable="true" toggleSpeed="500">
+
+				<p:fieldset legend="Cadastrar Detalhes" toggleable="true"
+					toggleSpeed="500" style="width: 48%; float: left;">
+
+					<h:panelGrid>
+
+						<h:outputText value="Selecione Impacto" style="font-weight:bold" />
+						<p:selectOneMenu value="#{detalhesBugBean.detalhesBug.impactoBug}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{impactoBugBean.listarImpactoAtivo()}"
+								var="impacto" itemLabel="#{impacto.nome}" itemValue="#{impacto}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Selecione a Prioridade"
+							style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{detalhesBugBean.detalhesBug.prioridadeBug}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems
+								value="#{prioridadeBugBean.listarPrioridadeAtivo()}"
+								var="prioridade" itemLabel="#{prioridade.nome}"
+								itemValue="#{prioridade}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Selecione a Fase" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{detalhesBugBean.detalhesBug.fasesBug}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{fasesBugBean.listarFaseBugAtivo()}"
+								var="faseDBug" itemLabel="#{faseDBug.nome}"
+								itemValue="#{faseDBug}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Descrição: " style="font-weight:bold" />
+						<p:inputTextarea rows="5" cols="100"
+							value="#{detalhesBugBean.detalhesBug.descricao}" maxlength="500" />
+
+						<h:outputText value="Reincidente: " />
+						<p:selectBooleanCheckbox
+							value="#{detalhesBugBean.detalhesBug.reincidente}" />
+
+						<h:outputText value="Data de abertura " />
+						<p:calendar value="#{detalhesBugBean.detalhesBug.dataAbertura}"
+							pattern="dd/MM/yyyy" mask="true" />
+
+						<h:outputText value="Volume " style="font-weight:bold" />
+						<p:inputText value="#{detalhesBugBean.detalhesBug.volume}" />
+
+						<h:outputText value="Paliativo: " />
+						<p:selectBooleanCheckbox
+							value="#{detalhesBugBean.detalhesBug.paliativo}" />
+
+						<h:outputText value="Priorizado: " />
+						<p:selectBooleanCheckbox
+							value="#{detalhesBugBean.detalhesBug.priorizado}" />
+
+						<p:commandButton value="Criar Ação"
+							action="#{detalhesBugBean.cadastrarDetalhes(bugBean.bug)}"
+							update="@all" />
+
+					</h:panelGrid>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Detalhes" toggleable="true" toggleSpeed="500"
+					style="width: 48%; float: right;">
+
+					<p:dataTable
+						value="#{detalhesBugBean.listarDetalhesBugEspecifico(bugBean.bug)}"
+						var="detalhe" emptyMessage="Não há detalhes cadastrados.">
+
+						<p:column headerText="Fase" style="text-align: center;">
+
+							<h:outputText value="#{detalhe.fasesBug.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Impacto" style="text-align: center;">
+
+							<h:outputText value="#{detalhe.impactoBug.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Prioridade" style="text-align: center;">
+
+							<h:outputText value="#{detalhe.prioridadeBug.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Data Abertura" style="text-align: center;">
+
+							<h:outputText value="#{detalhe.dataAberturaFormatada}" />
+
+						</p:column>
+
+						<p:column style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:detalhesModDetalhesBug"
+								icon="ui-icon-pencil" title="Modifica Ações"
+								oncomplete="PF('modDetalhesBug').show()">
+
+								<f:setPropertyActionListener value="#{detalhe}"
+									target="#{detalhesBugBean.detalhesBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Ações" widgetVar="modDetalhesBug"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="true"
+						width="600" height="450">
+
+						<h:panelGroup id="detalhesModDetalhesBug">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Selecione Impacto" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{detalhesBugBean.detalhesBugModifica.impactoBug}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{impactoBugBean.listarImpactoAtivo()}"
+										var="impacto" itemLabel="#{impacto.nome}"
+										itemValue="#{impacto}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Selecione a Prioridade"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{detalhesBugBean.detalhesBugModifica.prioridadeBug}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{prioridadeBugBean.listarPrioridadeAtivo()}"
+										var="prioridade" itemLabel="#{prioridade.nome}"
+										itemValue="#{prioridade}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Selecione a Fase" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{detalhesBugBean.detalhesBugModifica.fasesBug}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{fasesBugBean.listarFaseBugAtivo()}"
+										var="faseDBug" itemLabel="#{faseDBug.nome}"
+										itemValue="#{faseDBug}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5" cols="80"
+									value="#{detalhesBugBean.detalhesBugModifica.descricao}"
+									maxlength="500" />
+
+								<h:outputText value="Reincidente: " />
+								<p:selectBooleanCheckbox
+									value="#{detalhesBugBean.detalhesBugModifica.reincidente}" />
+
+								<h:outputText value="Data de abertura " />
+								<p:calendar
+									value="#{detalhesBugBean.detalhesBugModifica.dataAbertura}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<h:outputText value="Volume " style="font-weight:bold" />
+								<p:inputText
+									value="#{detalhesBugBean.detalhesBugModifica.volume}" />
+
+								<h:outputText value="Paliativo: " />
+								<p:selectBooleanCheckbox
+									value="#{detalhesBugBean.detalhesBugModifica.paliativo}" />
+
+								<h:outputText value="Priorizado: " />
+								<p:selectBooleanCheckbox
+									value="#{detalhesBugBean.detalhesBugModifica.priorizado}" />
+
+								<p:commandButton value="Modificar: "
+									action="#{detalhesBugBean.modificarDetalhes()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
 
 		</h:form>
 

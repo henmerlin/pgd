@@ -17,9 +17,11 @@ public class AcaoBugServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 	
-	public void cadastrarAcao(AcaoBug acaoBug) throws Exception {
+	public void cadastrarAcao(AcaoBug acaoBug, Bug bug) throws Exception {
 		
 		try {
+			
+			acaoBug.setBug(bug);
 			
 			this.entityManager.persist(acaoBug);
 			

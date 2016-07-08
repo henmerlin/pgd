@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pgd_bugs_detalhes_bug")
 public class DetalhesBug {
@@ -20,7 +22,15 @@ public class DetalhesBug {
 	@Lob
 	private String descricao;
 
-	private Date dataAcao;
+	private Date dataAbertura;
+	
+	private Integer volume;
+	
+	private Boolean reincidente;
+	
+	private Boolean paliativo;
+	
+	private Boolean priorizado;
 	
 	@ManyToOne
 	private Bug bug;
@@ -32,7 +42,7 @@ public class DetalhesBug {
 	private ImpactoBug impactoBug;
 	
 	@ManyToOne
-	private StatusBug statusBug;
+	private FasesBug fasesBug;
 	
 	public Integer getId() {
 		return id;
@@ -49,15 +59,7 @@ public class DetalhesBug {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Date getDataAcao() {
-		return dataAcao;
-	}
-
-	public void setDataAcao(Date dataAcao) {
-		this.dataAcao = dataAcao;
-	}
-
+	
 	public Bug getBug() {
 		return bug;
 	}
@@ -82,12 +84,58 @@ public class DetalhesBug {
 		this.impactoBug = impactoBug;
 	}
 
-	public StatusBug getStatusBug() {
-		return statusBug;
+	public FasesBug getFasesBug() {
+		return fasesBug;
 	}
 
-	public void setStatusBug(StatusBug statusBug) {
-		this.statusBug = statusBug;
+	public void setFasesBug(FasesBug fasesBug) {
+		this.fasesBug = fasesBug;
+	}	
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+	
+	public String getDataAberturaFormatada() {
+		
+		return JSFUtil.formatarData(this.dataAbertura);
+		
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Integer getVolume() {
+		return volume;
+	}
+
+	public void setVolume(Integer volume) {
+		this.volume = volume;
+	}
+
+	public Boolean getReincidente() {
+		return reincidente;
+	}
+
+	public void setReincidente(Boolean reincidente) {
+		this.reincidente = reincidente;
+	}
+
+	public Boolean getPaliativo() {
+		return paliativo;
+	}
+
+	public void setPaliativo(Boolean paliativo) {
+		this.paliativo = paliativo;
+	}
+
+	public Boolean getPriorizado() {
+		return priorizado;
+	}
+
+	public void setPriorizado(Boolean priorizado) {
+		this.priorizado = priorizado;
 	}
 
 	@Override

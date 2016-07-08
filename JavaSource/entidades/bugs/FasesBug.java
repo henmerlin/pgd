@@ -1,19 +1,13 @@
 package entidades.bugs;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import util.JSFUtil;
-
 @Entity
-@Table(name="pgd_bugs_acao_bug")
-public class AcaoBug {
+@Table(name="pgd_bugs_fases_bug")
+public class FasesBug {
 
 	@Id
 	@GeneratedValue
@@ -21,13 +15,9 @@ public class AcaoBug {
 	
 	private String nome;
 	
-	@Lob
-	private String descricao;
+	private Boolean ativo;
 	
-	private Date dataAcao;
-	
-	@ManyToOne
-	private Bug bug;
+	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -35,7 +25,7 @@ public class AcaoBug {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}	
+	}
 
 	public String getNome() {
 		return nome;
@@ -45,34 +35,20 @@ public class AcaoBug {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
-	public Date getDataAcao() {
-		return dataAcao;
-	}
-	
-	public String getDataAcaoFormatada() {
-		
-		return JSFUtil.formatarData(this.dataAcao);
-		
+	public Integer getOrdem() {
+		return ordem;
 	}
 
-	public void setDataAcao(Date dataAcao) {
-		this.dataAcao = dataAcao;
-	}
-
-	public Bug getBug() {
-		return bug;
-	}
-
-	public void setBug(Bug bug) {
-		this.bug = bug;
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override
@@ -91,7 +67,7 @@ public class AcaoBug {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AcaoBug other = (AcaoBug) obj;
+		FasesBug other = (FasesBug) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -102,7 +78,6 @@ public class AcaoBug {
 
 	@Override
 	public String toString() {
-		return "AcaoBug [id=" + id + "]";
+		return "FasesBug [id=" + id + "]";
 	}
-	
 }

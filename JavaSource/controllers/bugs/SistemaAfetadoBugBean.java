@@ -36,6 +36,7 @@ public class SistemaAfetadoBugBean {
 			
 			this.sistemaAfetadoBugServico.cadastrarSistemaAfetadoBug(this.sistemaAfetadoBug, bug);
 			JSFUtil.addInfoMessage("Sistema cadastrado com sucesso.");
+			this.sistemaAfetadoBug = new SistemaAfetadoBug();
 			
 		} catch (Exception e) {
 
@@ -51,6 +52,7 @@ public class SistemaAfetadoBugBean {
 			
 			this.sistemaAfetadoBugServico.modificarSistemaAfetadoBug(this.sistemaAfetadoBugModifica);
 			JSFUtil.addInfoMessage("Sistema modificado com sucesso.");
+			this.sistemaAfetadoBugModifica = new SistemaAfetadoBug();
 			
 		} catch (Exception e) {
 

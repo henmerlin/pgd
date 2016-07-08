@@ -30,11 +30,11 @@ public class DetalhesBugBean {
 		
 	}
 	
-	public void cadastrarDetalhes() {
+	public void cadastrarDetalhes(Bug bug) {
 		
 		try {
-			
-			this.detalhesBugServico.cadastrarDetalhes(this.detalhesBug);
+						
+			this.detalhesBugServico.cadastrarDetalhes(this.detalhesBug, bug);
 			JSFUtil.addInfoMessage("Detalhe cadastrado com sucesso.");
 			this.detalhesBug = new DetalhesBug();
 			
@@ -52,6 +52,7 @@ public class DetalhesBugBean {
 			
 			this.detalhesBugServico.modificarDetalhes(this.detalhesBugModifica);
 			JSFUtil.addInfoMessage("Detalhe modificado com sucesso.");
+			this.detalhesBugModifica = new DetalhesBug();
 			
 		} catch (Exception e) {
 			

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import util.JSFUtil;
@@ -28,6 +29,9 @@ public class Bug {
 	private Date dataAbertura;
 	
 	private Date previsao;
+	
+	@ManyToOne
+	private StatusBug statusBug;
 
 	public Integer getId() {
 		return id;
@@ -87,6 +91,14 @@ public class Bug {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public StatusBug getStatusBug() {
+		return statusBug;
+	}
+
+	public void setStatusBug(StatusBug statusBug) {
+		this.statusBug = statusBug;
 	}
 
 	@Override

@@ -30,11 +30,11 @@ public class AcaoBugBean {
 		
 	}
 	
-	public void cadastrarAcao() {
+	public void cadastrarAcao(Bug bug) {
 		
 		try {
 			
-			this.acaoBugServico.cadastrarAcao(this.acaoBug);
+			this.acaoBugServico.cadastrarAcao(this.acaoBug, bug);
 			JSFUtil.addInfoMessage("Acão cadastrada com sucesso.");
 			this.acaoBug = new AcaoBug();
 			

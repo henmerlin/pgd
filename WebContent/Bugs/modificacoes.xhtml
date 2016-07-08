@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Ferramenta
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-align-left"> </i> Gerenciar Ferramenta</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('Bugs')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.validaAdmin('Bugs')}"
+				type="preRenderView" />
+
+		</f:metadata>
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:tabView dynamic="true" cache="true" id="tabview">
+
+				<p:tab title="Prioridade">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{prioridadeBugBean.prioridadeBug.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{prioridadeBugBean.prioridadeBug.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{prioridadeBugBean.cadastrarPrioridade()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{prioridadeBugBean.listarPrioridade()}"
+						var="prioridade" style="margin-top: 20px;"
+						emptyMessage="Não há prioridades registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{prioridade.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{prioridade.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!prioridade.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{prioridade.ordem}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModPrioridade"
+								oncomplete="PF('modPrioridade').show()" icon="ui-icon-pencil"
+								title="Edita Prioridade">
+
+								<f:setPropertyActionListener value="#{prioridade}"
+									target="#{prioridadeBugBean.prioridadeBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Prioridade" widgetVar="modPrioridade"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModPrioridade">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome: " style="font-weight:bold" />
+								<p:inputText
+									value="#{prioridadeBugBean.prioridadeBugModifica.nome}" />
+
+								<h:outputText value="Status: " style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{prioridadeBugBean.prioridadeBugModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputNumber
+									value="#{prioridadeBugBean.prioridadeBugModifica.ordem}" />
+
+								<p:commandButton value="Editar"
+									action="#{prioridadeBugBean.modificarPrioridade()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Impacto">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{impactoBugBean.impactoBug.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{impactoBugBean.impactoBug.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{impactoBugBean.cadastrarImpacto()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{impactoBugBean.listarImpacto()}"
+						var="impacto" style="margin-top: 20px;"
+						emptyMessage="Não há impactos registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{impacto.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{impacto.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!impacto.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{impacto.ordem}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModImpacto"
+								oncomplete="PF('modImpacto').show()" icon="ui-icon-pencil"
+								title="Edita Prioridade">
+
+								<f:setPropertyActionListener value="#{impacto}"
+									target="#{impactoBugBean.impactoBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Impacto" widgetVar="modImpacto"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModImpacto">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome: " style="font-weight:bold" />
+								<p:inputText value="#{impactoBugBean.impactoBugModifica.nome}" />
+
+								<h:outputText value="Status: " style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{impactoBugBean.impactoBugModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputNumber
+									value="#{impactoBugBean.impactoBugModifica.ordem}" />
+
+								<p:commandButton value="Editar"
+									action="#{impactoBugBean.modificarImpacto()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+
+				<p:tab title="Status">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{statusBugBean.statusBug.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{statusBugBean.statusBug.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{statusBugBean.cadastrarStatus()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{statusBugBean.listarStatus()}" var="status"
+						style="margin-top: 20px;" emptyMessage="Não há status registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{status.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{status.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!status.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{status.ordem}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModStatus"
+								oncomplete="PF('modStatus').show()" icon="ui-icon-pencil"
+								title="Edita Status">
+
+								<f:setPropertyActionListener value="#{status}"
+									target="#{statusBugBean.statusBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Impacto" widgetVar="modStatus"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModStatus">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome: " style="font-weight:bold" />
+								<p:inputText value="#{statusBugBean.statusBugModifica.nome}" />
+
+								<h:outputText value="Status: " style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{statusBugBean.statusBugModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputNumber value="#{statusBugBean.statusBugModifica.ordem}" />
+
+								<p:commandButton value="Editar"
+									action="#{statusBugBean.modificarStatus()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Fases">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{fasesBugBean.fasesBug.nome}" />
+
+						<h:outputText value="Status: " style="font-weight:bold" />
+						<p:selectOneMenu value="#{fasesBugBean.fasesBug.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Cadastrar"
+							action="#{fasesBugBean.cadastrarFase()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{fasesBugBean.listarFaseBug()}" var="fases"
+						style="margin-top: 20px;" emptyMessage="Não há fases registradas">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{fases.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{fases.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!fases.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Ordem" style="text-align: center;">
+
+							<h:outputText value="#{fases.ordem}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModFases"
+								oncomplete="PF('modFases').show()" icon="ui-icon-pencil"
+								title="Edita Prioridade">
+
+								<f:setPropertyActionListener value="#{fases}"
+									target="#{fasesBugBean.fasesBugModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Impacto" widgetVar="modFases" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModFases">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome: " style="font-weight:bold" />
+								<p:inputText value="#{fasesBugBean.fasesBugModifica.nome}" />
+
+								<h:outputText value="Status: " style="font-weight:bold" />
+								<p:selectOneMenu value="#{fasesBugBean.fasesBugModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Ordem: " style="font-weight:bold" />
+								<p:inputText value="#{fasesBugBean.fasesBugModifica.ordem}" />
+
+								<p:commandButton value="Editar"
+									action="#{fasesBugBean.modificarFase()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Usuário">
+
+					<h:panelGrid>
+
+						<h:outputText value="Login" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
+								var="usuario" itemLabel="#{usuario.login}"
+								itemValue="#{usuario}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Status" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.ativo}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Sistema" style="font-weight:bold" />
+						<p:selectManyCheckbox
+							value="#{controleUsuarioBean.sistemaSelected}"
+							layout="pageDirection" columns="1">
+
+							<f:selectItems value="#{controleUsuarioBean.sistemas}"
+								var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+						</p:selectManyCheckbox>
+
+						<p:commandButton value="Cadastrar"
+							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{controleUsuarioBean.listarControleUsuario()}"
+						var="usuario" style="margin-top: 20px;"
+						emptyMessage="Não há usuários registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{usuario.usuarioEfika.login}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{usuario.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!usuario.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Sistema" style="text-align: center;">
+
+							<h:outputText value="#{usuario.sistema}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuário"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{controleUsuarioBean.controleUsuarioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Usuário" widgetVar="modUser" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModUsuário">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Login" style="font-weight:bold" />
+								<h:outputText
+									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Sistema" style="font-weight:bold" />
+								<p:selectManyCheckbox
+									value="#{controleUsuarioBean.sistemaSelectedModifica}"
+									layout="pageDirection" columns="1">
+
+									<f:selectItems value="#{controleUsuarioBean.sistemas}"
+										var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+								</p:selectManyCheckbox>
+
+								<p:commandButton value="Editar"
+									action="#{controleUsuarioBean.modificaUsuario()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
