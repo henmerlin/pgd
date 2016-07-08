@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdg_pps_Controle_Usuario")
+@Table(name="pdg_Controle_Usuario")
 public class ControleUsuario {
 
 	@Id
