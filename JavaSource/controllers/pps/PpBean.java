@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import entidades.pps.Pp;
+import entidades.pps.SequenciaRelatorioPp;
 import models.pps.PpServico;
+import models.pps.SequenciaRelatorioPpServico;
 import util.JSFUtil;
 
 @ManagedBean
@@ -18,6 +20,9 @@ public class PpBean {
 	
 	@EJB
 	private PpServico ppServico;
+	
+	@EJB
+	private SequenciaRelatorioPpServico sequenciaRelatorioPpServico;
 	
 	public PpBean() {
 		
@@ -81,7 +86,10 @@ public class PpBean {
 	
 	public List<Pp> listarPpEmTrabalho() {
 		
-		return this.ppServico.listarPpEmTrabalho();
+		
+		List<SequenciaRelatorioPp> sequencia = this.sequenciaRelatorioPpServico.listarSequenciaAtivo();		
+		
+		return this.ppServico.listarPpEmTrabalho(sequencia);
 		
 	}
 	
