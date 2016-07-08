@@ -87,7 +87,7 @@ public class PpBean {
 	public List<Pp> listarPpEmTrabalho() {
 		
 		
-		List<SequenciaRelatorioPp> sequencia = this.sequenciaRelatorioPpServico.listarSequenciaAtivo();		
+		List<SequenciaRelatorioPp> sequencia = this.sequenciaRelatorioPpServico.listarSequenciaAtivo();
 		
 		return this.ppServico.listarPpEmTrabalho(sequencia);
 		

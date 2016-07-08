@@ -118,7 +118,7 @@ public class PpServico {
 
 				}
 
-				sequencia.append("i.statusFasePp.nome = '" + sequenciaRelatorioPp.getStatusFasePp().getNome() + "' " + or + " ");
+				sequencia.append("p.statusFasePp.nome = '" + sequenciaRelatorioPp.getStatusFasePp().getNome() + "' " + or + " ");
 
 				count++;
 
