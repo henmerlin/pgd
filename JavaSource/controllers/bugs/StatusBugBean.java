@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import entidades.bugs.StatusBug;
+import models.bugs.SequenciaRelatorioBugServico;
 import models.bugs.StatusBugServico;
 import util.JSFUtil;
 
@@ -21,6 +22,9 @@ public class StatusBugBean {
 	@EJB
 	private StatusBugServico statusBugServico;
 	
+	@EJB
+	private SequenciaRelatorioBugServico sequenciaRelatorioBugServico;
+	
 	public StatusBugBean() {
 		
 		this.statusBug = new StatusBug();
@@ -34,6 +38,9 @@ public class StatusBugBean {
 		try {
 			
 			this.statusBugServico.cadastrarStatus(this.statusBug);
+			
+			this.sequenciaRelatorioBugServico.cadastrarSequencia(this.statusBug);
+			
 			JSFUtil.addInfoMessage("Status Cadastrado com sucesso.");
 			this.statusBug = new StatusBug();
 			

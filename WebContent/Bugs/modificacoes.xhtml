@@ -526,6 +526,76 @@
 					</p:dialog>
 
 				</p:tab>
+				
+				<p:tab title="Relatório">
+
+					<p:dataTable value="#{sequenciaRelatorioBugBean.listarSequencia()}"
+						var="sequencia" style="margin-top: 20px;"
+						emptyMessage="Não há sequencia registradas">
+						
+						<f:facet name="header">Modifica condições do segundo gráfico.</f:facet>
+
+						<p:column headerText="Status" style="text-align: center;">
+
+							<h:outputText value="#{sequencia.statusBug.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{sequencia.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!sequencia.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModSequencia"
+								oncomplete="PF('modSequencia').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{sequencia}"
+									target="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Relatório" widgetVar="modSequencia"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModSequencia">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Status " style="font-weight:bold" />
+								<h:outputText
+									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.statusBug.nome}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.ativo}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItem itemLabel="Ativo" itemValue="true" />
+									<f:selectItem itemLabel="Inativo" itemValue="false" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Editar"
+									action="#{sequenciaRelatorioBugBean.modificaSequencia()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
 
 			</p:tabView>
 

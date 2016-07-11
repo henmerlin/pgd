@@ -111,11 +111,11 @@
 					<h:panelGroup id="detatlhesPp">
 
 						<p:panelGrid rendered="#{not empty ppBean.pp}"
-							columnClasses="label, value">
+							columnClasses="label, value" style="width: 100%">
 
 							<p:row>
 
-								<p:column>
+								<p:column style="width: 15%;">
 
 									<h:outputText value="Nome do pp" style="font-weight:bold" />
 
@@ -264,6 +264,8 @@
 							value="#{codigoPpBean.listarCodigoPpEspecifico(ppBean.pp)}"
 							var="codigo" style="margin-top: 20px;"
 							emptyMessage="Não há Códigos registrados">
+							
+							<f:facet name="header">Códigos </f:facet>
 
 							<p:column headerText="Códogo" style="text-align: center;">
 
@@ -290,6 +292,8 @@
 							value="#{priorizacaoBean.listarPriorizacaoEspecifico(ppBean.pp)}"
 							var="priorizacao" style="margin-top: 20px;"
 							emptyMessage="Não há priorização registradas">
+							
+							<f:facet name="header">Benefícios </f:facet>
 
 							<p:column headerText="Prioridade" style="text-align: center;">
 
@@ -325,6 +329,8 @@
 							value="#{informacaoFaseBean.listarInformacaoFaseEspecifico(ppBean.pp)}"
 							var="fase" style="margin-top: 20px;"
 							emptyMessage="Não há fases registradas">
+							
+							<f:facet name="header">Fases </f:facet>
 
 							<p:column headerText="Fase" style="text-align: center;">
 

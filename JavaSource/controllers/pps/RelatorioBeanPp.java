@@ -83,7 +83,7 @@ public class RelatorioBeanPp implements Serializable{
 		this.graficoFase.setTitle("Grafico Fase");
 		this.graficoFase.setLegendPosition("e");
 		this.graficoFase.setShowDataLabels(true);
-		this.graficoFase.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");
+		this.graficoFase.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 
 	}
 
@@ -106,7 +106,7 @@ public class RelatorioBeanPp implements Serializable{
 		this.graficoStatus.setTitle("Grafico Status");
 		this.graficoStatus.setLegendPosition("w");
 		this.graficoStatus.setShowDataLabels(true);
-		this.graficoStatus.setSeriesColors("003245, 005466, 007486, 0095A7, 00B6C7");
+		this.graficoStatus.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 
 	}
 

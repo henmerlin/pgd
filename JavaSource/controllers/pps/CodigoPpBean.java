@@ -67,6 +67,12 @@ public class CodigoPpBean {
 		return this.codigoPpServico.listarCodigoPpEspecifico(pp);
 		
 	}
+	
+	public List<CodigoPp> listarCodigoPP() {
+		
+		return this.codigoPpServico.listarCodigoPP();
+		
+	}
 
 	public CodigoPp getCodigoPp() {
 		return codigoPp;

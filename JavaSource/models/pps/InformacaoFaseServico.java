@@ -105,5 +105,23 @@ public class InformacaoFaseServico {
 		}		
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<InformacaoFase> listarInformaçãoFase() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM InformacaoFase i");
+			
+			return query.getResultList();
+			
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<InformacaoFase>();
+			
+		}
+		
+	}
 
 }

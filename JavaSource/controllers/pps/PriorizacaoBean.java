@@ -67,6 +67,12 @@ public class PriorizacaoBean {
 		return this.priorizacaoServico.listarPriorizacaoEspecifico(pp);
 		
 	}
+	
+	public List<Priorizacao> listarPriorizacao() {
+		
+		return this.priorizacaoServico.listarPriorizacao();
+		
+	}
 
 	public Priorizacao getPriorizacao() {
 		return priorizacao;

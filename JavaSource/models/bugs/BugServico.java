@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.bugs.Bug;
+import entidades.bugs.SequenciaRelatorioBug;
+import entidades.bugs.StatusBug;
 
 @Stateless
 public class BugServico {
@@ -75,6 +77,60 @@ public class BugServico {
 			
 		}
 		
-	}	
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Bug> listarBugPorFase(StatusBug statusBug) {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Bug b WHERE b.statusBug =:param1");
+			query.setParameter("param1", statusBug);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Bug>();
+			
+		}
+				
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Bug> listarBugPorStatus(List<SequenciaRelatorioBug> listaSequencia) {
+		
+		try {
+			
+			StringBuffer sequencia = new StringBuffer();
+			
+			Integer totalLista = listaSequencia.size();
+			
+			Integer count = 1;
+			
+			for (SequenciaRelatorioBug sequenciaRelatorioBug : listaSequencia) {
+				
+				String or = "";
+				
+				if (count != totalLista) {
+					
+					or = " OR ";
+					
+				}
+				
+				sequencia.append("b.statusBug.nome = '" + sequenciaRelatorioBug.getStatusBug().getNome() + "' " + or + " ");
+				
+				count++;
+			}
+			
+			Query query = this.entityManager.createQuery("FROM Bug b WHERE " + sequencia);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+
+			return new ArrayList<Bug>();
+			
+		}
+		
+	}
 
 }

@@ -63,5 +63,21 @@ public class CodigoPpServico {
 		}					
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CodigoPp> listarCodigoPP() {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM CodigoPp c");
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<CodigoPp>();
+			
+		}		
+		
+	}
 
 }

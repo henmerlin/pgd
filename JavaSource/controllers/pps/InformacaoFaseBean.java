@@ -67,6 +67,12 @@ public class InformacaoFaseBean {
 		return this.informacaoFaseServico.listarInformacaoFaseEspecifico(pp);
 		
 	}
+	
+	public List<InformacaoFase> listarInformaçãoFase() {
+		
+		return this.informacaoFaseServico.listarInformaçãoFase();
+		
+	}
 
 	public InformacaoFase getInformacaoFase() {
 		return informacaoFase;

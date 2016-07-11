@@ -21,7 +21,7 @@
 
 			<f:event listener="#{loginBean.validaPagina('Pps')}"
 				type="preRenderView" />
-				
+
 			<f:event listener="#{loginBean.validaAdmin('Pps')}"
 				type="preRenderView" />
 
@@ -40,7 +40,8 @@
 					rowsPerPageTemplate="10, 15, 20"
 					emptyMessage="Não há projetos registradas">
 
-					<p:column headerText="Nome do PP" style="text-align: center;" sortBy="#{pp.nome}">
+					<p:column headerText="Nome do PP" style="text-align: center;"
+						sortBy="#{pp.nome}">
 
 						<h:outputText value="#{pp.nome}" />
 
@@ -65,10 +66,13 @@
 
 					</p:column>
 
-					<p:column headerText="Data Prevista" style="text-align: center;" sortBy="#{pp.nome}">
+					<p:column headerText="Data Prevista" style="text-align: center;"
+						sortBy="#{pp.nome}">
 
-						<h:outputText rendered="#{pp.dataPrevistaFormatada!=null}" value="#{pp.dataPrevistaFormatada}" />
-						<h:outputText rendered="#{pp.dataPrevistaFormatada==null}" value="SEM PREVISÃO" />
+						<h:outputText rendered="#{pp.dataPrevistaFormatada!=null}"
+							value="#{pp.dataPrevistaFormatada}" />
+						<h:outputText rendered="#{pp.dataPrevistaFormatada==null}"
+							value="SEM PREVISÃO" />
 
 					</p:column>
 
@@ -252,10 +256,9 @@
 					</h:panelGroup>
 
 				</p:dialog>
-			</p:panel>
+			</p:panel>			
 
 		</h:form>
-
 
 	</ui:define>
 </ui:composition>

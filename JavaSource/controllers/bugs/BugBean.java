@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import entidades.bugs.Bug;
+import entidades.bugs.SequenciaRelatorioBug;
 import models.bugs.BugServico;
+import models.bugs.SequenciaRelatorioBugServico;
 import util.JSFUtil;
 
 @ManagedBean
@@ -18,6 +20,9 @@ public class BugBean {
 	
 	@EJB
 	private BugServico bugServico;
+	
+	@EJB
+	private SequenciaRelatorioBugServico sequenciaRelatorioBugServico;
 	
 	public BugBean() {
 		
@@ -76,6 +81,14 @@ public class BugBean {
 			return null;
 			
 		}
+		
+	}
+	
+	public List<Bug> listarBugEmTrabalho() {
+		
+		List<SequenciaRelatorioBug> listaSequencia = this.sequenciaRelatorioBugServico.listarSequenciaAtivo();
+		
+		return this.bugServico.listarBugPorStatus(listaSequencia);
 		
 	}
 

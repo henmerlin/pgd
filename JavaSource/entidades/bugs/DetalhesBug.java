@@ -43,7 +43,7 @@ public class DetalhesBug {
 	
 	@ManyToOne
 	private FasesBug fasesBug;
-	
+		
 	public Integer getId() {
 		return id;
 	}
