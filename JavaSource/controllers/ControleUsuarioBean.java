@@ -24,7 +24,7 @@ public class ControleUsuarioBean {
 	private List<String> sistemas;
 
 	private List<String> sistemaSelected;
-	
+
 	private List<String> sistemaSelectedModifica;
 
 	@EJB
@@ -47,44 +47,49 @@ public class ControleUsuarioBean {
 		this.controleUsuarioModifica = new ControleUsuario();
 
 		this.sistemaSelected = new ArrayList<String>();
-		
+
 		this.sistemaSelectedModifica = new ArrayList<String>();
 
 	}
 
 	public void cadastrarUsuario() {
 
-		try {		
+		try {
 			
-			this.controleUsuario = this.controleUsuarioServico.buscarControleUsuarioEspecifico(this.controleUsuario.getUsuarioEfika());
-			
-			if (this.controleUsuario.getUsuarioEfika().getLogin().isEmpty()) {
-				
-				this.controleUsuarioServico.cadastrarUsuario(this.controleUsuario, this.sistemaSelected);
-				JSFUtil.addInfoMessage("Controle cadastrado com sucesso.");
-				this.controleUsuario = new ControleUsuario();
-				this.sistemaSelected = new ArrayList<String>();
-				
-			}else{
-				
-				this.controleUsuario = new ControleUsuario();
-				JSFUtil.addWarnMessage("Controle já cadastrado.");
-				
-			}
-			
+			this.controleUsuarioServico.cadastrarUsuario(this.controleUsuario, this.sistemaSelected);
+			JSFUtil.addInfoMessage("Controle cadastrado com sucesso.");
+			this.controleUsuario = new ControleUsuario();
+			this.sistemaSelected = new ArrayList<String>();
 
-		} catch (Exception e) {			
 
-				JSFUtil.addErrorMessage(e.getMessage());
-				
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+
 		}
 
 	}
-
+	
+	public void cadastraControle() {
+		
+		try {
+			
+			this.controleUsuario = this.controleUsuarioServico.buscarControleUsuarioEspecifico(this.controleUsuario.getUsuarioEfika());
+			JSFUtil.addInfoMessage("Controle para o usuário já cadastrado, por favor modifique na lista.");			
+			
+		} catch (Exception e) {
+			
+			this.cadastrarUsuario();
+			
+		}
+		
+	}
+	
+	
 	public void modificaUsuario() {
 
 		try {
-						
+
 			this.controleUsuarioServico.modificaUsuario(this.controleUsuarioModifica, this.sistemaSelectedModifica);
 			JSFUtil.addInfoMessage("Controle modificado com sucesso.");
 			this.controleUsuarioModifica = new ControleUsuario();
