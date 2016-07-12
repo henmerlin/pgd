@@ -497,7 +497,8 @@
 						<h:outputText value="Login" style="font-weight:bold" />
 						<p:selectOneMenu
 							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
-							converter="omnifaces.SelectItemsConverter">
+							converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="startsWith">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
 								var="usuario" itemLabel="#{usuario.login}"
@@ -614,7 +615,7 @@
 					<p:dataTable value="#{sequenciaRelatorioPpBean.listarSequencia()}"
 						var="sequencia" style="margin-top: 20px;"
 						emptyMessage="Não há sequencia registradas">
-						
+
 						<f:facet name="header">Modifica condições do segundo gráfico.</f:facet>
 
 						<p:column headerText="Status" style="text-align: center;">
