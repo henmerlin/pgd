@@ -8,31 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import util.JSFUtil;
-
 @Entity
-@Table(name="pdg_projetos_Fase_Projeto")
+@Table(name="pgd_projetos_fase_projeto")
 public class FaseProjeto {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
+	
 	private Date dataInicio;
-
+	
 	private Date dataFim;
-
-	private Integer porcentagemConclusao;
-
+	
+	private Integer porcentagem;
+	
 	@ManyToOne
 	private Projeto projeto;
-	
-	@ManyToOne
-	private Fase fase;	
-	
-	public FaseProjeto() {
 
-	}
+	@ManyToOne
+	private ProjetoFase projetoFase;
 
 	public Integer getId() {
 		return id;
@@ -46,12 +40,6 @@ public class FaseProjeto {
 		return dataInicio;
 	}
 
-	public String getDataInicioFormatada() {
-
-		return JSFUtil.formatarData(this.dataInicio);
-
-	}
-
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
@@ -60,22 +48,16 @@ public class FaseProjeto {
 		return dataFim;
 	}
 
-	public String getDataFimFormatada() {
-
-		return JSFUtil.formatarData(this.dataFim);
-
-	}
-
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
-	}	
-
-	public Integer getPorcentagemConclusao() {
-		return porcentagemConclusao;
 	}
 
-	public void setPorcentagemConclusao(Integer porcentagemConclusao) {
-		this.porcentagemConclusao = porcentagemConclusao;
+	public Integer getPorcentagem() {
+		return porcentagem;
+	}
+
+	public void setPorcentagem(Integer porcentagem) {
+		this.porcentagem = porcentagem;
 	}
 
 	public Projeto getProjeto() {
@@ -84,14 +66,14 @@ public class FaseProjeto {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
-	}	
-
-	public Fase getFase() {
-		return fase;
 	}
 
-	public void setFase(Fase fase) {
-		this.fase = fase;
+	public ProjetoFase getProjetoFase() {
+		return projetoFase;
+	}
+
+	public void setProjetoFase(ProjetoFase projetoFase) {
+		this.projetoFase = projetoFase;
 	}
 
 	@Override
@@ -123,5 +105,5 @@ public class FaseProjeto {
 	public String toString() {
 		return "FaseProjeto [id=" + id + "]";
 	}
-
+	
 }

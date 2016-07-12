@@ -6,20 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdg_projetos_Impacto")
+@Table(name="pgd_projetos_impacto")
 public class Impacto {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
+	
 	private String nome;
 	
-	private Boolean ativo = true;
+	private Boolean ativo;
 	
-	public Impacto() {
-		
-	}
+	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +41,14 @@ public class Impacto {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Integer getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override

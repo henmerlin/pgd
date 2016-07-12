@@ -6,20 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdg_projetos_TipoTarefa")
+@Table(name="pgd_projetos_tipo_tarefa")
 public class TipoTarefa {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
+	
 	private String nome;
 	
-	private Boolean ativo = true;
+	private Boolean ativo;
 	
-	public TipoTarefa() {
-		
-	}
+	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -35,7 +33,7 @@ public class TipoTarefa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
+	}
 
 	public Boolean getAtivo() {
 		return ativo;
@@ -43,6 +41,14 @@ public class TipoTarefa {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Integer getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override

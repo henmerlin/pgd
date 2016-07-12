@@ -6,20 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdg_projetos_Fase")
-public class Fase {
-
+@Table(name="pgd_projetos_projeto_fase")
+public class ProjetoFase {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
-
-	private String nome;	
 	
-	private Boolean ativo = true;
+	private String nome;
 	
-	public Fase() {
-		
-	}
+	private Boolean ativo;
+	
+	private Integer ordem;
 
 	public Integer getId() {
 		return id;
@@ -36,13 +34,21 @@ public class Fase {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Integer getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(Integer ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class Fase {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Fase other = (Fase) obj;
+		ProjetoFase other = (ProjetoFase) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -72,7 +78,7 @@ public class Fase {
 
 	@Override
 	public String toString() {
-		return "Fase [id=" + id + "]";
-	}	
-
+		return "ProjetoFase [id=" + id + "]";
+	}
+	
 }

@@ -9,30 +9,24 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import util.JSFUtil;
-
 @Entity
-@Table(name="pdg_projetos_Impacto_Projeto")
+@Table(name="pgd_projetos_impacto_projeto")
 public class ImpactoProjeto {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
-
+	private Integer id;	
+	
 	@Lob
 	private String descricao;
-	
+
 	private Date dataImpacto;
 	
 	@ManyToOne
 	private Projeto projeto;
 	
 	@ManyToOne
-	private Impacto impacto;	
-	
-	public ImpactoProjeto() {
-		
-	}
+	private Impacto impacto;
 
 	public Integer getId() {
 		return id;
@@ -53,12 +47,6 @@ public class ImpactoProjeto {
 	public Date getDataImpacto() {
 		return dataImpacto;
 	}
-	
-	public String getDataImpactoFormatada() {
-		
-		return JSFUtil.formatarData(this.dataImpacto);
-		
-	}
 
 	public void setDataImpacto(Date dataImpacto) {
 		this.dataImpacto = dataImpacto;
@@ -78,6 +66,36 @@ public class ImpactoProjeto {
 
 	public void setImpacto(Impacto impacto) {
 		this.impacto = impacto;
-	}	
+	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ImpactoProjeto other = (ImpactoProjeto) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ImpactoProjeto [id=" + id + "]";
+	}	
+	
 }

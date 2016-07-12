@@ -7,48 +7,34 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-@Table(name="pdg_projetos_Projeto")
+@Table(name="pgd_projetos_projeto")
 public class Projeto {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@NotEmpty
-	private String nomePj;
-		
+	private String nome;
+	
 	@Lob
-	@NotEmpty
 	private String descricao;
 
 	private Boolean evolucao;
 	
-	@NotEmpty
-	private String nomeGpPmo;
+	private String nomeGp;
 	
-	@NotEmpty
-	private String nomeFocalCo;
+	private String nomeFocal;
 	
-	@NotEmpty
 	private String nomeEspecialista;
 	
-	@NotEmpty
-	private String areaEnv;
-		
-	private Integer conclusaoPj;
+	private String areaEnvolvida;
+	
+	@ManyToOne
+	private StatusProjeto statusProjeto;
 	
 	@ManyToOne
 	private TipoProjeto tipoProjeto;
-	
-	@ManyToOne
-	private StatusFase statusFase;
-		
-	public Projeto() {
-		
-	}
 
 	public Integer getId() {
 		return id;
@@ -58,14 +44,14 @@ public class Projeto {
 		this.id = id;
 	}
 
-	public String getNomePj() {
-		return nomePj;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomePj(String nomePj) {
-		this.nomePj = nomePj;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -82,20 +68,20 @@ public class Projeto {
 		this.evolucao = evolucao;
 	}
 
-	public String getNomeGpPmo() {
-		return nomeGpPmo;
+	public String getNomeGp() {
+		return nomeGp;
 	}
 
-	public void setNomeGpPmo(String nomeGpPmo) {
-		this.nomeGpPmo = nomeGpPmo;
+	public void setNomeGp(String nomeGp) {
+		this.nomeGp = nomeGp;
 	}
 
-	public String getNomeFocalCo() {
-		return nomeFocalCo;
+	public String getNomeFocal() {
+		return nomeFocal;
 	}
 
-	public void setNomeFocalCo(String nomeFocalCo) {
-		this.nomeFocalCo = nomeFocalCo;
+	public void setNomeFocal(String nomeFocal) {
+		this.nomeFocal = nomeFocal;
 	}
 
 	public String getNomeEspecialista() {
@@ -106,20 +92,20 @@ public class Projeto {
 		this.nomeEspecialista = nomeEspecialista;
 	}
 
-	public String getAreaEnv() {
-		return areaEnv;
+	public String getAreaEnvolvida() {
+		return areaEnvolvida;
 	}
 
-	public void setAreaEnv(String areaEnv) {
-		this.areaEnv = areaEnv;
-	}
-	
-	public Integer getConclusaoPj() {
-		return conclusaoPj;
+	public void setAreaEnvolvida(String areaEnvolvida) {
+		this.areaEnvolvida = areaEnvolvida;
 	}
 
-	public void setConclusaoPj(Integer conclusaoPj) {
-		this.conclusaoPj = conclusaoPj;
+	public StatusProjeto getStatusProjeto() {
+		return statusProjeto;
+	}
+
+	public void setStatusProjeto(StatusProjeto statusProjeto) {
+		this.statusProjeto = statusProjeto;
 	}
 
 	public TipoProjeto getTipoProjeto() {
@@ -128,14 +114,6 @@ public class Projeto {
 
 	public void setTipoProjeto(TipoProjeto tipoProjeto) {
 		this.tipoProjeto = tipoProjeto;
-	}	
-
-	public StatusFase getStatusFase() {
-		return statusFase;
-	}
-
-	public void setStatusFase(StatusFase statusFase) {
-		this.statusFase = statusFase;
 	}
 
 	@Override

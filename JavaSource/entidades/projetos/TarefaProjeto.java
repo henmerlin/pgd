@@ -3,21 +3,26 @@ package entidades.projetos;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pgd_projetos_tipo_projeto")
-public class TipoProjeto {
-		
+@Table(name="pgd_projetos_tarefa_projeto")
+public class TarefaProjeto {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	private String nome;
+	@Lob
+	private String descricao;
 	
-	private Boolean ativo;
+	@ManyToOne
+	private Projeto projeto;
 	
-	private Integer ordem;
+	@ManyToOne
+	private TipoTarefa tipoTarefa;
 
 	public Integer getId() {
 		return id;
@@ -27,28 +32,28 @@ public class TipoProjeto {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public Projeto getProjeto() {
+		return projeto;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
 	}
 
-	public Integer getOrdem() {
-		return ordem;
+	public TipoTarefa getTipoTarefa() {
+		return tipoTarefa;
 	}
 
-	public void setOrdem(Integer ordem) {
-		this.ordem = ordem;
+	public void setTipoTarefa(TipoTarefa tipoTarefa) {
+		this.tipoTarefa = tipoTarefa;
 	}
 
 	@Override
@@ -67,7 +72,7 @@ public class TipoProjeto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoProjeto other = (TipoProjeto) obj;
+		TarefaProjeto other = (TarefaProjeto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,8 +83,7 @@ public class TipoProjeto {
 
 	@Override
 	public String toString() {
-		return "TipoProjeto [id=" + id + "]";
-	}
-	
+		return "TarefaProjeto [id=" + id + "]";
+	}	
 
 }
