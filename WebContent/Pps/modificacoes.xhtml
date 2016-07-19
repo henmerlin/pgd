@@ -42,12 +42,7 @@
 						<p:inputText value="#{fasePpBean.fasePp.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{fasePpBean.fasePp.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{fasePpBean.fasePp.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{fasePpBean.cadastrarFase()}" update="@all" />
@@ -104,12 +99,8 @@
 								<p:inputText value="#{fasePpBean.fasePpMostra.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{fasePpBean.fasePpMostra.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{fasePpBean.fasePpMostra.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber value="#{fasePpBean.fasePpMostra.ordem}" />
@@ -133,12 +124,8 @@
 						<p:inputText value="#{statusFasePpBean.statusFasePp.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{statusFasePpBean.statusFasePp.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{statusFasePpBean.statusFasePp.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{statusFasePpBean.cadastraStatusFase()}" update="@all" />
@@ -197,13 +184,8 @@
 									value="#{statusFasePpBean.statusFasePpModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{statusFasePpBean.statusFasePpModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{statusFasePpBean.statusFasePpModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -228,12 +210,7 @@
 						<p:inputText value="#{beneficioBean.beneficio.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{beneficioBean.beneficio.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{beneficioBean.beneficio.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{beneficioBean.cadastrarBeneficio()}" update="@all" />
@@ -291,13 +268,8 @@
 								<p:inputText value="#{beneficioBean.beneficioModifica.nome}" />
 
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{beneficioBean.beneficioModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{beneficioBean.beneficioModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber value="#{beneficioBean.beneficioModifica.ordem}" />
@@ -321,12 +293,8 @@
 						<p:inputText value="#{prioridadeBean.prioridade.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{prioridadeBean.prioridade.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{prioridadeBean.prioridade.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{prioridadeBean.cadastrarPrioridade()}" update="@all" />
@@ -384,13 +352,8 @@
 								<p:inputText value="#{prioridadeBean.prioridadeModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{prioridadeBean.prioridadeModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{prioridadeBean.prioridadeModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -415,12 +378,7 @@
 						<p:inputText value="#{codigoBean.codigo.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{codigoBean.codigo.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{codigoBean.codigo.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{codigoBean.cadastrarCodigo()}" update="@all" />
@@ -472,12 +430,8 @@
 								<p:inputText value="#{codigoBean.codigoModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{codigoBean.codigoModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{codigoBean.codigoModifica.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{codigoBean.modificarCodigo()}" update="@all" />
@@ -506,13 +460,8 @@
 						</p:selectOneMenu>
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{controleUsuarioBean.controleUsuario.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{controleUsuarioBean.controleUsuario.ativo}" />
 
 						<h:outputText value="Sistema" style="font-weight:bold" />
 						<p:selectManyCheckbox
@@ -581,13 +530,8 @@
 									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
 
 								<h:outputText value="Sistema" style="font-weight:bold" />
 								<p:selectManyCheckbox
@@ -660,13 +604,8 @@
 									value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.statusFasePp.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{sequenciaRelatorioPpBean.sequenciaRelatorioPp.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{sequenciaRelatorioPpBean.modificarSequencia()}"

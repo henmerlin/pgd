@@ -22,7 +22,7 @@ public class StatusProjetoServico {
 
 			List<StatusProjeto> listarDStatus = this.listarStatusProjeto();
 
-			Integer total = listarDStatus.size();
+			Integer total = listarDStatus.size() + 1;
 
 			statusProjeto.setOrdem(total);
 

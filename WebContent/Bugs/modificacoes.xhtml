@@ -42,12 +42,7 @@
 						<p:inputText value="#{prioridadeBugBean.prioridadeBug.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{prioridadeBugBean.prioridadeBug.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{prioridadeBugBean.prioridadeBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{prioridadeBugBean.cadastrarPrioridade()}" update="@all" />
@@ -104,15 +99,9 @@
 								<h:outputText value="Nome: " style="font-weight:bold" />
 								<p:inputText
 									value="#{prioridadeBugBean.prioridadeBugModifica.nome}" />
-
+									
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{prioridadeBugBean.prioridadeBugModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox value="#{prioridadeBugBean.prioridadeBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -138,12 +127,7 @@
 						<p:inputText value="#{impactoBugBean.impactoBug.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{impactoBugBean.impactoBug.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{impactoBugBean.impactoBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{impactoBugBean.cadastrarImpacto()}" update="@all" />
@@ -201,13 +185,7 @@
 								<p:inputText value="#{impactoBugBean.impactoBugModifica.nome}" />
 
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{impactoBugBean.impactoBugModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox value="#{impactoBugBean.impactoBugModifica.ativo}" />	
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -232,13 +210,8 @@
 						<h:outputText value="Nome: " style="font-weight:bold" />
 						<p:inputText value="#{statusBugBean.statusBug.nome}" />
 
-						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{statusBugBean.statusBug.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<h:outputText value="Status: " style="font-weight:bold" />						
+						<p:selectBooleanCheckbox value="#{statusBugBean.statusBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{statusBugBean.cadastrarStatus()}" update="@all" />
@@ -294,14 +267,8 @@
 								<h:outputText value="Nome: " style="font-weight:bold" />
 								<p:inputText value="#{statusBugBean.statusBugModifica.nome}" />
 
-								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{statusBugBean.statusBugModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<h:outputText value="Status: " style="font-weight:bold" />								
+								<p:selectBooleanCheckbox value="#{statusBugBean.statusBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber value="#{statusBugBean.statusBugModifica.ordem}" />
@@ -325,12 +292,7 @@
 						<p:inputText value="#{fasesBugBean.fasesBug.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectOneMenu value="#{fasesBugBean.fasesBug.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{fasesBugBean.fasesBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{fasesBugBean.cadastrarFase()}" update="@all" />
@@ -387,12 +349,7 @@
 								<p:inputText value="#{fasesBugBean.fasesBugModifica.nome}" />
 
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectOneMenu value="#{fasesBugBean.fasesBugModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox value="#{fasesBugBean.fasesBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputText value="#{fasesBugBean.fasesBugModifica.ordem}" />
@@ -422,14 +379,8 @@
 								itemValue="#{usuario}" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{controleUsuarioBean.controleUsuario.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<h:outputText value="Status" style="font-weight:bold" />						
+						<p:selectBooleanCheckbox value="#{controleUsuarioBean.controleUsuario.ativo}" />
 
 						<h:outputText value="Sistema" style="font-weight:bold" />
 						<p:selectManyCheckbox
@@ -497,14 +448,8 @@
 								<h:outputText
 									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
 
-								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<h:outputText value="Status" style="font-weight:bold" />								
+								<p:selectBooleanCheckbox value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
 
 								<h:outputText value="Sistema" style="font-weight:bold" />
 								<p:selectManyCheckbox
@@ -576,14 +521,8 @@
 								<h:outputText
 									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.statusBug.nome}" />
 
-								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<h:outputText value="Ativo" style="font-weight:bold" />								
+								<p:selectBooleanCheckbox value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{sequenciaRelatorioBugBean.modificaSequencia()}"
