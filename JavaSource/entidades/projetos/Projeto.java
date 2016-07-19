@@ -1,11 +1,15 @@
 package entidades.projetos;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import util.JSFUtil;
 
 @Entity
 @Table(name="pgd_projetos_projeto")
@@ -29,7 +33,7 @@ public class Projeto {
 	private String nomeEspecialista;
 	
 	private String areaEnvolvida;
-	
+		
 	@ManyToOne
 	private StatusProjeto statusProjeto;
 	

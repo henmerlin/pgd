@@ -34,7 +34,7 @@
 				<h:panelGrid columns="3">
 
 					<p:outputLabel for="p0" value="Nome do Projeto: " />
-					<p:inputText id="p0" value="#{projetoBean.projeto.nomePj}" />
+					<p:inputText id="p0" value="#{projetoBean.projeto.nome}" />
 					<p:message for="p0" />
 
 					<h:outputText value="Selecione o Tipo" style="font-weight:bold" />
@@ -58,11 +58,11 @@
 					<p:message for="p4" />
 
 					<p:outputLabel for="p5" value="Nome GP PMO: " />
-					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGpPmo}" />
+					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />
 					<p:message for="p5" />
 
 					<p:outputLabel for="p6" value="Nome Focal CO: " />
-					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocalCo}" />
+					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocal}" />
 					<p:message for="p6" />
 
 					<p:outputLabel for="p7" value="Nome Especialista: " />
@@ -71,16 +71,11 @@
 					<p:message for="p7" />
 
 					<p:outputLabel for="p8" value="Areas Envolvidas: " />
-					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnv}" />
+					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnvolvida}" />
 					<p:message for="p8" />
 
-					<p:outputLabel for="p9" value="Data Prevista de Implantação: " />
-					<p:calendar id="p9" value="#{projetoBean.dataImplantacao.data}"
-						pattern="dd/MM/yyyy" mask="true" />
-					<p:message for="p9" />
-
 					<p:commandButton id="cadastrarProjeto" value="Cadastrar"
-						action="#{projetoBean.cadastrarProjeto()}" update="@all" />
+						action="#{projetoBean.cadasrtarProjeto()}" update="@all" />
 
 				</h:panelGrid>
 
