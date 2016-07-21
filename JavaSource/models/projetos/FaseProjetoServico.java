@@ -10,6 +10,8 @@ import javax.persistence.Query;
 
 import entidades.projetos.FaseProjeto;
 import entidades.projetos.Projeto;
+import entidades.projetos.ProjetoFase;
+import entidades.projetos.SequenciaRelatorioProjeto;
 
 @Stateless
 public class FaseProjetoServico {
@@ -18,9 +20,11 @@ public class FaseProjetoServico {
 	private EntityManager entityManager;
 	
 	
-	public void cadastrarFaseProjeto(FaseProjeto faseProjeto) throws Exception {
+	public void cadastrarFaseProjeto(FaseProjeto faseProjeto, Projeto projeto) throws Exception {
 		
 		try {
+			
+			faseProjeto.setProjeto(projeto);
 			
 			this.entityManager.persist(faseProjeto);
 			
@@ -59,6 +63,45 @@ public class FaseProjetoServico {
 			
 			return new ArrayList<FaseProjeto>();
 
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<FaseProjeto> listarFaseProjetoStatusEspecifico(ProjetoFase projetoFase, List<SequenciaRelatorioProjeto> listaSequencia) {
+		
+		try {
+			
+			StringBuffer sequencia = new StringBuffer();
+
+			Integer totalLista = listaSequencia.size();
+
+			Integer count = 1;			
+
+			for (SequenciaRelatorioProjeto sequenciaRelatorioProjeto : listaSequencia) {
+				
+				String or = "";
+
+				if (count != totalLista) {
+
+					or = " OR ";
+
+				}
+
+				sequencia.append("f.statusProjeto.nome = '" + sequenciaRelatorioProjeto.getStatusProjeto().getNome() + "' " + or + " ");
+
+				count++;
+
+			}
+			
+			Query query = this.entityManager.createQuery("FROM FaseProjeto f WHERE f.projetoFase =:param1 AND ( " + sequencia + " )");
+			query.setParameter("param1", projetoFase);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<FaseProjeto>();			
+			
 		}
 		
 	}

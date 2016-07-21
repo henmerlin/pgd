@@ -62,6 +62,7 @@ public class StatusProjetoServico {
 		try {
 
 			Query query = this.entityManager.createQuery("FROM StatusProjeto s WHERE s.ativo =:param1 ORDER BY s.ordem ASC");
+			query.setParameter("param1", true);
 			return query.getResultList();
 
 		} catch (Exception e) {

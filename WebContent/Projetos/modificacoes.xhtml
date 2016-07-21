@@ -11,7 +11,7 @@
 		 Gerenciar Ferramenta
 	</ui:define>
 	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Gerenciar Ferramenta</ui:define>
+		<i class="fa fa-cog"> </i> Gerenciar Ferramenta</ui:define>
 	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
@@ -36,23 +36,20 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome: " />
-						<p:inputText value="#{faseBean.faseCadastro.nome}" />
+						<p:inputText value="#{projetoFaseBean.projetoFase.nome}" />
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu value="#{faseBean.faseCadastro.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{projetoFaseBean.projetoFase.ativo}" />
 
 						<p:commandButton value="Criar"
-							action="#{faseBean.cadastrarFase()}" update="@all" />
+							action="#{projetoFaseBean.cadastrarProjetoFase()}" update="@all" />
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{faseBean.listarFases()}" var="fases"
-						style="margin-top: 20px;" emptyMessage="Não há fases registradas">
+					<p:dataTable value="#{projetoFaseBean.listaProjetoFase()}"
+						var="fases" style="margin-top: 20px;"
+						emptyMessage="Não há fases registradas">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -75,7 +72,7 @@
 								title="Edita Fase">
 
 								<f:setPropertyActionListener value="#{fases}"
-									target="#{faseBean.fase}" />
+									target="#{projetoFaseBean.projetoFaseModifica}" />
 
 							</p:commandButton>
 
@@ -91,19 +88,20 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Fase " style="font-weight:bold" />
-								<p:inputText value="#{faseBean.fase.nome}" />
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{projetoFaseBean.projetoFaseModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{faseBean.fase.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{projetoFaseBean.projetoFaseModifica.ativo}" />
+
+								<h:outputText value="Nome: " />
+								<p:inputNumber
+									value="#{projetoFaseBean.projetoFaseModifica.ordem}" />
 
 								<p:commandButton value="Editar"
-									action="#{faseBean.modificarFase()}" update="@all" />
+									action="#{projetoFaseBean.modificarProjetoFase()}"
+									update="@all" />
 
 							</h:panelGrid>
 
@@ -118,22 +116,19 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome: " />
-						<p:inputText value="#{impactoBean.impactoCadastro.nome}" />
+						<p:inputText value="#{impactoBean.impacto.nome}" />
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu value="#{impactoBean.impactoCadastro.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox value="#{impactoBean.impacto.ativo}" />
 
 						<p:commandButton value="Criar"
 							action="#{impactoBean.cadastrarImpacto()}" update="@all" />
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{impactoBean.listarImpacto()}" var="impactos" style="margin-top: 20px;" emptyMessage="Não há impacto registradas">
+					<p:dataTable value="#{impactoBean.listarImpacto()}" var="impactos"
+						style="margin-top: 20px;"
+						emptyMessage="Não há impacto registradas">
 
 						<p:column headerText="Impacto" style="text-align: center;">
 
@@ -156,7 +151,7 @@
 								title="Edita Impacto">
 
 								<f:setPropertyActionListener value="#{impactos}"
-									target="#{impactoBean.impacto}" />
+									target="#{impactoBean.impactoModifica}" />
 
 							</p:commandButton>
 
@@ -172,19 +167,15 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Impacto " style="font-weight:bold" />
-								<p:inputText value="#{impactoBean.impacto.nome}" />
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{impactoBean.impactoModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{impactoBean.impacto.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{impactoBean.impactoModifica.ativo}" />
 
 								<p:commandButton value="Editar"
-									action="#{impactoBean.modificarImpacto()}" update="@all" />
+									action="#{impactoBean.modificaImpacto()}" update="@all" />
 
 							</h:panelGrid>
 
@@ -199,16 +190,11 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome: " />
-						<p:inputText value="#{tipoTarefaBean.tipoTarefaCadastro.nome}" />
+						<p:inputText value="#{tipoTarefaBean.tipoTarefa.nome}" />
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{tipoTarefaBean.tipoTarefaCadastro.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{tipoTarefaBean.tipoTarefa.ativo}" />
 
 						<p:commandButton value="Criar"
 							action="#{tipoTarefaBean.cadastrarTipoTarefa()}" update="@all" />
@@ -216,7 +202,8 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{tipoTarefaBean.listarTipoTarefa()}"
-						var="tarefa" style="margin-top: 20px;" emptyMessage="Não há tipos de tarefa registradas">
+						var="tarefa" style="margin-top: 20px;"
+						emptyMessage="Não há tipos de tarefa registradas">
 
 						<p:column headerText="Tarefa" style="text-align: center;">
 
@@ -239,7 +226,7 @@
 								title="Edita Fase">
 
 								<f:setPropertyActionListener value="#{tarefa}"
-									target="#{tipoTarefaBean.tipoTarefa}" />
+									target="#{tipoTarefaBean.tipoTarefaModifica}" />
 
 							</p:commandButton>
 
@@ -255,16 +242,12 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Tarefa " style="font-weight:bold" />
-								<p:inputText value="#{tipoTarefaBean.tipoTarefa.nome}" />
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{tipoTarefaBean.tipoTarefaModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{tipoTarefaBean.tipoTarefa.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{tipoTarefaBean.tipoTarefaModifica.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{tipoTarefaBean.modificarTipoTarefa()}" update="@all" />
@@ -282,16 +265,11 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome: " />
-						<p:inputText value="#{tipoProjetoBean.tipoProjetoCadastro.nome}" />
+						<p:inputText value="#{tipoProjetoBean.tipoProjeto.nome}" />
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{tipoProjetoBean.tipoProjetoCadastro.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{tipoProjetoBean.tipoProjeto.ativo}" />
 
 						<p:commandButton value="Criar"
 							action="#{tipoProjetoBean.cadastrarTipoProjeto()}" update="@all" />
@@ -299,7 +277,8 @@
 					</h:panelGrid>
 
 					<p:dataTable value="#{tipoProjetoBean.listarTipoProjeto()}"
-						var="tipoProj" style="margin-top: 20px;" emptyMessage="Não há tipos de projetos registradas">
+						var="tipoProj" style="margin-top: 20px;"
+						emptyMessage="Não há tipos de projetos registradas">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -338,16 +317,12 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Tipo Projeto " style="font-weight:bold" />
-								<p:inputText value="#{tipoProjetoBean.tipoProjeto.nome}" />
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{tipoProjetoBean.tipoProjetoModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{tipoProjetoBean.tipoProjeto.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{tipoProjetoBean.tipoProjetoModifica.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{tipoProjetoBean.modificarTipoProjeto()}"
@@ -366,24 +341,21 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome: " />
-						<p:inputText value="#{statusFaseBean.statusFaseCadastro.nome}" />
+						<p:inputText value="#{statusProjetoBean.statusProjeto.nome}" />
 
 						<h:outputText value="Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{statusFaseBean.statusFaseCadastro.ativo}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItem itemLabel="Ativo" itemValue="true" />
-							<f:selectItem itemLabel="Inativo" itemValue="false" />
-						</p:selectOneMenu>
+						<p:selectBooleanCheckbox
+							value="#{statusProjetoBean.statusProjeto.ativo}" />
 
 						<p:commandButton value="Criar"
-							action="#{statusFaseBean.cadastrarCadastrarStatusFase()}" update="@all" />
+							action="#{statusProjetoBean.cadastraStatusProjeto()}"
+							update="@all" />
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{statusFaseBean.listarStatusFase()}"
-						var="statusFase" style="margin-top: 20px;" emptyMessage="Não há status de fase registrados">
+					<p:dataTable value="#{statusProjetoBean.listarStatusProjeto()}"
+						var="statusFase" style="margin-top: 20px;"
+						emptyMessage="Não há status de fase registrados">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -422,19 +394,190 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Tipo Projeto " style="font-weight:bold" />
-								<p:inputText value="#{statusFaseBean.statusFase.nome}" />
+								<h:outputText value="Nome: " />
+								<p:inputText
+									value="#{statusProjetoBean.statusProjetoModifica.nome}" />
 
 								<h:outputText value="Status" style="font-weight:bold" />
-								<p:selectOneMenu value="#{statusFaseBean.statusFase.ativo}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="true" />
-									<f:selectItem itemLabel="Inativo" itemValue="false" />
-								</p:selectOneMenu>
+								<p:selectBooleanCheckbox
+									value="#{statusProjetoBean.statusProjetoModifica.ativo}" />
 
 								<p:commandButton value="Editar"
-									action="#{statusFaseBean.modificarCadastrarStatusFase()}"
+									action="#{statusProjetoBean.modificaStatusProjeto()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Usuário">
+
+					<h:panelGrid>
+
+						<h:outputText value="Login" style="font-weight:bold" />
+						<p:selectOneMenu
+							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
+							converter="omnifaces.SelectItemsConverter">
+							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
+								var="usuario" itemLabel="#{usuario.login}"
+								itemValue="#{usuario}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Status" style="font-weight:bold" />
+						<p:selectBooleanCheckbox
+							value="#{controleUsuarioBean.controleUsuario.ativo}" />
+
+						<h:outputText value="Sistema" style="font-weight:bold" />
+						<p:selectManyCheckbox
+							value="#{controleUsuarioBean.sistemaSelected}"
+							layout="pageDirection" columns="1">
+
+							<f:selectItems value="#{controleUsuarioBean.sistemas}"
+								var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+						</p:selectManyCheckbox>
+
+						<p:commandButton value="Cadastrar"
+							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{controleUsuarioBean.listarControleUsuario()}"
+						var="usuario" style="margin-top: 20px;"
+						emptyMessage="Não há usuários registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{usuario.usuarioEfika.login}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{usuario.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!usuario.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Sistema" style="text-align: center;">
+
+							<h:outputText value="#{usuario.sistema}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuário"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{controleUsuarioBean.controleUsuarioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Usuário" widgetVar="modUser" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModUsuário">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Login" style="font-weight:bold" />
+								<h:outputText
+									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
+
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectBooleanCheckbox
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
+
+								<h:outputText value="Sistema" style="font-weight:bold" />
+								<p:selectManyCheckbox
+									value="#{controleUsuarioBean.sistemaSelectedModifica}"
+									layout="pageDirection" columns="1">
+
+									<f:selectItems value="#{controleUsuarioBean.sistemas}"
+										var="sistemas" itemLabel="#{sistemas}" itemValue="#{sistemas}" />
+
+								</p:selectManyCheckbox>
+
+								<p:commandButton value="Editar"
+									action="#{controleUsuarioBean.modificaUsuario()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+				
+				<p:tab title="Relatório">
+
+					<p:dataTable value="#{sequenciaRelatorioProjetoBean.listarSequenciaRelatorioProjeto()}"
+						var="sequencia" style="margin-top: 20px;"
+						emptyMessage="Não há sequencia registradas">
+
+						<f:facet name="header">Modifica condições do gráfico.</f:facet>
+
+						<p:column headerText="Status" style="text-align: center;">
+
+							<h:outputText value="#{sequencia.statusProjeto.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{sequencia.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!sequencia.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModSequencia"
+								oncomplete="PF('modSequencia').show()" icon="ui-icon-pencil"
+								title="Edita Código">
+
+								<f:setPropertyActionListener value="#{sequencia}"
+									target="#{sequenciaRelatorioProjetoBean.sequenciaRelatorioProjeto}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Relatório" widgetVar="modSequencia"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="250" height="150">
+
+						<h:panelGroup id="detalhesModSequencia">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Status " style="font-weight:bold" />
+								<h:outputText
+									value="#{sequenciaRelatorioProjetoBean.sequenciaRelatorioProjeto.statusProjeto.nome}" />
+
+								<h:outputText value="Ativo" style="font-weight:bold" />
+								<p:selectBooleanCheckbox
+									value="#{sequenciaRelatorioProjetoBean.sequenciaRelatorioProjeto.ativo}" />
+
+								<p:commandButton value="Editar"
+									action="#{sequenciaRelatorioProjetoBean.modificaSequenciaRelatorioProjeto()}"
 									update="@all" />
 
 							</h:panelGrid>

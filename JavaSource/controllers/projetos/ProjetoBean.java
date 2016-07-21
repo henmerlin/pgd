@@ -1,5 +1,7 @@
 package controllers.projetos;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -13,7 +15,7 @@ import util.JSFUtil;
 public class ProjetoBean {
 	
 	private Projeto projeto;
-	
+		
 	@EJB
 	private ProjetoServico projetoServico;
 
@@ -45,7 +47,26 @@ public class ProjetoBean {
 			
 			this.projetoServico.modificarProjeto(this.projeto);
 			JSFUtil.addInfoMessage("Projeto modificado com sucesso.");
-			this.projeto = new Projeto();
+			
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
+		
+	}
+	
+	public List<Projeto> listarProjetos() {
+		
+		return this.projetoServico.listarProjetos();
+		
+	}
+	
+	public void listarProjetoEspecifico() {
+		
+		try {
+			
+			this.projeto = this.projetoServico.listarProjetoEspecifico(this.projeto);
 			
 		} catch (Exception e) {
 

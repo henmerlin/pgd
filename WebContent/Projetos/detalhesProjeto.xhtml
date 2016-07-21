@@ -41,7 +41,7 @@
 					columnClasses="label, value">
 
 					<h:outputText value="Nome do projeto:" style="font-weight:bold" />
-					<h:outputText value="#{projetoBean.projeto.nomePj}" />
+					<h:outputText value="#{projetoBean.projeto.nome}" />
 
 					<br />
 
@@ -53,27 +53,18 @@
 							var="tipoProj" itemLabel="#{tipoProj.nome}"
 							itemValue="#{tipoProj}" />
 					</p:selectOneMenu>
-					
+
 					<br />
-					
+
 					<h:outputText value="Selecione o Status" style="font-weight:bold" />
-					<p:selectOneMenu value="#{projetoBean.projeto.statusFase}"
+					<p:selectOneMenu value="#{projetoBean.projeto.statusProjeto}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-						<f:selectItems value="#{statusFaseBean.listarStatusFaseAtivo()}"
+						<f:selectItems
+							value="#{statusProjetoBean.listarStatusProjetoAtivo()}"
 							var="statusFase" itemLabel="#{statusFase.nome}"
 							itemValue="#{statusFase}" />
 					</p:selectOneMenu>
-
-					<br />
-
-					<h:outputText id="outputPj"
-						value="Porcentagem #{projetoBean.projeto.conclusaoPj}%"
-						style="font-weight:bold" />
-					<h:inputHidden id="porcentagemPj"
-						value="#{projetoBean.projeto.conclusaoPj}" />
-					<p:slider for="porcentagemPj" display="outputPj"
-						displayTemplate="Porcentagem {value}%" style="width: 35%;"/>
 
 					<br />
 
@@ -90,12 +81,12 @@
 					<br />
 
 					<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
-					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGpPmo}" />
+					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />
 
 					<br />
 
 					<h:outputText value="Nome Focal CO: " style="font-weight:bold" />
-					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocalCo}" />
+					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocal}" />
 
 					<br />
 
@@ -106,7 +97,7 @@
 					<br />
 
 					<h:outputText value="Areas Envolvidas: " style="font-weight:bold" />
-					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnv}" />
+					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnvolvida}" />
 
 					<br />
 
@@ -136,7 +127,9 @@
 					<br />
 
 					<p:commandButton value="Salvar"
-						action="#{projetoBean.updaterProjeto()}" update="@all" />
+						action="#{projetoBean.modificarProjeto()}" update="@all">
+
+					</p:commandButton>
 
 				</h:panelGrid>
 
@@ -152,20 +145,23 @@
 					<h:panelGrid>
 
 						<h:outputText value="Selecione a fase" style="font-weight:bold" />
-						<p:selectOneMenu value="#{faseProjetoBean.faseProjeto.fase}"
+						<p:selectOneMenu
+							value="#{faseProjetoBean.faseProjeto.projetoFase}"
 							converter="omnifaces.SelectItemsConverter">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItems value="#{faseBean.listarFasesAtiva()}"
+							<f:selectItems
+								value="#{projetoFaseBean.listarProjetoFaseAtivo()}"
 								var="faseProj" itemLabel="#{faseProj.nome}"
 								itemValue="#{faseProj}" />
 						</p:selectOneMenu>
 
 						<h:outputText value="Selecione o Status" style="font-weight:bold" />
 						<p:selectOneMenu
-							value="#{faseProjetoBean.statusFaseProjeto.statusFase}"
+							value="#{faseProjetoBean.faseProjeto.statusProjeto}"
 							converter="omnifaces.SelectItemsConverter">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItems value="#{statusFaseBean.listarStatusFaseAtivo()}"
+							<f:selectItems
+								value="#{statusProjetoBean.listarStatusProjetoAtivo()}"
 								var="statusFase" itemLabel="#{statusFase.nome}"
 								itemValue="#{statusFase}" />
 						</p:selectOneMenu>
@@ -191,11 +187,11 @@
 
 					<p:dataTable
 						value="#{faseProjetoBean.listarFaseProjetoEspecifico(projetoBean.projeto)}"
-						var="faseProj">						
+						var="faseProj">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
-							<h:outputText value="#{faseProj.fase.nome}" />
+							<h:outputText value="#{faseProj.projetoFase.nome}" />
 
 						</p:column>
 
@@ -213,14 +209,13 @@
 
 						<p:column headerText="Status fase" style="text-align: center;">
 
-							<h:outputText
-								value="#{statusFaseProjetoBean.listarStatusFaseProjetoEspecifico(faseProj).get(0).statusFase.nome}" />
+							<h:outputText value="#{faseProj.statusProjeto.nome}" />
 
 						</p:column>
 
 						<p:column headerText="Porcentagem" style="text-align: center;">
 
-							<h:outputText value="#{faseProj.porcentagemConclusao}%" />
+							<h:outputText value="#{faseProj.porcentagem}%" />
 
 						</p:column>
 
@@ -231,11 +226,7 @@
 								title="Modifica Fase">
 
 								<f:setPropertyActionListener value="#{faseProj}"
-									target="#{faseProjetoBean.faseProjeto1}" />
-
-								<f:setPropertyActionListener
-									value="#{statusFaseProjetoBean.statusFaseProjeto}"
-									target="#{faseProjetoBean.statusFaseProjeto1}" />
+									target="#{faseProjetoBean.faseProjetoModifica}" />
 
 
 							</p:commandButton>
@@ -243,6 +234,63 @@
 						</p:column>
 
 					</p:dataTable>
+
+					<p:dialog header="Modificar Fase" widgetVar="modFase" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="500"
+						height="400">
+
+						<h:panelGroup id="detalhesModFase">
+
+							<h:panelGrid
+								rendered="#{not empty faseProjetoBean.faseProjetoModifica}"
+								columnClasses="label, value">
+
+								<h:outputText value="Selecione a fase" style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{faseProjetoBean.faseProjetoModifica.projetoFase}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{projetoFaseBean.listarProjetoFaseAtivo()}"
+										var="faseProj" itemLabel="#{faseProj.nome}"
+										itemValue="#{faseProj}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Selecione o Status"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{faseProjetoBean.faseProjetoModifica.statusProjeto}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{statusProjetoBean.listarStatusProjetoAtivo()}"
+										var="statusFase" itemLabel="#{statusFase.nome}"
+										itemValue="#{statusFase}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Porcentagem:" style="font-weight:bold" />
+								<p:inputText id="percentagem"
+									value="#{faseProjetoBean.faseProjetoModifica.porcentagem}" />
+								<p:slider for="percentagem" />
+
+								<h:outputText value="Data de inicio" style="font-weight:bold" />
+								<p:calendar
+									value="#{faseProjetoBean.faseProjetoModifica.dataInicio}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<h:outputText value="Data fim" style="font-weight:bold" />
+								<p:calendar
+									value="#{faseProjetoBean.faseProjetoModifica.dataFim}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<p:commandButton value="Modificar"
+									action="#{faseProjetoBean.modificaFaseProjeto()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
 
 				</p:fieldset>
 
@@ -260,17 +308,17 @@
 
 						<h:outputText value="Descrição: " style="font-weight:bold" />
 						<p:inputTextarea rows="5" cols="50"
-							value="#{impactoProjetoBean.impactoProjetoCadastrar.descricao}"
+							value="#{impactoProjetoBean.impactoProjeto.descricao}"
 							maxlength="1500" />
 
 						<h:outputText value="Data Impacto: " />
 						<p:calendar
-							value="#{impactoProjetoBean.impactoProjetoCadastrar.dataImpacto}"
+							value="#{impactoProjetoBean.impactoProjeto.dataImpacto}"
 							pattern="dd/MM/yyyy" mask="true" />
 
 						<h:outputText value="Selecione o Impacto" style="font-weight:bold" />
 						<p:selectOneMenu
-							value="#{impactoProjetoBean.impactoProjetoCadastrar.impacto}"
+							value="#{impactoProjetoBean.impactoProjeto.impacto}"
 							converter="omnifaces.SelectItemsConverter">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItems value="#{impactoBean.listarImpactoAtivo()}"
@@ -318,13 +366,55 @@
 								title="Modifica Impacto">
 
 								<f:setPropertyActionListener value="#{impact}"
-									target="#{impactoProjetoBean.impactoProjeto}" />
+									target="#{impactoProjetoBean.impactoProjetoModifica}" />
 
 							</p:commandButton>
 
 						</p:column>
 
 					</p:dataTable>
+
+					<p:dialog header="Modificar Impacto" widgetVar="modImpacto"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="500" height="400">
+
+						<h:panelGroup id="detalhesModImpacto">
+
+							<h:panelGrid
+								rendered="#{not empty impactoProjetoBean.impactoProjeto}"
+								columnClasses="label, value">
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5" cols="50"
+									value="#{impactoProjetoBean.impactoProjetoModifica.descricao}"
+									maxlength="1500" />
+
+								<h:outputText value="Data Impacto: " />
+								<p:calendar
+									value="#{impactoProjetoBean.impactoProjetoModifica.dataImpacto}"
+									pattern="dd/MM/yyyy" mask="true" />
+
+								<h:outputText value="Selecione o Impacto"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{impactoProjetoBean.impactoProjetoModifica.impacto}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{impactoBean.listarImpactoAtivo()}"
+										var="tipoImpact" itemLabel="#{tipoImpact.nome}"
+										itemValue="#{tipoImpact}" />
+								</p:selectOneMenu>
+
+								<p:commandButton value="Modificar"
+									action="#{impactoProjetoBean.modificaImpactoProjeto()}"
+									update="@all" />
+
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
 
 				</p:fieldset>
 
@@ -341,7 +431,8 @@
 					<h:panelGrid>
 
 						<h:outputText value="Selecione a tarefa" style="font-weight:bold" />
-						<p:selectOneMenu value="#{tarefaBean.tarefaCadastrar.tipoTarefa}"
+						<p:selectOneMenu
+							value="#{tarefaProjetoBean.tarefaProjeto.tipoTarefa}"
 							converter="omnifaces.SelectItemsConverter">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItems value="#{tipoTarefaBean.listarTipoTarefaAtivo()}"
@@ -351,10 +442,11 @@
 
 						<h:outputText value="Descrição: " style="font-weight:bold" />
 						<p:inputTextarea rows="5" cols="50"
-							value="#{tarefaBean.tarefaCadastrar.descricao}" maxlength="1500" />
+							value="#{tarefaProjetoBean.tarefaProjeto.descricao}"
+							maxlength="1500" />
 
 						<p:commandButton value="Cadastrar"
-							action="#{tarefaBean.cadastrarTarefa(projetoBean.projeto)}"
+							action="#{tarefaProjetoBean.cadastrarTarefaProjeto(projetoBean.projeto)}"
 							update="@all" />
 
 					</h:panelGrid>
@@ -365,7 +457,7 @@
 					toggleSpeed="500" style="width: 48%; float: right;">
 
 					<p:dataTable var="tarefa"
-						value="#{tarefaBean.listarTarefaEspecifica(projetoBean.projeto)}">
+						value="#{tarefaProjetoBean.listarTarefaProjetoEspecifico(projetoBean.projeto)}">
 
 						<p:column headerText="Tipo Tarefa" style="text-align: center;">
 
@@ -386,7 +478,7 @@
 								title="Modifica Tarefa">
 
 								<f:setPropertyActionListener value="#{tarefa}"
-									target="#{tarefaBean.tarefa}" />
+									target="#{tarefaProjetoBean.tarefaProjetoModifica}" />
 
 							</p:commandButton>
 
@@ -394,156 +486,44 @@
 
 					</p:dataTable>
 
+					<p:dialog header="Modificar Tarefa" widgetVar="modTarefa"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="500" height="400">
+
+						<h:panelGroup id="detalhesModTarefas">
+
+							<h:panelGrid rendered="#{not empty tarefaProjetoBean.tarefaProjetoModifica}"
+								columnClasses="label, value">
+
+								<h:outputText value="Selecione a tarefa"
+									style="font-weight:bold" />
+								<p:selectOneMenu
+									value="#{tarefaProjetoBean.tarefaProjetoModifica.tipoTarefa}"
+									converter="omnifaces.SelectItemsConverter">
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems
+										value="#{tipoTarefaBean.listarTipoTarefaAtivo()}"
+										var="tipoTarefa" itemLabel="#{tipoTarefa.nome}"
+										itemValue="#{tipoTarefa}" />
+								</p:selectOneMenu>
+
+								<h:outputText value="Descrição: " style="font-weight:bold" />
+								<p:inputTextarea rows="5" cols="50"
+									value="#{tarefaProjetoBean.tarefaProjetoModifica.descricao}"
+									maxlength="1500" />
+
+								<p:commandButton value="Modificar"
+									action="#{tarefaProjetoBean.modificarTarefaProjeto()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
 				</p:fieldset>
 
 			</p:fieldset>
-
-			<p:dialog header="Modificar data" widgetVar="modData" modal="true"
-				showEffect="fade" hideEffect="fade" resizable="false" width="500"
-				height="250">
-
-				<h:panelGroup id="detalhesModData">
-
-					<h:panelGrid
-						rendered="#{not empty dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(projetoBean.projeto)}"
-						columnClasses="label, value">
-
-						<h:outputText value="Data prevista implantação: " />
-						<p:calendar
-							value="#{dataImplantacaoProjetoBean.dataImplementacao.data}"
-							pattern="dd/MM/yyyy" mask="true" />
-
-						<h:outputText value="Justificativa: " />
-						<p:inputTextarea rows="5" cols="50"
-							value="#{dataImplantacaoProjetoBean.dataImplementacao.descricao}"
-							maxlength="1500" />
-
-						<p:commandButton value="Mudar data Prevista"
-							action="#{dataImplantacaoProjetoBean.validaCadastroDataImplantacao(projetoBean.projeto)}"
-							update="@all" />
-
-					</h:panelGrid>
-
-				</h:panelGroup>
-
-			</p:dialog>
-
-			<p:dialog header="Modificar Fase" widgetVar="modFase" modal="true"
-				showEffect="fade" hideEffect="fade" resizable="false" width="500"
-				height="400">
-
-				<h:panelGroup id="detalhesModFase">
-
-					<h:panelGrid rendered="#{not empty faseProjetoBean.faseProjeto1}"
-						columnClasses="label, value">
-
-						<h:outputText value="Data inicio:" />
-						<p:calendar value="#{faseProjetoBean.faseProjeto1.dataInicio}"
-							pattern="dd/MM/yyyy" mask="true" />
-
-						<h:outputText value="Data inicio:" />
-						<p:calendar value="#{faseProjetoBean.faseProjeto1.dataFim}"
-							pattern="dd/MM/yyyy" mask="true" />
-
-						<br />
-
-						<h:outputText id="output"
-							value="Porcentagem #{faseProjetoBean.faseProjeto1.porcentagemConclusao}%"
-							style="font-weight:bold" />
-						<h:inputHidden id="porcentagem"
-							value="#{faseProjetoBean.faseProjeto1.porcentagemConclusao}" />
-						<p:slider for="porcentagem" display="output"
-							displayTemplate="Porcentagem {value}%" />
-
-						<br />
-
-						<h:outputText value="Selecione o Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{faseProjetoBean.statusFaseProjeto1.statusFase}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItems value="#{statusFaseBean.listarStatusFaseAtivo()}"
-								var="statusFase" itemLabel="#{statusFase.nome}"
-								itemValue="#{statusFase}" />
-						</p:selectOneMenu>
-
-						<p:commandButton value="Modificar"
-							action="#{faseProjetoBean.modificarFase(projetoBean.projeto)}"
-							update="@all" />
-
-					</h:panelGrid>
-
-				</h:panelGroup>
-
-			</p:dialog>
-
-			<p:dialog header="Modificar Impacto" widgetVar="modImpacto"
-				modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-				width="500" height="400">
-
-				<h:panelGroup id="detalhesModImpacto">
-
-					<h:panelGrid
-						rendered="#{not empty impactoProjetoBean.impactoProjeto}"
-						columnClasses="label, value">
-
-						<h:outputText value="Descrição " style="font-weight:bold" />
-						<p:inputTextarea rows="5" cols="50"
-							value="#{impactoProjetoBean.impactoProjeto.descricao}"
-							maxlength="1500" />
-
-						<h:outputText value="Data Impacto" />
-						<p:calendar
-							value="#{impactoProjetoBean.impactoProjeto.dataImpacto}"
-							pattern="dd/MM/yyyy" mask="true" />
-
-						<h:outputText value="Selecione o Status" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{impactoProjetoBean.impactoProjeto.impacto}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItems value="#{impactoBean.listarImpactoAtivo()}"
-								var="statusImpct" itemLabel="#{statusImpct.nome}"
-								itemValue="#{statusImpct}" />
-						</p:selectOneMenu>
-
-						<p:commandButton value="Modificar"
-							action="#{impactoProjetoBean.modificarImpactoProjeto()}"
-							update="@all" />
-
-
-					</h:panelGrid>
-
-				</h:panelGroup>
-
-			</p:dialog>
-
-			<p:dialog header="Modificar Tarefa" widgetVar="modTarefa"
-				modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-				width="500" height="400">
-
-				<h:panelGroup id="detalhesModTarefas">
-
-					<h:panelGrid rendered="#{not empty tarefaBean.tarefa}"
-						columnClasses="label, value">
-
-						<h:outputText value="Tarefa: " style="font-weight:bold" />
-						<h:outputText value="#{tarefaBean.tarefa.tipoTarefa.nome}" />
-
-						<br />
-
-						<h:outputText value="Descrição " style="font-weight:bold" />
-						<p:inputTextarea rows="5" cols="50"
-							value="#{tarefaBean.tarefa.descricao}" maxlength="1500" />
-
-						<p:commandButton value="Modificar"
-							action="#{tarefaBean.modificarTarefa()}" update="@all" />
-
-					</h:panelGrid>
-
-				</h:panelGroup>
-
-			</p:dialog>
 
 		</h:form>
 

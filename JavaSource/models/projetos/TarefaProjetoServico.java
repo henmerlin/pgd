@@ -17,9 +17,11 @@ public class TarefaProjetoServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 	
-	public void cadastrarTarefaProjeto(TarefaProjeto tarefaProjeto) throws Exception {
+	public void cadastrarTarefaProjeto(TarefaProjeto tarefaProjeto, Projeto projeto) throws Exception {
 		
 		try {
+			
+			tarefaProjeto.setProjeto(projeto);
 			
 			this.entityManager.persist(tarefaProjeto);
 			

@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pgd_projetos_impacto_projeto")
 public class ImpactoProjeto {
@@ -46,6 +48,12 @@ public class ImpactoProjeto {
 
 	public Date getDataImpacto() {
 		return dataImpacto;
+	}
+	
+	public String getDataImpactoFormatada() {
+		
+		return JSFUtil.formatarData(this.dataImpacto);
+		
 	}
 
 	public void setDataImpacto(Date dataImpacto) {

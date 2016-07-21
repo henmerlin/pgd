@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pgd_projetos_fase_projeto")
 public class FaseProjeto {
@@ -27,6 +29,9 @@ public class FaseProjeto {
 
 	@ManyToOne
 	private ProjetoFase projetoFase;
+	
+	@ManyToOne
+	private StatusProjeto statusProjeto;
 
 	public Integer getId() {
 		return id;
@@ -40,12 +45,24 @@ public class FaseProjeto {
 		return dataInicio;
 	}
 
+	public String getDataInicioFormatada() {
+		
+		return JSFUtil.formatarData(this.dataInicio);
+		
+	}
+	
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
 	public Date getDataFim() {
 		return dataFim;
+	}
+	
+	public String getDataFimFormatada() {
+		
+		return JSFUtil.formatarData(this.dataFim);
+		
 	}
 
 	public void setDataFim(Date dataFim) {
@@ -74,6 +91,14 @@ public class FaseProjeto {
 
 	public void setProjetoFase(ProjetoFase projetoFase) {
 		this.projetoFase = projetoFase;
+	}	
+
+	public StatusProjeto getStatusProjeto() {
+		return statusProjeto;
+	}
+
+	public void setStatusProjeto(StatusProjeto statusProjeto) {
+		this.statusProjeto = statusProjeto;
 	}
 
 	@Override

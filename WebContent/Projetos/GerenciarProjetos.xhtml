@@ -31,45 +31,29 @@
 
 			<p:panel header="Gerenciar Projetos">
 
-				<p:dataTable var="proj" value="#{projetoBean.listarProjeto()}"
+				<p:dataTable var="proj" value="#{projetoBean.listarProjetos()}"
 					rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 15, 20" emptyMessage="Não há projetos registradas">
+					rowsPerPageTemplate="10, 15, 20"
+					emptyMessage="Não há projetos registradas">
 
 					<p:column headerText="Nome do Projeto" style="text-align: center;">
 
-						<h:outputText value="#{proj.nomePj}" />
+						<h:outputText value="#{proj.nome}" />
 
 					</p:column>
 
 					<p:column headerText="Gerente de projeto"
 						style="text-align: center;">
 
-						<h:outputText value="#{proj.nomeGpPmo}" />
+						<h:outputText value="#{proj.nomeGp}" />
 
 					</p:column>
 
-					<p:column headerText="Data Prevista de Implantação"
-						style="text-align: center;">
+					<p:column headerText="Status Projeto" style="text-align: center;">
 
-						<h:outputText
-							value="#{dataImplantacaoProjetoBean.listarDatasImplantacaoEspecifico(proj).get(0).dataFormatada}" />
-
-					</p:column>
-					
-					<p:column headerText="Porcentagem Conclusão"
-						style="text-align: center;">
-
-						<h:outputText
-							value="#{proj.conclusaoPj}%" />
-
-					</p:column>
-					
-					<p:column headerText="Status Projeto"
-						style="text-align: center;">
-
-						<h:outputText
-							value="#{proj.statusFase.nome}" />
+						<h:outputText value="Não informado" rendered="#{proj.statusProjeto.nome==null}"/>
+						<h:outputText value="#{proj.statusProjeto.nome}"/>
 
 					</p:column>
 
@@ -93,19 +77,19 @@
 					<h:panelGroup id="detatlhesProj">
 
 						<p:panelGrid rendered="#{not empty projetoBean.projeto}"
-							columnClasses="label, value">
+							columnClasses="label, value" style="width: 100%;">
 
 							<p:row>
 
-								<p:column >
+								<p:column>
 
-									<h:outputText value="Nome do projeto:" style="font-weight:bold"/>
+									<h:outputText value="Nome do projeto:" style="font-weight:bold" />
 
 								</p:column>
 
 								<p:column>
 
-									<h:outputText value="#{projetoBean.projeto.nomePj}" />
+									<h:outputText value="#{projetoBean.projeto.nome}" />
 
 								</p:column>
 
@@ -115,7 +99,8 @@
 
 								<p:column>
 
-									<h:outputText value="Descrição do projeto: " style="font-weight:bold"/>
+									<h:outputText value="Descrição do projeto: "
+										style="font-weight:bold" />
 
 								</p:column>
 
@@ -131,29 +116,13 @@
 
 								<p:column>
 
-									<h:outputText value="Nome GP PMO: " style="font-weight:bold"/>
+									<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
 
 								</p:column>
 
 								<p:column>
 
-									<h:outputText value="#{projetoBean.projeto.nomeGpPmo}" />
-
-								</p:column>
-
-							</p:row>
-
-							<p:row>
-
-								<p:column>
-
-									<h:outputText value="Nome Focal CO: " style="font-weight:bold"/>
-
-								</p:column>
-
-								<p:column>
-
-									<h:outputText value="#{projetoBean.projeto.nomeFocalCo}" />
+									<h:outputText value="#{projetoBean.projeto.nomeGp}" />
 
 								</p:column>
 
@@ -163,7 +132,24 @@
 
 								<p:column>
 
-									<h:outputText value="Nome Especialista: " style="font-weight:bold"/>
+									<h:outputText value="Nome Focal CO: " style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomeFocal}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome Especialista: "
+										style="font-weight:bold" />
 
 								</p:column>
 
@@ -179,23 +165,25 @@
 
 								<p:column>
 
-									<h:outputText value="Areas Envolvidas: " style="font-weight:bold"/>
+									<h:outputText value="Areas Envolvidas: "
+										style="font-weight:bold" />
 
 								</p:column>
 
 								<p:column>
 
-									<h:outputText value="#{projetoBean.projeto.areaEnv}" />
+									<h:outputText value="#{projetoBean.projeto.areaEnvolvida}" />
 
 								</p:column>
 
 							</p:row>
-							
-						</p:panelGrid>
-						
-						<br/>
 
-						<p:button outcome="detalhesProjeto" value="Modificar" style="float: right;">
+						</p:panelGrid>
+
+						<br />
+
+						<p:button outcome="detalhesProjeto" value="Modificar"
+							style="float: right;">
 
 							<f:param name="proj" value="#{projetoBean.projeto.id}" />
 
