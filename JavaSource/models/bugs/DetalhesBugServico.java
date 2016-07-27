@@ -90,5 +90,21 @@ public class DetalhesBugServico {
 		}
 		
 	}
+	
+	public DetalhesBug listarDetalhesBugEspecificoUm(Bug bug) {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM DetalhesBug d WHERE d.bug =:param1");
+			query.setParameter("param1", bug);
+			return (DetalhesBug) query.getSingleResult();
+			
+		} catch (Exception e) {
+
+			return null;
+			
+		}
+		
+	}
 
 }

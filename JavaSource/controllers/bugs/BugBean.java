@@ -18,6 +18,8 @@ public class BugBean {
 
 	private Bug bug;	
 	
+	private List<Bug> bugsSelecionados;
+	
 	@EJB
 	private BugServico bugServico;
 	
@@ -98,6 +100,14 @@ public class BugBean {
 
 	public void setBug(Bug bug) {
 		this.bug = bug;
-	}	
+	}
 
+	public List<Bug> getBugsSelecionados() {
+		return bugsSelecionados;
+	}
+
+	public void setBugsSelecionados(List<Bug> bugsSelecionados) {
+		this.bugsSelecionados = bugsSelecionados;
+	}	
+	
 }

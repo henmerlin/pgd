@@ -68,6 +68,11 @@
 					<p:inputText value="#{bugBean.bug.solicitante}" />
 
 					<br />
+					
+					<h:outputText value="Area Solicitante " style="font-weight:bold" />
+					<p:inputText value="#{bugBean.bug.areaSolicitante}" />
+
+					<br />
 
 					<h:outputText value="Data de Abertura " />
 					<p:calendar value="#{bugBean.bug.dataAbertura}"
@@ -289,7 +294,7 @@
 						<p:inputText value="#{acaoBugBean.acaoBug.nome}" />
 
 						<h:outputText value="Descrição: " style="font-weight:bold" />
-						<p:inputTextarea rows="5" cols="100"
+						<p:inputTextarea rows="5" cols="50"
 							value="#{acaoBugBean.acaoBug.descricao}" maxlength="500" />
 
 						<h:outputText value="Data da Ação " />
@@ -378,7 +383,7 @@
 
 			<br />
 
-			<p:fieldset legend="Ação" toggleable="true" toggleSpeed="500">
+			<p:fieldset legend="Detalhes" toggleable="true" toggleSpeed="500">
 
 				<p:fieldset legend="Cadastrar Detalhes" toggleable="true"
 					toggleSpeed="500" style="width: 48%; float: left;">
@@ -405,23 +410,16 @@
 								itemValue="#{prioridade}" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Selecione a Fase" style="font-weight:bold" />
-						<p:selectOneMenu
-							value="#{detalhesBugBean.detalhesBug.fasesBug}"
-							converter="omnifaces.SelectItemsConverter">
-							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-							<f:selectItems value="#{fasesBugBean.listarFaseBugAtivo()}"
-								var="faseDBug" itemLabel="#{faseDBug.nome}"
-								itemValue="#{faseDBug}" />
-						</p:selectOneMenu>
-
 						<h:outputText value="Descrição: " style="font-weight:bold" />
-						<p:inputTextarea rows="5" cols="100"
+						<p:inputTextarea rows="5" cols="50"
 							value="#{detalhesBugBean.detalhesBug.descricao}" maxlength="500" />
 
 						<h:outputText value="Reincidente: " />
 						<p:selectBooleanCheckbox
 							value="#{detalhesBugBean.detalhesBug.reincidente}" />
+
+						<h:outputText value="Cód. Reincidente" style="font-weight:bold" />
+						<p:inputText value="#{detalhesBugBean.detalhesBug.codReincidente}" />
 
 						<h:outputText value="Data de abertura " />
 						<p:calendar value="#{detalhesBugBean.detalhesBug.dataAbertura}"
@@ -453,11 +451,6 @@
 						value="#{detalhesBugBean.listarDetalhesBugEspecifico(bugBean.bug)}"
 						var="detalhe" emptyMessage="Não há detalhes cadastrados.">
 
-						<p:column headerText="Fase" style="text-align: center;">
-
-							<h:outputText value="#{detalhe.fasesBug.nome}" />
-
-						</p:column>
 
 						<p:column headerText="Impacto" style="text-align: center;">
 
@@ -522,16 +515,6 @@
 										itemValue="#{prioridade}" />
 								</p:selectOneMenu>
 
-								<h:outputText value="Selecione a Fase" style="font-weight:bold" />
-								<p:selectOneMenu
-									value="#{detalhesBugBean.detalhesBugModifica.fasesBug}"
-									converter="omnifaces.SelectItemsConverter">
-									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-									<f:selectItems value="#{fasesBugBean.listarFaseBugAtivo()}"
-										var="faseDBug" itemLabel="#{faseDBug.nome}"
-										itemValue="#{faseDBug}" />
-								</p:selectOneMenu>
-
 								<h:outputText value="Descrição: " style="font-weight:bold" />
 								<p:inputTextarea rows="5" cols="80"
 									value="#{detalhesBugBean.detalhesBugModifica.descricao}"
@@ -540,6 +523,10 @@
 								<h:outputText value="Reincidente: " />
 								<p:selectBooleanCheckbox
 									value="#{detalhesBugBean.detalhesBugModifica.reincidente}" />
+
+								<h:outputText value="Cód. Reincidente" style="font-weight:bold" />
+								<p:inputText
+									value="#{detalhesBugBean.detalhesBugModifica.codReincidente}" />
 
 								<h:outputText value="Data de abertura " />
 								<p:calendar

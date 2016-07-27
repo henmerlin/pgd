@@ -67,6 +67,13 @@ public class DetalhesBugBean {
 		return this.detalhesBugServico.listarDetalhesBugEspecifico(bug);
 		
 	}
+	
+	public DetalhesBug listarDetalhesBugEspecificoUm(Bug bug) {
+		
+		return this.detalhesBugServico.listarDetalhesBugEspecificoUm(bug);
+		
+	}
+	
 
 	public DetalhesBug getDetalhesBug() {
 		return detalhesBug;

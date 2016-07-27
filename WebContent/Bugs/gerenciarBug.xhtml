@@ -46,7 +46,31 @@
 						<h:outputText value="#{bug.titulo}" />
 
 					</p:column>
-					
+
+					<p:column headerText="Códigos" style="text-align: center;">
+
+						<ui:repeat var="cod"
+							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bug)}">
+
+							<h:outputText value=" #{cod.nome} " />
+							<br />
+
+						</ui:repeat>
+
+					</p:column>
+
+					<p:column headerText="Sistemas" style="text-align: center;">
+
+						<ui:repeat var="sis"
+							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bug)}">
+
+							<h:outputText value="#{sis.sistemaAfetado.nome}" />
+							<br />
+
+						</ui:repeat>
+
+					</p:column>
+
 					<p:column headerText="Status" style="text-align: center;">
 
 						<h:outputText value="#{bug.statusBug.nome}" />
@@ -56,6 +80,12 @@
 					<p:column headerText="Solicitante" style="text-align: center;">
 
 						<h:outputText value="#{bug.solicitante}" />
+
+					</p:column>
+					
+					<p:column headerText="Area Solicitante" style="text-align: center;">
+
+						<h:outputText value="#{bug.areaSolicitante}" />
 
 					</p:column>
 
@@ -85,8 +115,8 @@
 				</p:dataTable>
 
 				<p:dialog header="Detalhes Bug" widgetVar="infBug" modal="true"
-					showEffect="fade" hideEffect="fade" width="750" height="250"
-					minWidth="650" minHeight="250">
+					showEffect="fade" hideEffect="fade" width="750" height="450"
+					minWidth="650" minHeight="450">
 
 					<h:panelGroup id="detatlhesBug">
 
@@ -95,9 +125,9 @@
 
 							<p:row>
 
-								<p:column>
+								<p:column style="width: 20%;">
 
-									<h:outputText value="Titulo" style="font-weight:bold" />
+									<h:outputText value="Titulo" style="font-weight:bold;" />
 
 								</p:column>
 
@@ -107,7 +137,7 @@
 
 								</p:column>
 
-							</p:row>
+							</p:row>							
 							
 							<p:row>
 
@@ -124,7 +154,7 @@
 								</p:column>
 
 							</p:row>
-							
+
 							<p:row>
 
 								<p:column>
@@ -145,6 +175,22 @@
 
 								<p:column>
 
+									<h:outputText value="Area Solicitante" style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{bugBean.bug.areaSolicitante}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
 									<h:outputText value="Data Abertura" style="font-weight:bold" />
 
 								</p:column>
@@ -156,7 +202,7 @@
 								</p:column>
 
 							</p:row>
-							
+
 							<p:row>
 
 								<p:column>
@@ -174,9 +220,116 @@
 							</p:row>
 
 						</p:panelGrid>
-						
+
 						<br />
-						
+
+						<p:dataTable
+							value="#{detalhesBugBean.listarDetalhesBugEspecifico(bugBean.bug)}"
+							var="detalhes" emptyMessage="Não há detalhes registrados">
+
+							<f:facet name="header">Detalhes </f:facet>
+
+							<p:column headerText="Impacto" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.impactoBug.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Prioridade" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.prioridadeBug.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Descrição" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.descricao}" />
+
+							</p:column>
+
+							<p:column headerText="Reincidente" style="text-align: center;">
+
+								<h:outputText rendered="#{detalhes.reincidente}" value="Sim" />
+								<h:outputText rendered="#{!detalhes.reincidente}" value="Não" />
+
+							</p:column>
+							
+							<p:column headerText="Cód Reincidente" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.codReincidente}" />
+
+							</p:column>
+
+							<p:column headerText="Data Abertura" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.dataAberturaFormatada}" />
+
+							</p:column>
+
+							<p:column headerText="Volume" style="text-align: center;">
+
+								<h:outputText value="#{detalhes.volume}" />
+
+							</p:column>
+
+							<p:column headerText="Paliativo" style="text-align: center;">
+
+								<h:outputText rendered="#{detalhes.paliativo}" value="Sim" />
+								<h:outputText rendered="#{!detalhes.paliativo}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Priorizado" style="text-align: center;">
+
+								<h:outputText rendered="#{detalhes.priorizado}" value="Sim" />
+								<h:outputText rendered="#{!detalhes.priorizado}" value="Não" />
+
+							</p:column>
+
+						</p:dataTable>
+
+						<br />
+
+						<p:dataTable
+							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug)}"
+							var="cod" style="margin-top: 20px;"
+							emptyMessage="Não há Códigos registrados">
+
+							<f:facet name="header">Códigos </f:facet>
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{cod.codigoBug.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Código" style="text-align: center;">
+
+								<h:outputText value="#{cod.nome}" />
+
+							</p:column>
+
+						</p:dataTable>
+
+						<br />
+
+						<p:dataTable
+							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug)}"
+							var="sist" style="margin-top: 20px;"
+							emptyMessage="Não há Sistemas registrados">
+
+							<f:facet name="header">Sistema Afetado </f:facet>
+
+							<p:column headerText="Sistema" style="text-align: center;">
+
+								<h:outputText value="#{sist.sistemaAfetado.nome}" />
+
+							</p:column>
+
+						</p:dataTable>
+
+						<br />
+
 						<p:button outcome="detalhesBug" value="Modificar"
 							style="float: right;">
 

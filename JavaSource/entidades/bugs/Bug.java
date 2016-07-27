@@ -32,6 +32,8 @@ public class Bug {
 	
 	@ManyToOne
 	private StatusBug statusBug;
+	
+	private String areaSolicitante;
 
 	public Integer getId() {
 		return id;
@@ -99,6 +101,14 @@ public class Bug {
 
 	public void setStatusBug(StatusBug statusBug) {
 		this.statusBug = statusBug;
+	}	
+
+	public String getAreaSolicitante() {
+		return areaSolicitante;
+	}
+
+	public void setAreaSolicitante(String areaSolicitante) {
+		this.areaSolicitante = areaSolicitante;
 	}
 
 	@Override

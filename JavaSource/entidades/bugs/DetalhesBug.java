@@ -41,9 +41,8 @@ public class DetalhesBug {
 	@ManyToOne
 	private ImpactoBug impactoBug;
 	
-	@ManyToOne
-	private FasesBug fasesBug;
-		
+	private String codReincidente;
+			
 	public Integer getId() {
 		return id;
 	}
@@ -82,14 +81,6 @@ public class DetalhesBug {
 
 	public void setImpactoBug(ImpactoBug impactoBug) {
 		this.impactoBug = impactoBug;
-	}
-
-	public FasesBug getFasesBug() {
-		return fasesBug;
-	}
-
-	public void setFasesBug(FasesBug fasesBug) {
-		this.fasesBug = fasesBug;
 	}	
 
 	public Date getDataAbertura() {
@@ -136,6 +127,14 @@ public class DetalhesBug {
 
 	public void setPriorizado(Boolean priorizado) {
 		this.priorizado = priorizado;
+	}	
+
+	public String getCodReincidente() {
+		return codReincidente;
+	}
+
+	public void setCodReincidente(String codReincidente) {
+		this.codReincidente = codReincidente;
 	}
 
 	@Override

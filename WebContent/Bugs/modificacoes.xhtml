@@ -364,6 +364,65 @@
 					</p:dialog>
 
 				</p:tab>
+				
+				<p:tab title="Sistemas">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome: " style="font-weight:bold" />
+						<p:inputText value="#{sistemaAfetadoBean.sistemaAfetado.nome}" />
+
+						<p:commandButton value="Cadastrar"
+							action="#{sistemaAfetadoBean.cadastrarSistema()}" update="@all" />
+
+					</h:panelGrid>
+
+					<p:dataTable value="#{sistemaAfetadoBean.listarSistema()}" var="sistema"
+						style="margin-top: 20px;" emptyMessage="Não há sistemas registrados">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{sistema.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Editar"
+							style="text-align: center; width: 50px;">
+
+							<p:commandButton update="@form:tabview:detalhesModSis"
+								oncomplete="PF('modSis').show()" icon="ui-icon-pencil"
+								title="Edita sistema">
+
+								<f:setPropertyActionListener value="#{sistema}"
+									target="#{sistemaAfetadoBean.sistemaAfetadoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Editar Impacto" widgetVar="modSis" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="250"
+						height="150">
+
+						<h:panelGroup id="detalhesModSis">
+
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Nome: " style="font-weight:bold" />
+								<p:inputText value="#{sistemaAfetadoBean.sistemaAfetadoModifica.nome}" />
+
+								<p:commandButton value="Editar"
+									action="#{sistemaAfetadoBean.modificarSistemaAfetado()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
 
 				<p:tab title="Usuário">
 
