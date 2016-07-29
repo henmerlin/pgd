@@ -40,7 +40,7 @@
 					<p:inputText id="p0" value="#{bugBean.bug.titulo}" />
 					<p:message for="p0" />
 
-					<h:outputText for="p0dotOne" value="Selecione o Status"/>
+					<h:outputText for="p0dotOne" value="Selecione o Status: "/>
 					<p:selectOneMenu id="p0dotOne" value="#{bugBean.bug.statusBug}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
