@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.model.chart.PieChartModel;
 
 import entidades.bugs.FasesBug;
+import entidades.bugs.SequenciaRelatorioBug;
 import entidades.bugs.StatusBug;
 import models.bugs.BugServico;
 import models.bugs.DetalhesBugServico;
@@ -57,7 +58,6 @@ public class RelatorioBugBean implements Serializable{
 	public void criaGraficos() {
 		
 		this.graficoStatus();
-		this.graficoFases();
 		
 	}
 	
@@ -65,16 +65,16 @@ public class RelatorioBugBean implements Serializable{
 		
 		this.graficoPorStatus = new PieChartModel();
 		
-		List<StatusBug> listStatus = this.statusBugServico.listarStatusAtivo();
+		List<SequenciaRelatorioBug> listStatusSeq = this.sequenciaRelatorioBugServico.listarSequenciaAtivo();
 		
-		for (StatusBug statusBug : listStatus) {
+		for (SequenciaRelatorioBug sequenciaRelatorioBug : listStatusSeq) {
 			
-			Integer total = this.bugServico.listarBugPorFase(statusBug).size();
+			Integer total = this.bugServico.listarBugPorFase(sequenciaRelatorioBug.getStatusBug()).size();
 			
-			this.graficoPorStatus.set(statusBug.getNome(), total);
+			this.graficoPorStatus.set(sequenciaRelatorioBug.getStatusBug().getNome(), total);
 			
-		}
-		
+		}	
+				
 		this.graficoPorStatus.setTitle("Gráfico Status");
 		this.graficoPorStatus.setLegendPosition("w");
 		this.graficoPorStatus.setShowDataLabels(true);
