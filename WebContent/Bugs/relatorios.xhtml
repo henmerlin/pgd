@@ -47,7 +47,7 @@
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 				rowsPerPageTemplate="10, 15, 20"
 				emptyMessage="Não há Bugs registrados"
-				selection="#{bugBean.bugsSelecionados}" rowKey="#{bugs.id}"
+				filteredValue="#{bugBean.bugsSelecionados}" rowKey="#{bugs.id}"
 				selectionMode="multiple">
 
 				<f:facet name="{Exporters}">
@@ -68,7 +68,7 @@
 
 				</p:column>
 
-				<p:column headerText="Códigos" style="text-align: center;" sortBy="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugs)}">
+				<p:column headerText="Códigos" style="text-align: center;">
 
 					<ui:repeat var="cod"
 						value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugs)}">
@@ -103,31 +103,36 @@
 
 				</p:column>
 
-				<p:column headerText="Status" style="text-align: center;">
+				<p:column headerText="Status" style="text-align: center;"
+					filterBy="#{bugs.statusBug.nome}">
 
 					<h:outputText value="#{bugs.statusBug.nome}" />
 
 				</p:column>
 
-				<p:column headerText="Solicitante" style="text-align: center;">
+				<p:column headerText="Solicitante" style="text-align: center;"
+					filterBy="#{bugs.solicitante}">
 
 					<h:outputText value="#{bugs.solicitante}" />
 
 				</p:column>
 
-				<p:column headerText="Area Solicitante" style="text-align: center;">
+				<p:column headerText="Area Solicitante" style="text-align: center;"
+					filterBy="#{bugs.areaSolicitante}">
 
 					<h:outputText value="#{bugs.areaSolicitante}" />
 
 				</p:column>
 
-				<p:column headerText="Data Abertura" style="text-align: center;">
+				<p:column headerText="Data Abertura" style="text-align: center;"
+					filterBy="#{bugs.dataAberturaFormatada}">
 
 					<h:outputText value="#{bugs.dataAberturaFormatada}" />
 
 				</p:column>
 
-				<p:column headerText="Previsão" style="text-align: center;">
+				<p:column headerText="Previsão" style="text-align: center;"
+					filterBy="#{bugs.previsaoFormatada}">
 
 					<h:outputText value="#{bugs.previsaoFormatada}" />
 
