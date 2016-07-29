@@ -68,7 +68,7 @@
 
 				</p:column>
 
-				<p:column headerText="Códigos" style="text-align: center;">
+				<p:column headerText="Códigos" style="text-align: center;" sortBy="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugs)}">
 
 					<ui:repeat var="cod"
 						value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugs)}">
