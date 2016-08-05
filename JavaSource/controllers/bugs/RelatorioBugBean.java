@@ -78,7 +78,7 @@ public class RelatorioBugBean implements Serializable{
 		this.graficoPorStatus.setLegendPosition("w");
 		this.graficoPorStatus.setShowDataLabels(true);
 		this.graficoPorStatus.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
-		
+		this.graficoPorStatus.setDataFormat("value");
 		
 	}
 	
