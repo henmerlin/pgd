@@ -12,7 +12,6 @@ import org.primefaces.model.chart.PieChartModel;
 
 import entidades.bugs.FasesBug;
 import entidades.bugs.SequenciaRelatorioBug;
-import entidades.bugs.StatusBug;
 import models.bugs.BugServico;
 import models.bugs.DetalhesBugServico;
 import models.bugs.FasesBugServico;
@@ -101,6 +100,7 @@ public class RelatorioBugBean implements Serializable{
 		this.graficoPorFases.setLegendPosition("e");
 		this.graficoPorFases.setShowDataLabels(true);
 		this.graficoPorFases.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
+		this.graficoPorFases.setDataFormat("value");
 		
 	}
 
