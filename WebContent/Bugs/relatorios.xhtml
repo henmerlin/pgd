@@ -45,7 +45,7 @@
 			<p:dataTable id="listarBugs" var="bugs"
 				value="#{bugBean.listarBugEmTrabalho()}" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-				rowsPerPageTemplate="10, 15, 20"
+				rowsPerPageTemplate="10, 15, 20, 30, 40, 50"
 				emptyMessage="Não há Bugs registrados"
 				filteredValue="#{bugBean.bugsSelecionados}" rowKey="#{bugs.id}"
 				selectionMode="multiple">
