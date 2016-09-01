@@ -62,9 +62,43 @@ public class CodigoBugDescricaoBean {
 		
 	}
 	
-	public List<CodigoBugDescricao> listarCodigoDescricaoBugEspecifico(Bug bug) {
+	public List<CodigoBugDescricao> listarCodigoDescricaoBugEspecifico(Bug bug, Boolean bol) {
 		
 		return this.codigoBugDescricaoServico.listarCodigoDescricaoBugEspecifico(bug);
+		
+	}
+	
+	public String listarCodigoDescricaoBugEspecifico(Bug bug) {
+		
+		List<CodigoBugDescricao> list = this.codigoBugDescricaoServico.listarCodigoDescricaoBugEspecifico(bug);
+		
+		String contac = "";
+		
+		int contagem = 0;
+		
+		int contagemInicio = list.size();
+		
+		for (CodigoBugDescricao codigoBugDescricao : list) {
+			
+			String barra = "";
+			
+			if (contagem != contagemInicio && contagem != 0) {
+				
+				barra = " / ";
+				
+			} else {
+				
+				barra = "";
+				
+			}
+			
+			contac = contac + barra + codigoBugDescricao.getNome();
+			
+			contagem++;
+			
+		}
+		
+		return contac;
 		
 	}
 

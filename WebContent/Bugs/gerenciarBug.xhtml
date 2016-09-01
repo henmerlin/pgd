@@ -49,25 +49,16 @@
 
 					<p:column headerText="Códigos" style="text-align: center;">
 
-						<ui:repeat var="cod"
-							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bug)}">
-
-							<h:outputText value=" #{cod.nome} " />
-							<br />
-
-						</ui:repeat>
+						<h:outputText
+							value=" #{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bug)} " />
 
 					</p:column>
 
 					<p:column headerText="Sistemas" style="text-align: center;">
 
-						<ui:repeat var="sis"
-							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bug)}">
 
-							<h:outputText value="#{sis.sistemaAfetado.nome}" />
-							<br />
-
-						</ui:repeat>
+						<h:outputText
+							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bug)}" />
 
 					</p:column>
 
@@ -82,7 +73,7 @@
 						<h:outputText value="#{bug.solicitante}" />
 
 					</p:column>
-					
+
 					<p:column headerText="Area Solicitante" style="text-align: center;">
 
 						<h:outputText value="#{bug.areaSolicitante}" />
@@ -137,8 +128,8 @@
 
 								</p:column>
 
-							</p:row>							
-							
+							</p:row>
+
 							<p:row>
 
 								<p:column>
@@ -170,7 +161,7 @@
 								</p:column>
 
 							</p:row>
-							
+
 							<p:row>
 
 								<p:column>
@@ -253,8 +244,9 @@
 								<h:outputText rendered="#{!detalhes.reincidente}" value="Não" />
 
 							</p:column>
-							
-							<p:column headerText="Cód Reincidente" style="text-align: center;">
+
+							<p:column headerText="Cód Reincidente"
+								style="text-align: center;">
 
 								<h:outputText value="#{detalhes.codReincidente}" />
 
@@ -291,7 +283,7 @@
 						<br />
 
 						<p:dataTable
-							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug)}"
+							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug, true)}"
 							var="cod" style="margin-top: 20px;"
 							emptyMessage="Não há Códigos registrados">
 
@@ -314,7 +306,7 @@
 						<br />
 
 						<p:dataTable
-							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug)}"
+							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug, true)}"
 							var="sist" style="margin-top: 20px;"
 							emptyMessage="Não há Sistemas registrados">
 

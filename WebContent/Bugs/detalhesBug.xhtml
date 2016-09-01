@@ -127,7 +127,7 @@
 					style="width: 48%; float: right;">
 
 					<p:dataTable
-						value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug)}"
+						value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug, true)}"
 						var="codDesc" emptyMessage="Não há códigos cadastrados.">
 
 						<p:column headerText="Tipo Código" style="text-align: center;">
@@ -224,7 +224,7 @@
 					style="width: 48%; float: right;">
 
 					<p:dataTable
-						value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug)}"
+						value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug, true)}"
 						var="sistema" emptyMessage="Não há sistema cadastrados.">
 
 						<p:column headerText="Tipo Código" style="text-align: center;">
