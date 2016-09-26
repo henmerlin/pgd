@@ -17,9 +17,11 @@ public class DataImplantacaoProjetoServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 
-	public void cadastrarDataImplantacaoProjeto(DataImplantacaoProjeto dataImplantacaoProjeto) throws Exception {
+	public void cadastrarDataImplantacaoProjeto(DataImplantacaoProjeto dataImplantacaoProjeto, Projeto projeto) throws Exception {
 		
 		try {
+			
+			dataImplantacaoProjeto.setProjeto(projeto);
 			
 			this.entityManager.persist(dataImplantacaoProjeto);
 			

@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import util.JSFUtil;
+
 @Entity
 @Table(name="pgd_projetos_impacto")
 public class DataImplantacaoProjeto {
@@ -36,7 +38,13 @@ public class DataImplantacaoProjeto {
 	public Date getDataImplantacao() {
 		return dataImplantacao;
 	}
-
+	
+	public String getDataImplantacaoFormatada() {		
+		
+		return JSFUtil.formatarData(this.dataImplantacao);
+				
+	}
+	
 	public void setDataImplantacao(Date dataImplantacao) {
 		this.dataImplantacao = dataImplantacao;
 	}
