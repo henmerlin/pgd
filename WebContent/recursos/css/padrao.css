@@ -206,7 +206,35 @@ ul#menu li a.selected {
 }
 
 .jqplot-data-label {
-	
 	color: #FFF;
+}
+
+.colorSeAIniciar {
+	
+	background-color: #02a2ff;
+	
+}
+
+.colorSeEmAndamento {
+	
+	background-color: #ffff02;
+	
+}
+
+.colorSeConcluido {
+	
+	background-color: #8ec101;
+	
+}
+
+.colorSeParalisado {
+	
+	background-color: #f70000;
+	
+}
+
+.colorSeCancelado {
+	
+	background-color: #ff7402;
 	
 }

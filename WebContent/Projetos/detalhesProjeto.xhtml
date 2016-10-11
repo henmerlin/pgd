@@ -27,6 +27,10 @@
 			<f:event listener="#{projetoBean.listarProjetoEspecifico()}"
 				type="preRenderView" />
 
+			<f:event
+				listener="#{faseProjetoBean.listarFaseProjetoEspecificoList(projetoBean.projeto)}"
+				type="preRenderView" />
+
 		</f:metadata>
 	</ui:insert>
 
@@ -64,9 +68,20 @@
 							value="#{statusProjetoBean.listarStatusProjetoAtivo()}"
 							var="statusFase" itemLabel="#{statusFase.nome}"
 							itemValue="#{statusFase}" />
+						<p:ajax event="select" update="unRenderIfCancelOrParalised" />
 					</p:selectOneMenu>
 
 					<br />
+					
+					<h:panelGroup id="unRenderIfCancelOrParalised"
+						rendered="#{projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Cancelado') or projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Paralisado')}">
+
+						<h:outputText value="Justificativa: " style="font-weight:bold" />
+						<p:inputText value="#{projetoBean.projeto.justificativaStatus}" />
+
+						<br />
+
+					</h:panelGroup>
 
 					<h:outputText value="Evolução " style="font-weight:bold" />
 					<p:selectBooleanCheckbox value="#{projetoBean.projeto.evolucao}" />
@@ -82,6 +97,21 @@
 
 					<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
 					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />
+
+					<br />
+
+					<h:outputText value="Telefone GP PMO: " style="font-weight:bold" />
+					<p:inputText id="p9" value="#{projetoBean.projeto.telefoneGp}" />
+
+					<br />
+
+					<h:outputText value="Nome GP Vp: " style="font-weight:bold" />
+					<p:inputText id="p10" value="#{projetoBean.projeto.nomeGpVp}" />
+
+					<br />
+
+					<h:outputText value="Telefone GP Vp: " style="font-weight:bold" />
+					<p:inputText id="p11" value="#{projetoBean.projeto.telefoneGpVp}" />
 
 					<br />
 
@@ -116,7 +146,7 @@
 
 						</ui:repeat>
 
-						<p:commandButton value="Modificar data implantação"
+						<p:commandButton value="Cadastrar/Modificar data de implantação"
 							oncomplete="PF('modData').show()" update="@form:detalhesModData" />
 
 					</h:panelGrid>
@@ -139,7 +169,7 @@
 							<p:commandButton value="Modificar"
 								action="#{dataImplantacaoProjetoBean.cadastrarDataImplantacaoProjeto(projetoBean.projeto)}"
 								update="@all" />
-								
+
 						</h:panelGrid>
 
 
@@ -208,9 +238,8 @@
 				<p:fieldset legend="Fases do projeto" toggleable="true"
 					toggleSpeed="500" style="width: 48%; float: right;">
 
-					<p:dataTable
-						value="#{faseProjetoBean.listarFaseProjetoEspecifico(projetoBean.projeto)}"
-						var="faseProj">
+					<p:dataTable value="#{faseProjetoBean.listaFaseProjeto}"
+						var="faseProj" filteredValue="#{faseProjetoBean.listarSortida}">
 
 						<p:column headerText="Fase" style="text-align: center;">
 
@@ -218,13 +247,15 @@
 
 						</p:column>
 
-						<p:column headerText="Data Inicio" style="text-align: center;">
+						<p:column headerText="Data Inicio" style="text-align: center;"
+							sortBy="#{faseProj.dataInicio}">
 
 							<h:outputText value="#{faseProj.dataInicioFormatada}" />
 
 						</p:column>
 
-						<p:column headerText="Data Fim" style="text-align: center;">
+						<p:column headerText="Data Fim" style="text-align: center;"
+							sortBy="#{faseProj.dataFim}">
 
 							<h:outputText value="#{faseProj.dataFimFormatada}" />
 
@@ -238,7 +269,8 @@
 
 						<p:column headerText="Porcentagem" style="text-align: center;">
 
-							<h:outputText value="#{faseProj.porcentagem}%" />
+							<p:progressBar value="#{faseProj.porcentagem}"
+								labelTemplate="{value}%" displayOnly="true" />
 
 						</p:column>
 

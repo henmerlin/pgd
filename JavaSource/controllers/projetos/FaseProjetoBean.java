@@ -19,6 +19,10 @@ public class FaseProjetoBean {
 	
 	private FaseProjeto faseProjetoModifica;
 	
+	private List<FaseProjeto> listaFaseProjeto;
+	
+	private List<FaseProjeto> listarSortida;
+	
 	@EJB
 	private FaseProjetoServico faseProjetoServico;
 	
@@ -36,7 +40,7 @@ public class FaseProjetoBean {
 			
 			this.faseProjetoServico.cadastrarFaseProjeto(faseProjeto, projeto);
 			JSFUtil.addInfoMessage("Fase cadastrada com sucesso.");
-			this.faseProjetoModifica = new FaseProjeto();
+			this.faseProjeto = new FaseProjeto();
 			
 		} catch (Exception e) {
 
@@ -67,6 +71,12 @@ public class FaseProjetoBean {
 		return this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
 		
 	}
+	
+	public void listarFaseProjetoEspecificoList(Projeto projeto) {
+		
+		this.listaFaseProjeto = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
+		
+	}
 
 	public FaseProjeto getFaseProjeto() {
 		return faseProjeto;
@@ -82,6 +92,22 @@ public class FaseProjetoBean {
 
 	public void setFaseProjetoModifica(FaseProjeto faseProjetoModifica) {
 		this.faseProjetoModifica = faseProjetoModifica;
-	}	
+	}
+
+	public List<FaseProjeto> getListarSortida() {
+		return listarSortida;
+	}
+
+	public void setListarSortida(List<FaseProjeto> listarSortida) {
+		this.listarSortida = listarSortida;
+	}
+
+	public List<FaseProjeto> getListaFaseProjeto() {
+		return listaFaseProjeto;
+	}
+
+	public void setListaFaseProjeto(List<FaseProjeto> listaFaseProjeto) {
+		this.listaFaseProjeto = listaFaseProjeto;
+	}		
 
 }

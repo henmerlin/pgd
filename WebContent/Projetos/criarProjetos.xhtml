@@ -61,6 +61,18 @@
 					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />
 					<p:message for="p5" />
 
+					<p:outputLabel for="p10" value="Telefone GP PMO: " />
+					<p:inputText id="p10" value="#{projetoBean.projeto.telefoneGp}" />
+					<p:message for="p10" />
+
+					<p:outputLabel for="p9" value="Nome GP VP: " />
+					<p:inputText id="p9" value="#{projetoBean.projeto.nomeGpVp}" />
+					<p:message for="p9" />
+
+					<p:outputLabel for="p11" value="Telefone GP VP: " />
+					<p:inputText id="p11" value="#{projetoBean.projeto.telefoneGpVp}" />
+					<p:message for="p11" />
+
 					<p:outputLabel for="p6" value="Nome Focal CO: " />
 					<p:inputText id="p6" value="#{projetoBean.projeto.nomeFocal}" />
 					<p:message for="p6" />
@@ -73,7 +85,7 @@
 					<p:outputLabel for="p8" value="Areas Envolvidas: " />
 					<p:inputText id="p8" value="#{projetoBean.projeto.areaEnvolvida}" />
 					<p:message for="p8" />
-					
+
 					<p:commandButton id="cadastrarProjeto" value="Cadastrar"
 						action="#{projetoBean.cadasrtarProjeto()}" update="@all" />
 

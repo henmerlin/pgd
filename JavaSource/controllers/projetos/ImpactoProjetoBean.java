@@ -68,6 +68,20 @@ public class ImpactoProjetoBean {
 		return this.impactoProjetoServico.listarImpactoProjetoEspecifico(projeto);
 		
 	}
+	
+	public ImpactoProjeto listarImpactoProjetoEspecificoUnic(Projeto projeto) {
+		
+		try {
+						
+			return this.impactoProjetoServico.listarImpactoProjetoEspecificoUnic(projeto);
+						
+		} catch (Exception e) {
+
+			return null;
+			
+		}
+		
+	}
 
 	public ImpactoProjeto getImpactoProjeto() {
 		return impactoProjeto;

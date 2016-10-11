@@ -63,5 +63,22 @@ public class DataImplantacaoProjetoServico {
 		}
 		
 	}
+	
+	public DataImplantacaoProjeto listarDataImplantacaoProjetoEspecificoProjetoIdOrder(Projeto projeto) throws Exception {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM DataImplantacaoProjeto d WHERE d.projeto =:param1 ORDER BY d.id DESC");
+			query.setMaxResults(1);
+			query.setParameter("param1", projeto);
+			return (DataImplantacaoProjeto) query.getSingleResult();			
+			
+		} catch (Exception e) {
+
+			throw new Exception("Não possui data de implantação, por favor cadastre.");
+			
+		}
+		
+	}
 
 }

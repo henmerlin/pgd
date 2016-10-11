@@ -24,11 +24,19 @@ public class Projeto {
 	
 	private String nomeGp;
 	
+	private String telefoneGp;
+	
 	private String nomeFocal;
 	
 	private String nomeEspecialista;
 	
 	private String areaEnvolvida;
+	
+	private String nomeGpVp;
+	
+	private String telefoneGpVp;
+	
+	private String justificativaStatus;
 		
 	@ManyToOne
 	private StatusProjeto statusProjeto;
@@ -114,6 +122,38 @@ public class Projeto {
 
 	public void setTipoProjeto(TipoProjeto tipoProjeto) {
 		this.tipoProjeto = tipoProjeto;
+	}
+
+	public String getNomeGpVp() {
+		return nomeGpVp;
+	}
+
+	public void setNomeGpVp(String nomeGpVp) {
+		this.nomeGpVp = nomeGpVp;
+	}
+
+	public String getTelefoneGp() {
+		return telefoneGp;
+	}
+
+	public void setTelefoneGp(String telefoneGp) {
+		this.telefoneGp = telefoneGp;
+	}
+
+	public String getTelefoneGpVp() {
+		return telefoneGpVp;
+	}
+
+	public void setTelefoneGpVp(String telefoneGpVp) {
+		this.telefoneGpVp = telefoneGpVp;
+	}	
+
+	public String getJustificativaStatus() {
+		return justificativaStatus;
+	}
+
+	public void setJustificativaStatus(String justificativaStatus) {
+		this.justificativaStatus = justificativaStatus;
 	}
 
 	@Override

@@ -47,6 +47,22 @@ public class DataImplantacaoProjetoBean {
 		return this.dataImplantacaoProjetoServico.listarDataImplantacaoProjetoEspecificoProjeto(projeto);
 		
 	}
+	
+	public DataImplantacaoProjeto listarDataImplantacaoProjetoEspecificoProjetoIdOrder(Projeto projeto) {
+		
+		try {
+						
+			return this.dataImplantacaoProjetoServico.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(projeto);
+						
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+			return null;
+			
+		}
+		
+	}
 
 	public DataImplantacaoProjeto getDataImplantacaoProjeto() {
 		return dataImplantacaoProjeto;

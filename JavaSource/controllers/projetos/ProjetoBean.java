@@ -15,6 +15,10 @@ import util.JSFUtil;
 public class ProjetoBean {
 	
 	private Projeto projeto;
+	
+	private List<Projeto> listaDeProjetos;
+	
+	private List<Projeto> listaDeProjetosFiltred;
 		
 	@EJB
 	private ProjetoServico projetoServico;
@@ -62,6 +66,12 @@ public class ProjetoBean {
 		
 	}
 	
+	public void listarProjetosLista() {
+		
+		this.listaDeProjetos = this.projetoServico.listarProjetos();
+		
+	}
+	
 	public void listarProjetoEspecifico() {
 		
 		try {
@@ -82,6 +92,22 @@ public class ProjetoBean {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+
+	public List<Projeto> getListaDeProjetos() {
+		return listaDeProjetos;
+	}
+
+	public void setListaDeProjetos(List<Projeto> listaDeProjetos) {
+		this.listaDeProjetos = listaDeProjetos;
+	}
+
+	public List<Projeto> getListaDeProjetosFiltred() {
+		return listaDeProjetosFiltred;
+	}
+
+	public void setListaDeProjetosFiltred(List<Projeto> listaDeProjetosFiltred) {
+		this.listaDeProjetosFiltred = listaDeProjetosFiltred;
 	}	
 
 }

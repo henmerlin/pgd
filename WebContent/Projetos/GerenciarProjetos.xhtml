@@ -35,7 +35,13 @@
 					rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 15, 20"
-					emptyMessage="Não há projetos registradas">
+					emptyMessage="Não há projetos registradas"
+					filteredValue="#{projetoBean.listaDeProjetosFiltred}"
+					rowStyleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
+						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
+						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
+						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
+						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
 
 					<p:column headerText="Nome do Projeto" style="text-align: center;">
 
@@ -50,10 +56,33 @@
 
 					</p:column>
 
+					<p:column headerText="Tipo" style="text-align: center;">
+
+						<h:outputText value="#{proj.tipoProjeto.nome}" />
+
+					</p:column>
+
 					<p:column headerText="Status Projeto" style="text-align: center;">
 
-						<h:outputText value="Não informado" rendered="#{proj.statusProjeto.nome==null}"/>
-						<h:outputText value="#{proj.statusProjeto.nome}"/>
+						<h:outputText value="Não informado"
+							rendered="#{proj.statusProjeto.nome==null}" />
+						<h:outputText value="#{proj.statusProjeto.nome}" />
+
+					</p:column>
+
+					<p:column headerText="Data de Implantação"
+						style="text-align: center;"
+						sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
+
+						<h:outputText
+							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
+
+					</p:column>
+
+					<p:column headerText="Impacto" style="text-align: center;">
+
+						<h:outputText
+							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" />
 
 					</p:column>
 
@@ -123,6 +152,56 @@
 								<p:column>
 
 									<h:outputText value="#{projetoBean.projeto.nomeGp}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Telefone GP PMO: "
+										style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.telefoneGp}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Nome GP Vp: " style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.nomeGpVp}" />
+
+								</p:column>
+
+							</p:row>
+
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Telefone GP PMO: "
+										style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="#{projetoBean.projeto.telefoneGpVp}" />
 
 								</p:column>
 
