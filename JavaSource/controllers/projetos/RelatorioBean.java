@@ -13,11 +13,13 @@ import org.primefaces.model.chart.PieChartModel;
 import entidades.projetos.ProjetoFase;
 import entidades.projetos.SequenciaRelatorioProjeto;
 import entidades.projetos.StatusProjeto;
+import entidades.projetos.TipoProjeto;
 import models.projetos.FaseProjetoServico;
 import models.projetos.ProjetoFaseServico;
 import models.projetos.ProjetoServico;
 import models.projetos.SequenciaRelatorioProjetoServico;
 import models.projetos.StatusProjetoServico;
+import models.projetos.TipoProjetoServico;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -29,6 +31,8 @@ public class RelatorioBean implements Serializable {
 	private PieChartModel graficoEvolucao;
 	
 	private PieChartModel graficoFases;
+	
+	private PieChartModel graficoProjPreProj;
 
 	@EJB
 	private ProjetoServico projetoServico;
@@ -44,6 +48,9 @@ public class RelatorioBean implements Serializable {
 	
 	@EJB
 	private ProjetoFaseServico projetoFaseServico;
+	
+	@EJB
+	private TipoProjetoServico tipoProjetoServico;
 	
 	@PostConstruct
 	private void init() {
@@ -61,6 +68,7 @@ public class RelatorioBean implements Serializable {
 		this.criaGraficoStatus();
 		this.criaGraficoEvolucao();
 		this.criaGraficoFase();
+		this.criaGraficoProjOuPreProj();
 		
 	}
 	
@@ -125,6 +133,27 @@ public class RelatorioBean implements Serializable {
 		this.graficoFases.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 		
 	}
+	
+	public void criaGraficoProjOuPreProj() {
+		
+		this.graficoProjPreProj = new PieChartModel();
+		
+		List<TipoProjeto> tipoProjetos = this.tipoProjetoServico.listarTipoProjetoAtivo();		
+		
+		for (TipoProjeto tipoProjeto : tipoProjetos) {
+			
+			Integer total = this.projetoServico.listarProjetosTipoProjeto(tipoProjeto).size();
+			
+			this.graficoProjPreProj.set(tipoProjeto.getNome(), total);
+			
+		}
+		
+		this.graficoProjPreProj.setTitle("Grafico Fases");
+		this.graficoProjPreProj.setLegendPosition("sw");
+		this.graficoProjPreProj.setShowDataLabels(true);
+		this.graficoProjPreProj.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
+		
+	}
 
 	public PieChartModel getGraficoStatus() {
 		return graficoStatus;
@@ -149,5 +178,13 @@ public class RelatorioBean implements Serializable {
 	public void setGraficoFases(PieChartModel graficoFases) {
 		this.graficoFases = graficoFases;
 	}
+
+	public PieChartModel getGraficoProjPreProj() {
+		return graficoProjPreProj;
+	}
+
+	public void setGraficoProjPreProj(PieChartModel graficoProjPreProj) {
+		this.graficoProjPreProj = graficoProjPreProj;
+	}	
 
 }

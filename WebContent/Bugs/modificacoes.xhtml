@@ -42,7 +42,8 @@
 						<p:inputText value="#{prioridadeBugBean.prioridadeBug.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectBooleanCheckbox value="#{prioridadeBugBean.prioridadeBug.ativo}" />
+						<p:selectBooleanCheckbox
+							value="#{prioridadeBugBean.prioridadeBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{prioridadeBugBean.cadastrarPrioridade()}" update="@all" />
@@ -99,9 +100,10 @@
 								<h:outputText value="Nome: " style="font-weight:bold" />
 								<p:inputText
 									value="#{prioridadeBugBean.prioridadeBugModifica.nome}" />
-									
+
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectBooleanCheckbox value="#{prioridadeBugBean.prioridadeBugModifica.ativo}" />
+								<p:selectBooleanCheckbox
+									value="#{prioridadeBugBean.prioridadeBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -127,7 +129,8 @@
 						<p:inputText value="#{impactoBugBean.impactoBug.nome}" />
 
 						<h:outputText value="Status: " style="font-weight:bold" />
-						<p:selectBooleanCheckbox value="#{impactoBugBean.impactoBug.ativo}" />
+						<p:selectBooleanCheckbox
+							value="#{impactoBugBean.impactoBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
 							action="#{impactoBugBean.cadastrarImpacto()}" update="@all" />
@@ -185,7 +188,8 @@
 								<p:inputText value="#{impactoBugBean.impactoBugModifica.nome}" />
 
 								<h:outputText value="Status: " style="font-weight:bold" />
-								<p:selectBooleanCheckbox value="#{impactoBugBean.impactoBugModifica.ativo}" />	
+								<p:selectBooleanCheckbox
+									value="#{impactoBugBean.impactoBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber
@@ -210,7 +214,7 @@
 						<h:outputText value="Nome: " style="font-weight:bold" />
 						<p:inputText value="#{statusBugBean.statusBug.nome}" />
 
-						<h:outputText value="Status: " style="font-weight:bold" />						
+						<h:outputText value="Status: " style="font-weight:bold" />
 						<p:selectBooleanCheckbox value="#{statusBugBean.statusBug.ativo}" />
 
 						<p:commandButton value="Cadastrar"
@@ -267,8 +271,9 @@
 								<h:outputText value="Nome: " style="font-weight:bold" />
 								<p:inputText value="#{statusBugBean.statusBugModifica.nome}" />
 
-								<h:outputText value="Status: " style="font-weight:bold" />								
-								<p:selectBooleanCheckbox value="#{statusBugBean.statusBugModifica.ativo}" />
+								<h:outputText value="Status: " style="font-weight:bold" />
+								<p:selectBooleanCheckbox
+									value="#{statusBugBean.statusBugModifica.ativo}" />
 
 								<h:outputText value="Ordem: " style="font-weight:bold" />
 								<p:inputNumber value="#{statusBugBean.statusBugModifica.ordem}" />
@@ -282,8 +287,8 @@
 
 					</p:dialog>
 
-				</p:tab>				
-				
+				</p:tab>
+
 				<p:tab title="Sistemas">
 
 					<h:panelGrid>
@@ -296,8 +301,9 @@
 
 					</h:panelGrid>
 
-					<p:dataTable value="#{sistemaAfetadoBean.listarSistema()}" var="sistema"
-						style="margin-top: 20px;" emptyMessage="Não há sistemas registrados">
+					<p:dataTable value="#{sistemaAfetadoBean.listarSistema()}"
+						var="sistema" style="margin-top: 20px;"
+						emptyMessage="Não há sistemas registrados">
 
 						<p:column headerText="Nome" style="text-align: center;">
 
@@ -330,10 +336,12 @@
 							<h:panelGrid columns="2">
 
 								<h:outputText value="Nome: " style="font-weight:bold" />
-								<p:inputText value="#{sistemaAfetadoBean.sistemaAfetadoModifica.nome}" />
+								<p:inputText
+									value="#{sistemaAfetadoBean.sistemaAfetadoModifica.nome}" />
 
 								<p:commandButton value="Editar"
-									action="#{sistemaAfetadoBean.modificarSistemaAfetado()}" update="@all" />
+									action="#{sistemaAfetadoBean.modificarSistemaAfetado()}"
+									update="@all" />
 
 							</h:panelGrid>
 
@@ -350,15 +358,17 @@
 						<h:outputText value="Login" style="font-weight:bold" />
 						<p:selectOneMenu
 							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
-							converter="omnifaces.SelectItemsConverter">
+							converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="startsWith">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
 								var="usuario" itemLabel="#{usuario.login}"
 								itemValue="#{usuario}" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Status" style="font-weight:bold" />						
-						<p:selectBooleanCheckbox value="#{controleUsuarioBean.controleUsuario.ativo}" />
+						<h:outputText value="Status" style="font-weight:bold" />
+						<p:selectBooleanCheckbox
+							value="#{controleUsuarioBean.controleUsuario.ativo}" />
 
 						<h:outputText value="Sistema" style="font-weight:bold" />
 						<p:selectManyCheckbox
@@ -371,7 +381,7 @@
 						</p:selectManyCheckbox>
 
 						<p:commandButton value="Cadastrar"
-							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
+							action="#{controleUsuarioBean.cadastraControle()}" update="@all" />
 
 					</h:panelGrid>
 
@@ -426,8 +436,9 @@
 								<h:outputText
 									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
 
-								<h:outputText value="Status" style="font-weight:bold" />								
-								<p:selectBooleanCheckbox value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
+								<h:outputText value="Status" style="font-weight:bold" />
+								<p:selectBooleanCheckbox
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
 
 								<h:outputText value="Sistema" style="font-weight:bold" />
 								<p:selectManyCheckbox
@@ -449,13 +460,13 @@
 					</p:dialog>
 
 				</p:tab>
-				
+
 				<p:tab title="Relatório">
 
 					<p:dataTable value="#{sequenciaRelatorioBugBean.listarSequencia()}"
 						var="sequencia" style="margin-top: 20px;"
 						emptyMessage="Não há sequencia registradas">
-						
+
 						<f:facet name="header">Modifica condições do segundo gráfico.</f:facet>
 
 						<p:column headerText="Status" style="text-align: center;">
@@ -499,8 +510,9 @@
 								<h:outputText
 									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.statusBug.nome}" />
 
-								<h:outputText value="Ativo" style="font-weight:bold" />								
-								<p:selectBooleanCheckbox value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.ativo}" />
+								<h:outputText value="Ativo" style="font-weight:bold" />
+								<p:selectBooleanCheckbox
+									value="#{sequenciaRelatorioBugBean.sequenciaRelatorioBug.ativo}" />
 
 								<p:commandButton value="Editar"
 									action="#{sequenciaRelatorioBugBean.modificaSequencia()}"

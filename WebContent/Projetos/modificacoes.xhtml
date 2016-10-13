@@ -21,6 +21,9 @@
 
 			<f:event listener="#{loginBean.validaPagina('Projetos')}"
 				type="preRenderView" />
+				
+			<f:event listener="#{loginBean.validaAdmin('Projetos')}"
+				type="preRenderView" />
 
 		</f:metadata>
 	</ui:insert>
@@ -378,7 +381,7 @@
 								title="Edita Tipo Projeto">
 
 								<f:setPropertyActionListener value="#{statusFase}"
-									target="#{statusFaseBean.statusFase}" />
+									target="#{statusProjetoBean.statusProjetoModifica}" />
 
 							</p:commandButton>
 
@@ -421,7 +424,8 @@
 						<h:outputText value="Login" style="font-weight:bold" />
 						<p:selectOneMenu
 							value="#{controleUsuarioBean.controleUsuario.usuarioEfika}"
-							converter="omnifaces.SelectItemsConverter">
+							converter="omnifaces.SelectItemsConverter" filter="true"
+							filterMatchMode="startsWith">
 							<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 							<f:selectItems value="#{controleUsuarioBean.listaDeUsuario()}"
 								var="usuario" itemLabel="#{usuario.login}"
@@ -443,7 +447,7 @@
 						</p:selectManyCheckbox>
 
 						<p:commandButton value="Cadastrar"
-							action="#{controleUsuarioBean.cadastrarUsuario()}" update="@all" />
+							action="#{controleUsuarioBean.cadastraControle()}" update="@all" />
 
 					</h:panelGrid>
 
@@ -522,10 +526,11 @@
 					</p:dialog>
 
 				</p:tab>
-				
+
 				<p:tab title="Relatório">
 
-					<p:dataTable value="#{sequenciaRelatorioProjetoBean.listarSequenciaRelatorioProjeto()}"
+					<p:dataTable
+						value="#{sequenciaRelatorioProjetoBean.listarSequenciaRelatorioProjeto()}"
 						var="sequencia" style="margin-top: 20px;"
 						emptyMessage="Não há sequencia registradas">
 

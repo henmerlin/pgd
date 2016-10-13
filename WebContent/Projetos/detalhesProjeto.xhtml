@@ -31,6 +31,10 @@
 				listener="#{faseProjetoBean.listarFaseProjetoEspecificoList(projetoBean.projeto)}"
 				type="preRenderView" />
 
+			<f:event
+				listener="#{upDownLoadBean.listaDeArquivosDownload(projetoBean.projeto)}"
+				type="preRenderView" />
+
 		</f:metadata>
 	</ui:insert>
 
@@ -72,7 +76,7 @@
 					</p:selectOneMenu>
 
 					<br />
-					
+
 					<h:panelGroup id="unRenderIfCancelOrParalised"
 						rendered="#{projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Cancelado') or projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Paralisado')}">
 
@@ -85,6 +89,11 @@
 
 					<h:outputText value="Evolução " style="font-weight:bold" />
 					<p:selectBooleanCheckbox value="#{projetoBean.projeto.evolucao}" />
+
+					<br />
+
+					<h:outputText value="Impacto CO " style="font-weight:bold" />
+					<p:selectBooleanCheckbox value="#{projetoBean.projeto.impactaCo}" />
 
 					<br />
 
@@ -577,6 +586,60 @@
 						</h:panelGroup>
 
 					</p:dialog>
+
+				</p:fieldset>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:fieldset legend="Arquivos do projeto" toggleable="true"
+				toggleSpeed="500" style="width: 100%;">
+
+				<p:fieldset legend="Upload" style="width: 48%; float: left;">
+
+					<h:form>
+
+						<p:fileUpload fileUploadListener="#{upDownLoadBean.upload}"
+							allowTypes="/(\.|\/)(doc|docx|xls|xlsx|csv|pdf)$/"
+							label="Escolher arquivo" cancelLabel="Cancelar" fileLimit="5"
+							multiple="true" sizeLimit="5000000" dragDropSupport="true"
+							mode="advanced" style="width: 100%;" update="@all"/>
+
+					</h:form>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Download" style="width: 48%; float: right;">
+
+					<p:dataTable id="arquivosDownload" value="#{upDownLoadBean.listaFilesProjetoUpload}" 
+						var="download" emptyMessage="Não possui arquivos associados"
+						style="text-align: center;">
+
+						<p:column headerText="Nome">
+
+							<h:outputText value="#{download.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Data de upload">
+
+							<h:outputText value="#{download.dataRegistroFormatada}" />
+
+						</p:column>
+
+						<p:column headerText="Download" style="width: 80px;">
+
+							<p:commandButton icon="fa fa-download" ajax="false"
+								actionListener="#{upDownLoadBean.salvaPath(download)}">
+
+								<p:fileDownload value="#{upDownLoadBean.file}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
 
 				</p:fieldset>
 

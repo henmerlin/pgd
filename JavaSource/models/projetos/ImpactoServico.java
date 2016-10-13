@@ -49,7 +49,8 @@ public class ImpactoServico {
 			this.entityManager.merge(impacto);
 
 		} catch (Exception e) {
-
+			
+			System.out.println(e.getMessage());
 			throw new Exception("Erro ao modificar Impacto");
 
 		}

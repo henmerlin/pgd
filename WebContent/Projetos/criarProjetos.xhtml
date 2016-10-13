@@ -21,6 +21,9 @@
 
 			<f:event listener="#{loginBean.validaPagina('Projetos')}"
 				type="preRenderView" />
+			
+			<f:event listener="#{loginBean.validaAdmin('Projetos')}"
+				type="preRenderView" />
 
 		</f:metadata>
 	</ui:insert>
@@ -56,13 +59,18 @@
 					<p:selectBooleanCheckbox id="p4"
 						value="#{projetoBean.projeto.evolucao}" />
 					<p:message for="p4" />
+					
+					<p:outputLabel for="p12" value="Impacto CO: " />
+					<p:selectBooleanCheckbox id="p12"
+						value="#{projetoBean.projeto.impactaCo}" />
+					<p:message for="p12" />
 
 					<p:outputLabel for="p5" value="Nome GP PMO: " />
 					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />
 					<p:message for="p5" />
 
 					<p:outputLabel for="p10" value="Telefone GP PMO: " />
-					<p:inputText id="p10" value="#{projetoBean.projeto.telefoneGp}" />
+					<p:inputMask id="p10" value="#{projetoBean.projeto.telefoneGp}" mask="(99) 9999-9999?9" />
 					<p:message for="p10" />
 
 					<p:outputLabel for="p9" value="Nome GP VP: " />
@@ -70,7 +78,7 @@
 					<p:message for="p9" />
 
 					<p:outputLabel for="p11" value="Telefone GP VP: " />
-					<p:inputText id="p11" value="#{projetoBean.projeto.telefoneGpVp}" />
+					<p:inputMask id="p11" value="#{projetoBean.projeto.telefoneGpVp}" mask="(99) 9999-9999?9" />
 					<p:message for="p11" />
 
 					<p:outputLabel for="p6" value="Nome Focal CO: " />

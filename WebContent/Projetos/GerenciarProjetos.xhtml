@@ -21,6 +21,9 @@
 
 			<f:event listener="#{loginBean.validaPagina('Projetos')}"
 				type="preRenderView" />
+				
+			<f:event listener="#{loginBean.validaAdmin('Projetos')}"
+				type="preRenderView" />
 
 		</f:metadata>
 	</ui:insert>
@@ -119,6 +122,24 @@
 								<p:column>
 
 									<h:outputText value="#{projetoBean.projeto.nome}" />
+
+								</p:column>
+
+							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Impacto CO: "
+										style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="Sim" rendered="#{projetoBean.projeto.impactaCo}" />
+									<h:outputText value="Não" rendered="#{!projetoBean.projeto.impactaCo}"/>
 
 								</p:column>
 

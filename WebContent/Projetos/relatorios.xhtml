@@ -21,6 +21,7 @@
 
 			<f:event listener="#{loginBean.validaPagina('Projetos')}"
 				type="preRenderView" />
+				
 
 		</f:metadata>
 	</ui:insert>
@@ -37,7 +38,7 @@
 				<p:chart type="pie" model="#{relatorioBean.graficoEvolucao}"
 					style="height: 350px; width: 33%; float: left;" responsive="true" />
 					
-				<p:chart type="pie" model="#{relatorioBean.graficoFases}"
+				<p:chart type="pie" model="#{relatorioBean.graficoProjPreProj}"
 					style="height: 350px; width: 33%; float: left;" responsive="true" />
 
 			</p:panel>

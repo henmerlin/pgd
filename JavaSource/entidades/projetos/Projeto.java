@@ -37,6 +37,8 @@ public class Projeto {
 	private String telefoneGpVp;
 	
 	private String justificativaStatus;
+	
+	private Boolean impactaCo = false;
 		
 	@ManyToOne
 	private StatusProjeto statusProjeto;
@@ -154,6 +156,14 @@ public class Projeto {
 
 	public void setJustificativaStatus(String justificativaStatus) {
 		this.justificativaStatus = justificativaStatus;
+	}	
+
+	public Boolean getImpactaCo() {
+		return impactaCo;
+	}
+
+	public void setImpactaCo(Boolean impactaCo) {
+		this.impactaCo = impactaCo;
 	}
 
 	@Override

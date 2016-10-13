@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import entidades.projetos.Projeto;
 import entidades.projetos.SequenciaRelatorioProjeto;
 import entidades.projetos.StatusProjeto;
+import entidades.projetos.TipoProjeto;
 
 @Stateless
 public class ProjetoServico {
@@ -85,6 +86,23 @@ public class ProjetoServico {
 			
 			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.statusProjeto =:param1");
 			query.setParameter("param1", statusProjeto);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+			
+			return new ArrayList<Projeto>();
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Projeto> listarProjetosTipoProjeto(TipoProjeto tipoProjeto) {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Projeto p WHERE p.tipoProjeto =:param1");
+			query.setParameter("param1", tipoProjeto);
 			return query.getResultList();
 			
 		} catch (Exception e) {
