@@ -64,28 +64,52 @@
 
 					<br />
 
+					<!--
+					
+						Cuidar com os IDS do select Status Projetos 
+						Ambiente de teste: IDs 20 e 18
+						Produção: IDs 451099 e 451101
+					
+					 -->
+
 					<h:outputText value="Selecione o Status" style="font-weight:bold" />
-					<p:selectOneMenu value="#{projetoBean.projeto.statusProjeto}"
-						converter="omnifaces.SelectItemsConverter">
+					<p:selectOneMenu id="selectMenuStatus"
+						value="#{projetoBean.projeto.statusProjeto}"
+						converter="omnifaces.SelectItemsConverter"
+						onchange="if(this.value == 'StatusProjeto [id=20]' || this.value == 'StatusProjeto [id=18]') {PF('justCancelOrParalised').show();}">
 						<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 						<f:selectItems
 							value="#{statusProjetoBean.listarStatusProjetoAtivo()}"
 							var="statusFase" itemLabel="#{statusFase.nome}"
 							itemValue="#{statusFase}" />
-						<p:ajax event="select" update="unRenderIfCancelOrParalised" />
 					</p:selectOneMenu>
+
+					<h:outputText
+						value="Justificativa: #{projetoBean.projeto.justificativaStatus}"
+						rendered="#{not empty projetoBean.projeto.justificativaStatus}" />
 
 					<br />
 
-					<h:panelGroup id="unRenderIfCancelOrParalised"
-						rendered="#{projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Cancelado') or projetoBean.projeto.statusProjeto.nome.equalsIgnoreCase('Paralisado')}">
+					<p:dialog widgetVar="justCancelOrParalised" header="Justificativa"
+						width="400" minWidth="400" height="150" minHeight="150"
+						modal="true" resizable="false" style="text-align: center;">
 
-						<h:outputText value="Justificativa: " style="font-weight:bold" />
-						<p:inputText value="#{projetoBean.projeto.justificativaStatus}" />
+						<h:panelGrid>
+
+							<h:outputText value="Justificativa: " style="font-weight:bold" />
+							<p:inputTextarea
+								value="#{projetoBean.projeto.justificativaStatus}" rows="5"
+								cols="65" maxlength="1000" />
+
+						</h:panelGrid>
 
 						<br />
 
-					</h:panelGroup>
+						<p:commandButton value="Salvar"
+							action="#{projetoBean.modificarProjeto()}" update="@all" />
+
+					</p:dialog>
+
 
 					<h:outputText value="Evolução " style="font-weight:bold" />
 					<p:selectBooleanCheckbox value="#{projetoBean.projeto.evolucao}" />
@@ -100,7 +124,7 @@
 					<h:outputText value="Descrição do projeto: "
 						style="font-weight:bold" />
 					<p:inputTextarea id="p2" rows="5" cols="100"
-						value="#{projetoBean.projeto.descricao}" maxlength="500" />
+						value="#{projetoBean.projeto.descricao}" maxlength="1000" />
 
 					<br />
 
@@ -604,7 +628,7 @@
 							allowTypes="/(\.|\/)(doc|docx|xls|xlsx|csv|pdf)$/"
 							label="Escolher arquivo" cancelLabel="Cancelar" fileLimit="5"
 							multiple="true" sizeLimit="5000000" dragDropSupport="true"
-							mode="advanced" style="width: 100%;" update="@all"/>
+							mode="advanced" style="width: 100%;" update="@all" />
 
 					</h:form>
 
@@ -612,8 +636,9 @@
 
 				<p:fieldset legend="Download" style="width: 48%; float: right;">
 
-					<p:dataTable id="arquivosDownload" value="#{upDownLoadBean.listaFilesProjetoUpload}" 
-						var="download" emptyMessage="Não possui arquivos associados"
+					<p:dataTable id="arquivosDownload"
+						value="#{upDownLoadBean.listaFilesProjetoUpload}" var="download"
+						emptyMessage="Não possui arquivos associados"
 						style="text-align: center;">
 
 						<p:column headerText="Nome">
@@ -628,18 +653,36 @@
 
 						</p:column>
 
-						<p:column headerText="Download" style="width: 80px;">
+						<p:column headerText="Ações" style="width: 80px;">
 
 							<p:commandButton icon="fa fa-download" ajax="false"
-								actionListener="#{upDownLoadBean.salvaPath(download)}">
+								actionListener="#{upDownLoadBean.salvaPath(download)}"
+								style="margin-right: 5px;">
 
 								<p:fileDownload value="#{upDownLoadBean.file}" />
+
+							</p:commandButton>
+
+
+							<p:commandButton icon="fa fa-trash"
+								actionListener="#{upDownLoadBean.removerFilesProjetoUpload(download)}"
+								update="@all">
+
+								<p:confirm header="Confirmação" message="Você tem certeza?"
+									icon="ui-icon-alert" />
 
 							</p:commandButton>
 
 						</p:column>
 
 					</p:dataTable>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
 
 				</p:fieldset>
 

@@ -83,6 +83,22 @@ public class UpDownLoadBean implements Serializable {
 		this.listaFilesProjetoUpload = this.upDownLoadServico.listarFilesProjetoUpload(projeto);
 		
 	}
+	
+	public void removerFilesProjetoUpload(FilesProjetoUpload filesProjetoUpload) {
+		
+		try {
+			
+			this.upDownLoadServico.removerArquivoFisico(filesProjetoUpload);
+			
+			JSFUtil.addInfoMessage("Arquivo removido com sucesso.");
+			
+		} catch (Exception e) {
+
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}
+		
+	}
 
 	public Projeto getProjeto() {
 		return projeto;

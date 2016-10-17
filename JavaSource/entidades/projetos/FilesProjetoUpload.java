@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import util.JSFUtil;
 
 @Entity
+@Table(name="pgd_projetos_File_UpDown")
 public class FilesProjetoUpload {
 
 	@Id

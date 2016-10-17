@@ -148,7 +148,7 @@ public class RelatorioBean implements Serializable {
 			
 		}
 		
-		this.graficoProjPreProj.setTitle("Grafico Fases");
+		this.graficoProjPreProj.setTitle("Grafico Tipo Projeto");
 		this.graficoProjPreProj.setLegendPosition("sw");
 		this.graficoProjPreProj.setShowDataLabels(true);
 		this.graficoProjPreProj.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
