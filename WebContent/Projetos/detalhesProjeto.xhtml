@@ -92,7 +92,8 @@
 
 					<p:dialog widgetVar="justCancelOrParalised" header="Justificativa"
 						width="400" minWidth="400" height="150" minHeight="150"
-						modal="true" resizable="false" style="text-align: center;">
+						modal="true" resizable="false" style="text-align: center;"
+						closable="false">
 
 						<h:panelGrid>
 
@@ -107,6 +108,9 @@
 
 						<p:commandButton value="Salvar"
 							action="#{projetoBean.modificarProjeto()}" update="@all" />
+
+						<p:commandButton value="Fechar"
+							onclick="PF('justCancelOrParalised').hide();" update="@all" />
 
 					</p:dialog>
 
@@ -127,6 +131,13 @@
 						value="#{projetoBean.projeto.descricao}" maxlength="1000" />
 
 					<br />
+
+					<h:outputText value="Saving: " style="font-weight:bold" />
+					<p:inputNumber id="p12" value="#{projetoBean.projeto.saving}"
+						symbol="R$" decimalSeparator="," thousandSeparator="."/>
+
+					<br />
+
 
 					<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
 					<p:inputText id="p5" value="#{projetoBean.projeto.nomeGp}" />

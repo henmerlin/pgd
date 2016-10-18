@@ -161,6 +161,26 @@
 								</p:column>
 
 							</p:row>
+							
+							<p:row>
+
+								<p:column>
+
+									<h:outputText value="Saving: " style="font-weight:bold" />
+
+								</p:column>
+
+								<p:column>
+
+									<h:outputText value="R$ #{projetoBean.projeto.saving}" >
+									
+										<f:convertNumber currencyCode="R$" type="currency" />
+									
+									</h:outputText>
+
+								</p:column>
+
+							</p:row>
 
 							<p:row>
 

@@ -45,6 +45,8 @@ public class Projeto {
 	
 	@ManyToOne
 	private TipoProjeto tipoProjeto;
+	
+	private Double saving; 
 
 	public Integer getId() {
 		return id;
@@ -164,6 +166,14 @@ public class Projeto {
 
 	public void setImpactaCo(Boolean impactaCo) {
 		this.impactaCo = impactaCo;
+	}	
+
+	public Double getSaving() {
+		return saving;
+	}
+
+	public void setSaving(Double saving) {
+		this.saving = saving;
 	}
 
 	@Override
