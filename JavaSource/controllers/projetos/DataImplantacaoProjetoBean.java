@@ -1,5 +1,6 @@
 package controllers.projetos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,10 +12,11 @@ import entidades.projetos.Projeto;
 import models.projetos.DataImplantacaoProjetoServico;
 import util.JSFUtil;
 
+@SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class DataImplantacaoProjetoBean {
-	
+public class DataImplantacaoProjetoBean implements Serializable {
+
 	private DataImplantacaoProjeto dataImplantacaoProjeto;
 	
 	@EJB

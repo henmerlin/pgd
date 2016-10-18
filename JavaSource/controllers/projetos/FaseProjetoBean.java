@@ -68,7 +68,9 @@ public class FaseProjetoBean {
 	
 	public List<FaseProjeto> listarFaseProjetoEspecifico(Projeto projeto) {
 		
-		return this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
+		this.listarSortida = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
+		
+		return this.listarSortida;
 		
 	}
 	

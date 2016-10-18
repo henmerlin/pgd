@@ -46,7 +46,7 @@
 						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
 						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
 
-					<p:column headerText="Nome do Projeto" style="text-align: center;">
+					<p:column headerText="Nome do Projeto" style="text-align: center;" filterBy="#{proj.nome}">
 
 						<h:outputText value="#{proj.nome}" />
 
@@ -59,13 +59,13 @@
 
 					</p:column>
 
-					<p:column headerText="Tipo" style="text-align: center;">
+					<p:column headerText="Tipo" style="text-align: center;" filterBy="#{proj.tipoProjeto.nome}">
 
 						<h:outputText value="#{proj.tipoProjeto.nome}" />
 
 					</p:column>
 
-					<p:column headerText="Status Projeto" style="text-align: center;">
+					<p:column headerText="Status Projeto" style="text-align: center;" filterBy="#{proj.statusProjeto.nome}">
 
 						<h:outputText value="Não informado"
 							rendered="#{proj.statusProjeto.nome==null}" />
@@ -82,7 +82,7 @@
 
 					</p:column>
 
-					<p:column headerText="Impacto" style="text-align: center;">
+					<p:column headerText="Impacto" style="text-align: center;" filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}">
 
 						<h:outputText
 							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" />

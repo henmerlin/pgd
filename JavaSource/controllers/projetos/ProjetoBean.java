@@ -1,5 +1,6 @@
 package controllers.projetos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,10 +11,12 @@ import entidades.projetos.Projeto;
 import models.projetos.ProjetoServico;
 import util.JSFUtil;
 
+@SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class ProjetoBean {
+public class ProjetoBean implements Serializable {
 	
+
 	private Projeto projeto;
 	
 	private List<Projeto> listaDeProjetos;
@@ -62,7 +65,9 @@ public class ProjetoBean {
 	
 	public List<Projeto> listarProjetos() {
 		
-		return this.projetoServico.listarProjetos();
+		this.listaDeProjetosFiltred = this.projetoServico.listarProjetos();
+		
+		return this.listaDeProjetosFiltred;
 		
 	}
 	
