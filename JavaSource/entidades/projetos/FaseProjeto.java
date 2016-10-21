@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +24,9 @@ public class FaseProjeto {
 	private Date dataFim;
 	
 	private Integer porcentagem;
+	
+	@Lob
+	private String observacoes;
 	
 	@ManyToOne
 	private Projeto projeto;
@@ -99,6 +103,14 @@ public class FaseProjeto {
 
 	public void setStatusProjeto(StatusProjeto statusProjeto) {
 		this.statusProjeto = statusProjeto;
+	}	
+	
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
 	@Override

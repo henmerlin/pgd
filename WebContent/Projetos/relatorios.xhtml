@@ -30,18 +30,48 @@
 
 		<h:form id="form">
 
-			<p:panel header="Tipo" style="height: 400px;">
+			<p:commandButton value="Gráficos para imagem"
+				onclick="exportChart(); PF('dlgDownloadImg').show();" />
 
-				<p:chart type="pie" model="#{relatorioBean.graficoStatus}"
-					style="height: 350px; width: 33%; float: left;" responsive="true" />
+			<div id="chartAsImage">
 
-				<p:chart type="pie" model="#{relatorioBean.graficoEvolucao}"
-					style="height: 350px; width: 33%; float: left;" responsive="true" />
+				<p:panel header="Gráficos" style="height: 400px;">
 
-				<p:chart type="pie" model="#{relatorioBean.graficoProjPreProj}"
-					style="height: 350px; width: 33%; float: left;" responsive="true" />
+					<p:chart type="pie" model="#{relatorioBean.graficoStatus}"
+						style="height: 350px; width: 33%; float: left;" responsive="true"
+						widgetVar="chart" />
 
-			</p:panel>
+					<p:chart type="pie" model="#{relatorioBean.graficoEvolucao}"
+						style="height: 350px; width: 33%; float: left;" responsive="true" />
+
+					<p:chart type="pie" model="#{relatorioBean.graficoProjPreProj}"
+						style="height: 350px; width: 33%; float: left;" responsive="true" />
+
+				</p:panel>
+
+			</div>
+
+			<p:dialog widgetVar="dlgDownloadImg" height="450" minHeight="400"
+				resizable="false" modal="true" showEffect="fade" hideEffect="fade" position="350, 100" closeOnEscape="true">
+
+				<div id="output"></div>
+
+			</p:dialog>
+
+			<script type="text/javascript">
+				
+				function exportChart() {
+
+					html2canvas($("#chartAsImage"), {
+				         onrendered: function (canvas) {
+					         
+				         	$("#output").empty().append(canvas);
+				                
+			             }
+			         });						
+				}				
+			
+			</script>
 
 			<br />
 

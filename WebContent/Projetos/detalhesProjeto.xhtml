@@ -134,7 +134,7 @@
 
 					<h:outputText value="Saving: " style="font-weight:bold" />
 					<p:inputNumber id="p12" value="#{projetoBean.projeto.saving}"
-						symbol="R$" decimalSeparator="," thousandSeparator="."/>
+						symbol="R$" decimalSeparator="," thousandSeparator="." />
 
 					<br />
 
@@ -271,6 +271,11 @@
 						<p:calendar value="#{faseProjetoBean.faseProjeto.dataFim}"
 							pattern="dd/MM/yyyy" mask="true" />
 
+						<h:outputText value="Observações" style="font-weight:bold" />
+						<p:inputTextarea
+							value="#{faseProjetoBean.faseProjeto.observacoes}" rows="5"
+							cols="50" />
+
 						<p:commandButton value="Criar Fase"
 							action="#{faseProjetoBean.cadastrarFaseProjeto(projetoBean.projeto)}"
 							update="@all" />
@@ -381,6 +386,11 @@
 								<p:calendar
 									value="#{faseProjetoBean.faseProjetoModifica.dataFim}"
 									pattern="dd/MM/yyyy" mask="true" />
+
+								<h:outputText value="Observações" style="font-weight:bold" />
+								<p:inputTextarea
+									value="#{faseProjetoBean.faseProjetoModifica.observacoes}"
+									rows="5" cols="50" />
 
 								<p:commandButton value="Modificar"
 									action="#{faseProjetoBean.modificaFaseProjeto()}" update="@all" />
