@@ -1,6 +1,8 @@
 package controllers.projetos;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -63,6 +65,36 @@ public class DataImplantacaoProjetoBean implements Serializable {
 			return null;
 			
 		}
+		
+	}
+	
+	public String semafaroDate(Date dataImplantacao) {
+				
+		String semafaroBoolean = "";		
+		
+		Calendar calendar = Calendar.getInstance();
+		
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);		
+		
+		Date date = calendar.getTime();
+		
+		if (dataImplantacao.after(date)) {
+			
+			semafaroBoolean = "Depois";
+			
+		} else if (dataImplantacao.before(date)) {
+			
+			semafaroBoolean = "Antes";
+			
+		} else {
+			
+			semafaroBoolean = "No dia";
+			
+		}
+		
+		return semafaroBoolean;
 		
 	}
 

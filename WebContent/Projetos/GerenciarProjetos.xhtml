@@ -21,7 +21,7 @@
 
 			<f:event listener="#{loginBean.validaPagina('Projetos')}"
 				type="preRenderView" />
-				
+
 			<f:event listener="#{loginBean.validaAdmin('Projetos')}"
 				type="preRenderView" />
 
@@ -39,16 +39,19 @@
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 15, 20"
 					emptyMessage="Não há projetos registradas"
-					filteredValue="#{projetoBean.listaDeProjetosFiltred}"
-					rowStyleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
-						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
-						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
-						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
-						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
+					filteredValue="#{projetoBean.listaDeProjetosFiltred}">
 
-					<p:column headerText="Nome do Projeto" style="text-align: center;" filterBy="#{proj.nome}">
+					<p:column headerText="Nome do Projeto" style="text-align: center;"
+						filterBy="#{proj.nome}">
 
 						<h:outputText value="#{proj.nome}" />
+
+					</p:column>
+
+					<p:column headerText="Nome do Focal" style="text-align: center;"
+						filterBy="#{proj.nomeFocal}">
+
+						<h:outputText value="#{proj.nomeFocal}" />
 
 					</p:column>
 
@@ -59,33 +62,64 @@
 
 					</p:column>
 
-					<p:column headerText="Tipo" style="text-align: center;" filterBy="#{proj.tipoProjeto.nome}">
+					<p:column headerText="Tipo" style="text-align: center;"
+						filterBy="#{proj.tipoProjeto.nome}">
 
 						<h:outputText value="#{proj.tipoProjeto.nome}" />
 
 					</p:column>
 
-					<p:column headerText="Status Projeto" style="text-align: center;" filterBy="#{proj.statusProjeto.nome}">
+					<p:column headerText="Status Projeto" style="text-align: center;"
+						filterBy="#{proj.statusProjeto.nome}"
+						styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
+						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
+						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
+						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
+						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
 
 						<h:outputText value="Não informado"
 							rendered="#{proj.statusProjeto.nome==null}" />
+
 						<h:outputText value="#{proj.statusProjeto.nome}" />
 
 					</p:column>
 
-					<p:column headerText="Data de Implantação"
+					<p:column headerText="Data Prevista de entrega"
 						style="text-align: center;"
 						sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
 
 						<h:outputText
 							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
 
+
+
+						<span
+							class="fa fa-circle #{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Antes' ? 'semafaroVerde' : null}
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Depois' ? 'semafaroVermelho' : null }
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'No dia' ? 'semafaroAmarelo' : null }" />
+
 					</p:column>
 
-					<p:column headerText="Impacto" style="text-align: center;" filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}">
+					<p:column headerText="Impacto" style="text-align: center;"
+						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
+						styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null ? 'semafaroVazio' : null}">
 
-						<h:outputText
-							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" />
+						<!-- <h:outputText
+							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" /> -->
+
+						<span class="fa fa-circle" />
+
+					</p:column>
+
+					<p:column headerText="Porcentagem" style="text-align: center;"
+						sortBy="#{faseProjetoBean.porcentagemDoProjeto(proj)}">
+
+						<p:progressBar
+							value="#{faseProjetoBean.porcentagemDoProjeto(proj)}"
+							labelTemplate="{value}%" displayOnly="true" />
 
 					</p:column>
 
@@ -104,7 +138,7 @@
 
 				<p:dialog header="Detalhes do Projeto" widgetVar="infProj"
 					modal="true" showEffect="fade" hideEffect="fade" width="500"
-					height="300" minHeight="300" minWidth="500">
+					height="300" minHeight="300" minWidth="500" closeOnEscape="true">
 
 					<h:panelGroup id="detatlhesProj">
 
@@ -126,20 +160,21 @@
 								</p:column>
 
 							</p:row>
-							
+
 							<p:row>
 
 								<p:column>
 
-									<h:outputText value="Impacto CO: "
-										style="font-weight:bold" />
+									<h:outputText value="Impacto CO: " style="font-weight:bold" />
 
 								</p:column>
 
 								<p:column>
 
-									<h:outputText value="Sim" rendered="#{projetoBean.projeto.impactaCo}" />
-									<h:outputText value="Não" rendered="#{!projetoBean.projeto.impactaCo}"/>
+									<h:outputText value="Sim"
+										rendered="#{projetoBean.projeto.impactaCo}" />
+									<h:outputText value="Não"
+										rendered="#{!projetoBean.projeto.impactaCo}" />
 
 								</p:column>
 
@@ -161,7 +196,7 @@
 								</p:column>
 
 							</p:row>
-							
+
 							<p:row>
 
 								<p:column>
@@ -172,10 +207,10 @@
 
 								<p:column>
 
-									<h:outputText value="R$ #{projetoBean.projeto.saving}" >
-									
+									<h:outputText value="R$ #{projetoBean.projeto.saving}">
+
 										<f:convertNumber currencyCode="R$" type="currency" />
-									
+
 									</h:outputText>
 
 								</p:column>

@@ -32,7 +32,11 @@ public class RelatorioBean implements Serializable {
 	
 	private PieChartModel graficoFases;
 	
+	private PieChartModel graficoStatusPorTipo;
+	
 	private PieChartModel graficoProjPreProj;
+	
+	private PieChartModel graficoImpactoPorTipo;
 
 	@EJB
 	private ProjetoServico projetoServico;
@@ -65,10 +69,12 @@ public class RelatorioBean implements Serializable {
 	
 	public void criarGraficos() {
 		
-		this.criaGraficoStatus();
+		/*this.criaGraficoStatus();
 		this.criaGraficoEvolucao();
-		this.criaGraficoFase();
+		this.criaGraficoFase();*/
 		this.criaGraficoProjOuPreProj();
+		this.criaGraficoStatusPorTipo();
+		this.criaGraficoImpactoPorTipo();
 		
 	}
 	
@@ -89,7 +95,6 @@ public class RelatorioBean implements Serializable {
 		this.graficoStatus.setTitle("Grafico Status");
 		this.graficoStatus.setLegendPosition("sw");
 		this.graficoStatus.setShowDataLabels(true);
-		this.graficoStatus.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 		
 		
 	}
@@ -106,7 +111,6 @@ public class RelatorioBean implements Serializable {
 		this.graficoEvolucao.setTitle("Grafico Evolucao");
 		this.graficoEvolucao.setLegendPosition("sw");
 		this.graficoEvolucao.setShowDataLabels(true);
-		this.graficoEvolucao.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 		
 	}
 	
@@ -130,7 +134,6 @@ public class RelatorioBean implements Serializable {
 		this.graficoFases.setTitle("Grafico Fases");
 		this.graficoFases.setLegendPosition("sw");
 		this.graficoFases.setShowDataLabels(true);
-		this.graficoFases.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 		
 	}
 	
@@ -151,9 +154,68 @@ public class RelatorioBean implements Serializable {
 		this.graficoProjPreProj.setTitle("Grafico Tipo Projeto");
 		this.graficoProjPreProj.setLegendPosition("sw");
 		this.graficoProjPreProj.setShowDataLabels(true);
-		this.graficoProjPreProj.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
 		
 	}
+	
+	public void criaGraficoStatusPorTipo() {
+		
+		this.graficoStatusPorTipo = new PieChartModel();		
+		
+		List<StatusProjeto> listaDeStatusProjeto = this.statusProjetoServico.listarStatusAtivo();
+		
+		List<TipoProjeto> tipoProjetos = this.tipoProjetoServico.listarTipoProjetoAtivo();
+		
+		for (StatusProjeto statusProjeto : listaDeStatusProjeto) {
+			
+			for (TipoProjeto tipoProjeto : tipoProjetos) {
+				
+				Integer total = this.projetoServico.listarProjetoPorStatusETipo(statusProjeto, tipoProjeto).size();
+				
+				this.graficoStatusPorTipo.set(statusProjeto.getNome() + " - " + tipoProjeto.getNome(), total);				
+				
+			}
+			
+		}
+		
+		this.graficoStatusPorTipo.setTitle("Grafico Tipo Projeto por Status");
+		this.graficoStatusPorTipo.setLegendPosition("sw");
+		this.graficoStatusPorTipo.setShowDataLabels(true);		
+		
+	}
+	
+	public void criaGraficoImpactoPorTipo() {
+		
+		this.graficoImpactoPorTipo = new PieChartModel();
+		
+		List<TipoProjeto> tipoProjetos = this.tipoProjetoServico.listarTipoProjetoAtivo();
+		
+		Boolean trueFalse = true;
+		
+		for (TipoProjeto tipoProjeto : tipoProjetos) {
+			
+			if (trueFalse) {
+				
+				Integer totalTrue = this.projetoServico.listarProjetosPorImpactoETipo(true, tipoProjeto).size();
+				this.graficoImpactoPorTipo.set(tipoProjeto.getNome() + " - Impacta o CO", totalTrue);
+				
+				trueFalse = false;
+				
+			} else {
+				
+				Integer totalFalse = this.projetoServico.listarProjetosPorImpactoETipo(false, tipoProjeto).size();
+				this.graficoImpactoPorTipo.set(tipoProjeto.getNome() + " - Não Impacta o CO", totalFalse);
+				
+			}
+						
+		}
+		
+		this.graficoImpactoPorTipo.setTitle("Grafico Tipo Projeto por Impacto");
+		this.graficoImpactoPorTipo.setLegendPosition("sw");
+		this.graficoImpactoPorTipo.setShowDataLabels(true);		
+		
+	}
+	
+	
 
 	public PieChartModel getGraficoStatus() {
 		return graficoStatus;
@@ -185,6 +247,22 @@ public class RelatorioBean implements Serializable {
 
 	public void setGraficoProjPreProj(PieChartModel graficoProjPreProj) {
 		this.graficoProjPreProj = graficoProjPreProj;
+	}
+
+	public PieChartModel getGraficoStatusPorTipo() {
+		return graficoStatusPorTipo;
+	}
+
+	public void setGraficoStatusPorTipo(PieChartModel graficoStatusPorTipo) {
+		this.graficoStatusPorTipo = graficoStatusPorTipo;
+	}
+
+	public PieChartModel getGraficoImpactoPorTipo() {
+		return graficoImpactoPorTipo;
+	}
+
+	public void setGraficoImpactoPorTipo(PieChartModel graficoImpactoPorTipo) {
+		this.graficoImpactoPorTipo = graficoImpactoPorTipo;
 	}	
 
 }

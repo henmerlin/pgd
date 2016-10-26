@@ -211,30 +211,64 @@ ul#menu li a.selected {
 
 .colorSeAIniciar {
 	
-	background-color: #02a2ff;
+	/* Azul */
+	
+	color: #02a2ff;
 	
 }
 
 .colorSeEmAndamento {
 	
-	background-color: #ffff02;
+	/* Alaranjado */
+	
+	color: #00ff33;
 	
 }
 
 .colorSeConcluido {
 	
-	background-color: #8ec101;
+	/* Verde */
+	
+	color: #8ec101;
 	
 }
 
 .colorSeParalisado {
 	
-	background-color: #f70000;
+	/* Vermelho */
+	
+	color: #f70000;
 	
 }
 
 .colorSeCancelado {
 	
-	background-color: #ff7402;
+	/* Alaranjado */
+	
+	color: #ff7402;
+	
+}
+
+.semafaroVerde {
+	
+	color: #1eb500;
+	
+}
+
+.semafaroAmarelo {
+	
+	color: #fff200;
+	
+}
+
+.semafaroVermelho {
+	
+	color: #ff0000;
+	
+}
+
+.semafaroVazio {
+	
+	color: #ffffff;
 	
 }

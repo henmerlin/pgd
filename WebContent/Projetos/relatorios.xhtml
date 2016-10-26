@@ -35,24 +35,24 @@
 
 			<div id="chartAsImage">
 
-				<p:panel header="Gráficos" style="height: 400px;">
-
-					<p:chart type="pie" model="#{relatorioBean.graficoStatus}"
-						style="height: 350px; width: 33%; float: left;" responsive="true"
-						widgetVar="chart" />
-
-					<p:chart type="pie" model="#{relatorioBean.graficoEvolucao}"
-						style="height: 350px; width: 33%; float: left;" responsive="true" />
+				<p:panel header="Gráficos" style="height:800px;">
 
 					<p:chart type="pie" model="#{relatorioBean.graficoProjPreProj}"
-						style="height: 350px; width: 33%; float: left;" responsive="true" />
+						style="height: 350px; width: 50%; float: left;" responsive="true" />
+
+					<p:chart type="pie" model="#{relatorioBean.graficoImpactoPorTipo}"
+						style="height: 350px; width: 50%; float: left;" responsive="true" />
+
+					<p:chart type="pie" model="#{relatorioBean.graficoStatusPorTipo}"
+						style="height: 350px; width: 50%; float:left;" responsive="true" />
 
 				</p:panel>
 
 			</div>
 
 			<p:dialog widgetVar="dlgDownloadImg" height="450" minHeight="400"
-				resizable="false" modal="true" showEffect="fade" hideEffect="fade" position="350, 100" closeOnEscape="true">
+				resizable="false" modal="true" showEffect="fade" hideEffect="fade"
+				position="350, 100" closeOnEscape="true">
 
 				<div id="output"></div>
 
@@ -106,10 +106,16 @@
 					</p:column>
 
 					<p:column headerText="Status Projeto" style="text-align: center;"
-						filterBy="#{proj.statusProjeto.nome}" filterMatchMode="contains">
+						filterBy="#{proj.statusProjeto.nome}"
+						styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
+						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
+						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
+						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
+						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
 
 						<h:outputText value="Não informado"
 							rendered="#{proj.statusProjeto.nome==null}" />
+
 						<h:outputText value="#{proj.statusProjeto.nome}" />
 
 					</p:column>
@@ -129,10 +135,24 @@
 
 					<p:column headerText="Impacto" style="text-align: center;"
 						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
-						filterMatchMode="contains">
+						styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
+						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null ? 'semafaroVazio' : null}">
 
-						<h:outputText
-							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" />
+						<!-- <h:outputText
+							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" /> -->
+
+						<span class="fa fa-circle" />
+
+					</p:column>
+
+					<p:column headerText="Porcentagem" style="text-align: center;"
+						sortBy="#{faseProjetoBean.porcentagemDoProjeto(proj)}">
+
+						<p:progressBar
+							value="#{faseProjetoBean.porcentagemDoProjeto(proj)}"
+							labelTemplate="{value}%" displayOnly="true" />
 
 					</p:column>
 
@@ -152,7 +172,8 @@
 
 				<p:dialog header="Detalhes do Projeto" widgetVar="infProj"
 					modal="true" showEffect="fade" hideEffect="fade" width="800"
-					height="600" minHeight="600" minWidth="800" resizable="false">
+					height="600" minHeight="600" minWidth="800" resizable="false"
+					closeOnEscape="true">
 
 					<h:panelGroup id="detatlhesProj">
 
