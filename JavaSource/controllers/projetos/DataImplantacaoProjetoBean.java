@@ -69,31 +69,35 @@ public class DataImplantacaoProjetoBean implements Serializable {
 	}
 	
 	public String semafaroDate(Date dataImplantacao) {
+		
+		String semafaroBoolean = "";
+		
+		if (dataImplantacao != null) {					
+			
+			Calendar calendar = Calendar.getInstance();
+			
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);		
+			
+			Date date = calendar.getTime();
+			
+			if (dataImplantacao.after(date)) {
 				
-		String semafaroBoolean = "";		
-		
-		Calendar calendar = Calendar.getInstance();
-		
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);		
-		
-		Date date = calendar.getTime();
-		
-		if (dataImplantacao.after(date)) {
+				semafaroBoolean = "Depois";
+				
+			} else if (dataImplantacao.before(date)) {
+				
+				semafaroBoolean = "Antes";
+				
+			} else {
+				
+				semafaroBoolean = "No dia";
+				
+			}
 			
-			semafaroBoolean = "Depois";
-			
-		} else if (dataImplantacao.before(date)) {
-			
-			semafaroBoolean = "Antes";
-			
-		} else {
-			
-			semafaroBoolean = "No dia";
-			
-		}
-		
+		}		
+				
 		return semafaroBoolean;
 		
 	}

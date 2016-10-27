@@ -91,12 +91,11 @@
 						<h:outputText
 							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
 
-
-
 						<span
 							class="fa fa-circle #{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Antes' ? 'semafaroVerde' : null}
 							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Depois' ? 'semafaroVermelho' : null }
-							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'No dia' ? 'semafaroAmarelo' : null }" />
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'No dia' ? 'semafaroAmarelo' : null }
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == '' ? 'semafaroVazio' : null }" />
 
 					</p:column>
 

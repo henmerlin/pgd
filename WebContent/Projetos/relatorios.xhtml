@@ -120,16 +120,18 @@
 
 					</p:column>
 
-					<p:column headerText="Data de Implantação"
+					<p:column headerText="Data Prevista de entrega"
 						style="text-align: center;"
 						sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
 
 						<h:outputText
-							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
+							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
 
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-
-						</h:outputText>
+						<span
+							class="fa fa-circle #{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Antes' ? 'semafaroVerde' : null}
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Depois' ? 'semafaroVermelho' : null }
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'No dia' ? 'semafaroAmarelo' : null }
+							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == '' ? 'semafaroVazio' : null }" />
 
 					</p:column>
 
