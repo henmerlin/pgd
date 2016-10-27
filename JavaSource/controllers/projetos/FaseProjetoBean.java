@@ -22,7 +22,7 @@ public class FaseProjetoBean {
 	private List<FaseProjeto> listaFaseProjeto;
 
 	private List<FaseProjeto> listarSortida;
-
+		
 	@EJB
 	private FaseProjetoServico faseProjetoServico;
 
@@ -109,7 +109,7 @@ public class FaseProjetoBean {
 		return porcentagem;
 
 	}
-
+	
 	public FaseProjeto getFaseProjeto() {
 		return faseProjeto;
 	}
@@ -140,6 +140,6 @@ public class FaseProjetoBean {
 
 	public void setListaFaseProjeto(List<FaseProjeto> listaFaseProjeto) {
 		this.listaFaseProjeto = listaFaseProjeto;
-	}		
+	}
 
 }

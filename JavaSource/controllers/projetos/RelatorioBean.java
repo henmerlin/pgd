@@ -34,6 +34,8 @@ public class RelatorioBean implements Serializable {
 	
 	private PieChartModel graficoStatusPorTipo;
 	
+	private PieChartModel graficoStatusPorTipoPre;
+	
 	private PieChartModel graficoProjPreProj;
 	
 	private PieChartModel graficoImpactoPorTipo;
@@ -159,7 +161,9 @@ public class RelatorioBean implements Serializable {
 	
 	public void criaGraficoStatusPorTipo() {
 		
-		this.graficoStatusPorTipo = new PieChartModel();		
+		this.graficoStatusPorTipo = new PieChartModel();
+		
+		this.graficoStatusPorTipoPre = new PieChartModel();
 		
 		List<StatusProjeto> listaDeStatusProjeto = this.statusProjetoServico.listarStatusAtivo();
 		
@@ -169,17 +173,31 @@ public class RelatorioBean implements Serializable {
 			
 			for (TipoProjeto tipoProjeto : tipoProjetos) {
 				
-				Integer total = this.projetoServico.listarProjetoPorStatusETipo(statusProjeto, tipoProjeto).size();
-				
-				this.graficoStatusPorTipo.set(statusProjeto.getNome() + " - " + tipoProjeto.getNome(), total);				
+				if (tipoProjeto.getNome().equalsIgnoreCase("Pré Projeto")) {
+					
+					Integer total = this.projetoServico.listarProjetoPorStatusETipo(statusProjeto, tipoProjeto).size();
+					
+					this.graficoStatusPorTipo.set(statusProjeto.getNome() + " - " + tipoProjeto.getNome(), total);	
+					
+				} else if (tipoProjeto.getNome().equalsIgnoreCase("Projeto")) {
+					
+					Integer total = this.projetoServico.listarProjetoPorStatusETipo(statusProjeto, tipoProjeto).size();
+					
+					this.graficoStatusPorTipoPre.set(statusProjeto.getNome() + " - " + tipoProjeto.getNome(), total);	
+					
+				}							
 				
 			}
 			
 		}
 		
-		this.graficoStatusPorTipo.setTitle("Grafico Tipo Projeto por Status");
+		this.graficoStatusPorTipo.setTitle("Grafico Tipo Projeto por Status - Pré Projeto");
 		this.graficoStatusPorTipo.setLegendPosition("sw");
-		this.graficoStatusPorTipo.setShowDataLabels(true);		
+		this.graficoStatusPorTipo.setShowDataLabels(true);
+		
+		this.graficoStatusPorTipoPre.setTitle("Grafico Tipo Projeto por Status - Projeto");
+		this.graficoStatusPorTipoPre.setLegendPosition("sw");
+		this.graficoStatusPorTipoPre.setShowDataLabels(true);
 		
 	}
 	
@@ -263,6 +281,14 @@ public class RelatorioBean implements Serializable {
 
 	public void setGraficoImpactoPorTipo(PieChartModel graficoImpactoPorTipo) {
 		this.graficoImpactoPorTipo = graficoImpactoPorTipo;
+	}
+
+	public PieChartModel getGraficoStatusPorTipoPre() {
+		return graficoStatusPorTipoPre;
+	}
+
+	public void setGraficoStatusPorTipoPre(PieChartModel graficoStatusPorTipoPre) {
+		this.graficoStatusPorTipoPre = graficoStatusPorTipoPre;
 	}	
 
 }
