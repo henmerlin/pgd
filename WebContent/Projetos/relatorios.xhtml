@@ -88,7 +88,7 @@
 					filteredValue="#{projetoBean.listaDeProjetosFiltred}">
 
 					<p:column headerText="Nome do Projeto" style="text-align: center;"
-						filterBy="#{proj.nome}">
+						filterBy="#{proj.nome}" filterMatchMode="contains">
 
 						<h:outputText value="#{proj.nome}" />
 
@@ -109,7 +109,7 @@
 					</p:column>
 
 					<p:column headerText="Status Projeto" style="text-align: center;"
-						filterBy="#{proj.statusProjeto.nome}"
+						filterBy="#{proj.statusProjeto.nome}" filterMatchMode="contains"
 						styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
 						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
 						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
@@ -139,7 +139,7 @@
 					</p:column>
 
 					<p:column headerText="Impacto" style="text-align: center;"
-						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
+						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" filterMatchMode="contains"
 						styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
 						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
 						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
