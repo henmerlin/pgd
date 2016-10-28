@@ -22,7 +22,7 @@ public class FaseProjetoBean {
 	private List<FaseProjeto> listaFaseProjeto;
 
 	private List<FaseProjeto> listarSortida;
-		
+
 	@EJB
 	private FaseProjetoServico faseProjetoServico;
 
@@ -68,7 +68,7 @@ public class FaseProjetoBean {
 
 	public List<FaseProjeto> listarFaseProjetoEspecifico(Projeto projeto) {
 
-		this.listarSortida = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
+		this.listarSortida = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);		
 
 		return this.listarSortida;
 
@@ -76,7 +76,7 @@ public class FaseProjetoBean {
 
 	public void listarFaseProjetoEspecificoList(Projeto projeto) {
 
-		this.listaFaseProjeto = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);
+		this.listaFaseProjeto = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);		
 
 	}
 
@@ -85,31 +85,31 @@ public class FaseProjetoBean {
 		List<FaseProjeto> faseProjetos = this.faseProjetoServico.listarFaseProjetoEspecifico(projeto);		
 
 		Integer totalDeFases = faseProjetos.size();
-		
+
 		Integer totalValor = 0;
 
 		for (FaseProjeto faseProjeto : faseProjetos) {
-						
-			if (faseProjeto.getPorcentagem() != null && faseProjeto.getPorcentagem() != 0) {
-				
+
+			if (faseProjeto.getPorcentagem() != null) {
+
 				totalValor = totalValor + faseProjeto.getPorcentagem();
-				
+
 			}		
 
 		}
 
 		Double porcentagem = 0.0;
-		
+
 		if (totalDeFases != 0) {			
-			
+
 			porcentagem = (double) (totalValor / totalDeFases);
-			
+
 		}
 
 		return porcentagem;
 
 	}
-	
+
 	public FaseProjeto getFaseProjeto() {
 		return faseProjeto;
 	}

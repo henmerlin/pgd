@@ -376,9 +376,11 @@
 						</p:panelGrid>
 
 						<br />
-
+						
+						<h:outputText value="#{faseProjetoBean.listarFaseProjetoEspecificoList(projetoBean.projeto)}"/>
+ 
 						<p:dataTable
-							value="#{faseProjetoBean.listarFaseProjetoEspecifico(projetoBean.projeto)}"
+							value="#{faseProjetoBean.listaFaseProjeto}"
 							var="faseProj" filteredValue="#{faseProjetoBean.listarSortida}"
 							emptyMessage="Nenhuma fase cadastrada" style="width: 100%;">
 
