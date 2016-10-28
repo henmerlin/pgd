@@ -12,7 +12,7 @@
 	</ui:define>
 	<ui:define name="tituloPrincipal">
 		<i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
-	<ui:define name="tituloSecundario"></ui:define> 
+	<ui:define name="tituloSecundario"></ui:define>
 
 	<ui:define name="botoesAcao"></ui:define>
 
@@ -42,14 +42,14 @@
 					filteredValue="#{projetoBean.listaDeProjetosFiltred}">
 
 					<p:column headerText="Nome do Projeto" style="text-align: center;"
-						filterBy="#{proj.nome}">
+						filterBy="#{proj.nome}" filterMatchMode="contains">
 
 						<h:outputText value="#{proj.nome}" />
 
 					</p:column>
 
 					<p:column headerText="Nome do Focal" style="text-align: center;"
-						filterBy="#{proj.nomeFocal}">
+						filterBy="#{proj.nomeFocal}" filterMatchMode="contains">
 
 						<h:outputText value="#{proj.nomeFocal}" />
 
@@ -63,14 +63,14 @@
 					</p:column>
 
 					<p:column headerText="Tipo" style="text-align: center;"
-						filterBy="#{proj.tipoProjeto.nome}">
+						filterBy="#{proj.tipoProjeto.nome}" filterMatchMode="contains">
 
 						<h:outputText value="#{proj.tipoProjeto.nome}" />
 
 					</p:column>
 
 					<p:column headerText="Status Projeto" style="text-align: center;"
-						filterBy="#{proj.statusProjeto.nome}"
+						filterBy="#{proj.statusProjeto.nome}" filterMatchMode="contains"
 						styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
 						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
 						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
@@ -101,6 +101,7 @@
 
 					<p:column headerText="Impacto" style="text-align: center;"
 						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
+						filterMatchMode="contains"
 						styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
 						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
 						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
