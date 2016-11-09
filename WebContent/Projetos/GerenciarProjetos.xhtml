@@ -91,11 +91,10 @@
 						<h:outputText
 							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
 
-						<span
-							class="fa fa-circle #{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Antes' ? 'semafaroVerde' : null}
-							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'Depois' ? 'semafaroVermelho' : null }
-							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == 'No dia' ? 'semafaroAmarelo' : null }
-							#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao) == '' ? 'semafaroVazio' : null }" />
+						<h:outputText value=" Em dia" styleClass="semafaroVerde"
+							rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Antes') or dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('No dia')}" />
+						<h:outputText value=" Atraso" styleClass="semafaroVermelho"
+							rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Depois')}" />
 
 					</p:column>
 

@@ -214,7 +214,7 @@ ul#menu li a.selected {
 	/* Azul */
 	
 	color: #02a2ff;
-	font-weight: bold;
+	font-weight: bolder;
 	
 }
 
@@ -223,7 +223,7 @@ ul#menu li a.selected {
 	/* Alaranjado */
 	
 	color: #00ff33;
-	font-weight: bold;
+	font-weight: bolder;
 	
 }
 
@@ -232,7 +232,7 @@ ul#menu li a.selected {
 	/* Verde */
 	
 	color: #8ec101;
-	font-weight: bold;
+	font-weight: bolder;
 	
 }
 
@@ -241,7 +241,7 @@ ul#menu li a.selected {
 	/* Vermelho */
 	
 	color: #f70000;
-	font-weight: bold;
+	font-weight: bolder;
 	
 }
 
@@ -250,25 +250,28 @@ ul#menu li a.selected {
 	/* Alaranjado */
 	
 	color: #ff7402;
-	font-weight: bold;
+	font-weight: bolder;
 	
 }
 
 .semafaroVerde {
 	
 	color: #1eb500;
+	font-weight: bolder;
 	
 }
 
 .semafaroAmarelo {
 	
 	color: #fff200;
+	font-weight: bolder;
 	
 }
 
 .semafaroVermelho {
 	
 	color: #ff0000;
+	font-weight: bolder;
 	
 }
 
