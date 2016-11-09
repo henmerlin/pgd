@@ -11,6 +11,9 @@
 	<script
 		src="#{facesContext.externalContext.requestContextPath}/recursos/js/html2canvas.js" />
 
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js" />
+	
 	<script type="text/javascript">
 		PrimeFaces.widget.SelectCheckboxMenu.prototype.refresh = (function(){return function(){$(PrimeFaces.escapeClientId(this.panelId)).remove();this.init( arguments[0] );};})();
 		PrimeFaces.locales['pt'] = {

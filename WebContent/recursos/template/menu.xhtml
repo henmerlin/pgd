@@ -28,24 +28,28 @@
 		<h:panelGroup
 			rendered="#{loginBean.logado and loginBean.pagina.equalsIgnoreCase('projetos')}">
 
-			<li><a href="/PGD/Projetos/criarProjetos.jsf"> <i
-					class="fa fa-align-left" /> Criar Projetos
-			</a></li>
+			<h:panelGroup rendered="#{loginBean.is_Admin('projetos')}">
 
-			<li><a href="/PGD/Projetos/modificacoes.jsf"> <i
-					class="fa fa-cog" /> Gerenciar Ferramenta
-			</a></li>
+				<li><a href="/PGD/Projetos/criarProjetos.jsf"> <i
+						class="fa fa-align-left" /> Criar Projetos
+				</a></li>
 
-			<li><a href="/PGD/Projetos/GerenciarProjetos.jsf"> <i
-					class="fa fa-align-left" /> Gerenciar Projetos
-			</a></li>
+				<li><a href="/PGD/Projetos/modificacoes.jsf"> <i
+						class="fa fa-cog" /> Gerenciar Ferramenta
+				</a></li>
+
+				<li><a href="/PGD/Projetos/GerenciarProjetos.jsf"> <i
+						class="fa fa-align-left" /> Gerenciar Projetos
+				</a></li>
+				
+			</h:panelGroup>
 			
 			<li><a href="/PGD/Projetos/relatorios.jsf"> <i
 					class="fa fa-pie-chart" /> Relatórios
 			</a></li>
 
 		</h:panelGroup>
-		
+
 		<h:panelGroup
 			rendered="#{loginBean.logado and loginBean.pagina.equalsIgnoreCase('Pps')}">
 
@@ -62,9 +66,9 @@
 				<li><a href="/PGD/Pps/gerenciarPp.jsf"> <i
 						class="fa fa-align-left" /> Gerenciar Projetos
 				</a></li>
-				
-				<li><a href="/PGD/Pps/Export.jsf"> <i
-						class="fa fa-print" /> Export
+
+				<li><a href="/PGD/Pps/Export.jsf"> <i class="fa fa-print" />
+						Export
 				</a></li>
 
 			</h:panelGroup>
@@ -97,9 +101,9 @@
 			<li><a href="/PGD/Bugs/relatorios.jsf"> <i
 					class="fa fa-pie-chart" /> Relatórios
 			</a></li>
-			
+
 		</h:panelGroup>
-		
+
 	</ul>
 </ui:composition>
 </html>

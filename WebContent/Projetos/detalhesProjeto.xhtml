@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition template="/recursos/template/template.xhtml">
 
@@ -33,6 +34,10 @@
 
 			<f:event
 				listener="#{upDownLoadBean.listaDeArquivosDownload(projetoBean.projeto)}"
+				type="preRenderView" />
+
+			<f:event
+				listener="#{grafico.listarFaseProjetoEspecificoList(projetoBean.projeto)}"
 				type="preRenderView" />
 
 		</f:metadata>
@@ -400,6 +405,41 @@
 						</h:panelGroup>
 
 					</p:dialog>
+
+				</p:fieldset>
+
+				<p:fieldset legend="Time Line"
+					style="width: 100%;" toggleable="true"
+					toggleSpeed="500">
+
+					<script type="text/javascript">
+
+						google.charts.load('current', {'packages':['timeline'], 'language':'pt_BR'});
+				      	google.charts.setOnLoadCallback(drawChart);
+				      	function drawChart() {
+					      	
+				        	var container = document.getElementById('timeline');
+				        	var chart = new google.visualization.Timeline(container);
+				        	var dataTable = new google.visualization.DataTable();
+
+				        	dataTable.addColumn({ type: 'string', id: 'Fase' });
+				        	dataTable.addColumn({ type: 'date', id: 'Início' });
+				        	dataTable.addColumn({ type: 'date', id: 'Fim' });
+				        	
+						    <ui:repeat var="time" value="#{grafico.listaTimeLine()}">										
+		
+									dataTable.addRow(['#{time.nome}', new Date(Date.parse('#{time.dataInicio}')), new Date(Date.parse('#{time.dataFim}'))]);
+							
+							</ui:repeat>	
+
+							chart.draw(dataTable);
+											        	
+				      }
+
+					</script>
+					
+					<div id="timeline" style="height: 180px;" />
+
 
 				</p:fieldset>
 
