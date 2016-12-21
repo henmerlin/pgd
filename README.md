@@ -1,4 +1,4 @@
-PDG
+PGD
 ===================
 ### Desenvolvedor
 \#| Nome
