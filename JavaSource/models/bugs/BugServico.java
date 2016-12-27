@@ -73,7 +73,7 @@ public class BugServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Id do bug n„o existe.");
+			throw new Exception("Id do bug n√£o existe.");
 			
 		}
 		

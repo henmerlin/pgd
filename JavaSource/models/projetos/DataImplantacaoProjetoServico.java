@@ -75,7 +75,7 @@ public class DataImplantacaoProjetoServico {
 			
 		} catch (Exception e) {
 
-			throw new Exception("Não possui data de implantação, por favor cadastre.");
+			throw new Exception("NÃ£o possui data de implantaÃ§Ã£o, por favor cadastre.");
 			
 		}
 		

@@ -1,342 +1,353 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/recursos/template/template.xhtml">
+    <ui:composition template="/recursos/template/template.xhtml">
 
-	<ui:define name="tituloPagina">
-		 Gerenciar Bug
-	</ui:define>
-	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Gerenciar Bug</ui:define>
-	<ui:define name="tituloSecundario"></ui:define>
+        <ui:define name="tituloPagina">
+            Gerenciar Bug
+        </ui:define>
+        <ui:define name="tituloPrincipal">
+            <i class="fa fa-align-left"> </i> Gerenciar Bug</ui:define>
+        <ui:define name="tituloSecundario"></ui:define>
 
-	<ui:define name="botoesAcao"></ui:define>
+        <ui:define name="botoesAcao"></ui:define>
 
-	<ui:insert name="eventos">
-		<f:metadata>
+        <ui:insert name="eventos">
+            <f:metadata>
 
-			<f:event listener="#{loginBean.validaPagina('Bugs')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaPagina('Bugs')}"
+                         type="preRenderView" />
 
-			<f:event listener="#{loginBean.validaAdmin('Bugs')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaAdmin('Bugs')}"
+                         type="preRenderView" />
 
-		</f:metadata>
-	</ui:insert>
+            </f:metadata>
+        </ui:insert>
 
-	<ui:define name="conteudo">
+        <ui:define name="conteudo">
 
-		<h:form id="form">
+            <h:form id="form">
 
-			<p:panel header="Gerenciar PPs">
+                <p:panel header="Gerenciar PPs">
 
-				<p:dataTable var="bug" value="#{bugBean.listarBugs()}" rows="10"
-					paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 15, 20, 30, 40, 50"
-					emptyMessage="Não há bugs registrados">
+                    <p:dataTable id="listarBugs" var="bug" value="#{bugBean.listarBugs()}" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20, 30, 40, 50"
+                                 emptyMessage="Não há bugs registrados">
 
-					<p:column headerText="Nome" style="text-align: center;"
-						sortBy="#{bug.titulo}">
+                        <f:facet name="{Exporters}">
 
-						<h:outputText value="#{bug.titulo}" />
+                            <h:commandLink>
 
-					</p:column>
+                                <i class="fa fa-download"></i> Exportar						
+                                <p:dataExporter type="xls" target="listarBugs" fileName="bugs" />
 
-					<p:column headerText="Códigos" style="text-align: center;">
+                            </h:commandLink>
 
-						<h:outputText
-							value=" #{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bug)} " />
+                        </f:facet>
 
-					</p:column>
+                        <p:column headerText="Nome" style="text-align: center;"
+                                  sortBy="#{bug.titulo}">
 
-					<p:column headerText="Sistemas" style="text-align: center;">
+                            <h:outputText value="#{bug.titulo}" />
 
+                        </p:column>
 
-						<h:outputText
-							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bug)}" />
+                        <p:column headerText="Códigos" style="text-align: center;">
 
-					</p:column>
+                            <h:outputText
+                                value=" #{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bug)} " />
 
-					<p:column headerText="Status" style="text-align: center;">
+                        </p:column>
 
-						<h:outputText value="#{bug.statusBug.nome}" />
+                        <p:column headerText="Sistemas" style="text-align: center;">
 
-					</p:column>
 
-					<p:column headerText="Solicitante" style="text-align: center;">
+                            <h:outputText
+                                value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bug)}" />
 
-						<h:outputText value="#{bug.solicitante}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Status" style="text-align: center;">
 
-					<p:column headerText="Area Solicitante" style="text-align: center;">
+                            <h:outputText value="#{bug.statusBug.nome}" />
 
-						<h:outputText value="#{bug.areaSolicitante}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Solicitante" style="text-align: center;">
 
-					<p:column headerText="Data Abertura" style="text-align: center;">
+                            <h:outputText value="#{bug.solicitante}" />
 
-						<h:outputText value="#{bug.dataAberturaFormatada}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Area Solicitante" style="text-align: center;">
 
-					<p:column headerText="Previsão" style="text-align: center;">
+                            <h:outputText value="#{bug.areaSolicitante}" />
 
-						<h:outputText value="#{bug.previsaoFormatada}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Data Abertura" style="text-align: center;">
 
-					<p:column style="text-align: center; width: 50px;">
+                            <h:outputText value="#{bug.dataAberturaFormatada}" />
 
-						<p:commandButton update="@form:detatlhesBug"
-							oncomplete="PF('infBug').show()" icon="ui-icon-search"
-							title="Detalhes do projeto">
-							<f:setPropertyActionListener value="#{bug}"
-								target="#{bugBean.bug}" />
-						</p:commandButton>
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Previsão" style="text-align: center;">
 
-				</p:dataTable>
+                            <h:outputText value="#{bug.previsaoFormatada}" />
 
-				<p:dialog header="Detalhes Bug" widgetVar="infBug" modal="true"
-					showEffect="fade" hideEffect="fade" width="750" height="450"
-					minWidth="650" minHeight="450">
+                        </p:column>
 
-					<h:panelGroup id="detatlhesBug">
+                        <p:column style="text-align: center; width: 50px;">
 
-						<p:panelGrid rendered="#{not empty bugBean.bug}"
-							columnClasses="label, value" style="width: 100%;">
+                            <p:commandButton update="@form:detatlhesBug"
+                                             oncomplete="PF('infBug').show()" icon="ui-icon-search"
+                                             title="Detalhes do projeto">
+                                <f:setPropertyActionListener value="#{bug}"
+                                                             target="#{bugBean.bug}" />
+                            </p:commandButton>
 
-							<p:row>
+                        </p:column>
 
-								<p:column style="width: 20%;">
+                    </p:dataTable>
 
-									<h:outputText value="Titulo" style="font-weight:bold;" />
+                    <p:dialog header="Detalhes Bug" widgetVar="infBug" modal="true"
+                              showEffect="fade" hideEffect="fade" width="750" height="450"
+                              minWidth="650" minHeight="450">
 
-								</p:column>
+                        <h:panelGroup id="detatlhesBug">
 
-								<p:column>
+                            <p:panelGrid rendered="#{not empty bugBean.bug}"
+                                         columnClasses="label, value" style="width: 100%;">
 
-									<h:outputText value="#{bugBean.bug.titulo}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column style="width: 20%;">
 
-							</p:row>
+                                        <h:outputText value="Titulo" style="font-weight:bold;" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Descrição" style="font-weight:bold" />
+                                        <h:outputText value="#{bugBean.bug.titulo}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{bugBean.bug.descricao}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Descrição" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Solicitante" style="font-weight:bold" />
+                                        <h:outputText value="#{bugBean.bug.descricao}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{bugBean.bug.solicitante}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Solicitante" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Area Solicitante" style="font-weight:bold" />
+                                        <h:outputText value="#{bugBean.bug.solicitante}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{bugBean.bug.areaSolicitante}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Area Solicitante" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Data Abertura" style="font-weight:bold" />
+                                        <h:outputText value="#{bugBean.bug.areaSolicitante}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{bugBean.bug.dataAberturaFormatada}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Data Abertura" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Previsão" style="font-weight:bold" />
+                                        <h:outputText value="#{bugBean.bug.dataAberturaFormatada}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{bugBean.bug.previsaoFormatada}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Previsão" style="font-weight:bold" />
 
-						</p:panelGrid>
+                                    </p:column>
 
-						<br />
+                                    <p:column>
 
-						<p:dataTable
-							value="#{detalhesBugBean.listarDetalhesBugEspecifico(bugBean.bug)}"
-							var="detalhes" emptyMessage="Não há detalhes registrados">
+                                        <h:outputText value="#{bugBean.bug.previsaoFormatada}" />
 
-							<f:facet name="header">Detalhes </f:facet>
+                                    </p:column>
 
-							<p:column headerText="Impacto" style="text-align: center;">
+                                </p:row>
 
-								<h:outputText value="#{detalhes.impactoBug.nome}" />
+                            </p:panelGrid>
 
-							</p:column>
+                            <br />
 
-							<p:column headerText="Prioridade" style="text-align: center;">
+                            <p:dataTable
+                                value="#{detalhesBugBean.listarDetalhesBugEspecifico(bugBean.bug)}"
+                                var="detalhes" emptyMessage="Não há detalhes registrados">
 
-								<h:outputText value="#{detalhes.prioridadeBug.nome}" />
+                                <f:facet name="header">Detalhes </f:facet>
 
-							</p:column>
+                                <p:column headerText="Impacto" style="text-align: center;">
 
-							<p:column headerText="Descrição" style="text-align: center;">
+                                    <h:outputText value="#{detalhes.impactoBug.nome}" />
 
-								<h:outputText value="#{detalhes.descricao}" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Prioridade" style="text-align: center;">
 
-							<p:column headerText="Reincidente" style="text-align: center;">
+                                    <h:outputText value="#{detalhes.prioridadeBug.nome}" />
 
-								<h:outputText rendered="#{detalhes.reincidente}" value="Sim" />
-								<h:outputText rendered="#{!detalhes.reincidente}" value="Não" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Descrição" style="text-align: center;">
 
-							<p:column headerText="Cód Reincidente"
-								style="text-align: center;">
+                                    <h:outputText value="#{detalhes.descricao}" />
 
-								<h:outputText value="#{detalhes.codReincidente}" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Reincidente" style="text-align: center;">
 
-							<p:column headerText="Data Abertura" style="text-align: center;">
+                                    <h:outputText rendered="#{detalhes.reincidente}" value="Sim" />
+                                    <h:outputText rendered="#{!detalhes.reincidente}" value="Não" />
 
-								<h:outputText value="#{detalhes.dataAberturaFormatada}" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Cód Reincidente"
+                                          style="text-align: center;">
 
-							<p:column headerText="Volume" style="text-align: center;">
+                                    <h:outputText value="#{detalhes.codReincidente}" />
 
-								<h:outputText value="#{detalhes.volume}" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Data Abertura" style="text-align: center;">
 
-							<p:column headerText="Paliativo" style="text-align: center;">
+                                    <h:outputText value="#{detalhes.dataAberturaFormatada}" />
 
-								<h:outputText rendered="#{detalhes.paliativo}" value="Sim" />
-								<h:outputText rendered="#{!detalhes.paliativo}" value="Não" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Volume" style="text-align: center;">
 
-							<p:column headerText="Priorizado" style="text-align: center;">
+                                    <h:outputText value="#{detalhes.volume}" />
 
-								<h:outputText rendered="#{detalhes.priorizado}" value="Sim" />
-								<h:outputText rendered="#{!detalhes.priorizado}" value="Não" />
+                                </p:column>
 
-							</p:column>
+                                <p:column headerText="Paliativo" style="text-align: center;">
 
-						</p:dataTable>
+                                    <h:outputText rendered="#{detalhes.paliativo}" value="Sim" />
+                                    <h:outputText rendered="#{!detalhes.paliativo}" value="Não" />
 
-						<br />
+                                </p:column>
 
-						<p:dataTable
-							value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug, true)}"
-							var="cod" style="margin-top: 20px;"
-							emptyMessage="Não há Códigos registrados">
+                                <p:column headerText="Priorizado" style="text-align: center;">
 
-							<f:facet name="header">Códigos </f:facet>
+                                    <h:outputText rendered="#{detalhes.priorizado}" value="Sim" />
+                                    <h:outputText rendered="#{!detalhes.priorizado}" value="Não" />
 
-							<p:column headerText="Nome" style="text-align: center;">
+                                </p:column>
 
-								<h:outputText value="#{cod.codigoBug.nome}" />
+                            </p:dataTable>
 
-							</p:column>
+                            <br />
 
-							<p:column headerText="Código" style="text-align: center;">
+                            <p:dataTable
+                                value="#{codigoBugDescricaoBean.listarCodigoDescricaoBugEspecifico(bugBean.bug, true)}"
+                                var="cod" style="margin-top: 20px;"
+                                emptyMessage="Não há Códigos registrados">
 
-								<h:outputText value="#{cod.nome}" />
+                                <f:facet name="header">Códigos </f:facet>
 
-							</p:column>
+                                <p:column headerText="Nome" style="text-align: center;">
 
-						</p:dataTable>
+                                    <h:outputText value="#{cod.codigoBug.nome}" />
 
-						<br />
+                                </p:column>
 
-						<p:dataTable
-							value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug, true)}"
-							var="sist" style="margin-top: 20px;"
-							emptyMessage="Não há Sistemas registrados">
+                                <p:column headerText="Código" style="text-align: center;">
 
-							<f:facet name="header">Sistema Afetado </f:facet>
+                                    <h:outputText value="#{cod.nome}" />
 
-							<p:column headerText="Sistema" style="text-align: center;">
+                                </p:column>
 
-								<h:outputText value="#{sist.sistemaAfetado.nome}" />
+                            </p:dataTable>
 
-							</p:column>
+                            <br />
 
-						</p:dataTable>
+                            <p:dataTable
+                                value="#{sistemaAfetadoBugBean.listarSistemaAfetadoEspecificoBug(bugBean.bug, true)}"
+                                var="sist" style="margin-top: 20px;"
+                                emptyMessage="Não há Sistemas registrados">
 
-						<br />
+                                <f:facet name="header">Sistema Afetado </f:facet>
 
-						<p:button outcome="detalhesBug" value="Modificar"
-							style="float: right;">
+                                <p:column headerText="Sistema" style="text-align: center;">
 
-							<f:param name="bug" value="#{bugBean.bug.id}" />
+                                    <h:outputText value="#{sist.sistemaAfetado.nome}" />
 
-						</p:button>
+                                </p:column>
 
-					</h:panelGroup>
+                            </p:dataTable>
 
-				</p:dialog>
+                            <br />
 
-			</p:panel>
+                            <p:button outcome="detalhesBug" value="Modificar"
+                                      style="float: right;">
 
-		</h:form>
+                                <f:param name="bug" value="#{bugBean.bug.id}" />
 
-	</ui:define>
-</ui:composition>
+                            </p:button>
+
+                        </h:panelGroup>
+
+                    </p:dialog>
+
+                </p:panel>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
 </html>

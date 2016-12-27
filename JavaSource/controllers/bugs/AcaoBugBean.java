@@ -35,7 +35,7 @@ public class AcaoBugBean {
 		try {
 			
 			this.acaoBugServico.cadastrarAcao(this.acaoBug, bug);
-			JSFUtil.addInfoMessage("Ac�o cadastrada com sucesso.");
+			JSFUtil.addInfoMessage("Ação cadastrada com sucesso.");
 			this.acaoBug = new AcaoBug();
 			
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class AcaoBugBean {
 		try {
 			
 			this.acaoBugServico.modificarAcao(this.acaoBugModifica);
-			JSFUtil.addInfoMessage("Ac�o modifica com sucesso.");
+			JSFUtil.addInfoMessage("Ação�o modifica com sucesso.");
 			this.acaoBugModifica = new AcaoBug();
 			
 		} catch (Exception e) {

@@ -51,7 +51,7 @@ public class CodigoPpBean {
 		try {
 			
 			this.codigoPpServico.modificaCodigoPp(this.codigoPpModifica);
-			JSFUtil.addInfoMessage("Código para o pp modificado com sucesso");
+			JSFUtil.addInfoMessage("CÃ³digo para o pp modificado com sucesso");
 			this.codigoPpModifica = new CodigoPp();
 			
 		} catch (Exception e) {

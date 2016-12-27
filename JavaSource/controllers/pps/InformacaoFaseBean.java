@@ -14,80 +14,80 @@ import util.JSFUtil;
 @ManagedBean
 @ViewScoped
 public class InformacaoFaseBean {
-	
-	private InformacaoFase informacaoFase;
-	
-	private InformacaoFase informacaoFaseModifica;
-	
-	@EJB
-	private InformacaoFaseServico informacaoFaseServico;
 
-	public InformacaoFaseBean() {
-		
-		this.informacaoFase = new InformacaoFase();
-		
-		this.informacaoFaseModifica = new InformacaoFase();
-		
-	}
-	
-	public void cadastrarInformacaoFase(Pp pp) {
-		
-		try {			
-					
-			this.informacaoFaseServico.cadastrarInformacaoFase(this.informacaoFase, pp);
-			JSFUtil.addInfoMessage("Informação fase cadastrada com sucesso.");
-			this.informacaoFase = new InformacaoFase();
-			
-		} catch (Exception e) {
-			
-			JSFUtil.addErrorMessage(e.getMessage());
+    private InformacaoFase informacaoFase;
 
-		}
-		
-	}
-	
-	public void modificarInformacaoFase(Pp pp) {
-		
-		try {
-			
-			this.informacaoFaseServico.modificarInformacaoFase(this.informacaoFaseModifica);
-			JSFUtil.addInfoMessage("Informação modificada com sucesso.");
-			this.informacaoFase = new InformacaoFase();
-			
-		} catch (Exception e) {
-			
-			JSFUtil.addErrorMessage(e.getMessage());
-			
-		}
-		
-	}
-	
-	public List<InformacaoFase> listarInformacaoFaseEspecifico(Pp pp) {
-		
-		return this.informacaoFaseServico.listarInformacaoFaseEspecifico(pp);
-		
-	}
-	
-	public List<InformacaoFase> listarInformaçãoFase() {
-		
-		return this.informacaoFaseServico.listarInformaçãoFase();
-		
-	}
+    private InformacaoFase informacaoFaseModifica;
 
-	public InformacaoFase getInformacaoFase() {
-		return informacaoFase;
-	}
+    @EJB
+    private InformacaoFaseServico informacaoFaseServico;
 
-	public void setInformacaoFase(InformacaoFase informacaoFase) {
-		this.informacaoFase = informacaoFase;
-	}
+    public InformacaoFaseBean() {
 
-	public InformacaoFase getInformacaoFaseModifica() {
-		return informacaoFaseModifica;
-	}
+        this.informacaoFase = new InformacaoFase();
 
-	public void setInformacaoFaseModifica(InformacaoFase informacaoFaseModifica) {
-		this.informacaoFaseModifica = informacaoFaseModifica;
-	}	
-	
+        this.informacaoFaseModifica = new InformacaoFase();
+
+    }
+
+    public void cadastrarInformacaoFase(Pp pp) {
+
+        try {
+
+            this.informacaoFaseServico.cadastrarInformacaoFase(this.informacaoFase, pp);
+            JSFUtil.addInfoMessage("Informaï¿½ï¿½o fase cadastrada com sucesso.");
+            this.informacaoFase = new InformacaoFase();
+
+        } catch (Exception e) {
+
+            JSFUtil.addErrorMessage(e.getMessage());
+
+        }
+
+    }
+
+    public void modificarInformacaoFase(Pp pp) {
+
+        try {
+
+            this.informacaoFaseServico.modificarInformacaoFase(this.informacaoFaseModifica);
+            JSFUtil.addInfoMessage("Informaï¿½ï¿½o modificada com sucesso.");
+            this.informacaoFase = new InformacaoFase();
+
+        } catch (Exception e) {
+
+            JSFUtil.addErrorMessage(e.getMessage());
+
+        }
+
+    }
+
+    public List<InformacaoFase> listarInformacaoFaseEspecifico(Pp pp) {
+
+        return this.informacaoFaseServico.listarInformacaoFaseEspecifico(pp);
+
+    }
+    
+    public List<InformacaoFase> listarInformacaoFase() {
+        
+        return this.informacaoFaseServico.listarInformacaoFase();
+        
+    }
+
+    public InformacaoFase getInformacaoFase() {
+        return informacaoFase;
+    }
+
+    public void setInformacaoFase(InformacaoFase informacaoFase) {
+        this.informacaoFase = informacaoFase;
+    }
+
+    public InformacaoFase getInformacaoFaseModifica() {
+        return informacaoFaseModifica;
+    }
+
+    public void setInformacaoFaseModifica(InformacaoFase informacaoFaseModifica) {
+        this.informacaoFaseModifica = informacaoFaseModifica;
+    }
+
 }

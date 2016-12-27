@@ -27,7 +27,7 @@ public class CodigoBugDescricaoServico {
 			
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Descrição.");
+			throw new Exception("Erro ao cadastrar DescriÃ§Ã£o.");
 			
 		}
 		
@@ -41,7 +41,7 @@ public class CodigoBugDescricaoServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao modificar Descrição.");
+			throw new Exception("Erro ao modificar DescriÃ§Ã£o.");
 			
 		}
 		

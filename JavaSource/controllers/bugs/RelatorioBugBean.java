@@ -74,7 +74,7 @@ public class RelatorioBugBean implements Serializable{
 			
 		}	
 				
-		this.graficoPorStatus.setTitle("Gr·fico Status");
+		this.graficoPorStatus.setTitle("Gr√°fico Status");
 		this.graficoPorStatus.setLegendPosition("w");
 		this.graficoPorStatus.setShowDataLabels(true);
 		this.graficoPorStatus.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");
@@ -96,7 +96,7 @@ public class RelatorioBugBean implements Serializable{
 			
 		}
 		
-		this.graficoPorFases.setTitle("Gr·fico Fase");
+		this.graficoPorFases.setTitle("Gr√°fico Fase");
 		this.graficoPorFases.setLegendPosition("e");
 		this.graficoPorFases.setShowDataLabels(true);
 		this.graficoPorFases.setSeriesColors("003245, 004356, 005466, 006476, 007486, 008597, 0095A7, 005B7, 0086C7, 00C6D7");

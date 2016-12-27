@@ -34,7 +34,7 @@ public class CodigoBugBean {
 		try {
 			
 			this.codigoBugServico.cadastrarCodigoBug(this.codigoBug);
-			JSFUtil.addInfoMessage("Código cadastrado com sucesso.");
+			JSFUtil.addInfoMessage("CÃ³digo cadastrado com sucesso.");
 			this.codigoBug = new CodigoBug();
 			
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class CodigoBugBean {
 		try {
 			
 			this.codigoBugServico.modificarCodigoBug(this.codigoBugModifica);
-			JSFUtil.addInfoMessage("Código modificado com sucesso.");
+			JSFUtil.addInfoMessage("CÃ³digo modificado com sucesso.");
 			this.codigoBugModifica = new CodigoBug();
 			
 		} catch (Exception e) {

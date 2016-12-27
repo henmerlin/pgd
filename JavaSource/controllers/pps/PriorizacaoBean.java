@@ -35,7 +35,7 @@ public class PriorizacaoBean {
 		try {
 			
 			this.priorizacaoServico.cadastrarPriorizacao(this.priorizacao, pp);
-			JSFUtil.addInfoMessage("Priorização cadastrada com sucesso.");
+			JSFUtil.addInfoMessage("PriorizaÃ§Ã£o cadastrada com sucesso.");
 			this.priorizacao = new Priorizacao();
 			
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class PriorizacaoBean {
 		try {
 			
 			this.priorizacaoServico.modificarPriorizacao(this.priorizacaoModifica);
-			JSFUtil.addInfoMessage("Priorização modificada com sucesso.");
+			JSFUtil.addInfoMessage("PriorizaÃ§Ã£o modificada com sucesso.");
 			this.priorizacaoModifica = new Priorizacao();
 			
 		} catch (Exception e) {

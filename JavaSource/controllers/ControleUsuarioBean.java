@@ -75,7 +75,7 @@ public class ControleUsuarioBean {
 		try {
 			
 			this.controleUsuario = this.controleUsuarioServico.buscarControleUsuarioEspecifico(this.controleUsuario.getUsuarioEfika());
-			JSFUtil.addInfoMessage("Controle para o usu·rio j· cadastrado, por favor modifique na lista.");			
+			JSFUtil.addInfoMessage("Controle para o usu√°rio j√° cadastrado, por favor modifique na lista.");			
 			
 		} catch (Exception e) {
 			

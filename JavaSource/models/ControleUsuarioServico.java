@@ -39,7 +39,7 @@ public class ControleUsuarioServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao cadastrar Controle do Usu·rio");
+			throw new Exception("Erro ao cadastrar Controle do Usu√°rio");
 			
 		}
 		
@@ -67,7 +67,7 @@ public class ControleUsuarioServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao modificar Controle do Usu·rio");
+			throw new Exception("Erro ao modificar Controle do Usu√°rio");
 			
 		}
 		

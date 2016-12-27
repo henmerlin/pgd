@@ -1,359 +1,370 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/recursos/template/template.xhtml">
+    <ui:composition template="/recursos/template/template.xhtml">
 
-	<ui:define name="tituloPagina">
-		 Gerenciar Projeto
-	</ui:define>
-	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
-	<ui:define name="tituloSecundario"></ui:define>
+        <ui:define name="tituloPagina">
+            Gerenciar Projeto
+        </ui:define>
+        <ui:define name="tituloPrincipal">
+            <i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
+        <ui:define name="tituloSecundario"></ui:define>
 
-	<ui:define name="botoesAcao"></ui:define>
+        <ui:define name="botoesAcao"></ui:define>
 
-	<ui:insert name="eventos">
-		<f:metadata>
+        <ui:insert name="eventos">
+            <f:metadata>
 
-			<f:event listener="#{loginBean.validaPagina('Projetos')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaPagina('Projetos')}"
+                         type="preRenderView" />
 
-			<f:event listener="#{loginBean.validaAdmin('Projetos')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaAdmin('Projetos')}"
+                         type="preRenderView" />
 
-		</f:metadata>
-	</ui:insert>
+            </f:metadata>
+        </ui:insert>
 
-	<ui:define name="conteudo">
+        <ui:define name="conteudo">
 
-		<h:form id="form">
+            <h:form id="form">
 
-			<p:panel header="Gerenciar Projetos">
+                <p:panel header="Gerenciar Projetos">
 
-				<p:dataTable var="proj" value="#{projetoBean.listarProjetos()}"
-					rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 15, 20"
-					emptyMessage="Não há projetos registradas"
-					filteredValue="#{projetoBean.listaDeProjetosFiltred}">
+                    <p:dataTable id="listaprojetos" var="proj" value="#{projetoBean.listarProjetos()}"
+                                 rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20"
+                                 emptyMessage="Não há projetos registradas"
+                                 filteredValue="#{projetoBean.listaDeProjetosFiltred}">
 
-					<p:column headerText="Nome do Projeto" style="text-align: center;"
-						filterBy="#{proj.nome}" filterMatchMode="contains">
+                        <f:facet name="{Exporters}">
 
-						<h:outputText value="#{proj.nome}" />
+                            <h:commandLink>
 
-					</p:column>
+                                <i class="fa fa-download"></i> Exportar						
+                                <p:dataExporter type="xls" target="listaprojetos" fileName="projetos" />
 
-					<p:column headerText="Nome do Focal" style="text-align: center;"
-						filterBy="#{proj.nomeFocal}" filterMatchMode="contains">
+                            </h:commandLink>
 
-						<h:outputText value="#{proj.nomeFocal}" />
+                        </f:facet>
 
-					</p:column>
+                        <p:column headerText="Nome do Projeto" style="text-align: center;"
+                                  filterBy="#{proj.nome}" filterMatchMode="contains">
 
-					<p:column headerText="Gerente de projeto"
-						style="text-align: center;">
+                            <h:outputText value="#{proj.nome}" />
 
-						<h:outputText value="#{proj.nomeGp}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Nome do Focal" style="text-align: center;"
+                                  filterBy="#{proj.nomeFocal}" filterMatchMode="contains">
 
-					<p:column headerText="Tipo" style="text-align: center;"
-						filterBy="#{proj.tipoProjeto.nome}" filterMatchMode="contains">
+                            <h:outputText value="#{proj.nomeFocal}" />
 
-						<h:outputText value="#{proj.tipoProjeto.nome}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Gerente de projeto"
+                                  style="text-align: center;">
 
-					<p:column headerText="Status Projeto" style="text-align: center;"
-						filterBy="#{proj.statusProjeto.nome}" filterMatchMode="contains"
-						styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
-						#{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
-						#{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
-						#{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
-						#{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
+                            <h:outputText value="#{proj.nomeGp}" />
 
-						<h:outputText value="Não informado"
-							rendered="#{proj.statusProjeto.nome==null}" />
+                        </p:column>
 
-						<h:outputText value="#{proj.statusProjeto.nome}" />
+                        <p:column headerText="Tipo" style="text-align: center;"
+                                  filterBy="#{proj.tipoProjeto.nome}" filterMatchMode="contains">
 
-					</p:column>
+                            <h:outputText value="#{proj.tipoProjeto.nome}" />
 
-					<p:column headerText="Data Prevista de entrega"
-						style="text-align: center;"
-						sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
+                        </p:column>
 
-						<h:outputText
-							value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
+                        <p:column headerText="Status Projeto" style="text-align: center;"
+                                  filterBy="#{proj.statusProjeto.nome}" filterMatchMode="contains"
+                                  styleClass="#{proj.statusProjeto.nome == 'A iniciar' ? 'colorSeAIniciar' : null} 
+                                  #{proj.statusProjeto.nome == 'Em andamento' ? 'colorSeEmAndamento' : null} 
+                                  #{proj.statusProjeto.nome == 'Concluído' ? 'colorSeConcluido' : null} 
+                                  #{proj.statusProjeto.nome == 'Paralisado' ? 'colorSeParalisado' : null} 
+                                  #{proj.statusProjeto.nome == 'Cancelado' ? 'colorSeCancelado' : null}">
 
-						<h:outputText value=" Atraso" styleClass="semafaroVermelho"
-							rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Antes') 										
-										and !proj.statusProjeto.nome.equals('Concluído')}" />
-						<h:outputText value=" Em dia" styleClass="semafaroVerde"
-							rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Depois')
-										or dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('No dia')
-										and !proj.statusProjeto.nome.equals('Concluído')}" />
+                            <h:outputText value="Não informado"
+                                          rendered="#{proj.statusProjeto.nome==null}" />
 
-					</p:column>
+                            <h:outputText value="#{proj.statusProjeto.nome}" />
 
-					<p:column headerText="Impacto" style="text-align: center;"
-						filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
-						filterMatchMode="contains"
-						styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
-						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
-						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
-						#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null ? 'semafaroVazio' : null}">
+                        </p:column>
 
-						<!-- <h:outputText
-							value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" /> -->
+                        <p:column headerText="Data Prevista de entrega"
+                                  style="text-align: center;"
+                                  sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
 
-						<span class="fa fa-circle" />
+                            <h:outputText
+                                value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
 
-					</p:column>
+                            <h:outputText value=" Atraso" styleClass="semafaroVermelho"
+                                          rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Antes') 										
+                                                      and !proj.statusProjeto.nome.equals('Concluído')}" />
+                            <h:outputText value=" Em dia" styleClass="semafaroVerde"
+                                          rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Depois')
+                                                      or dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('No dia')
+                                                      and !proj.statusProjeto.nome.equals('Concluído')}" />
 
-					<p:column headerText="% de Conclusão" style="text-align: center;"
-						sortBy="#{faseProjetoBean.porcentagemDoProjeto(proj)}">
+                        </p:column>
 
-						<p:progressBar
-							value="#{faseProjetoBean.porcentagemDoProjeto(proj)}"
-							labelTemplate="{value}%" displayOnly="true" />
+                        <p:column headerText="Impacto" style="text-align: center;"
+                                  filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
+                                  filterMatchMode="contains"
+                                  styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
+                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
+                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
+                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null ? 'semafaroVazio' : null}">
 
-					</p:column>
+                            <!-- <h:outputText
+                                    value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" /> -->
 
-					<p:column style="text-align: center; width: 50px;">
+                            <span class="fa fa-circle" />
 
-						<p:commandButton update="@form:detatlhesProj"
-							oncomplete="PF('infProj').show()" icon="ui-icon-search"
-							title="Detalhes do projeto">
-							<f:setPropertyActionListener value="#{proj}"
-								target="#{projetoBean.projeto}" />
-						</p:commandButton>
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="% de Conclusão" style="text-align: center;"
+                                  sortBy="#{faseProjetoBean.porcentagemDoProjeto(proj)}">
 
-				</p:dataTable>
+                            <p:progressBar
+                                value="#{faseProjetoBean.porcentagemDoProjeto(proj)}"
+                                labelTemplate="{value}%" displayOnly="true" />
 
-				<p:dialog header="Detalhes do Projeto" widgetVar="infProj"
-					modal="true" showEffect="fade" hideEffect="fade" width="500"
-					height="300" minHeight="300" minWidth="500" closeOnEscape="true">
+                        </p:column>
 
-					<h:panelGroup id="detatlhesProj">
+                        <p:column style="text-align: center; width: 50px;">
 
-						<p:panelGrid rendered="#{not empty projetoBean.projeto}"
-							columnClasses="label, value" style="width: 100%;">
+                            <p:commandButton update="@form:detatlhesProj"
+                                             oncomplete="PF('infProj').show()" icon="ui-icon-search"
+                                             title="Detalhes do projeto">
+                                <f:setPropertyActionListener value="#{proj}"
+                                                             target="#{projetoBean.projeto}" />
+                            </p:commandButton>
 
-							<p:row>
+                        </p:column>
 
-								<p:column>
+                    </p:dataTable>
 
-									<h:outputText value="Nome do projeto:" style="font-weight:bold" />
+                    <p:dialog header="Detalhes do Projeto" widgetVar="infProj"
+                              modal="true" showEffect="fade" hideEffect="fade" width="500"
+                              height="300" minHeight="300" minWidth="500" closeOnEscape="true">
 
-								</p:column>
+                        <h:panelGroup id="detatlhesProj">
 
-								<p:column>
+                            <p:panelGrid rendered="#{not empty projetoBean.projeto}"
+                                         columnClasses="label, value" style="width: 100%;">
 
-									<h:outputText value="#{projetoBean.projeto.nome}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome do projeto:" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Impacto CO: " style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.nome}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="Sim"
-										rendered="#{projetoBean.projeto.impactaCo}" />
-									<h:outputText value="Não"
-										rendered="#{!projetoBean.projeto.impactaCo}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Impacto CO: " style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Descrição do projeto: "
-										style="font-weight:bold" />
+                                        <h:outputText value="Sim"
+                                                      rendered="#{projetoBean.projeto.impactaCo}" />
+                                        <h:outputText value="Não"
+                                                      rendered="#{!projetoBean.projeto.impactaCo}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.descricao}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Descrição do projeto: "
+                                                      style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Saving: " style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.descricao}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="R$ #{projetoBean.projeto.saving}">
+                                <p:row>
 
-										<f:convertNumber currencyCode="R$" type="currency" />
+                                    <p:column>
 
-									</h:outputText>
+                                        <h:outputText value="Saving: " style="font-weight:bold" />
 
-								</p:column>
+                                    </p:column>
 
-							</p:row>
+                                    <p:column>
 
-							<p:row>
+                                        <h:outputText value="R$ #{projetoBean.projeto.saving}">
 
-								<p:column>
+                                            <f:convertNumber currencyCode="R$" type="currency" />
 
-									<h:outputText value="Nome GP PMO: " style="font-weight:bold" />
+                                        </h:outputText>
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.nomeGp}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome GP PMO: " style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Telefone GP PMO: "
-										style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.nomeGp}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.telefoneGp}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Telefone GP PMO: "
+                                                      style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Nome GP Vp: " style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.telefoneGp}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.nomeGpVp}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome GP Vp: " style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Telefone GP PMO: "
-										style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.nomeGpVp}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.telefoneGpVp}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Telefone GP PMO: "
+                                                      style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Nome Focal CO: " style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.telefoneGpVp}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.nomeFocal}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome Focal CO: " style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Nome Especialista: "
-										style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.nomeFocal}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.nomeEspecialista}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome Especialista: "
+                                                      style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Areas Envolvidas: "
-										style="font-weight:bold" />
+                                        <h:outputText value="#{projetoBean.projeto.nomeEspecialista}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{projetoBean.projeto.areaEnvolvida}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Areas Envolvidas: "
+                                                      style="font-weight:bold" />
 
-						</p:panelGrid>
+                                    </p:column>
 
-						<br />
+                                    <p:column>
 
-						<p:button outcome="detalhesProjeto" value="Modificar"
-							style="float: right;">
+                                        <h:outputText value="#{projetoBean.projeto.areaEnvolvida}" />
 
-							<f:param name="proj" value="#{projetoBean.projeto.id}" />
+                                    </p:column>
 
-						</p:button>
+                                </p:row>
 
-					</h:panelGroup>
+                            </p:panelGrid>
 
-				</p:dialog>
-			</p:panel>
+                            <br />
 
-		</h:form>
+                            <p:button outcome="detalhesProjeto" value="Modificar"
+                                      style="float: right;">
 
+                                <f:param name="proj" value="#{projetoBean.projeto.id}" />
 
-	</ui:define>
-</ui:composition>
+                            </p:button>
+
+                        </h:panelGroup>
+
+                    </p:dialog>
+                </p:panel>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
 </html>

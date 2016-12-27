@@ -107,10 +107,10 @@ public class RelatorioBean implements Serializable {
 		
 		List<SequenciaRelatorioProjeto> sequenciaRelatorioProjeto = this.sequenciaRelatorioProjetoServico.listarSequenciaRelatorioProjetoAtivo();
 		
-		this.graficoEvolucao.set("Evolucao", this.projetoServico.listarProjetoEvolucao(true, sequenciaRelatorioProjeto).size());
-		this.graficoEvolucao.set("N�o Evolucao", this.projetoServico.listarProjetoEvolucao(false, sequenciaRelatorioProjeto).size());
+		this.graficoEvolucao.set("Evolução", this.projetoServico.listarProjetoEvolucao(true, sequenciaRelatorioProjeto).size());
+		this.graficoEvolucao.set("Não Evolução", this.projetoServico.listarProjetoEvolucao(false, sequenciaRelatorioProjeto).size());
 		
-		this.graficoEvolucao.setTitle("Grafico Evolucao");
+		this.graficoEvolucao.setTitle("Gráfico Evolução");
 		this.graficoEvolucao.setLegendPosition("sw");
 		this.graficoEvolucao.setShowDataLabels(true);
 		
@@ -133,7 +133,7 @@ public class RelatorioBean implements Serializable {
 		}
 		
 		
-		this.graficoFases.setTitle("Grafico Fases");
+		this.graficoFases.setTitle("Gráfico Fases");
 		this.graficoFases.setLegendPosition("sw");
 		this.graficoFases.setShowDataLabels(true);
 		
@@ -153,7 +153,7 @@ public class RelatorioBean implements Serializable {
 			
 		}
 		
-		this.graficoProjPreProj.setTitle("Grafico Tipo Projeto");
+		this.graficoProjPreProj.setTitle("Gráfico Tipo Projeto");
 		this.graficoProjPreProj.setLegendPosition("sw");
 		this.graficoProjPreProj.setShowDataLabels(true);
 		
@@ -173,7 +173,7 @@ public class RelatorioBean implements Serializable {
 			
 			for (TipoProjeto tipoProjeto : tipoProjetos) {
 				
-				if (tipoProjeto.getNome().equalsIgnoreCase("Pr� Projeto")) {
+				if (tipoProjeto.getNome().equalsIgnoreCase("Pré Projeto")) {
 					
 					Integer total = this.projetoServico.listarProjetoPorStatusETipo(statusProjeto, tipoProjeto).size();
 					
@@ -191,11 +191,11 @@ public class RelatorioBean implements Serializable {
 			
 		}
 		
-		this.graficoStatusPorTipo.setTitle("Grafico Tipo Projeto por Status - Pr� Projeto");
+		this.graficoStatusPorTipo.setTitle("Gráfico Tipo Projeto por Status - Pré Projeto");
 		this.graficoStatusPorTipo.setLegendPosition("sw");
 		this.graficoStatusPorTipo.setShowDataLabels(true);
 		
-		this.graficoStatusPorTipoPre.setTitle("Grafico Tipo Projeto por Status - Projeto");
+		this.graficoStatusPorTipoPre.setTitle("Gráfico Tipo Projeto por Status - Projeto");
 		this.graficoStatusPorTipoPre.setLegendPosition("sw");
 		this.graficoStatusPorTipoPre.setShowDataLabels(true);
 		
@@ -221,13 +221,13 @@ public class RelatorioBean implements Serializable {
 			} else {
 				
 				Integer totalFalse = this.projetoServico.listarProjetosPorImpactoETipo(false, tipoProjeto).size();
-				this.graficoImpactoPorTipo.set(tipoProjeto.getNome() + " - N�o Impacta o CO", totalFalse);
+				this.graficoImpactoPorTipo.set(tipoProjeto.getNome() + " - Não Impacta o CO", totalFalse);
 				
 			}
 						
 		}
 		
-		this.graficoImpactoPorTipo.setTitle("Grafico Tipo Projeto por Impacto");
+		this.graficoImpactoPorTipo.setTitle("Gráfico Tipo Projeto por Impacto");
 		this.graficoImpactoPorTipo.setLegendPosition("sw");
 		this.graficoImpactoPorTipo.setShowDataLabels(true);		
 		

@@ -35,7 +35,7 @@ public class CodigoBugDescricaoBean {
 		try {
 			
 			this.codigoBugDescricaoServico.cadastrarDescricao(this.codigoBugDescricao, bug);
-			JSFUtil.addInfoMessage("Descrição cadastrada com sucesso.");
+			JSFUtil.addInfoMessage("DescriÃ§Ã£o cadastrada com sucesso.");
 			this.codigoBugDescricao = new CodigoBugDescricao();
 			
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class CodigoBugDescricaoBean {
 		try {
 			
 			this.codigoBugDescricaoServico.modificarDescricao(this.codigoBugDescricaoModifica);
-			JSFUtil.addInfoMessage("Descrição modificada com sucesso.");
+			JSFUtil.addInfoMessage("DescriÃ§Ã£o modificada com sucesso.");
 			this.codigoBugDescricaoModifica = new CodigoBugDescricao();
 			
 		} catch (Exception e) {

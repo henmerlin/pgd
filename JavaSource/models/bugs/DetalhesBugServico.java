@@ -31,7 +31,7 @@ public class DetalhesBugServico {
 
 			}else{
 				
-				throw new Exception("Bug j· possui um detalhe cadastrado.");
+				throw new Exception("Bug j√° possui um detalhe cadastrado.");
 				
 			}
 			

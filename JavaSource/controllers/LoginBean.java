@@ -13,171 +13,182 @@ import util.JSFUtil;
 import webservices.Usuario;
 
 import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
-	private UsuarioEfika usuario;
+    private UsuarioEfika usuario;
 
-	private Usuario usuarioWS;
+    private Usuario usuarioWS;
 
-	private String senha;
-	
-	private String pagina;
-	
-	@EJB
-	private LoginServico servicoLogin;
+    private String senha;
 
-	private boolean logado;
+    private String pagina;
 
-	public LoginBean() {
-		this.usuario = new UsuarioEfika();
-		this.logado = false;
-	}
+    @EJB
+    private LoginServico servicoLogin;
 
-	public void validarLogin() {
-				
-		FacesContext fc = FacesContext.getCurrentInstance();
-		
-		if (!this.logado){
-			
-			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler)
-					fc.getApplication().getNavigationHandler();
-			nav.performNavigation("index.jsf");
-		}
-		
-	}
+    private boolean logado;
 
-	public Boolean is_Admin(String sistema){
+    public LoginBean() {
+        this.usuario = new UsuarioEfika();
+        this.logado = false;
+    }
 
-		ControleUsuario ControleUsuario = new ControleUsuario();
-		
-		String[] sistemaBuscado;
-		
-		Boolean esAdm = false;
-		
-		try {			
-			
-			ControleUsuario = this.servicoLogin.validaListaAdm(this.usuario);
-			
-			sistemaBuscado = ControleUsuario.getSistema().split(";");
-			
-			for (String string : sistemaBuscado) {
-				
-				if (string.equalsIgnoreCase(sistema)) {
-					
-					esAdm = true;
-					
-				}
-				
-			}
-			
-			return esAdm;
-						
-		} catch (Exception e) {
-			
-			return esAdm;
+    public void validarLogin() {
 
-		}
+        FacesContext fc = FacesContext.getCurrentInstance();
 
-	}
+        if (!this.logado) {
+            
+            this.geturl();
 
-	public void validaAdmin(String sistema) {
-		
-		try {
-			
-			this.validarLogin();
+            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+            nav.performNavigation("index.jsf");
+        }
 
-			FacesContext fc = FacesContext.getCurrentInstance();
-						
-			if(!this.is_Admin(sistema)){				
-				
-				ConfigurableNavigationHandler nav  = (ConfigurableNavigationHandler) 
-						fc.getApplication().getNavigationHandler();
-				nav.performNavigation("restrito.jsf");
-				
-			}
-		} catch (Exception e) {
-			
-			this.usuario = new UsuarioEfika();
-			
-		}
-		
-	}
-	
-	public String logar() {
+    }
+    
+    public void geturl() {
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) context.getExternalContext().getRequest();
+        String url = req.getRequestURL().toString();
+        
+    }
 
-		try {
+    public Boolean is_Admin(String sistema) {
 
-			this.usuarioWS = this.servicoLogin.buscaLoginWS(this.usuario.getLogin());
-			this.servicoLogin.autenticaLogin(this.usuarioWS, this.senha);
+        ControleUsuario ControleUsuario = new ControleUsuario();
 
-			this.logado = true;			
-			return "index.jsf"; 
+        String[] sistemaBuscado;
 
-		} catch (Exception e) {
+        Boolean esAdm = false;
 
-			JSFUtil.addErrorMessage(e.getMessage());
-			this.usuario = new UsuarioEfika();
-			return "";
+        try {
 
-		}
+            ControleUsuario = this.servicoLogin.validaListaAdm(this.usuario);
 
-	}
+            sistemaBuscado = ControleUsuario.getSistema().split(";");
 
-	public void deslogar() {
+            for (String string : sistemaBuscado) {
 
-		this.usuario = new UsuarioEfika();
-		this.logado = false;
+                if (string.equalsIgnoreCase(sistema)) {
 
-	}
-	
-	public void validaPagina(String pagina) {
-				
-		this.pagina = pagina;
-		
-	}
+                    esAdm = true;
 
-	public UsuarioEfika getUsuario() {
-		return usuario;
-	}
+                }
 
-	public void setUsuario(UsuarioEfika usuario) {
-		this.usuario = usuario;
-	}
+            }
 
-	public boolean isLogado() {
-		return logado;
-	}
+            return esAdm;
 
-	public void setLogado(boolean logado) {
-		this.logado = logado;
-	}
+        } catch (Exception e) {
 
-	public String getSenha() {
-		return senha;
-	}
+            return esAdm;
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+        }
 
-	public Usuario getUsuarioWS() {
-		return usuarioWS;
-	}
+    }
 
-	public void setUsuarioWS(Usuario usuarioWS) {
-		this.usuarioWS = usuarioWS;
-	}
+    public void validaAdmin(String sistema) {
 
-	public String getPagina() {
-		return pagina;
-	}
+        try {
 
-	public void setPagina(String pagina) {
-		this.pagina = pagina;
-	}
+            this.validarLogin();
+
+            FacesContext fc = FacesContext.getCurrentInstance();
+
+            if (!this.is_Admin(sistema)) {
+
+                ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+                nav.performNavigation("restrito.jsf");
+
+            }
+        } catch (Exception e) {
+
+            this.usuario = new UsuarioEfika();
+
+        }
+
+    }
+
+    public String logar() {
+        
+        try {
+
+            this.usuarioWS = this.servicoLogin.buscaLoginWS(this.usuario.getLogin());
+            this.servicoLogin.autenticaLogin(this.usuarioWS, this.senha);
+
+            this.logado = true;            
+
+            return "index.jsf";
+
+        } catch (Exception e) {
+
+            JSFUtil.addErrorMessage(e.getMessage());
+            this.usuario = new UsuarioEfika();
+
+            return "index.jsf";
+
+        }
+
+    }
+
+    public void deslogar() {
+
+        this.usuario = new UsuarioEfika();
+        this.logado = false;
+
+    }
+
+    public void validaPagina(String pagina) {
+
+        this.pagina = pagina;
+
+    }
+
+    public UsuarioEfika getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEfika usuario) {
+        this.usuario = usuario;
+    }
+
+    public boolean isLogado() {
+        return logado;
+    }
+
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Usuario getUsuarioWS() {
+        return usuarioWS;
+    }
+
+    public void setUsuarioWS(Usuario usuarioWS) {
+        this.usuarioWS = usuarioWS;
+    }
+
+    public String getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(String pagina) {
+        this.pagina = pagina;
+    }
 
 }

@@ -24,7 +24,7 @@ public class CodigoBugServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao cadastrar Código.");
+			throw new Exception("Erro ao cadastrar CÃ³digo.");
 			
 		}		
 		
@@ -38,7 +38,7 @@ public class CodigoBugServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao modificar Código.");
+			throw new Exception("Erro ao modificar CÃ³digo.");
 			
 		}
 		

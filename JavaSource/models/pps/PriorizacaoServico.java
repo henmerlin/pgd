@@ -30,13 +30,13 @@ public class PriorizacaoServico {
 				
 			}else{
 				
-				throw new Exception("Já existe uma Priorização cadastrada.");
+				throw new Exception("JÃ¡ existe uma PriorizaÃ§Ã£o cadastrada.");
 				
 			}
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Priorização.");
+			throw new Exception("Erro ao cadastrar PriorizaÃ§Ã£o.");
 
 		}
 
@@ -50,7 +50,7 @@ public class PriorizacaoServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao modificar Priorização.");
+			throw new Exception("Erro ao modificar PriorizaÃ§Ã£o.");
 
 		}
 

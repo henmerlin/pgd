@@ -1,265 +1,276 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/recursos/template/template.xhtml">
+    <ui:composition template="/recursos/template/template.xhtml">
 
-	<ui:define name="tituloPagina">
-		 Gerenciar Projeto
-	</ui:define>
-	<ui:define name="tituloPrincipal">
-		<i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
-	<ui:define name="tituloSecundario"></ui:define>
+        <ui:define name="tituloPagina">
+            Gerenciar Projeto
+        </ui:define>
+        <ui:define name="tituloPrincipal">
+            <i class="fa fa-align-left"> </i> Gerenciar Projeto</ui:define>
+        <ui:define name="tituloSecundario"></ui:define>
 
-	<ui:define name="botoesAcao"></ui:define>
+        <ui:define name="botoesAcao"></ui:define>
 
-	<ui:insert name="eventos">
-		<f:metadata>
+        <ui:insert name="eventos">
+            <f:metadata>
 
-			<f:event listener="#{loginBean.validaPagina('Pps')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaPagina('Pps')}"
+                         type="preRenderView" />
 
-			<f:event listener="#{loginBean.validaAdmin('Pps')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaAdmin('Pps')}"
+                         type="preRenderView" />
 
-		</f:metadata>
-	</ui:insert>
+            </f:metadata>
+        </ui:insert>
 
-	<ui:define name="conteudo">
+        <ui:define name="conteudo">
 
-		<h:form id="form">
+            <h:form id="form">
 
-			<p:panel header="Gerenciar PPs">
+                <p:panel header="Gerenciar PPs">
 
-				<p:dataTable var="pp" value="#{ppBean.listarPp()}" rows="10"
-					paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 15, 20"
-					emptyMessage="Não há projetos registradas">
+                    <p:dataTable id="listarpps" var="pp" value="#{ppBean.listarPp()}" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20"
+                                 emptyMessage="Não há projetos registradas">
 
-					<p:column headerText="Nome do PP" style="text-align: center;"
-						sortBy="#{pp.nome}">
+                        <f:facet name="{Exporters}">
 
-						<h:outputText value="#{pp.nome}" />
+                            <h:commandLink>
 
-					</p:column>
+                                <i class="fa fa-download"></i> Exportar						
+                                <p:dataExporter type="xls" target="listarpps" fileName="pps" />
 
-					<p:column headerText="Autor" style="text-align: center;">
+                            </h:commandLink>
 
-						<h:outputText value="#{pp.autor}" />
+                        </f:facet>
 
-					</p:column>
+                        <p:column headerText="Nome do PP" style="text-align: center;"
+                                  sortBy="#{pp.nome}">
 
-					<p:column headerText="Solicitante" style="text-align: center;">
+                            <h:outputText value="#{pp.nome}" />
 
-						<h:outputText value="#{pp.solicitante}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Autor" style="text-align: center;">
 
-					<p:column headerText="Data de Solicitação"
-						style="text-align: center;" sortBy="#{pp.nome}">
+                            <h:outputText value="#{pp.autor}" />
 
-						<h:outputText value="#{pp.dataSolicitacaoFormatada}" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Solicitante" style="text-align: center;">
 
-					<p:column headerText="Data Prevista" style="text-align: center;"
-						sortBy="#{pp.nome}">
+                            <h:outputText value="#{pp.solicitante}" />
 
-						<h:outputText rendered="#{pp.dataPrevistaFormatada!=null}"
-							value="#{pp.dataPrevistaFormatada}" />
-						<h:outputText rendered="#{pp.dataPrevistaFormatada==null}"
-							value="SEM PREVISÃO" />
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Data de Solicitação"
+                                  style="text-align: center;" sortBy="#{pp.nome}">
 
-					<p:column style="text-align: center; width: 50px;">
+                            <h:outputText value="#{pp.dataSolicitacaoFormatada}" />
 
-						<p:commandButton update="@form:detatlhesPp"
-							oncomplete="PF('infPp').show()" icon="ui-icon-search"
-							title="Detalhes do projeto">
-							<f:setPropertyActionListener value="#{pp}" target="#{ppBean.pp}" />
-						</p:commandButton>
+                        </p:column>
 
-					</p:column>
+                        <p:column headerText="Data Prevista" style="text-align: center;"
+                                  sortBy="#{pp.nome}">
 
-				</p:dataTable>
+                            <h:outputText rendered="#{pp.dataPrevistaFormatada!=null}"
+                                          value="#{pp.dataPrevistaFormatada}" />
+                            <h:outputText rendered="#{pp.dataPrevistaFormatada==null}"
+                                          value="SEM PREVISÃO" />
 
-				<p:dialog header="Detalhes do Projeto" widgetVar="infPp"
-					modal="true" showEffect="fade" hideEffect="fade" width="750"
-					height="400" minWidth="650" minHeight="400">
+                        </p:column>
 
-					<h:panelGroup id="detatlhesPp">
+                        <p:column style="text-align: center; width: 50px;">
 
-						<p:panelGrid rendered="#{not empty ppBean.pp}"
-							columnClasses="label, value" style="width: 100%;">
+                            <p:commandButton update="@form:detatlhesPp"
+                                             oncomplete="PF('infPp').show()" icon="ui-icon-search"
+                                             title="Detalhes do projeto">
+                                <f:setPropertyActionListener value="#{pp}" target="#{ppBean.pp}" />
+                            </p:commandButton>
 
-							<p:row>
+                        </p:column>
 
-								<p:column>
+                    </p:dataTable>
 
-									<h:outputText value="Nome do pp" style="font-weight:bold" />
+                    <p:dialog header="Detalhes do Projeto" widgetVar="infPp"
+                              modal="true" showEffect="fade" hideEffect="fade" width="750"
+                              height="400" minWidth="650" minHeight="400">
 
-								</p:column>
+                        <h:panelGroup id="detatlhesPp">
 
-								<p:column>
+                            <p:panelGrid rendered="#{not empty ppBean.pp}"
+                                         columnClasses="label, value" style="width: 100%;">
 
-									<h:outputText value="#{ppBean.pp.nome}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Nome do pp" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Descrição" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.nome}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.descricao}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Descrição" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Area Solicitante" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.descricao}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.areaSolicitante}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Area Solicitante" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Solicitante" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.areaSolicitante}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.solicitante}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Solicitante" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Autor" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.solicitante}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.autor}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Autor" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Data de Solicitação"
-										style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.autor}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.dataSolicitacaoFormatada}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Data de Solicitação"
+                                                      style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Data de Postagem" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.dataSolicitacaoFormatada}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.dataPostagemFormatada}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Data de Postagem" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Data de Prevista" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.dataPostagemFormatada}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.dataPrevistaFormatada}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Data de Prevista" style="font-weight:bold" />
 
-							<p:row>
+                                    </p:column>
 
-								<p:column>
+                                    <p:column>
 
-									<h:outputText value="Impactos" style="font-weight:bold" />
+                                        <h:outputText value="#{ppBean.pp.dataPrevistaFormatada}" />
 
-								</p:column>
+                                    </p:column>
 
-								<p:column>
+                                </p:row>
 
-									<h:outputText value="#{ppBean.pp.impacto}" />
+                                <p:row>
 
-								</p:column>
+                                    <p:column>
 
-							</p:row>
+                                        <h:outputText value="Impactos" style="font-weight:bold" />
 
-						</p:panelGrid>
+                                    </p:column>
 
-						<br />
+                                    <p:column>
 
-						<p:button outcome="detalhesProjeto" value="Modificar"
-							style="float: right;">
+                                        <h:outputText value="#{ppBean.pp.impacto}" />
 
-							<f:param name="pp" value="#{ppBean.pp.id}" />
+                                    </p:column>
 
-						</p:button>
+                                </p:row>
 
-					</h:panelGroup>
+                            </p:panelGrid>
 
-				</p:dialog>
-			</p:panel>			
+                            <br />
 
-		</h:form>
+                            <p:button outcome="detalhesProjeto" value="Modificar"
+                                      style="float: right;">
 
-	</ui:define>
-</ui:composition>
+                                <f:param name="pp" value="#{ppBean.pp.id}" />
+
+                            </p:button>
+
+                        </h:panelGroup>
+
+                    </p:dialog>
+                </p:panel>			
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
 </html>

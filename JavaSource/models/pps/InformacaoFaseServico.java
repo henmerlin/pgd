@@ -16,112 +16,111 @@ import entidades.pps.SequenciaRelatorioPp;
 @Stateless
 public class InformacaoFaseServico {
 
-	@PersistenceContext(unitName = "vu")
-	private EntityManager entityManager;
+    @PersistenceContext(unitName = "vu")
+    private EntityManager entityManager;
 
-	public void cadastrarInformacaoFase(InformacaoFase informacaoFase, Pp pp) throws Exception {
+    public void cadastrarInformacaoFase(InformacaoFase informacaoFase, Pp pp) throws Exception {
 
-		try {
+        try {
 
-			informacaoFase.setPp(pp);
+            informacaoFase.setPp(pp);
 
-			this.entityManager.persist(informacaoFase);
+            this.entityManager.persist(informacaoFase);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar informação da fase");
+            throw new Exception("Erro ao cadastrar informaï¿½ï¿½o da fase");
 
-		}
+        }
 
-	}
+    }
 
-	public void modificarInformacaoFase(InformacaoFase informacaoFase) throws Exception {
+    public void modificarInformacaoFase(InformacaoFase informacaoFase) throws Exception {
 
-		try {
+        try {
 
-			this.entityManager.merge(informacaoFase);
+            this.entityManager.merge(informacaoFase);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			throw new Exception("Erro ao modificar informação da fase");
+            throw new Exception("Erro ao modificar informaï¿½ï¿½o da fase");
 
-		}
+        }
 
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<InformacaoFase> listarInformacaoFaseEspecifico(Pp pp) {
+    @SuppressWarnings("unchecked")
+    public List<InformacaoFase> listarInformacaoFaseEspecifico(Pp pp) {
 
-		try {
+        try {
 
-			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.pp =:param1");
-			query.setParameter("param1", pp);
-			return query.getResultList();
+            Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.pp =:param1");
+            query.setParameter("param1", pp);
+            return query.getResultList();
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			return new ArrayList<InformacaoFase>();
+            return new ArrayList<InformacaoFase>();
 
-		}
+        }
 
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp, List<SequenciaRelatorioPp> listaSequencia) {
+    @SuppressWarnings("unchecked")
+    public List<InformacaoFase> listarInformacaoFaseEspecificoFase(FasePp fasePp, List<SequenciaRelatorioPp> listaSequencia) {
 
-		try {
-			
-			StringBuffer sequencia = new StringBuffer();
-			
-			Integer totalLista = listaSequencia.size();
-			
-			Integer count = 1;			
-			
-			for (SequenciaRelatorioPp sequenciaRelatorioPp : listaSequencia) {
-				
-				String or = "";
-				
-				if (count != totalLista) {
-					
-					or = " OR ";
-					
-				}
-				
-				sequencia.append("i.statusFasePp.nome = '" + sequenciaRelatorioPp.getStatusFasePp().getNome() + "' " + or + " ");
-				
-				count++;
-				
-			}
-						
-			Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (" + sequencia + ")");
-			query.setParameter("param1", fasePp);
-						
-			return query.getResultList();
+        try {
 
-		} catch (Exception e) {
+            StringBuffer sequencia = new StringBuffer();
 
-			return new ArrayList<InformacaoFase>();
+            Integer totalLista = listaSequencia.size();
 
-		}		
+            Integer count = 1;
 
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<InformacaoFase> listarInformaçãoFase() {
-		
-		try {
-			
-			Query query = this.entityManager.createQuery("FROM InformacaoFase i");
-			
-			return query.getResultList();
-			
-			
-		} catch (Exception e) {
-			
-			return new ArrayList<InformacaoFase>();
-			
-		}
-		
-	}
+            for (SequenciaRelatorioPp sequenciaRelatorioPp : listaSequencia) {
+
+                String or = "";
+
+                if (count != totalLista) {
+
+                    or = " OR ";
+
+                }
+
+                sequencia.append("i.statusFasePp.nome = '" + sequenciaRelatorioPp.getStatusFasePp().getNome() + "' " + or + " ");
+
+                count++;
+
+            }
+
+            Query query = this.entityManager.createQuery("FROM InformacaoFase i WHERE i.fasePp =:param1 AND (" + sequencia + ")");
+            query.setParameter("param1", fasePp);
+
+            return query.getResultList();
+
+        } catch (Exception e) {
+
+            return new ArrayList<InformacaoFase>();
+
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<InformacaoFase> listarInformacaoFase() {
+
+        try {
+
+            Query query = this.entityManager.createQuery("FROM InformacaoFase i");
+
+            return query.getResultList();
+
+        } catch (Exception e) {
+
+            return new ArrayList<InformacaoFase>();
+
+        }
+
+    }
 
 }

@@ -34,7 +34,7 @@ public class BeneficioBean {
 		try {
 
 			this.beneficioServico.cadastrarBeneficio(this.beneficio);			
-			JSFUtil.addInfoMessage("Benefício cadastrado com sucesso.");			
+			JSFUtil.addInfoMessage("Benefï¿½cio cadastrado com sucesso.");			
 			this.beneficio = new Beneficio();
 
 
@@ -51,7 +51,7 @@ public class BeneficioBean {
 		try {
 
 			this.beneficioServico.modificarBeneficio(this.beneficioModifica);
-			JSFUtil.addInfoMessage("Benefício modificado com sucesso.");
+			JSFUtil.addInfoMessage("BeneÃ­cio modificado com sucesso.");
 			this.beneficioModifica = new Beneficio();			
 
 		} catch (Exception e) {

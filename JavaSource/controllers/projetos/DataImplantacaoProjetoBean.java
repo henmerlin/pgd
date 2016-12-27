@@ -35,7 +35,7 @@ public class DataImplantacaoProjetoBean implements Serializable {
 		try {
 			
 			this.dataImplantacaoProjetoServico.cadastrarDataImplantacaoProjeto(this.dataImplantacaoProjeto, projeto);
-			JSFUtil.addInfoMessage("Erro ao cadastar data nova data de implantação");
+			JSFUtil.addInfoMessage("Erro ao cadastar data nova data de implantaÃ§Ã£o");
 			this.dataImplantacaoProjeto = new DataImplantacaoProjeto();			
 			
 		} catch (Exception e) {

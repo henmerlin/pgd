@@ -27,7 +27,7 @@ public class CodigoPpServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao cadastrar Código para o Pp");
+			throw new Exception("Erro ao cadastrar CÃ³digo para o Pp");
 
 		}		
 		
@@ -41,7 +41,7 @@ public class CodigoPpServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao modificar Código para o Pp");
+			throw new Exception("Erro ao modificar CÃ³digo para o Pp");
 			
 		}
 		

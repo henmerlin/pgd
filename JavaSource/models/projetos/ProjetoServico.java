@@ -73,7 +73,7 @@ public class ProjetoServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Projeto n„o encontrado.");
+			throw new Exception("Projeto n√£o encontrado.");
 
 		}
 

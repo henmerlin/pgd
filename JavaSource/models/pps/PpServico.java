@@ -74,7 +74,7 @@ public class PpServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Pp n„o encontrado.");
+			throw new Exception("Pp n√£o encontrado.");
 
 		}
 

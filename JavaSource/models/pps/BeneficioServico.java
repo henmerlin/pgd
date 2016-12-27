@@ -30,7 +30,7 @@ public class BeneficioServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Benefício");
+			throw new Exception("Erro ao cadastrar BenefÃ­cio");
 
 		}
 
@@ -50,7 +50,7 @@ public class BeneficioServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao modificar Benefício");
+			throw new Exception("Erro ao modificar BenefÃ­cio");
 
 		}
 

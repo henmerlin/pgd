@@ -33,7 +33,7 @@ public class JSFUtil {
 		
 		FacesMessage message;
 
-		message = new FacesMessage("Informação", msg);
+		message = new FacesMessage("InformaÃ§Ã£o", msg);
 
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		

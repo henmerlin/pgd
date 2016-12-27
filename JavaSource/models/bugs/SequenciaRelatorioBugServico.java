@@ -31,7 +31,7 @@ public class SequenciaRelatorioBugServico {
 			
 		} catch (Exception e) {
 			
-			throw new Exception("Erro ao cadastrar Sequência.");
+			throw new Exception("Erro ao cadastrar SequÃªncia.");
 			
 		}
 		
@@ -45,7 +45,7 @@ public class SequenciaRelatorioBugServico {
 			
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao modificar Sequência");
+			throw new Exception("Erro ao modificar SequÃªncia");
 			
 		}
 		
