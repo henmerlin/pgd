@@ -1,309 +1,309 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/recursos/template/template.xhtml">
+    <ui:composition template="/recursos/template/template.xhtml">
 
-	<ui:define name="tituloPagina">
-		 Export
-	</ui:define>
-	<ui:define name="tituloPrincipal">
-		<i class="fa fa-print"> </i> Export
-	</ui:define>
-	<ui:define name="tituloSecundario"></ui:define>
+        <ui:define name="tituloPagina">
+            Export
+        </ui:define>
+        <ui:define name="tituloPrincipal">
+            <i class="fa fa-print"> </i> Export
+        </ui:define>
+        <ui:define name="tituloSecundario"></ui:define>
 
-	<ui:define name="botoesAcao"></ui:define>
+        <ui:define name="botoesAcao"></ui:define>
 
-	<ui:insert name="eventos">
+        <ui:insert name="eventos">
 
-		<f:metadata>
+            <f:metadata>
 
-			<f:event listener="#{loginBean.validaPagina('Pps')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaPagina('Pps')}"
+                         type="preRenderView" />
 
-			<f:event listener="#{loginBean.validaAdmin('Pps')}"
-				type="preRenderView" />
+                <f:event listener="#{loginBean.validaAdmin('Pps')}"
+                         type="preRenderView" />
 
 
-		</f:metadata>
+            </f:metadata>
 
-	</ui:insert>
+        </ui:insert>
 
-	<ui:define name="conteudo">
+        <ui:define name="conteudo">
 
-		<p:panel id="panelInicio" header="Início" style="margin-bottom:20px">
+            <p:panel id="panelInicio" header="Início" style="margin-bottom:20px">
 
-			<p:fieldset legend="PPs" toggleable="true" toggleSpeed="500">
+                <p:fieldset legend="PPs" toggleable="true" toggleSpeed="500">
 
-				<p:dataTable id="dtPP" value="#{ppBean.listarPp()}"
-					var="projetosPequenos" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-					rowsPerPageTemplate="10, 15, 20">
+                    <p:dataTable id="dtPP" value="#{ppBean.listarPp()}"
+                                 var="projetosPequenos" rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20">
 
-					<f:facet name="{Exporters}">
+                        <f:facet name="{Exporters}">
 
-						<h:commandLink>
+                            <h:commandLink>
 
-							<i class="fa fa-download"></i>Exportar						
-						<p:dataExporter type="xls" target="dtPP" fileName="PP" />
+                                <i class="fa fa-download"></i>Exportar						
+                                <p:dataExporter type="xls" target="dtPP" fileName="PP" />
 
-						</h:commandLink>
+                            </h:commandLink>
 
-					</f:facet>
+                        </f:facet>
 
-					<p:column headerText="Id">
+                        <p:column headerText="Id">
 
-						<h:outputText value="#{projetosPequenos.id}" />
+                            <h:outputText value="#{projetosPequenos.id}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Nome do PP">
+                        <p:column headerText="Nome do PP">
 
-						<h:outputText value="#{projetosPequenos.nome}" />
+                            <h:outputText value="#{projetosPequenos.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Descrição">
+                        <p:column headerText="Descrição">
 
-						<h:outputText value="#{projetosPequenos.descricao}" />
+                            <h:outputText value="#{projetosPequenos.descricao}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Area Solicitante">
+                        <p:column headerText="Area Solicitante">
 
-						<h:outputText value="#{projetosPequenos.areaSolicitante}" />
+                            <h:outputText value="#{projetosPequenos.areaSolicitante}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Solicitante">
+                        <p:column headerText="Solicitante">
 
-						<h:outputText value="#{projetosPequenos.solicitante}" />
+                            <h:outputText value="#{projetosPequenos.solicitante}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Autor">
+                        <p:column headerText="Autor">
 
-						<h:outputText value="#{projetosPequenos.autor}" />
+                            <h:outputText value="#{projetosPequenos.autor}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Data Solicitação">
+                        <p:column headerText="Data Solicitação">
 
-						<h:outputText value="#{projetosPequenos.dataSolicitacaoFormatada}" />
+                            <h:outputText value="#{projetosPequenos.dataSolicitacaoFormatada}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Data Postagem">
+                        <p:column headerText="Data Postagem">
 
-						<h:outputText value="#{projetosPequenos.dataPostagemFormatada}" />
+                            <h:outputText value="#{projetosPequenos.dataPostagemFormatada}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Data Prevista">
+                        <p:column headerText="Data Prevista">
 
-						<h:outputText value="#{projetosPequenos.dataPrevistaFormatada}" />
+                            <h:outputText value="#{projetosPequenos.dataPrevistaFormatada}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Impacto">
+                        <p:column headerText="Impacto">
 
-						<h:outputText value="#{projetosPequenos.impacto}" />
+                            <h:outputText value="#{projetosPequenos.impacto}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Status Geral do PP">
+                        <p:column headerText="Status Geral do PP">
 
-						<h:outputText value="#{projetosPequenos.statusFasePp.nome}" />
+                            <h:outputText value="#{projetosPequenos.statusFasePp.nome}" />
 
-					</p:column>
+                        </p:column>
 
-				</p:dataTable>
+                    </p:dataTable>
 
-			</p:fieldset>
+                </p:fieldset>
 
-			<br />
+                <br />
 
-			<p:fieldset legend="Informação" toggleable="true" toggleSpeed="500">
+                <p:fieldset legend="Informação" toggleable="true" toggleSpeed="500">
 
-				<p:dataTable id="dtInfo"
-					value="#{informacaoFaseBean.listarInformaçãoFase()}"
-					var="informacoesFase" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-					rowsPerPageTemplate="10, 15, 20">
+                    <p:dataTable id="dtInfo"
+                                 value="#{informacaoFaseBean.listarTodas()}"
+                                 var="informacoesFase" rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20">
 
-					<f:facet name="{Exporters}">
+                        <f:facet name="{Exporters}">
 
-						<h:commandLink>
+                            <h:commandLink>
 
-							<i class="fa fa-download"></i>Exportar						
-						<p:dataExporter type="xls" target="dtInfo" fileName="InfoPP" />
+                                <i class="fa fa-download"></i>Exportar						
+                                <p:dataExporter type="xls" target="dtInfo" fileName="InfoPP" />
 
-						</h:commandLink>
+                            </h:commandLink>
 
-					</f:facet>
+                        </f:facet>
 
-					<p:column headerText="Data Fim">
+                        <p:column headerText="Data Fim">
 
-						<h:outputText value="#{informacoesFase.dataFimFormatado}" />
+                            <h:outputText value="#{informacoesFase.dataFimFormatado}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Data Inicio">
+                        <p:column headerText="Data Inicio">
 
-						<h:outputText value="#{informacoesFase.dataFimFormatado}" />
+                            <h:outputText value="#{informacoesFase.dataFimFormatado}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Descrição">
+                        <p:column headerText="Descrição">
 
-						<h:outputText value="#{informacoesFase.descricao}" />
+                            <h:outputText value="#{informacoesFase.descricao}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Porcentagem">
+                        <p:column headerText="Porcentagem">
 
-						<h:outputText value="#{informacoesFase.porcentagem}" />
+                            <h:outputText value="#{informacoesFase.porcentagem}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Nome da Fase">
+                        <p:column headerText="Nome da Fase">
 
-						<h:outputText value="#{informacoesFase.fasePp.nome}" />
+                            <h:outputText value="#{informacoesFase.fasePp.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Status da Fase PP">
+                        <p:column headerText="Status da Fase PP">
 
-						<h:outputText value="#{informacoesFase.statusFasePp.nome}" />
+                            <h:outputText value="#{informacoesFase.statusFasePp.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="ID do PP">
+                        <p:column headerText="ID do PP">
 
-						<h:outputText value="#{informacoesFase.pp.id}" />
+                            <h:outputText value="#{informacoesFase.pp.id}" />
 
-					</p:column>
+                        </p:column>
 
-				</p:dataTable>
+                    </p:dataTable>
 
-			</p:fieldset>
+                </p:fieldset>
 
-			<br />
+                <br />
 
-			<p:fieldset legend="Código" toggleable="true" toggleSpeed="500">
+                <p:fieldset legend="Código" toggleable="true" toggleSpeed="500">
 
-				<p:dataTable id="dtCod" value="#{codigoPpBean.listarCodigoPP()}"
-					var="codPP" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-					rowsPerPageTemplate="10, 15, 20">
+                    <p:dataTable id="dtCod" value="#{codigoPpBean.listarCodigoPP()}"
+                                 var="codPP" rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20">
 
-					<f:facet name="{Exporters}">
+                        <f:facet name="{Exporters}">
 
-						<h:commandLink>
+                            <h:commandLink>
 
-							<i class="fa fa-download"></i>Exportar						
-						<p:dataExporter type="xls" target="dtCod" fileName="CodigoPP" />
+                                <i class="fa fa-download"></i>Exportar						
+                                <p:dataExporter type="xls" target="dtCod" fileName="CodigoPP" />
 
-						</h:commandLink>
+                            </h:commandLink>
 
-					</f:facet>
+                        </f:facet>
 
-					<p:column headerText="Número">
+                        <p:column headerText="Número">
 
-						<h:outputText value="#{codPP.nome}" />
+                            <h:outputText value="#{codPP.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Data Postagem">
+                        <p:column headerText="Data Postagem">
 
-						<h:outputText value="#{codPP.dataPostagemFormatada}" />
+                            <h:outputText value="#{codPP.dataPostagemFormatada}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Código">
+                        <p:column headerText="Código">
 
-						<h:outputText value="#{codPP.codigo.nome}" />
+                            <h:outputText value="#{codPP.codigo.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="ID do PP">
+                        <p:column headerText="ID do PP">
 
-						<h:outputText value="#{codPP.pp.id}" />
+                            <h:outputText value="#{codPP.pp.id}" />
 
-					</p:column>
-				</p:dataTable>
+                        </p:column>
+                    </p:dataTable>
 
-			</p:fieldset>
+                </p:fieldset>
 
-			<br />
+                <br />
 
-			<p:fieldset legend="Data Priorização" toggleable="true" toggleSpeed="500">
+                <p:fieldset legend="Data Priorização" toggleable="true" toggleSpeed="500">
 
-				<p:dataTable id="dtPrio"
-					value="#{priorizacaoBean.listarPriorizacao()}" var="priorizacao"
-					rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-					rowsPerPageTemplate="10, 15, 20">
+                    <p:dataTable id="dtPrio"
+                                 value="#{priorizacaoBean.listarPriorizacao()}" var="priorizacao"
+                                 rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 rowsPerPageTemplate="10, 15, 20">
 
-					<f:facet name="{Exporters}">
+                        <f:facet name="{Exporters}">
 
-						<h:commandLink>
+                            <h:commandLink>
 
-							<i class="fa fa-download"></i>Exportar						
-						<p:dataExporter type="xls" target="dtPrio"
-								fileName="PriorizacaoPP" />
+                                <i class="fa fa-download"></i>Exportar						
+                                <p:dataExporter type="xls" target="dtPrio"
+                                                fileName="PriorizacaoPP" />
 
-						</h:commandLink>
+                            </h:commandLink>
 
-					</f:facet>
+                        </f:facet>
 
-					<p:column headerText="Prioridade">
+                        <p:column headerText="Prioridade">
 
-						<h:outputText value="#{priorizacao.prioridade.nome}" />
+                            <h:outputText value="#{priorizacao.prioridade.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Desc">
+                        <p:column headerText="Desc">
 
-						<h:outputText value="#{priorizacao.descStatus}" />
+                            <h:outputText value="#{priorizacao.descStatus}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Nota">
+                        <p:column headerText="Nota">
 
-						<h:outputText value="#{priorizacao.nota}" />
+                            <h:outputText value="#{priorizacao.nota}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Saving">
+                        <p:column headerText="Saving">
 
-						<h:outputText value="#{priorizacao.saving}" />
+                            <h:outputText value="#{priorizacao.saving}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="Beneficio">
+                        <p:column headerText="Beneficio">
 
-						<h:outputText value="#{priorizacao.beneficio.nome}" />
+                            <h:outputText value="#{priorizacao.beneficio.nome}" />
 
-					</p:column>
+                        </p:column>
 
-					<p:column headerText="ID do PP">
+                        <p:column headerText="ID do PP">
 
-						<h:outputText value="#{priorizacao.pp.id}" />
+                            <h:outputText value="#{priorizacao.pp.id}" />
 
-					</p:column>
-					
-				</p:dataTable>
+                        </p:column>
 
-			</p:fieldset>
+                    </p:dataTable>
 
-		</p:panel>
+                </p:fieldset>
 
-	</ui:define>
+            </p:panel>
 
-</ui:composition>
+        </ui:define>
+
+    </ui:composition>
 
 </html>

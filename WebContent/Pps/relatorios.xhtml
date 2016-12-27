@@ -45,18 +45,15 @@
 
                     <p:dataTable id="listaPps" var="pp"
                                  value="#{ppBean.listarPpEmTrabalho()}" rows="10" paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                  rowsPerPageTemplate="10, 15, 20"
                                  emptyMessage="Não há PPs registrados">
 
                         <f:facet name="{Exporters}">
 
-                            <h:commandLink>
-
-                                <i class="fa fa-download"></i> Exportar						
+                            <h:commandButton value="Exportar">
                                 <p:dataExporter type="xls" target="listaPps" fileName="pps" />
-
-                            </h:commandLink>
+                            </h:commandButton>
 
                         </f:facet>
 

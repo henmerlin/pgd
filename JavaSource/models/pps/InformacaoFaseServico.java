@@ -29,7 +29,7 @@ public class InformacaoFaseServico {
 
         } catch (Exception e) {
 
-            throw new Exception("Erro ao cadastrar informa��o da fase");
+            throw new Exception("Erro ao cadastrar informação da fase");
 
         }
 
@@ -43,7 +43,7 @@ public class InformacaoFaseServico {
 
         } catch (Exception e) {
 
-            throw new Exception("Erro ao modificar informa��o da fase");
+            throw new Exception("Erro ao modificar informação da fase");
 
         }
 
@@ -107,20 +107,13 @@ public class InformacaoFaseServico {
     }
 
     @SuppressWarnings("unchecked")
-    public List<InformacaoFase> listarInformacaoFase() {
-
+    public List<InformacaoFase> listar() {
         try {
-
-            Query query = this.entityManager.createQuery("FROM InformacaoFase i");
-
+            Query query = this.entityManager.createQuery("FROM InformacaoFase");
             return query.getResultList();
-
         } catch (Exception e) {
-
             return new ArrayList<InformacaoFase>();
-
         }
-
     }
 
 }

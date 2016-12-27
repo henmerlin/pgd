@@ -35,7 +35,7 @@ public class InformacaoFaseBean {
         try {
 
             this.informacaoFaseServico.cadastrarInformacaoFase(this.informacaoFase, pp);
-            JSFUtil.addInfoMessage("Informa��o fase cadastrada com sucesso.");
+            JSFUtil.addInfoMessage("informação fase cadastrada com sucesso.");
             this.informacaoFase = new InformacaoFase();
 
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class InformacaoFaseBean {
         try {
 
             this.informacaoFaseServico.modificarInformacaoFase(this.informacaoFaseModifica);
-            JSFUtil.addInfoMessage("Informa��o modificada com sucesso.");
+            JSFUtil.addInfoMessage("informação modificada com sucesso.");
             this.informacaoFase = new InformacaoFase();
 
         } catch (Exception e) {
@@ -68,10 +68,10 @@ public class InformacaoFaseBean {
 
     }
     
-    public List<InformacaoFase> listarInformacaoFase() {
-        
-        return this.informacaoFaseServico.listarInformacaoFase();
-        
+    public List<InformacaoFase> listarTodas() {
+
+        return this.informacaoFaseServico.listar();
+
     }
 
     public InformacaoFase getInformacaoFase() {

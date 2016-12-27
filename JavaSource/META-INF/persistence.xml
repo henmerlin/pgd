@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="vu">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/co</jta-data-source>
-		<class>entidades.UsuarioEfika</class>
-		<class>entidades.pps.Pp</class>
-		<class>entidades.pps.Beneficio</class>
-		<class>entidades.pps.InformacaoFase</class>
-		<class>entidades.pps.Prioridade</class>
-		<class>entidades.pps.Priorizacao</class>
-		<class>entidades.pps.StatusFasePp</class>
-		<class>entidades.pps.FasePp</class>
-		<class>entidades.pps.CodigoPp</class>
-		<class>entidades.pps.Codigo</class>
-		<class>entidades.ControleUsuario</class>
-		<class>entidades.pps.SequenciaRelatorioPp</class>
-		<class>entidades.bugs.Bug</class>
-		<class>entidades.bugs.PrioridadeBug</class>
-		<class>entidades.bugs.ImpactoBug</class>
-		<class>entidades.bugs.StatusBug</class>
-		<class>entidades.bugs.DetalhesBug</class>
-		<class>entidades.bugs.SistemaAfetado</class>
-		<class>entidades.bugs.AcaoBug</class>
-		<class>entidades.bugs.CodigoBug</class>
-		<class>entidades.bugs.CodigoBugDescricao</class>
-		<class>entidades.bugs.SistemaAfetadoBug</class>
-		<class>entidades.bugs.FasesBug</class>
-		<class>entidades.bugs.SequenciaRelatorioBug</class>
-		<class>entidades.projetos.Projeto</class>
-		<class>entidades.projetos.ProjetoFase</class>
-		<class>entidades.projetos.TipoProjeto</class>
-		<class>entidades.projetos.StatusProjeto</class>
-		<class>entidades.projetos.TipoTarefa</class>
-		<class>entidades.projetos.Impacto</class>
-		<class>entidades.projetos.FaseProjeto</class>
-		<class>entidades.projetos.DataImplantacaoProjeto</class>
-		<class>entidades.projetos.TarefaProjeto</class>
-		<class>entidades.projetos.ImpactoProjeto</class>
-		<class>entidades.projetos.SequenciaRelatorioProjeto</class>
-		<class>entidades.projetos.FilesProjetoUpload</class>
-		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-		</properties>
-	</persistence-unit>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="vu">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:/co</jta-data-source>
+    <class>entidades.UsuarioEfika</class>
+    <class>entidades.pps.Pp</class>
+    <class>entidades.pps.Beneficio</class>
+    <class>entidades.pps.InformacaoFase</class>
+    <class>entidades.pps.Prioridade</class>
+    <class>entidades.pps.Priorizacao</class>
+    <class>entidades.pps.StatusFasePp</class>
+    <class>entidades.pps.FasePp</class>
+    <class>entidades.pps.CodigoPp</class>
+    <class>entidades.pps.Codigo</class>
+    <class>entidades.ControleUsuario</class>
+    <class>entidades.pps.SequenciaRelatorioPp</class>
+    <class>entidades.bugs.Bug</class>
+    <class>entidades.bugs.PrioridadeBug</class>
+    <class>entidades.bugs.ImpactoBug</class>
+    <class>entidades.bugs.StatusBug</class>
+    <class>entidades.bugs.DetalhesBug</class>
+    <class>entidades.bugs.SistemaAfetado</class>
+    <class>entidades.bugs.AcaoBug</class>
+    <class>entidades.bugs.CodigoBug</class>
+    <class>entidades.bugs.CodigoBugDescricao</class>
+    <class>entidades.bugs.SistemaAfetadoBug</class>
+    <class>entidades.bugs.FasesBug</class>
+    <class>entidades.bugs.SequenciaRelatorioBug</class>
+    <class>entidades.projetos.Projeto</class>
+    <class>entidades.projetos.ProjetoFase</class>
+    <class>entidades.projetos.TipoProjeto</class>
+    <class>entidades.projetos.StatusProjeto</class>
+    <class>entidades.projetos.TipoTarefa</class>
+    <class>entidades.projetos.Impacto</class>
+    <class>entidades.projetos.FaseProjeto</class>
+    <class>entidades.projetos.DataImplantacaoProjeto</class>
+    <class>entidades.projetos.TarefaProjeto</class>
+    <class>entidades.projetos.ImpactoProjeto</class>
+    <class>entidades.projetos.SequenciaRelatorioProjeto</class>
+    <class>entidades.projetos.FilesProjetoUpload</class>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
 </persistence>

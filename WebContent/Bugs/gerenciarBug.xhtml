@@ -34,7 +34,7 @@
 
                 <p:panel header="Gerenciar PPs">
 
-                    <p:dataTable id="listarBugs" var="bug" value="#{bugBean.listarBugs()}" rows="10"
+                    <p:dataTable id="exbug" var="bug" value="#{bugBean.listarBugs()}" rows="10"
                                  paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                                  rowsPerPageTemplate="10, 15, 20, 30, 40, 50"
@@ -42,12 +42,9 @@
 
                         <f:facet name="{Exporters}">
 
-                            <h:commandLink>
-
-                                <i class="fa fa-download"></i> Exportar						
-                                <p:dataExporter type="xls" target="listarBugs" fileName="bugs" />
-
-                            </h:commandLink>
+                            <h:commandButton value="Exportar">
+                                <p:dataExporter type="xls" target="exbug" fileName="bugs" />
+                            </h:commandButton>
 
                         </f:facet>
 
