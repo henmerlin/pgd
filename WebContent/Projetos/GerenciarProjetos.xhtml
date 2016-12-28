@@ -71,7 +71,7 @@
                         </p:column>
 
                         <p:column headerText="Tipo" style="text-align: center;"
-                                  filterBy="#{proj.tipoProjeto.nome}" filterMatchMode="contains">
+                                  filterBy="#{proj.tipoProjeto.nome}" filterMatchMode="equals">
 
                             <h:outputText value="#{proj.tipoProjeto.nome}" />
 
@@ -97,12 +97,12 @@
                                   sortBy="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao}">
 
                             <h:outputText
-                                value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}" />
+                                value="#{dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacaoFormatada}-" />
 
-                            <h:outputText value=" Atraso" styleClass="semafaroVermelho"
+                            <h:outputText value=" Atrasado" styleClass="semafaroVermelho"
                                           rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Antes') 										
                                                       and !proj.statusProjeto.nome.equals('Concluído')}" />
-                            <h:outputText value=" Em dia" styleClass="semafaroVerde"
+                            <h:outputText value=" No Prazo" styleClass="semafaroVerde"
                                           rendered="#{dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('Depois')
                                                       or dataImplantacaoProjetoBean.semafaroDate(dataImplantacaoProjetoBean.listarDataImplantacaoProjetoEspecificoProjetoIdOrder(proj).dataImplantacao).equals('No dia')
                                                       and !proj.statusProjeto.nome.equals('Concluído')}" />
@@ -111,16 +111,12 @@
 
                         <p:column headerText="Impacto" style="text-align: center;"
                                   filterBy="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}"
-                                  filterMatchMode="contains"
-                                  styleClass="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Baixo' ? 'semafaroVerde' : null} 
-                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Médio' ? 'semafaroAmarelo' : null}
-                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == 'Alto' ? 'semafaroVermelho' : null}
-                                  #{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null ? 'semafaroVazio' : null}">
+                                  filterMatchMode="contains">
 
-                            <!-- <h:outputText
-                                    value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" /> -->
-
-                            <span class="fa fa-circle" />
+                            <h:outputText
+                                value="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome}" />
+                            
+                            <h:outputText value="Inexistente" rendered="#{impactoProjetoBean.listarImpactoProjetoEspecificoUnic(proj).impacto.nome == null}"/>
 
                         </p:column>
 

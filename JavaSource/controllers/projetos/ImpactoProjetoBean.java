@@ -16,87 +16,87 @@ import javax.faces.bean.ManagedBean;
 @ViewScoped
 public class ImpactoProjetoBean {
 
-	private ImpactoProjeto impactoProjeto;
-	
-	private ImpactoProjeto impactoProjetoModifica;
-	
-	@EJB
-	private ImpactoProjetoServico impactoProjetoServico;
-	
-	public ImpactoProjetoBean() {
-		
-		this.impactoProjeto = new ImpactoProjeto();
-		
-		this.impactoProjetoModifica = new ImpactoProjeto();
-		
-	}
-	
-	public void cadastrarImpactoProjeto(Projeto projeto) {
-		
-		try {
-			
-			this.impactoProjetoServico.cadastrarImpactoProjeto(this.impactoProjeto, projeto);
-			JSFUtil.addInfoMessage("Impacto cadastrado com sucesso.");
-			this.impactoProjeto = new ImpactoProjeto();
-			
-		} catch (Exception e) {
+    private ImpactoProjeto impactoProjeto;
 
-			JSFUtil.addErrorMessage(e.getMessage());
-			
-		}
-		
-	}
-	
-	public void modificaImpactoProjeto() {
-		
-		try {
-			
-			this.impactoProjetoServico.modificarImpactoProjeto(this.impactoProjetoModifica);
-			JSFUtil.addInfoMessage("Impacto modificado com sucesso.");
-			this.impactoProjetoModifica = new ImpactoProjeto();
-			
-		} catch (Exception e) {
+    private ImpactoProjeto impactoProjetoModifica;
 
-			JSFUtil.addErrorMessage(e.getMessage());
-			
-		}
-		
-	}
-	
-	public List<ImpactoProjeto> listarImpactoProjetoEspecifico(Projeto projeto) {
-		
-		return this.impactoProjetoServico.listarImpactoProjetoEspecifico(projeto);
-		
-	}
-	
-	public ImpactoProjeto listarImpactoProjetoEspecificoUnic(Projeto projeto) {
-		
-		try {
-						
-			return this.impactoProjetoServico.listarImpactoProjetoEspecificoUnic(projeto);
-						
-		} catch (Exception e) {
+    @EJB
+    private ImpactoProjetoServico impactoProjetoServico;
 
-			return null;
-			
-		}
-		
-	}
+    public ImpactoProjetoBean() {
 
-	public ImpactoProjeto getImpactoProjeto() {
-		return impactoProjeto;
-	}
+        this.impactoProjeto = new ImpactoProjeto();
 
-	public void setImpactoProjeto(ImpactoProjeto impactoProjeto) {
-		this.impactoProjeto = impactoProjeto;
-	}
+        this.impactoProjetoModifica = new ImpactoProjeto();
 
-	public ImpactoProjeto getImpactoProjetoModifica() {
-		return impactoProjetoModifica;
-	}
+    }
 
-	public void setImpactoProjetoModifica(ImpactoProjeto impactoProjetoModifica) {
-		this.impactoProjetoModifica = impactoProjetoModifica;
-	}
+    public void cadastrarImpactoProjeto(Projeto projeto) {
+
+        try {
+
+            this.impactoProjetoServico.cadastrarImpactoProjeto(this.impactoProjeto, projeto);
+            JSFUtil.addInfoMessage("Impacto cadastrado com sucesso.");
+            this.impactoProjeto = new ImpactoProjeto();
+
+        } catch (Exception e) {
+
+            JSFUtil.addErrorMessage(e.getMessage());
+
+        }
+
+    }
+
+    public void modificaImpactoProjeto() {
+
+        try {
+
+            this.impactoProjetoServico.modificarImpactoProjeto(this.impactoProjetoModifica);
+            JSFUtil.addInfoMessage("Impacto modificado com sucesso.");
+            this.impactoProjetoModifica = new ImpactoProjeto();
+
+        } catch (Exception e) {
+
+            JSFUtil.addErrorMessage(e.getMessage());
+
+        }
+
+    }
+
+    public List<ImpactoProjeto> listarImpactoProjetoEspecifico(Projeto projeto) {
+
+        return this.impactoProjetoServico.listarImpactoProjetoEspecifico(projeto);
+
+    }
+
+    public ImpactoProjeto listarImpactoProjetoEspecificoUnic(Projeto projeto) {
+
+        try {
+
+            return this.impactoProjetoServico.listarImpactoProjetoEspecificoUnic(projeto);
+
+        } catch (Exception e) {
+
+            return null;
+
+        }
+
+    }
+
+    public ImpactoProjeto getImpactoProjeto() {
+        return impactoProjeto;
+    }
+
+    public void setImpactoProjeto(ImpactoProjeto impactoProjeto) {
+        this.impactoProjeto = impactoProjeto;
+    }
+
+    public ImpactoProjeto getImpactoProjetoModifica() {
+        return impactoProjetoModifica;
+    }
+
+    public void setImpactoProjetoModifica(ImpactoProjeto impactoProjetoModifica) {
+        this.impactoProjetoModifica = impactoProjetoModifica;
+    }
 
 }
